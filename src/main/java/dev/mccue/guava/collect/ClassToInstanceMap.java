@@ -31,14 +31,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <p>Like any other {@code Map<Class, Object>}, this map may contain entries for primitive types,
  * and a primitive type and its corresponding wrapper type may map to different values.
  *
- * <h3>Implementations</h3>
+ * <h2>Implementations</h2>
  *
  * <ul>
  *   <li>{@link ImmutableClassToInstanceMap}
  *   <li>{@link MutableClassToInstanceMap}
  * </ul>
  *
- * <p>To map a generic type to an instance of that type, use {@link
+ * <p>To map a generic type to an instance of that type, use {@code
  * dev.mccue.guava.reflect.TypeToInstanceMap} instead.
  *
  * <p>See the Guava User Guide article on <a href=

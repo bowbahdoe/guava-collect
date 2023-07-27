@@ -45,12 +45,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * ImmutableList}, which have well-defined {@link #equals} semantics, thus avoiding a common source
  * of bugs and confusion.
  *
- * <h3>About <i>all</i> {@code Immutable-} collections</h3>
+ * <h2>About <i>all</i> {@code Immutable-} collections</h2>
  *
  * <p>The remainder of this documentation applies to every public {@code Immutable-} type in this
  * package, whether it is a subtype of {@code ImmutableCollection} or not.
  *
- * <h4>Guarantees</h4>
+ * <h3>Guarantees</h3>
  *
  * <p>Each makes the following guarantees:
  *

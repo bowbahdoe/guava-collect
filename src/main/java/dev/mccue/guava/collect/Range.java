@@ -36,7 +36,7 @@ import dev.mccue.jsr305.CheckForNull;
  * possible to <i>iterate</i> over these contained values. To do so, pass this range instance and an
  * appropriate {@link DiscreteDomain} to {@link ContiguousSet#create}.
  *
- * <h3>Types of ranges</h3>
+ * <h2>Types of ranges</h2>
  *
  * <p>Each end of the range may be bounded or unbounded. If bounded, there is an associated
  * <i>endpoint</i> value, and the range is considered to be either <i>open</i> (does not include the

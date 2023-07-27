@@ -44,7 +44,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * not be modifiable. When modification isn't supported, those methods will throw an {@link
  * UnsupportedOperationException}.
  *
- * <h3>Implementations</h3>
+ * <h2>Implementations</h2>
  *
  * <ul>
  *   <li>{@link ImmutableTable}

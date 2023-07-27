@@ -45,12 +45,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * of {@code Comparator} for pre-Java-8 users, in the same sense that {@link FluentIterable} is an
  * enriched {@link Iterable} for pre-Java-8 users.
  *
- * <h3>Three types of methods</h3>
+ * <h2>Three types of methods</h2>
  *
  * Like other fluent types, there are three types of methods present: methods for <i>acquiring</i>,
  * <i>chaining</i>, and <i>using</i>.
  *
- * <h4>Acquiring</h4>
+ * <h3>Acquiring</h3>
  *
  * <p>The common ways to get an instance of {@code Ordering} are:
  *

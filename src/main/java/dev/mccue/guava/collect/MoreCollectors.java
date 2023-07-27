@@ -29,7 +29,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Collectors not present in {@code java.util.stream.Collectors} that are not otherwise associated
- * with a {@code dev.mccue.guava. type.
+ * with a {@code dev.mccue.guava} type.
  *
  * @author Louis Wasserman
  * @since 21.0

@@ -55,7 +55,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p><a id="streams"></a>
  *
- * <h3>Comparison to streams</h3>
+ * <h2>Comparison to streams</h2>
  *
  * <p>{@link Stream} is similar to this class, but generally more powerful, and certainly more
  * standard. Key differences include:

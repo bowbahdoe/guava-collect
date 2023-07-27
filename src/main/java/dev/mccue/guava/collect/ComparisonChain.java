@@ -54,7 +54,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * "https://github.com/google/guava/wiki/CommonObjectUtilitiesExplained#comparecompareto">{@code
  * ComparisonChain}</a>.
  *
- * <h4 id="java8">Java 8+ equivalents</h4>
+ * <h2 id="java8">Java 8+ equivalents</h2>
  *
  * If you are using Java version 8 or greater, you should generally use the static methods in {@link
  * Comparator} instead of {@code ComparisonChain}. The example above can be implemented like this:

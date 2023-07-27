@@ -55,7 +55,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * times when the first style is more useful, use the multimap's {@link #asMap} view (or create a
  * {@code Map<K, Collection<V>>} in the first place).
  *
- * <h3>Example</h3>
+ * <h2>Example</h2>
  *
  * <p>The following code:
  *

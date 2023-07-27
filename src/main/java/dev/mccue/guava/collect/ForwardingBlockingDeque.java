@@ -41,7 +41,7 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * @author Emily Soldal
  * @since 14.0
- * @deprecated This class has moved to {@code dev.mccue.guava.util.concurrent}. Please use {@link
+ * @deprecated This class has moved to {@code dev.mccue.guava.util.concurrent}. Please use {@code
  *     dev.mccue.guava.util.concurrent.ForwardingBlockingDeque} instead.
  */
 @Deprecated
