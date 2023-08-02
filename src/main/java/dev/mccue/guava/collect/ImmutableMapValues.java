@@ -25,11 +25,12 @@ import java.util.function.Consumer;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * {@code values()} implementation for {@link ImmutableMap}.
+ * {@code values()} implementation for {@code ImmutableMap}.
  *
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  */
+
 @ElementTypesAreNonnullByDefault
 final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
   private final ImmutableMap<K, V> map;

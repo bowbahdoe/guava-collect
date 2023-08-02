@@ -23,10 +23,11 @@ import java.util.Collections;
 import java.util.Spliterator;
 
 /**
- * Implementation of {@link ImmutableList} with exactly one element.
+ * Implementation of {@code ImmutableList} with exactly one element.
  *
  * @author Hayward Chan
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 final class SingletonImmutableList<E> extends ImmutableList<E> {

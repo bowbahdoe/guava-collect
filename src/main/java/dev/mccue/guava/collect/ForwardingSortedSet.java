@@ -31,8 +31,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingSortedSet} forward <i>indiscriminately</i> to
- * the methods of the delegate. For example, overriding {@link #add} alone <i>will not</i> change
- * the behavior of {@link #addAll}, which can lead to unexpected behavior. In this case, you should
+ * the methods of the delegate. For example, overriding {@code #add} alone <i>will not</i> change
+ * the behavior of {@code #addAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code addAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardAddAll} method.
  *
@@ -96,8 +96,8 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
   }
 
   /**
-   * A sensible definition of {@link #contains} in terms of the {@code first()} method of {@link
-   * #tailSet}. If you override {@link #tailSet}, you may wish to override {@link #contains} to
+   * A sensible definition of {@code #contains} in terms of the {@code first()} method of {@code
+   * #tailSet}. If you override {@code #tailSet}, you may wish to override {@code #contains} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -116,8 +116,8 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
   }
 
   /**
-   * A sensible definition of {@link #remove} in terms of the {@code iterator()} method of {@link
-   * #tailSet}. If you override {@link #tailSet}, you may wish to override {@link #remove} to
+   * A sensible definition of {@code #remove} in terms of the {@code iterator()} method of {@code
+   * #tailSet}. If you override {@code #tailSet}, you may wish to override {@code #remove} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -143,9 +143,9 @@ public abstract class ForwardingSortedSet<E extends @Nullable Object> extends Fo
   }
 
   /**
-   * A sensible default implementation of {@link #subSet(Object, Object)} in terms of {@link
-   * #headSet(Object)} and {@link #tailSet(Object)}. In some situations, you may wish to override
-   * {@link #subSet(Object, Object)} to forward to this implementation.
+   * A sensible default implementation of {@code #subSet(Object, Object)} in terms of {@code
+   * #headSet(Object)} and {@code #tailSet(Object)}. In some situations, you may wish to override
+   * {@code #subSet(Object, Object)} to forward to this implementation.
    *
    * @since 7.0
    */

@@ -40,13 +40,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A multiset which maintains the ordering of its elements, according to either their natural order
- * or an explicit {@link Comparator}. In all cases, this implementation uses {@link
- * Comparable#compareTo} or {@link Comparator#compare} instead of {@link Object#equals} to determine
+ * or an explicit {@code Comparator}. In all cases, this implementation uses {@code
+ * Comparable#compareTo} or {@code Comparator#compare} instead of {@code Object#equals} to determine
  * equivalence of instances.
  *
  * <p><b>Warning:</b> The comparison must be <i>consistent with equals</i> as explained by the
- * {@link Comparable} class specification. Otherwise, the resulting multiset will violate the {@link
- * java.util.Collection} contract, which is specified in terms of {@link Object#equals}.
+ * {@code Comparable} class specification. Otherwise, the resulting multiset will violate the {@code
+ * java.util.Collection} contract, which is specified in terms of {@code Object#equals}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multiset">{@code Multiset}</a>.
@@ -55,6 +55,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class TreeMultiset<E extends @Nullable Object> extends AbstractSortedMultiset<E>
     implements Serializable {
@@ -98,7 +99,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
    * Creates an empty multiset containing the given initial elements, sorted according to the
    * elements' natural order.
    *
-   * <p>This implementation is highly efficient when {@code elements} is itself a {@link Multiset}.
+   * <p>This implementation is highly efficient when {@code elements} is itself a {@code Multiset}.
    *
    * <p>The type specification is {@code <E extends Comparable>}, instead of the more specific
    * {@code <E extends Comparable<? super E>>}, to support classes defined without generics.

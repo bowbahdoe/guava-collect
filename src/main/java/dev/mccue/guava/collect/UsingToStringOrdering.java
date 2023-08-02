@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import java.io.Serializable;
 
 /** An ordering that uses the natural order of the string representation of the values. */
+
 @ElementTypesAreNonnullByDefault
 final class UsingToStringOrdering extends Ordering<Object> implements Serializable {
   static final UsingToStringOrdering INSTANCE = new UsingToStringOrdering();

@@ -53,9 +53,9 @@ final class CollectSpliterators {
       checkArgument((extraCharacteristics & Spliterator.SORTED) != 0);
     }
     class WithCharacteristics implements Spliterator<T> {
-      private final OfInt delegate;
+      private final Spliterator.OfInt delegate;
 
-      WithCharacteristics(OfInt delegate) {
+      WithCharacteristics(Spliterator.OfInt delegate) {
         this.delegate = delegate;
       }
 
@@ -72,7 +72,7 @@ final class CollectSpliterators {
       @Override
       @CheckForNull
       public Spliterator<T> trySplit() {
-        OfInt split = delegate.trySplit();
+        Spliterator.OfInt split = delegate.trySplit();
         return (split == null) ? null : new WithCharacteristics(split);
       }
 
@@ -294,7 +294,7 @@ final class CollectSpliterators {
   }
 
   /**
-   * Implements the {@link Stream#flatMap} operation on spliterators.
+   * Implements the {@code Stream#flatMap} operation on spliterators.
    *
    * @param <InElementT> the element type of the input spliterator
    * @param <OutElementT> the element type of the output spliterators
@@ -305,7 +305,7 @@ final class CollectSpliterators {
           OutElementT extends @Nullable Object,
           OutSpliteratorT extends Spliterator<OutElementT>>
       implements Spliterator<OutElementT> {
-    /** Factory for constructing {@link FlatMapSpliterator} instances. */
+    /** Factory for constructing {@code FlatMapSpliterator} instances. */
     @FunctionalInterface
     interface Factory<InElementT extends @Nullable Object, OutSpliteratorT extends Spliterator<?>> {
       OutSpliteratorT newFlatMapSpliterator(
@@ -419,7 +419,7 @@ final class CollectSpliterators {
   }
 
   /**
-   * Implementation of {@link Stream#flatMap} with an object spliterator output type.
+   * Implementation of {@code Stream#flatMap} with an object spliterator output type.
    *
    * <p>To avoid having this type, we could use {@code FlatMapSpliterator} directly. The main
    * advantages to having the type are the ability to use its constructor reference below and the
@@ -444,7 +444,7 @@ final class CollectSpliterators {
   }
 
   /**
-   * Implementation of {@link Stream#flatMap} with a primitive spliterator output type.
+   * Implementation of {@code Stream#flatMap} with a primitive spliterator output type.
    *
    * @param <InElementT> the element type of the input spliterator
    * @param <OutElementT> the (boxed) element type of the output spliterators
@@ -504,43 +504,43 @@ final class CollectSpliterators {
     }
   }
 
-  /** Implementation of {@link #flatMapToInt}. */
+  /** Implementation of {@code #flatMapToInt}. */
   static final class FlatMapSpliteratorOfInt<InElementT extends @Nullable Object>
       extends FlatMapSpliteratorOfPrimitive<InElementT, Integer, IntConsumer, Spliterator.OfInt>
       implements Spliterator.OfInt {
     FlatMapSpliteratorOfInt(
-        @CheckForNull OfInt prefix,
+        @CheckForNull Spliterator.OfInt prefix,
         Spliterator<InElementT> from,
-        Function<? super InElementT, OfInt> function,
+        Function<? super InElementT, Spliterator.OfInt> function,
         int characteristics,
         long estimatedSize) {
       super(prefix, from, function, FlatMapSpliteratorOfInt::new, characteristics, estimatedSize);
     }
   }
 
-  /** Implementation of {@link #flatMapToLong}. */
+  /** Implementation of {@code #flatMapToLong}. */
   static final class FlatMapSpliteratorOfLong<InElementT extends @Nullable Object>
       extends FlatMapSpliteratorOfPrimitive<InElementT, Long, LongConsumer, Spliterator.OfLong>
       implements Spliterator.OfLong {
     FlatMapSpliteratorOfLong(
-        @CheckForNull OfLong prefix,
+        @CheckForNull Spliterator.OfLong prefix,
         Spliterator<InElementT> from,
-        Function<? super InElementT, OfLong> function,
+        Function<? super InElementT, Spliterator.OfLong> function,
         int characteristics,
         long estimatedSize) {
       super(prefix, from, function, FlatMapSpliteratorOfLong::new, characteristics, estimatedSize);
     }
   }
 
-  /** Implementation of {@link #flatMapToDouble}. */
+  /** Implementation of {@code #flatMapToDouble}. */
   static final class FlatMapSpliteratorOfDouble<InElementT extends @Nullable Object>
       extends FlatMapSpliteratorOfPrimitive<
           InElementT, Double, DoubleConsumer, Spliterator.OfDouble>
       implements Spliterator.OfDouble {
     FlatMapSpliteratorOfDouble(
-        @CheckForNull OfDouble prefix,
+        @CheckForNull Spliterator.OfDouble prefix,
         Spliterator<InElementT> from,
-        Function<? super InElementT, OfDouble> function,
+        Function<? super InElementT, Spliterator.OfDouble> function,
         int characteristics,
         long estimatedSize) {
       super(

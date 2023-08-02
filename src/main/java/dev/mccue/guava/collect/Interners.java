@@ -16,7 +16,6 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
-
 import dev.mccue.guava.base.Equivalence;
 import dev.mccue.guava.base.Function;
 import dev.mccue.guava.collect.MapMaker.Dummy;
@@ -24,7 +23,7 @@ import dev.mccue.guava.collect.MapMakerInternalMap.InternalEntry;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Contains static methods pertaining to instances of {@link Interner}.
+ * Contains static methods pertaining to instances of {@code Interner}.
  *
  * @author Kevin Bourrillion
  * @since 3.0
@@ -34,7 +33,7 @@ public final class Interners {
   private Interners() {}
 
   /**
-   * Builder for {@link Interner} instances.
+   * Builder for {@code Interner} instances.
    *
    * @since 21.0
    */
@@ -45,7 +44,7 @@ public final class Interners {
     private InternerBuilder() {}
 
     /**
-     * Instructs the {@link InternerBuilder} to build a strong interner.
+     * Instructs the {@code InternerBuilder} to build a strong interner.
      *
      * @see Interners#newStrongInterner()
      */
@@ -55,17 +54,18 @@ public final class Interners {
     }
 
     /**
-     * Instructs the {@link InternerBuilder} to build a weak interner.
+     * Instructs the {@code InternerBuilder} to build a weak interner.
      *
      * @see Interners#newWeakInterner()
      */
+    
     public InternerBuilder weak() {
       this.strong = false;
       return this;
     }
 
     /**
-     * Sets the concurrency level that will be used by the to-be-built {@link Interner}.
+     * Sets the concurrency level that will be used by the to-be-built {@code Interner}.
      *
      * @see MapMaker#concurrencyLevel(int)
      */
@@ -82,7 +82,7 @@ public final class Interners {
     }
   }
 
-  /** Returns a fresh {@link InternerBuilder} instance. */
+  /** Returns a fresh {@code InternerBuilder} instance. */
   public static InternerBuilder newBuilder() {
     return new InternerBuilder();
   }
@@ -90,7 +90,7 @@ public final class Interners {
   /**
    * Returns a new thread-safe interner which retains a strong reference to each instance it has
    * interned, thus preventing these instances from being garbage-collected. If this retention is
-   * acceptable, this implementation may perform better than {@link #newWeakInterner}.
+   * acceptable, this implementation may perform better than {@code #newWeakInterner}.
    */
   public static <E> Interner<E> newStrongInterner() {
     return newBuilder().strong().build();
@@ -99,17 +99,17 @@ public final class Interners {
   /**
    * Returns a new thread-safe interner which retains a weak reference to each instance it has
    * interned, and so does not prevent these instances from being garbage-collected. This most
-   * likely does not perform as well as {@link #newStrongInterner}, but is the best alternative when
+   * likely does not perform as well as {@code #newStrongInterner}, but is the best alternative when
    * the memory usage of that implementation is unacceptable.
    */
+  
   public static <E> Interner<E> newWeakInterner() {
     return newBuilder().weak().build();
   }
 
-  @VisibleForTesting
   static final class InternerImpl<E> implements Interner<E> {
     // MapMaker is our friend, we know about this type
-    @VisibleForTesting final MapMakerInternalMap<E, Dummy, ?, ?> map;
+    final MapMakerInternalMap<E, Dummy, ?, ?> map;
 
     private InternerImpl(MapMaker mapMaker) {
       this.map =
@@ -149,7 +149,7 @@ public final class Interners {
   }
 
   /**
-   * Returns a function that delegates to the {@link Interner#intern} method of the given interner.
+   * Returns a function that delegates to the {@code Interner#intern} method of the given interner.
    *
    * @since 8.0
    */

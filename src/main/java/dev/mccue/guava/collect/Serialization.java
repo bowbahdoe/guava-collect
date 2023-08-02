@@ -38,9 +38,9 @@ final class Serialization {
 
   /**
    * Reads a count corresponding to a serialized map, multiset, or multimap. It returns the size of
-   * a map serialized by {@link #writeMap(Map, ObjectOutputStream)}, the number of distinct elements
-   * in a multiset serialized by {@link #writeMultiset(Multiset, ObjectOutputStream)}, or the number
-   * of distinct keys in a multimap serialized by {@link #writeMultimap(Multimap,
+   * a map serialized by {@code #writeMap(Map, ObjectOutputStream)}, the number of distinct elements
+   * in a multiset serialized by {@code #writeMultiset(Multiset, ObjectOutputStream)}, or the number
+   * of distinct keys in a multimap serialized by {@code #writeMultimap(Multimap,
    * ObjectOutputStream)}.
    */
   static int readCount(ObjectInputStream stream) throws IOException {
@@ -64,7 +64,7 @@ final class Serialization {
   }
 
   /**
-   * Populates a map by reading an input stream, as part of deserialization. See {@link #writeMap}
+   * Populates a map by reading an input stream, as part of deserialization. See {@code #writeMap}
    * for the data format.
    */
   static <K extends @Nullable Object, V extends @Nullable Object> void populateMap(
@@ -74,8 +74,8 @@ final class Serialization {
   }
 
   /**
-   * Populates a map by reading an input stream, as part of deserialization. See {@link #writeMap}
-   * for the data format. The size is determined by a prior call to {@link #readCount}.
+   * Populates a map by reading an input stream, as part of deserialization. See {@code #writeMap}
+   * for the data format. The size is determined by a prior call to {@code #readCount}.
    */
   static <K extends @Nullable Object, V extends @Nullable Object> void populateMap(
       Map<K, V> map, ObjectInputStream stream, int size)
@@ -107,7 +107,7 @@ final class Serialization {
   }
 
   /**
-   * Populates a multiset by reading an input stream, as part of deserialization. See {@link
+   * Populates a multiset by reading an input stream, as part of deserialization. See {@code
    * #writeMultiset} for the data format.
    */
   static <E extends @Nullable Object> void populateMultiset(
@@ -117,9 +117,9 @@ final class Serialization {
   }
 
   /**
-   * Populates a multiset by reading an input stream, as part of deserialization. See {@link
+   * Populates a multiset by reading an input stream, as part of deserialization. See {@code
    * #writeMultiset} for the data format. The number of distinct elements is determined by a prior
-   * call to {@link #readCount}.
+   * call to {@code #readCount}.
    */
   static <E extends @Nullable Object> void populateMultiset(
       Multiset<E> multiset, ObjectInputStream stream, int distinctElements)
@@ -134,7 +134,7 @@ final class Serialization {
 
   /**
    * Stores the contents of a multimap in an output stream, as part of serialization. It does not
-   * support concurrent multimaps whose content may change while the method is running. The {@link
+   * support concurrent multimaps whose content may change while the method is running. The {@code
    * Multimap#asMap} view determines the ordering in which data is written to the stream.
    *
    * <p>The serialized output consists of the number of distinct keys, and then for each distinct
@@ -153,7 +153,7 @@ final class Serialization {
   }
 
   /**
-   * Populates a multimap by reading an input stream, as part of deserialization. See {@link
+   * Populates a multimap by reading an input stream, as part of deserialization. See {@code
    * #writeMultimap} for the data format.
    */
   static <K extends @Nullable Object, V extends @Nullable Object> void populateMultimap(
@@ -164,9 +164,9 @@ final class Serialization {
   }
 
   /**
-   * Populates a multimap by reading an input stream, as part of deserialization. See {@link
+   * Populates a multimap by reading an input stream, as part of deserialization. See {@code
    * #writeMultimap} for the data format. The number of distinct keys is determined by a prior call
-   * to {@link #readCount}.
+   * to {@code #readCount}.
    */
   static <K extends @Nullable Object, V extends @Nullable Object> void populateMultimap(
       Multimap<K, V> multimap, ObjectInputStream stream, int distinctKeys)

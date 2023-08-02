@@ -21,7 +21,7 @@ import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * "Overrides" the {@link ImmutableMultiset} static methods that lack {@link
+ * "Overrides" the {@code ImmutableMultiset} static methods that lack {@code
  * ImmutableSortedMultiset} equivalents with deprecated, exception-throwing versions. This prevents
  * accidents like the following:
  *
@@ -32,7 +32,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * // BAD CODE! The returned multiset is actually an unsorted ImmutableMultiset!
  * }</pre>
  *
- * <p>While we could put the overrides in {@link ImmutableSortedMultiset} itself, it seems clearer
+ * <p>While we could put the overrides in {@code ImmutableSortedMultiset} itself, it seems clearer
  * to separate these "do not call" methods from those intended for normal use.
  *
  * @author Louis Wasserman
@@ -40,12 +40,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultiset<E> {
   /**
-   * Not supported. Use {@link ImmutableSortedMultiset#toImmutableSortedMultiset} instead. This
-   * method exists only to hide {@link ImmutableMultiset#toImmutableMultiset} from consumers of
+   * Not supported. Use {@code ImmutableSortedMultiset#toImmutableSortedMultiset} instead. This
+   * method exists only to hide {@code ImmutableMultiset#toImmutableMultiset} from consumers of
    * {@code ImmutableSortedMultiset}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableSortedMultiset#toImmutableSortedMultiset}.
+   * @deprecated Use {@code ImmutableSortedMultiset#toImmutableSortedMultiset}.
    * @since 21.0
    */
   @DoNotCall("Use toImmutableSortedMultiset.")
@@ -55,12 +55,12 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
   }
 
   /**
-   * Not supported. Use {@link ImmutableSortedMultiset#toImmutableSortedMultiset} instead. This
-   * method exists only to hide {@link ImmutableMultiset#toImmutableMultiset} from consumers of
+   * Not supported. Use {@code ImmutableSortedMultiset#toImmutableSortedMultiset} instead. This
+   * method exists only to hide {@code ImmutableMultiset#toImmutableMultiset} from consumers of
    * {@code ImmutableSortedMultiset}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableSortedMultiset#toImmutableSortedMultiset}.
+   * @deprecated Use {@code ImmutableSortedMultiset#toImmutableSortedMultiset}.
    * @since 22.0
    */
   @DoNotCall("Use toImmutableSortedMultiset.")
@@ -73,12 +73,12 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
   }
 
   /**
-   * Not supported. Use {@link ImmutableSortedMultiset#naturalOrder}, which offers better
-   * type-safety, instead. This method exists only to hide {@link ImmutableMultiset#builder} from
+   * Not supported. Use {@code ImmutableSortedMultiset#naturalOrder}, which offers better
+   * type-safety, instead. This method exists only to hide {@code ImmutableMultiset#builder} from
    * consumers of {@code ImmutableSortedMultiset}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableSortedMultiset#naturalOrder}, which offers better type-safety.
+   * @deprecated Use {@code ImmutableSortedMultiset#naturalOrder}, which offers better type-safety.
    */
   @DoNotCall("Use naturalOrder.")
   @Deprecated
@@ -92,7 +92,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass a parameter of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass a parameter of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable)}.</b>
    */
   @DoNotCall("Elements must be Comparable. (Or, pass a Comparator to orderedBy or copyOf.)")
@@ -107,7 +107,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable, Comparable)}.</b>
    */
   @DoNotCall("Elements must be Comparable. (Or, pass a Comparator to orderedBy or copyOf.)")
@@ -122,7 +122,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable, Comparable, Comparable)}.</b>
    */
   @DoNotCall("Elements must be Comparable. (Or, pass a Comparator to orderedBy or copyOf.)")
@@ -137,7 +137,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable, Comparable, Comparable, Comparable)}. </b>
    */
   @DoNotCall("Elements must be Comparable. (Or, pass a Comparator to orderedBy or copyOf.)")
@@ -152,7 +152,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable, Comparable, Comparable, Comparable, Comparable)} .
    *     </b>
    */
@@ -168,7 +168,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#of(Comparable, Comparable, Comparable, Comparable, Comparable,
    *     Comparable, Comparable...)} . </b>
    */
@@ -185,7 +185,7 @@ abstract class ImmutableSortedMultisetFauxverideShim<E> extends ImmutableMultise
    * ImmutableSortedMultiset}, not this dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedMultiset#copyOf(Comparable[])}.</b>
    */
   @DoNotCall("Elements must be Comparable. (Or, pass a Comparator to orderedBy or copyOf.)")

@@ -17,7 +17,6 @@
 package dev.mccue.guava.collect;
 
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -31,6 +30,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class DescendingMultiset<E extends @Nullable Object> extends ForwardingMultiset<E>
     implements SortedMultiset<E> {

@@ -21,7 +21,6 @@ import static java.util.Collections.emptySet;
 
 import dev.mccue.guava.base.Predicate;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -33,7 +32,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link Multimaps#filterKeys(Multimap, Predicate)}.
+ * Implementation of {@code Multimaps#filterKeys(Multimap, Predicate)}.
  *
  * @author Louis Wasserman
  */

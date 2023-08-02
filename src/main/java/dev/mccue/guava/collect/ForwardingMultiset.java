@@ -30,8 +30,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingMultiset} forward <b>indiscriminately</b> to
- * the methods of the delegate. For example, overriding {@link #add(Object, int)} alone <b>will
- * not</b> change the behavior of {@link #add(Object)}, which can lead to unexpected behavior. In
+ * the methods of the delegate. For example, overriding {@code #add(Object, int)} alone <b>will
+ * not</b> change the behavior of {@code #add(Object)}, which can lead to unexpected behavior. In
  * this case, you should override {@code add(Object)} as well, either providing your own
  * implementation, or delegating to the provided {@code standardAdd} method.
  *
@@ -106,8 +106,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #contains} in terms of {@link #count}. If you override {@link
-   * #count}, you may wish to override {@link #contains} to forward to this implementation.
+   * A sensible definition of {@code #contains} in terms of {@code #count}. If you override {@code
+   * #count}, you may wish to override {@code #contains} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -117,8 +117,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #clear} in terms of the {@code iterator} method of {@link
-   * #entrySet}. If you override {@link #entrySet}, you may wish to override {@link #clear} to
+   * A sensible definition of {@code #clear} in terms of the {@code iterator} method of {@code
+   * #entrySet}. If you override {@code #entrySet}, you may wish to override {@code #clear} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -129,8 +129,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible, albeit inefficient, definition of {@link #count} in terms of {@link #entrySet}. If
-   * you override {@link #entrySet}, you may wish to override {@link #count} to forward to this
+   * A sensible, albeit inefficient, definition of {@code #count} in terms of {@code #entrySet}. If
+   * you override {@code #entrySet}, you may wish to override {@code #count} to forward to this
    * implementation.
    *
    * @since 7.0
@@ -145,8 +145,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #add(Object)} in terms of {@link #add(Object, int)}. If you
-   * override {@link #add(Object, int)}, you may wish to override {@link #add(Object)} to forward to
+   * A sensible definition of {@code #add(Object)} in terms of {@code #add(Object, int)}. If you
+   * override {@code #add(Object, int)}, you may wish to override {@code #add(Object)} to forward to
    * this implementation.
    *
    * @since 7.0
@@ -157,9 +157,9 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #addAll(Collection)} in terms of {@link #add(Object)} and
-   * {@link #add(Object, int)}. If you override either of these methods, you may wish to override
-   * {@link #addAll(Collection)} to forward to this implementation.
+   * A sensible definition of {@code #addAll(Collection)} in terms of {@code #add(Object)} and
+   * {@code #add(Object, int)}. If you override either of these methods, you may wish to override
+   * {@code #addAll(Collection)} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -169,8 +169,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #remove(Object)} in terms of {@link #remove(Object, int)}. If
-   * you override {@link #remove(Object, int)}, you may wish to override {@link #remove(Object)} to
+   * A sensible definition of {@code #remove(Object)} in terms of {@code #remove(Object, int)}. If
+   * you override {@code #remove(Object, int)}, you may wish to override {@code #remove(Object)} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -181,8 +181,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #removeAll} in terms of the {@code removeAll} method of {@link
-   * #elementSet}. If you override {@link #elementSet}, you may wish to override {@link #removeAll}
+   * A sensible definition of {@code #removeAll} in terms of the {@code removeAll} method of {@code
+   * #elementSet}. If you override {@code #elementSet}, you may wish to override {@code #removeAll}
    * to forward to this implementation.
    *
    * @since 7.0
@@ -193,8 +193,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #retainAll} in terms of the {@code retainAll} method of {@link
-   * #elementSet}. If you override {@link #elementSet}, you may wish to override {@link #retainAll}
+   * A sensible definition of {@code #retainAll} in terms of the {@code retainAll} method of {@code
+   * #elementSet}. If you override {@code #elementSet}, you may wish to override {@code #retainAll}
    * to forward to this implementation.
    *
    * @since 7.0
@@ -205,9 +205,9 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #setCount(Object, int)} in terms of {@link #count(Object)},
-   * {@link #add(Object, int)}, and {@link #remove(Object, int)}. {@link #entrySet()}. If you
-   * override any of these methods, you may wish to override {@link #setCount(Object, int)} to
+   * A sensible definition of {@code #setCount(Object, int)} in terms of {@code #count(Object)},
+   * {@code #add(Object, int)}, and {@code #remove(Object, int)}. {@code #entrySet()}. If you
+   * override any of these methods, you may wish to override {@code #setCount(Object, int)} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -217,9 +217,9 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #setCount(Object, int, int)} in terms of {@link #count(Object)}
-   * and {@link #setCount(Object, int)}. If you override either of these methods, you may wish to
-   * override {@link #setCount(Object, int, int)} to forward to this implementation.
+   * A sensible definition of {@code #setCount(Object, int, int)} in terms of {@code #count(Object)}
+   * and {@code #setCount(Object, int)}. If you override either of these methods, you may wish to
+   * override {@code #setCount(Object, int, int)} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -228,12 +228,12 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible implementation of {@link Multiset#elementSet} in terms of the following methods:
-   * {@link ForwardingMultiset#clear}, {@link ForwardingMultiset#contains}, {@link
-   * ForwardingMultiset#containsAll}, {@link ForwardingMultiset#count}, {@link
-   * ForwardingMultiset#isEmpty}, the {@link Set#size} and {@link Set#iterator} methods of {@link
-   * ForwardingMultiset#entrySet}, and {@link ForwardingMultiset#remove(Object, int)}. In many
-   * situations, you may wish to override {@link ForwardingMultiset#elementSet} to forward to this
+   * A sensible implementation of {@code Multiset#elementSet} in terms of the following methods:
+   * {@code ForwardingMultiset#clear}, {@code ForwardingMultiset#contains}, {@code
+   * ForwardingMultiset#containsAll}, {@code ForwardingMultiset#count}, {@code
+   * ForwardingMultiset#isEmpty}, the {@code Set#size} and {@code Set#iterator} methods of {@code
+   * ForwardingMultiset#entrySet}, and {@code ForwardingMultiset#remove(Object, int)}. In many
+   * situations, you may wish to override {@code ForwardingMultiset#elementSet} to forward to this
    * implementation or a subclass thereof.
    *
    * @since 10.0
@@ -254,8 +254,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #iterator} in terms of {@link #entrySet} and {@link
-   * #remove(Object)}. If you override either of these methods, you may wish to override {@link
+   * A sensible definition of {@code #iterator} in terms of {@code #entrySet} and {@code
+   * #remove(Object)}. If you override either of these methods, you may wish to override {@code
    * #iterator} to forward to this implementation.
    *
    * @since 7.0
@@ -265,8 +265,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible, albeit inefficient, definition of {@link #size} in terms of {@link #entrySet}. If
-   * you override {@link #entrySet}, you may wish to override {@link #size} to forward to this
+   * A sensible, albeit inefficient, definition of {@code #size} in terms of {@code #entrySet}. If
+   * you override {@code #entrySet}, you may wish to override {@code #size} to forward to this
    * implementation.
    *
    * @since 7.0
@@ -276,9 +276,9 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible, albeit inefficient, definition of {@link #equals} in terms of {@code
-   * entrySet().size()} and {@link #count}. If you override either of these methods, you may wish to
-   * override {@link #equals} to forward to this implementation.
+   * A sensible, albeit inefficient, definition of {@code #equals} in terms of {@code
+   * entrySet().size()} and {@code #count}. If you override either of these methods, you may wish to
+   * override {@code #equals} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -287,8 +287,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #hashCode} as {@code entrySet().hashCode()} . If you override
-   * {@link #entrySet}, you may wish to override {@link #hashCode} to forward to this
+   * A sensible definition of {@code #hashCode} as {@code entrySet().hashCode()} . If you override
+   * {@code #entrySet}, you may wish to override {@code #hashCode} to forward to this
    * implementation.
    *
    * @since 7.0
@@ -298,8 +298,8 @@ public abstract class ForwardingMultiset<E extends @Nullable Object> extends For
   }
 
   /**
-   * A sensible definition of {@link #toString} as {@code entrySet().toString()} . If you override
-   * {@link #entrySet}, you may wish to override {@link #toString} to forward to this
+   * A sensible definition of {@code #toString} as {@code entrySet().toString()} . If you override
+   * {@code #entrySet}, you may wish to override {@code #toString} to forward to this
    * implementation.
    *
    * @since 7.0

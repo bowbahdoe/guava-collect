@@ -24,13 +24,11 @@ import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 import static dev.mccue.guava.collect.NullnessCasts.unsafeNull;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.base.Preconditions;
 import dev.mccue.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -67,8 +65,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * than {@code size()}. Furthermore, this structure places significantly reduced load on the garbage
  * collector by only using a constant number of internal objects.
  *
- * <p>If there are no removals, then iteration order for the {@link #entrySet}, {@link #keySet}, and
- * {@link #values} views is the same as insertion order. Any removal invalidates any ordering
+ * <p>If there are no removals, then iteration order for the {@code #entrySet}, {@code #keySet}, and
+ * {@code #values} views is the same as insertion order. Any removal invalidates any ordering
  * guarantees.
  *
  * <p>This class should not be assumed to be universally superior to {@code java.util.HashMap}.
@@ -117,8 +115,7 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
    * Maximum allowed false positive probability of detecting a hash flooding attack given random
    * input.
    */
-  @VisibleForTesting(
-      )
+  
   static final double HASH_FLOODING_FPP = 0.001;
 
   /**
@@ -203,19 +200,19 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
    *
    * <p>The pointers in [size(), entries.length) are all "null" (UNSET).
    */
-  @VisibleForTesting @CheckForNull transient int[] entries;
+  @CheckForNull transient int[] entries;
 
   /**
    * The keys of the entries in the map, in the range of [0, size()). The keys in [size(),
    * keys.length) are all {@code null}.
    */
-  @VisibleForTesting @CheckForNull transient @Nullable Object[] keys;
+  @CheckForNull transient @Nullable Object[] keys;
 
   /**
    * The values of the entries in the map, in the range of [0, size()). The values in [size(),
    * values.length) are all {@code null}.
    */
-  @VisibleForTesting @CheckForNull transient @Nullable Object[] values;
+  @CheckForNull transient @Nullable Object[] values;
 
   /**
    * Keeps track of metadata like the number of hash table bits and modifications of this data
@@ -257,7 +254,6 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
   }
 
   /** Returns whether arrays need to be allocated. */
-  @VisibleForTesting
   boolean needsAllocArrays() {
     return table == null;
   }
@@ -280,7 +276,6 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
   }
 
   @SuppressWarnings("unchecked")
-  @VisibleForTesting
   @CheckForNull
   Map<K, V> delegateOrNull() {
     if (table instanceof Map) {
@@ -293,7 +288,6 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
     return new LinkedHashMap<>(tableSize, 1.0f);
   }
 
-  @VisibleForTesting
   @CanIgnoreReturnValue
   Map<K, V> convertToHashFloodingResistantImplementation() {
     Map<K, V> newDelegate = createHashFloodingResistantDelegate(hashTableMask() + 1);

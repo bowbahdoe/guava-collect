@@ -22,7 +22,6 @@ import static dev.mccue.guava.collect.CompactHashing.UNSET;
 import static dev.mccue.guava.collect.Hashing.smearedHash;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.base.Preconditions;
 import dev.mccue.guava.primitives.Ints;
@@ -63,7 +62,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * every element added, the garbage collector will have to traverse {@code 1.5} references on
  * average, in the marking phase, not {@code 5.0} as in {@code java.util.HashSet}.
  *
- * <p>If there are no removals, then {@link #iterator iteration} order is the same as insertion
+ * <p>If there are no removals, then {@code #iterator iteration} order is the same as insertion
  * order. Any removal invalidates any ordering guarantees.
  *
  * <p>This class should not be assumed to be universally superior to {@code java.util.HashSet}.
@@ -130,8 +129,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
    * Maximum allowed false positive probability of detecting a hash flooding attack given random
    * input.
    */
-  @VisibleForTesting(
-      )
+  
   static final double HASH_FLOODING_FPP = 0.001;
 
   /**
@@ -186,7 +184,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
    * The elements contained in the set, in the range of [0, size()). The elements in [size(),
    * elements.length) are all {@code null}.
    */
-  @VisibleForTesting @CheckForNull transient @Nullable Object[] elements;
+  @CheckForNull transient @Nullable Object[] elements;
 
   /**
    * Keeps track of metadata like the number of hash table bits and modifications of this data
@@ -222,7 +220,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   /** Returns whether arrays need to be allocated. */
-  @VisibleForTesting
   boolean needsAllocArrays() {
     return table == null;
   }
@@ -244,7 +241,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   @SuppressWarnings("unchecked")
-  @VisibleForTesting
   @CheckForNull
   Set<E> delegateOrNull() {
     if (table instanceof Set) {
@@ -257,7 +253,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     return new LinkedHashSet<>(tableSize, 1.0f);
   }
 
-  @VisibleForTesting
   @CanIgnoreReturnValue
   Set<E> convertToHashFloodingResistantImplementation() {
     Set<E> newDelegate = createHashFloodingResistantDelegate(hashTableMask() + 1);
@@ -271,7 +266,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     return newDelegate;
   }
 
-  @VisibleForTesting
   boolean isUsingHashFloodingResistance() {
     return delegateOrNull() != null;
   }

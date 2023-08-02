@@ -31,6 +31,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 @SuppressWarnings("AvoidObjectArrays")
 public final class ObjectArrays {
@@ -139,7 +140,7 @@ public final class ObjectArrays {
   }
 
   /**
-   * Implementation of {@link Collection#toArray(Object[])} for collections backed by an object
+   * Implementation of {@code Collection#toArray(Object[])} for collections backed by an object
    * array. the runtime type of the returned array is that of the specified array. If the collection
    * fits in the specified array, it is returned therein. Otherwise, a new array is allocated with
    * the runtime type of the specified array and the size of the specified collection.

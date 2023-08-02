@@ -22,6 +22,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /** An ordering that treats {@code null} as greater than all other values. */
+
 @ElementTypesAreNonnullByDefault
 final class NullsLastOrdering<T extends @Nullable Object> extends Ordering<@Nullable T>
     implements Serializable {

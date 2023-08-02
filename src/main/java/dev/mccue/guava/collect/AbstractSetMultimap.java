@@ -26,8 +26,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Basic implementation of the {@link SetMultimap} interface. It's a wrapper around {@link
- * AbstractMapBasedMultimap} that converts the returned collections into {@code Sets}. The {@link
+ * Basic implementation of the {@code SetMultimap} interface. It's a wrapper around {@code
+ * AbstractMapBasedMultimap} that converts the returned collections into {@code Sets}. The {@code
  * #createCollection} method must return a {@code Set}.
  *
  * @author Jared Levy
@@ -69,7 +69,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
    * {@inheritDoc}
    *
    * <p>Because a {@code SetMultimap} has unique values for a given key, this method returns a
-   * {@link Set}, instead of the {@link Collection} specified in the {@link Multimap} interface.
+   * {@code Set}, instead of the {@code Collection} specified in the {@code Multimap} interface.
    */
   @Override
   public Set<V> get(@ParametricNullness K key) {
@@ -80,7 +80,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
    * {@inheritDoc}
    *
    * <p>Because a {@code SetMultimap} has unique values for a given key, this method returns a
-   * {@link Set}, instead of the {@link Collection} specified in the {@link Multimap} interface.
+   * {@code Set}, instead of the {@code Collection} specified in the {@code Multimap} interface.
    */
   @Override
   public Set<Entry<K, V>> entries() {
@@ -91,7 +91,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
    * {@inheritDoc}
    *
    * <p>Because a {@code SetMultimap} has unique values for a given key, this method returns a
-   * {@link Set}, instead of the {@link Collection} specified in the {@link Multimap} interface.
+   * {@code Set}, instead of the {@code Collection} specified in the {@code Multimap} interface.
    */
   @CanIgnoreReturnValue
   @Override
@@ -103,7 +103,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
    * {@inheritDoc}
    *
    * <p>Because a {@code SetMultimap} has unique values for a given key, this method returns a
-   * {@link Set}, instead of the {@link Collection} specified in the {@link Multimap} interface.
+   * {@code Set}, instead of the {@code Collection} specified in the {@code Multimap} interface.
    *
    * <p>Any duplicates in {@code values} will be stored in the multimap once.
    */
@@ -116,7 +116,7 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
   /**
    * {@inheritDoc}
    *
-   * <p>Though the method signature doesn't say so explicitly, the returned map has {@link Set}
+   * <p>Though the method signature doesn't say so explicitly, the returned map has {@code Set}
    * values.
    */
   @Override

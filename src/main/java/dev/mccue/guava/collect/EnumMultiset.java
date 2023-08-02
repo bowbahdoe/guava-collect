@@ -41,6 +41,7 @@ import dev.mccue.jsr305.CheckForNull;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
     implements Serializable {
@@ -52,7 +53,7 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
   /**
    * Creates a new {@code EnumMultiset} containing the specified elements.
    *
-   * <p>This implementation is highly efficient when {@code elements} is itself a {@link Multiset}.
+   * <p>This implementation is highly efficient when {@code elements} is itself a {@code Multiset}.
    *
    * @param elements the elements that the multiset should contain
    * @throws IllegalArgumentException if {@code elements} is empty
@@ -66,7 +67,7 @@ public final class EnumMultiset<E extends Enum<E>> extends AbstractMultiset<E>
   }
 
   /**
-   * Returns a new {@code EnumMultiset} instance containing the given elements. Unlike {@link
+   * Returns a new {@code EnumMultiset} instance containing the given elements. Unlike {@code
    * EnumMultiset#create(Iterable)}, this method does not produce an exception on an empty iterable.
    *
    * @since 14.0

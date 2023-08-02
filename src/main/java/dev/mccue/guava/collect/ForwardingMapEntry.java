@@ -17,7 +17,7 @@
 package dev.mccue.guava.collect;
 
 import dev.mccue.guava.base.Objects;
-
+import java.util.Map;
 import java.util.Map.Entry;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -28,12 +28,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingMapEntry} forward <i>indiscriminately</i> to
- * the methods of the delegate. For example, overriding {@link #getValue} alone <i>will not</i>
- * change the behavior of {@link #equals}, which can lead to unexpected behavior. In this case, you
+ * the methods of the delegate. For example, overriding {@code #getValue} alone <i>will not</i>
+ * change the behavior of {@code #equals}, which can lead to unexpected behavior. In this case, you
  * should override {@code equals} as well, either providing your own implementation, or delegating
  * to the provided {@code standardEquals} method.
  *
- * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equal} to test
+ * <p>Each of the {@code standard} methods, where appropriate, use {@code Objects#equal} to test
  * equality for both keys and values. This may not be the desired behavior for map implementations
  * that use non-standard notions of key equality, such as the entry of a {@code SortedMap} whose
  * comparator is not consistent with {@code equals}.
@@ -47,7 +47,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 @ElementTypesAreNonnullByDefault
 public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @Nullable Object>
-    extends ForwardingObject implements Entry<K, V> {
+    extends ForwardingObject implements Map.Entry<K, V> {
   // TODO(lowasser): identify places where thread safety is actually lost
 
   /** Constructor for use by subclasses. */
@@ -85,8 +85,8 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
   }
 
   /**
-   * A sensible definition of {@link #equals(Object)} in terms of {@link #getKey()} and {@link
-   * #getValue()}. If you override either of these methods, you may wish to override {@link
+   * A sensible definition of {@code #equals(Object)} in terms of {@code #getKey()} and {@code
+   * #getValue()}. If you override either of these methods, you may wish to override {@code
    * #equals(Object)} to forward to this implementation.
    *
    * @since 7.0
@@ -101,8 +101,8 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
   }
 
   /**
-   * A sensible definition of {@link #hashCode()} in terms of {@link #getKey()} and {@link
-   * #getValue()}. If you override either of these methods, you may wish to override {@link
+   * A sensible definition of {@code #hashCode()} in terms of {@code #getKey()} and {@code
+   * #getValue()}. If you override either of these methods, you may wish to override {@code
    * #hashCode()} to forward to this implementation.
    *
    * @since 7.0
@@ -114,8 +114,8 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
   }
 
   /**
-   * A sensible definition of {@link #toString} in terms of {@link #getKey} and {@link #getValue}.
-   * If you override either of these methods, you may wish to override {@link #equals} to forward to
+   * A sensible definition of {@code #toString} in terms of {@code #getKey} and {@code #getValue}.
+   * If you override either of these methods, you may wish to override {@code #equals} to forward to
    * this implementation.
    *
    * @since 7.0

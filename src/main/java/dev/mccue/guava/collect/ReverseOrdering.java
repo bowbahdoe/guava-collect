@@ -24,6 +24,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /** An ordering that uses the reverse of a given order. */
+
 @ElementTypesAreNonnullByDefault
 final class ReverseOrdering<T extends @Nullable Object> extends Ordering<T>
     implements Serializable {

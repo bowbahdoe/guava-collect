@@ -26,8 +26,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingSortedMultiset} forward
- * <b>indiscriminately</b> to the methods of the delegate. For example, overriding {@link
- * #add(Object, int)} alone <b>will not</b> change the behavior of {@link #add(Object)}, which can
+ * <b>indiscriminately</b> to the methods of the delegate. For example, overriding {@code
+ * #add(Object, int)} alone <b>will not</b> change the behavior of {@code #add(Object)}, which can
  * lead to unexpected behavior. In this case, you should override {@code add(Object)} as well,
  * either providing your own implementation, or delegating to the provided {@code standardAdd}
  * method.
@@ -42,6 +42,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 15.0
  */
+
 @ElementTypesAreNonnullByDefault
 public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
     extends ForwardingMultiset<E> implements SortedMultiset<E> {
@@ -57,14 +58,14 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible implementation of {@link SortedMultiset#elementSet} in terms of the following
-   * methods: {@link SortedMultiset#clear}, {@link SortedMultiset#comparator}, {@link
-   * SortedMultiset#contains}, {@link SortedMultiset#containsAll}, {@link SortedMultiset#count},
-   * {@link SortedMultiset#firstEntry} {@link SortedMultiset#headMultiset}, {@link
-   * SortedMultiset#isEmpty}, {@link SortedMultiset#lastEntry}, {@link SortedMultiset#subMultiset},
-   * {@link SortedMultiset#tailMultiset}, the {@code size()} and {@code iterator()} methods of
-   * {@link SortedMultiset#entrySet}, and {@link SortedMultiset#remove(Object, int)}. In many
-   * situations, you may wish to override {@link SortedMultiset#elementSet} to forward to this
+   * A sensible implementation of {@code SortedMultiset#elementSet} in terms of the following
+   * methods: {@code SortedMultiset#clear}, {@code SortedMultiset#comparator}, {@code
+   * SortedMultiset#contains}, {@code SortedMultiset#containsAll}, {@code SortedMultiset#count},
+   * {@code SortedMultiset#firstEntry} {@code SortedMultiset#headMultiset}, {@code
+   * SortedMultiset#isEmpty}, {@code SortedMultiset#lastEntry}, {@code SortedMultiset#subMultiset},
+   * {@code SortedMultiset#tailMultiset}, the {@code size()} and {@code iterator()} methods of
+   * {@code SortedMultiset#entrySet}, and {@code SortedMultiset#remove(Object, int)}. In many
+   * situations, you may wish to override {@code SortedMultiset#elementSet} to forward to this
    * implementation or a subclass thereof.
    *
    * @since 15.0
@@ -87,13 +88,13 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A skeleton implementation of a descending multiset view. Normally, {@link
+   * A skeleton implementation of a descending multiset view. Normally, {@code
    * #descendingMultiset()} will not reflect any changes you make to the behavior of methods such as
-   * {@link #add(Object)} or {@link #pollFirstEntry}. This skeleton implementation correctly
+   * {@code #add(Object)} or {@code #pollFirstEntry}. This skeleton implementation correctly
    * delegates each of its operations to the appropriate methods of this {@code
    * ForwardingSortedMultiset}.
    *
-   * <p>In many cases, you may wish to override {@link #descendingMultiset()} to return an instance
+   * <p>In many cases, you may wish to override {@code #descendingMultiset()} to return an instance
    * of a subclass of {@code StandardDescendingMultiset}.
    *
    * @since 15.0
@@ -115,9 +116,9 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #firstEntry()} in terms of {@code entrySet().iterator()}.
+   * A sensible definition of {@code #firstEntry()} in terms of {@code entrySet().iterator()}.
    *
-   * <p>If you override {@link #entrySet()}, you may wish to override {@link #firstEntry()} to
+   * <p>If you override {@code #entrySet()}, you may wish to override {@code #firstEntry()} to
    * forward to this implementation.
    */
   @CheckForNull
@@ -137,11 +138,11 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #lastEntry()} in terms of {@code
+   * A sensible definition of {@code #lastEntry()} in terms of {@code
    * descendingMultiset().entrySet().iterator()}.
    *
-   * <p>If you override {@link #descendingMultiset} or {@link #entrySet()}, you may wish to override
-   * {@link #firstEntry()} to forward to this implementation.
+   * <p>If you override {@code #descendingMultiset} or {@code #entrySet()}, you may wish to override
+   * {@code #firstEntry()} to forward to this implementation.
    */
   @CheckForNull
   protected Entry<E> standardLastEntry() {
@@ -160,9 +161,9 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #pollFirstEntry()} in terms of {@code entrySet().iterator()}.
+   * A sensible definition of {@code #pollFirstEntry()} in terms of {@code entrySet().iterator()}.
    *
-   * <p>If you override {@link #entrySet()}, you may wish to override {@link #pollFirstEntry()} to
+   * <p>If you override {@code #entrySet()}, you may wish to override {@code #pollFirstEntry()} to
    * forward to this implementation.
    */
   @CheckForNull
@@ -184,11 +185,11 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #pollLastEntry()} in terms of {@code
+   * A sensible definition of {@code #pollLastEntry()} in terms of {@code
    * descendingMultiset().entrySet().iterator()}.
    *
-   * <p>If you override {@link #descendingMultiset()} or {@link #entrySet()}, you may wish to
-   * override {@link #pollLastEntry()} to forward to this implementation.
+   * <p>If you override {@code #descendingMultiset()} or {@code #entrySet()}, you may wish to
+   * override {@code #pollLastEntry()} to forward to this implementation.
    */
   @CheckForNull
   protected Entry<E> standardPollLastEntry() {
@@ -217,11 +218,11 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #subMultiset(Object, BoundType, Object, BoundType)} in terms of
-   * {@link #headMultiset(Object, BoundType) headMultiset} and {@link #tailMultiset(Object,
+   * A sensible definition of {@code #subMultiset(Object, BoundType, Object, BoundType)} in terms of
+   * {@code #headMultiset(Object, BoundType) headMultiset} and {@code #tailMultiset(Object,
    * BoundType) tailMultiset}.
    *
-   * <p>If you override either of these methods, you may wish to override {@link
+   * <p>If you override either of these methods, you may wish to override {@code
    * #subMultiset(Object, BoundType, Object, BoundType)} to forward to this implementation.
    */
   protected SortedMultiset<E> standardSubMultiset(

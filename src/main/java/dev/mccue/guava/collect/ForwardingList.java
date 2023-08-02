@@ -29,12 +29,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * more methods to modify the behavior of the backing list as desired per the <a
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
- * <p>This class does not implement {@link java.util.RandomAccess}. If the delegate supports random
+ * <p>This class does not implement {@code java.util.RandomAccess}. If the delegate supports random
  * access, the {@code ForwardingList} subclass should implement the {@code RandomAccess} interface.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingList} forward <b>indiscriminately</b> to the
- * methods of the delegate. For example, overriding {@link #add} alone <b>will not</b> change the
- * behavior of {@link #addAll}, which can lead to unexpected behavior. In this case, you should
+ * methods of the delegate. For example, overriding {@code #add} alone <b>will not</b> change the
+ * behavior of {@code #addAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code addAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardAddAll} method.
  *
@@ -127,8 +127,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #add(Object)}, in terms of {@link #add(int,
-   * Object)}. If you override {@link #add(int, Object)}, you may wish to override {@link
+   * A sensible default implementation of {@code #add(Object)}, in terms of {@code #add(int,
+   * Object)}. If you override {@code #add(int, Object)}, you may wish to override {@code
    * #add(Object)} to forward to this implementation.
    *
    * @since 7.0
@@ -139,9 +139,9 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #addAll(int, Collection)}, in terms of the {@code
-   * add} method of {@link #listIterator(int)}. If you override {@link #listIterator(int)}, you may
-   * wish to override {@link #addAll(int, Collection)} to forward to this implementation.
+   * A sensible default implementation of {@code #addAll(int, Collection)}, in terms of the {@code
+   * add} method of {@code #listIterator(int)}. If you override {@code #listIterator(int)}, you may
+   * wish to override {@code #addAll(int, Collection)} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -150,8 +150,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #indexOf}, in terms of {@link #listIterator()}. If
-   * you override {@link #listIterator()}, you may wish to override {@link #indexOf} to forward to
+   * A sensible default implementation of {@code #indexOf}, in terms of {@code #listIterator()}. If
+   * you override {@code #listIterator()}, you may wish to override {@code #indexOf} to forward to
    * this implementation.
    *
    * @since 7.0
@@ -161,9 +161,9 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #lastIndexOf}, in terms of {@link
-   * #listIterator(int)}. If you override {@link #listIterator(int)}, you may wish to override
-   * {@link #lastIndexOf} to forward to this implementation.
+   * A sensible default implementation of {@code #lastIndexOf}, in terms of {@code
+   * #listIterator(int)}. If you override {@code #listIterator(int)}, you may wish to override
+   * {@code #lastIndexOf} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -172,8 +172,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #iterator}, in terms of {@link #listIterator()}. If
-   * you override {@link #listIterator()}, you may wish to override {@link #iterator} to forward to
+   * A sensible default implementation of {@code #iterator}, in terms of {@code #listIterator()}. If
+   * you override {@code #listIterator()}, you may wish to override {@code #iterator} to forward to
    * this implementation.
    *
    * @since 7.0
@@ -183,9 +183,9 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #listIterator()}, in terms of {@link
-   * #listIterator(int)}. If you override {@link #listIterator(int)}, you may wish to override
-   * {@link #listIterator()} to forward to this implementation.
+   * A sensible default implementation of {@code #listIterator()}, in terms of {@code
+   * #listIterator(int)}. If you override {@code #listIterator(int)}, you may wish to override
+   * {@code #listIterator()} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -194,9 +194,9 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #listIterator(int)}, in terms of {@link #size},
-   * {@link #get(int)}, {@link #set(int, Object)}, {@link #add(int, Object)}, and {@link
-   * #remove(int)}. If you override any of these methods, you may wish to override {@link
+   * A sensible default implementation of {@code #listIterator(int)}, in terms of {@code #size},
+   * {@code #get(int)}, {@code #set(int, Object)}, {@code #add(int, Object)}, and {@code
+   * #remove(int)}. If you override any of these methods, you may wish to override {@code
    * #listIterator(int)} to forward to this implementation.
    *
    * @since 7.0
@@ -206,8 +206,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible default implementation of {@link #subList(int, int)}. If you override any other
-   * methods, you may wish to override {@link #subList(int, int)} to forward to this implementation.
+   * A sensible default implementation of {@code #subList(int, int)}. If you override any other
+   * methods, you may wish to override {@code #subList(int, int)} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -216,8 +216,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible definition of {@link #equals(Object)} in terms of {@link #size} and {@link
-   * #iterator}. If you override either of those methods, you may wish to override {@link
+   * A sensible definition of {@code #equals(Object)} in terms of {@code #size} and {@code
+   * #iterator}. If you override either of those methods, you may wish to override {@code
    * #equals(Object)} to forward to this implementation.
    *
    * @since 7.0
@@ -227,8 +227,8 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
   }
 
   /**
-   * A sensible definition of {@link #hashCode} in terms of {@link #iterator}. If you override
-   * {@link #iterator}, you may wish to override {@link #hashCode} to forward to this
+   * A sensible definition of {@code #hashCode} in terms of {@code #iterator}. If you override
+   * {@code #iterator}, you may wish to override {@code #hashCode} to forward to this
    * implementation.
    *
    * @since 7.0

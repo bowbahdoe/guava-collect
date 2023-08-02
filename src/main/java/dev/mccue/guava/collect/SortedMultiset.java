@@ -25,15 +25,15 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link Multiset} which maintains the ordering of its elements, according to either their
- * natural order or an explicit {@link Comparator}. This order is reflected when iterating over the
+ * A {@code Multiset} which maintains the ordering of its elements, according to either their
+ * natural order or an explicit {@code Comparator}. This order is reflected when iterating over the
  * sorted multiset, either directly, or through its {@code elementSet} or {@code entrySet} views. In
- * all cases, this implementation uses {@link Comparable#compareTo} or {@link Comparator#compare}
- * instead of {@link Object#equals} to determine equivalence of instances.
+ * all cases, this implementation uses {@code Comparable#compareTo} or {@code Comparator#compare}
+ * instead of {@code Object#equals} to determine equivalence of instances.
  *
  * <p><b>Warning:</b> The comparison must be <i>consistent with equals</i> as explained by the
- * {@link Comparable} class specification. Otherwise, the resulting multiset will violate the {@link
- * Collection} contract, which is specified in terms of {@link Object#equals}.
+ * {@code Comparable} class specification. Otherwise, the resulting multiset will violate the {@code
+ * Collection} contract, which is specified in terms of {@code Object#equals}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multiset">{@code Multiset}</a>.
@@ -41,11 +41,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 11.0
  */
+
 @ElementTypesAreNonnullByDefault
 public interface SortedMultiset<E extends @Nullable Object>
     extends SortedMultisetBridge<E>, SortedIterable<E> {
   /**
-   * Returns the comparator that orders this multiset, or {@link Ordering#natural()} if the natural
+   * Returns the comparator that orders this multiset, or {@code Ordering#natural()} if the natural
    * ordering of the elements is used.
    */
   @Override
@@ -80,7 +81,7 @@ public interface SortedMultiset<E extends @Nullable Object>
   Entry<E> pollLastEntry();
 
   /**
-   * Returns a {@link NavigableSet} view of the distinct elements in this multiset.
+   * Returns a {@code NavigableSet} view of the distinct elements in this multiset.
    *
    * @since 14.0 (present with return type {@code SortedSet} since 11.0)
    */
@@ -117,7 +118,7 @@ public interface SortedMultiset<E extends @Nullable Object>
    * multiset, so changes to one will be reflected in the other. The returned multiset supports all
    * operations that this multiset supports.
    *
-   * <p>The returned multiset will throw an {@link IllegalArgumentException} on attempts to add
+   * <p>The returned multiset will throw an {@code IllegalArgumentException} on attempts to add
    * elements outside its range.
    */
   SortedMultiset<E> headMultiset(@ParametricNullness E upperBound, BoundType boundType);
@@ -128,7 +129,7 @@ public interface SortedMultiset<E extends @Nullable Object>
    * reflected in the other. The returned multiset supports all operations that this multiset
    * supports.
    *
-   * <p>The returned multiset will throw an {@link IllegalArgumentException} on attempts to add
+   * <p>The returned multiset will throw an {@code IllegalArgumentException} on attempts to add
    * elements outside its range.
    *
    * <p>This method is equivalent to {@code tailMultiset(lowerBound,
@@ -146,7 +147,7 @@ public interface SortedMultiset<E extends @Nullable Object>
    * multiset, so changes to one will be reflected in the other. The returned multiset supports all
    * operations that this multiset supports.
    *
-   * <p>The returned multiset will throw an {@link IllegalArgumentException} on attempts to add
+   * <p>The returned multiset will throw an {@code IllegalArgumentException} on attempts to add
    * elements outside its range.
    */
   SortedMultiset<E> tailMultiset(@ParametricNullness E lowerBound, BoundType boundType);

@@ -36,13 +36,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * comparator. "Top" can mean the greatest or the lowest elements, specified in the factory used to
  * create the {@code TopKSelector} instance.
  *
- * <p>If your input data is available as a {@link Stream}, prefer passing {@link
- * Comparators#least(int)} to {@link Stream#collect(java.util.stream.Collector)}. If it is available
- * as an {@link Iterable} or {@link Iterator}, prefer {@link Ordering#leastOf(Iterable, int)}.
+ * <p>If your input data is available as a {@code Stream}, prefer passing {@code
+ * Comparators#least(int)} to {@code Stream#collect(java.util.stream.Collector)}. If it is available
+ * as an {@code Iterable} or {@code Iterator}, prefer {@code Ordering#leastOf(Iterable, int)}.
  *
- * <p>This uses the same efficient implementation as {@link Ordering#leastOf(Iterable, int)},
- * offering expected O(n + k log k) performance (worst case O(n log k)) for n calls to {@link
- * #offer} and a call to {@link #topK}, with O(k) memory. In comparison, quickselect has the same
+ * <p>This uses the same efficient implementation as {@code Ordering#leastOf(Iterable, int)},
+ * offering expected O(n + k log k) performance (worst case O(n log k)) for n calls to {@code
+ * #offer} and a call to {@code #topK}, with O(k) memory. In comparison, quickselect has the same
  * asymptotics but requires O(n) memory, and a {@code PriorityQueue} implementation takes O(n log
  * k). In benchmarks, this implementation performs at least as well as either implementation, and
  * degrades more gracefully for worst-case input.
@@ -58,7 +58,7 @@ final class TopKSelector<
 
   /**
    * Returns a {@code TopKSelector} that collects the lowest {@code k} elements added to it,
-   * relative to the natural ordering of the elements, and returns them via {@link #topK} in
+   * relative to the natural ordering of the elements, and returns them via {@code #topK} in
    * ascending order.
    *
    * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
@@ -69,7 +69,7 @@ final class TopKSelector<
 
   /**
    * Returns a {@code TopKSelector} that collects the lowest {@code k} elements added to it,
-   * relative to the specified comparator, and returns them via {@link #topK} in ascending order.
+   * relative to the specified comparator, and returns them via {@code #topK} in ascending order.
    *
    * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
    */
@@ -80,7 +80,7 @@ final class TopKSelector<
 
   /**
    * Returns a {@code TopKSelector} that collects the greatest {@code k} elements added to it,
-   * relative to the natural ordering of the elements, and returns them via {@link #topK} in
+   * relative to the natural ordering of the elements, and returns them via {@code #topK} in
    * descending order.
    *
    * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
@@ -91,7 +91,7 @@ final class TopKSelector<
 
   /**
    * Returns a {@code TopKSelector} that collects the greatest {@code k} elements added to it,
-   * relative to the specified comparator, and returns them via {@link #topK} in descending order.
+   * relative to the specified comparator, and returns them via {@code #topK} in descending order.
    *
    * @throws IllegalArgumentException if {@code k < 0} or {@code k > Integer.MAX_VALUE / 2}
    */
@@ -242,7 +242,7 @@ final class TopKSelector<
    * operation takes amortized linear time in the length of {@code elements}.
    *
    * <p>If all input data to this {@code TopKSelector} is in a single {@code Iterable}, prefer
-   * {@link Ordering#leastOf(Iterable, int)}, which provides a simpler API for that use case.
+   * {@code Ordering#leastOf(Iterable, int)}, which provides a simpler API for that use case.
    */
   public void offerAll(Iterable<? extends T> elements) {
     offerAll(elements.iterator());
@@ -254,7 +254,7 @@ final class TopKSelector<
    * consumed after this operation completes.
    *
    * <p>If all input data to this {@code TopKSelector} is in a single {@code Iterator}, prefer
-   * {@link Ordering#leastOf(Iterator, int)}, which provides a simpler API for that use case.
+   * {@code Ordering#leastOf(Iterator, int)}, which provides a simpler API for that use case.
    */
   public void offerAll(Iterator<? extends T> elements) {
     while (elements.hasNext()) {

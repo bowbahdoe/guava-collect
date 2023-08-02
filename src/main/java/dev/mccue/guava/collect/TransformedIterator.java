@@ -23,7 +23,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * An iterator that transforms a backing iterator; for internal use. This avoids the object overhead
- * of constructing a {@link dev.mccue.guava.base.Function Function} for internal methods.
+ * of constructing a {@code dev.mccue.guava.base.Function Function} for internal methods.
  *
  * @author Louis Wasserman
  */

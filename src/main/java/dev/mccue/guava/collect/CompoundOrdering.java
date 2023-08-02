@@ -23,6 +23,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /** An ordering that tries several comparators in order. */
+
 @ElementTypesAreNonnullByDefault
 final class CompoundOrdering<T extends @Nullable Object> extends Ordering<T>
     implements Serializable {

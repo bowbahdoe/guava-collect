@@ -19,7 +19,7 @@ package dev.mccue.guava.collect;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Skeletal implementation of {@link ImmutableSortedSet#descendingSet()}.
+ * Skeletal implementation of {@code ImmutableSortedSet#descendingSet()}.
  *
  * @author Louis Wasserman
  */
@@ -64,16 +64,19 @@ final class DescendingImmutableSortedSet<E> extends ImmutableSortedSet<E> {
   }
 
   @Override
+  
   public ImmutableSortedSet<E> descendingSet() {
     return forward;
   }
 
   @Override
+  
   public UnmodifiableIterator<E> descendingIterator() {
     return forward.iterator();
   }
 
   @Override
+  
   ImmutableSortedSet<E> createDescendingSet() {
     throw new AssertionError("should never be called");
   }

@@ -30,8 +30,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingSortedMap} forward <i>indiscriminately</i> to
- * the methods of the delegate. For example, overriding {@link #put} alone <i>will not</i> change
- * the behavior of {@link #putAll}, which can lead to unexpected behavior. In this case, you should
+ * the methods of the delegate. For example, overriding {@code #put} alone <i>will not</i> change
+ * the behavior of {@code #putAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code putAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardPutAll} method.
  *
@@ -94,8 +94,8 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
   }
 
   /**
-   * A sensible implementation of {@link SortedMap#keySet} in terms of the methods of {@code
-   * ForwardingSortedMap}. In many cases, you may wish to override {@link
+   * A sensible implementation of {@code SortedMap#keySet} in terms of the methods of {@code
+   * ForwardingSortedMap}. In many cases, you may wish to override {@code
    * ForwardingSortedMap#keySet} to forward to this implementation or a subclass thereof.
    *
    * @since 15.0
@@ -119,8 +119,8 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
   }
 
   /**
-   * A sensible definition of {@link #containsKey} in terms of the {@code firstKey()} method of
-   * {@link #tailMap}. If you override {@link #tailMap}, you may wish to override {@link
+   * A sensible definition of {@code #containsKey} in terms of the {@code firstKey()} method of
+   * {@code #tailMap}. If you override {@code #tailMap}, you may wish to override {@code
    * #containsKey} to forward to this implementation.
    *
    * @since 7.0
@@ -139,9 +139,9 @@ public abstract class ForwardingSortedMap<K extends @Nullable Object, V extends 
   }
 
   /**
-   * A sensible default implementation of {@link #subMap(Object, Object)} in terms of {@link
-   * #headMap(Object)} and {@link #tailMap(Object)}. In some situations, you may wish to override
-   * {@link #subMap(Object, Object)} to forward to this implementation.
+   * A sensible default implementation of {@code #subMap(Object, Object)} in terms of {@code
+   * #headMap(Object)} and {@code #tailMap(Object)}. In some situations, you may wish to override
+   * {@code #subMap(Object, Object)} to forward to this implementation.
    *
    * @since 7.0
    */

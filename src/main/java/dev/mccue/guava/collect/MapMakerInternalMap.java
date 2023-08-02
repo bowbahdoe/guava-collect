@@ -17,14 +17,12 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
 
-
 import dev.mccue.guava.base.Equivalence;
 import dev.mccue.guava.collect.MapMaker.Dummy;
 import dev.mccue.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -50,15 +48,15 @@ import java.util.concurrent.locks.ReentrantLock;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * The concurrent hash map implementation built by {@link MapMaker}.
+ * The concurrent hash map implementation built by {@code MapMaker}.
  *
  * <p>This implementation is heavily derived from revision 1.96 of <a
  * href="http://tinyurl.com/ConcurrentHashMap">ConcurrentHashMap.java</a>.
  *
  * @param <K> the type of the keys in the map
  * @param <V> the type of the values in the map
- * @param <E> the type of the {@link InternalEntry} entry implementation used internally
- * @param <S> the type of the {@link Segment} entry implementation used internally
+ * @param <E> the type of the {@code InternalEntry} entry implementation used internally
+ * @param <S> the type of the {@code Segment} entry implementation used internally
  * @author Bob Lee
  * @author Charles Fry
  * @author Doug Lea ({@code ConcurrentHashMap})
@@ -194,7 +192,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Returns a fresh {@link MapMakerInternalMap} as specified by the given {@code builder}. */
+  /** Returns a fresh {@code MapMakerInternalMap} as specified by the given {@code builder}. */
   static <K, V> MapMakerInternalMap<K, V, ? extends InternalEntry<K, V, ?>, ?> create(
       MapMaker builder) {
     if (builder.getKeyStrength() == Strength.STRONG
@@ -216,13 +214,13 @@ class MapMakerInternalMap<
   }
 
   /**
-   * Returns a fresh {@link MapMakerInternalMap} with {@link MapMaker.Dummy} values but otherwise as
-   * specified by the given {@code builder}. The returned {@link MapMakerInternalMap} will be
-   * optimized to saved memory. Since {@link MapMaker.Dummy} is a singleton, we don't need to store
+   * Returns a fresh {@code MapMakerInternalMap} with {@code MapMaker.Dummy} values but otherwise as
+   * specified by the given {@code builder}. The returned {@code MapMakerInternalMap} will be
+   * optimized to saved memory. Since {@code MapMaker.Dummy} is a singleton, we don't need to store
    * any values at all. Because of this optimization, {@code build.getValueStrength()} must be
-   * {@link Strength#STRONG}.
+   * {@code Strength#STRONG}.
    *
-   * <p>This method is intended to only be used by the internal implementation of {@link Interners},
+   * <p>This method is intended to only be used by the internal implementation of {@code Interners},
    * since a map of dummy values is the exact use case there.
    */
   static <K>
@@ -266,17 +264,17 @@ class MapMakerInternalMap<
   }
 
   /**
-   * A helper object for operating on {@link InternalEntry} instances in a type-safe and efficient
+   * A helper object for operating on {@code InternalEntry} instances in a type-safe and efficient
    * manner.
    *
    * <p>For each of the four combinations of strong/weak key and strong/weak value, there are
-   * corresponding {@link InternalEntry}, {@link Segment}, and {@link InternalEntryHelper}
+   * corresponding {@code InternalEntry}, {@code Segment}, and {@code InternalEntryHelper}
    * implementations.
    *
    * @param <K> the type of the key in each entry
    * @param <V> the type of the value in each entry
-   * @param <E> the type of the {@link InternalEntry} entry implementation
-   * @param <S> the type of the {@link Segment} entry implementation
+   * @param <E> the type of the {@code InternalEntry} entry implementation
+   * @param <S> the type of the {@code Segment} entry implementation
    */
   interface InternalEntryHelper<
       K, V, E extends InternalEntry<K, V, E>, S extends Segment<K, V, E, S>> {
@@ -308,7 +306,7 @@ class MapMakerInternalMap<
   }
 
   /**
-   * An entry in a hash table of a {@link Segment}.
+   * An entry in a hash table of a {@code Segment}.
    *
    * <p>Entries in the map can be in the following states:
    *
@@ -335,7 +333,7 @@ class MapMakerInternalMap<
    * memory. If only Java had mixins!
    */
 
-  /** Base class for {@link InternalEntry} implementations for strong keys. */
+  /** Base class for {@code InternalEntry} implementations for strong keys. */
   abstract static class AbstractStrongKeyEntry<K, V, E extends InternalEntry<K, V, E>>
       implements InternalEntry<K, V, E> {
     final K key;
@@ -363,11 +361,11 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Marker interface for {@link InternalEntry} implementations for strong values. */
+  /** Marker interface for {@code InternalEntry} implementations for strong values. */
   interface StrongValueEntry<K, V, E extends InternalEntry<K, V, E>>
       extends InternalEntry<K, V, E> {}
 
-  /** Marker interface for {@link InternalEntry} implementations for weak values. */
+  /** Marker interface for {@code InternalEntry} implementations for weak values. */
   interface WeakValueEntry<K, V, E extends InternalEntry<K, V, E>> extends InternalEntry<K, V, E> {
     /** Gets the weak value reference held by entry. */
     WeakValueReference<K, V, E> getValueReference();
@@ -379,7 +377,7 @@ class MapMakerInternalMap<
     return (WeakValueReference<K, V, E>) UNSET_WEAK_VALUE_REFERENCE;
   }
 
-  /** Concrete implementation of {@link InternalEntry} for strong keys and strong values. */
+  /** Concrete implementation of {@code InternalEntry} for strong keys and strong values. */
   static class StrongKeyStrongValueEntry<K, V>
       extends AbstractStrongKeyEntry<K, V, StrongKeyStrongValueEntry<K, V>>
       implements StrongValueEntry<K, V, StrongKeyStrongValueEntry<K, V>> {
@@ -410,7 +408,7 @@ class MapMakerInternalMap<
       }
     }
 
-    /** Concrete implementation of {@link InternalEntryHelper} for strong keys and strong values. */
+    /** Concrete implementation of {@code InternalEntryHelper} for strong keys and strong values. */
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, StrongKeyStrongValueEntry<K, V>, StrongKeyStrongValueSegment<K, V>> {
@@ -472,7 +470,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link InternalEntry} for strong keys and weak values. */
+  /** Concrete implementation of {@code InternalEntry} for strong keys and weak values. */
   static class StrongKeyWeakValueEntry<K, V>
       extends AbstractStrongKeyEntry<K, V, StrongKeyWeakValueEntry<K, V>>
       implements WeakValueEntry<K, V, StrongKeyWeakValueEntry<K, V>> {
@@ -509,7 +507,7 @@ class MapMakerInternalMap<
       }
     }
 
-    /** Concrete implementation of {@link InternalEntryHelper} for strong keys and weak values. */
+    /** Concrete implementation of {@code InternalEntryHelper} for strong keys and weak values. */
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, StrongKeyWeakValueEntry<K, V>, StrongKeyWeakValueSegment<K, V>> {
@@ -573,7 +571,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link InternalEntry} for strong keys and {@link Dummy} values. */
+  /** Concrete implementation of {@code InternalEntry} for strong keys and {@code Dummy} values. */
   static class StrongKeyDummyValueEntry<K>
       extends AbstractStrongKeyEntry<K, Dummy, StrongKeyDummyValueEntry<K>>
       implements StrongValueEntry<K, Dummy, StrongKeyDummyValueEntry<K>> {
@@ -603,7 +601,7 @@ class MapMakerInternalMap<
     }
 
     /**
-     * Concrete implementation of {@link InternalEntryHelper} for strong keys and {@link Dummy}
+     * Concrete implementation of {@code InternalEntryHelper} for strong keys and {@code Dummy}
      * values.
      */
     static final class Helper<K>
@@ -659,7 +657,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Base class for {@link InternalEntry} implementations for weak keys. */
+  /** Base class for {@code InternalEntry} implementations for weak keys. */
   abstract static class AbstractWeakKeyEntry<K, V, E extends InternalEntry<K, V, E>>
       extends WeakReference<K> implements InternalEntry<K, V, E> {
     final int hash;
@@ -686,7 +684,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link InternalEntry} for weak keys and {@link Dummy} values. */
+  /** Concrete implementation of {@code InternalEntry} for weak keys and {@code Dummy} values. */
   static class WeakKeyDummyValueEntry<K>
       extends AbstractWeakKeyEntry<K, Dummy, WeakKeyDummyValueEntry<K>>
       implements StrongValueEntry<K, Dummy, WeakKeyDummyValueEntry<K>> {
@@ -716,7 +714,7 @@ class MapMakerInternalMap<
     }
 
     /**
-     * Concrete implementation of {@link InternalEntryHelper} for weak keys and {@link Dummy}
+     * Concrete implementation of {@code InternalEntryHelper} for weak keys and {@code Dummy}
      * values.
      */
     static final class Helper<K>
@@ -777,7 +775,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link InternalEntry} for weak keys and strong values. */
+  /** Concrete implementation of {@code InternalEntry} for weak keys and strong values. */
   static class WeakKeyStrongValueEntry<K, V>
       extends AbstractWeakKeyEntry<K, V, WeakKeyStrongValueEntry<K, V>>
       implements StrongValueEntry<K, V, WeakKeyStrongValueEntry<K, V>> {
@@ -809,7 +807,7 @@ class MapMakerInternalMap<
       }
     }
 
-    /** Concrete implementation of {@link InternalEntryHelper} for weak keys and strong values. */
+    /** Concrete implementation of {@code InternalEntryHelper} for weak keys and strong values. */
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, WeakKeyStrongValueEntry<K, V>, WeakKeyStrongValueSegment<K, V>> {
@@ -873,7 +871,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link InternalEntry} for weak keys and weak values. */
+  /** Concrete implementation of {@code InternalEntry} for weak keys and weak values. */
   static class WeakKeyWeakValueEntry<K, V>
       extends AbstractWeakKeyEntry<K, V, WeakKeyWeakValueEntry<K, V>>
       implements WeakValueEntry<K, V, WeakKeyWeakValueEntry<K, V>> {
@@ -910,7 +908,7 @@ class MapMakerInternalMap<
       }
     }
 
-    /** Concrete implementation of {@link InternalEntryHelper} for weak keys and weak values. */
+    /** Concrete implementation of {@code InternalEntryHelper} for weak keys and weak values. */
     static final class Helper<K, V>
         implements InternalEntryHelper<
             K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> {
@@ -982,26 +980,26 @@ class MapMakerInternalMap<
   interface WeakValueReference<K, V, E extends InternalEntry<K, V, E>> {
     /**
      * Returns the current value being referenced, or {@code null} if there is none (e.g. because
-     * either it got collected, or {@link #clear} was called, or it wasn't set in the first place).
+     * either it got collected, or {@code #clear} was called, or it wasn't set in the first place).
      */
     @CheckForNull
     V get();
 
-    /** Returns the entry which contains this {@link WeakValueReference}. */
+    /** Returns the entry which contains this {@code WeakValueReference}. */
     E getEntry();
 
-    /** Unsets the referenced value. Subsequent calls to {@link #get} will return {@code null}. */
+    /** Unsets the referenced value. Subsequent calls to {@code #get} will return {@code null}. */
     void clear();
 
     /**
-     * Returns a freshly created {@link WeakValueReference} for the given {@code entry} (and on the
-     * given {@code queue}) with the same value as this {@link WeakValueReference}.
+     * Returns a freshly created {@code WeakValueReference} for the given {@code entry} (and on the
+     * given {@code queue}) with the same value as this {@code WeakValueReference}.
      */
     WeakValueReference<K, V, E> copyFor(ReferenceQueue<V> queue, E entry);
   }
 
   /**
-   * A dummy implementation of {@link InternalEntry}, solely for use in the type signature of {@link
+   * A dummy implementation of {@code InternalEntry}, solely for use in the type signature of {@code
    * #UNSET_WEAK_VALUE_REFERENCE} below.
    */
   static final class DummyInternalEntry
@@ -1032,7 +1030,7 @@ class MapMakerInternalMap<
   }
 
   /**
-   * A singleton {@link WeakValueReference} used to denote an unset value in an entry with weak
+   * A singleton {@code WeakValueReference} used to denote an unset value in an entry with weak
    * values.
    */
   static final WeakValueReference<Object, Object, DummyInternalEntry> UNSET_WEAK_VALUE_REFERENCE =
@@ -1059,7 +1057,7 @@ class MapMakerInternalMap<
         }
       };
 
-  /** Concrete implementation of {@link WeakValueReference}. */
+  /** Concrete implementation of {@code WeakValueReference}. */
   static final class WeakValueReferenceImpl<K, V, E extends InternalEntry<K, V, E>>
       extends WeakReference<V> implements WeakValueReference<K, V, E> {
     final E entry;
@@ -1101,10 +1099,9 @@ class MapMakerInternalMap<
   }
 
   /**
-   * This method is a convenience for testing. Code should call {@link Segment#copyEntry} directly.
+   * This method is a convenience for testing. Code should call {@code Segment#copyEntry} directly.
    */
   // Guarded By Segment.this
-  @VisibleForTesting
   E copyEntry(E original, E newNext) {
     int hash = original.getHash();
     return segmentFor(hash).copyEntry(original, newNext);
@@ -1127,10 +1124,9 @@ class MapMakerInternalMap<
   }
 
   /**
-   * This method is a convenience for testing. Code should call {@link Segment#getLiveValue}
+   * This method is a convenience for testing. Code should call {@code Segment#getLiveValue}
    * instead.
    */
-  @VisibleForTesting
   boolean isLiveForTesting(InternalEntry<K, V, ?> entry) {
     return segmentFor(entry.getHash()).getLiveValueForTesting(entry) != null;
   }
@@ -1243,9 +1239,9 @@ class MapMakerInternalMap<
     }
 
     /**
-     * Returns {@code this} up-casted to the specific {@link Segment} implementation type {@code S}.
+     * Returns {@code this} up-casted to the specific {@code Segment} implementation type {@code S}.
      *
-     * <p>This method exists so that the {@link Segment} code can be generic in terms of {@code S},
+     * <p>This method exists so that the {@code Segment} code can be generic in terms of {@code S},
      * the type of the concrete implementation.
      */
     abstract S self();
@@ -1280,7 +1276,7 @@ class MapMakerInternalMap<
     // Convenience methods for testing
 
     /**
-     * Unsafe cast of the given entry to {@code E}, the type of the specific {@link InternalEntry}
+     * Unsafe cast of the given entry to {@code E}, the type of the specific {@code InternalEntry}
      * implementation type.
      *
      * <p>This method is provided as a convenience for tests. Otherwise they'd need to be
@@ -1304,7 +1300,7 @@ class MapMakerInternalMap<
     }
 
     /**
-     * Unsafely creates of a fresh {@link WeakValueReference}, referencing the given {@code value},
+     * Unsafely creates of a fresh {@code WeakValueReference}, referencing the given {@code value},
      * for the given {@code entry}
      */
     WeakValueReference<K, V, E> newWeakValueReferenceForTesting(
@@ -1479,10 +1475,9 @@ class MapMakerInternalMap<
     }
 
     /**
-     * This method is a convenience for testing. Code should call {@link
+     * This method is a convenience for testing. Code should call {@code
      * MapMakerInternalMap#containsValue} directly.
      */
-    @VisibleForTesting
     boolean containsValue(Object value) {
       try {
         if (count != 0) { // read-volatile
@@ -2033,7 +2028,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for strong keys and strong values. */
+  /** Concrete implementation of {@code Segment} for strong keys and strong values. */
   static final class StrongKeyStrongValueSegment<K, V>
       extends Segment<K, V, StrongKeyStrongValueEntry<K, V>, StrongKeyStrongValueSegment<K, V>> {
     StrongKeyStrongValueSegment(
@@ -2058,7 +2053,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for strong keys and weak values. */
+  /** Concrete implementation of {@code Segment} for strong keys and weak values. */
   static final class StrongKeyWeakValueSegment<K, V>
       extends Segment<K, V, StrongKeyWeakValueEntry<K, V>, StrongKeyWeakValueSegment<K, V>> {
     private final ReferenceQueue<V> queueForValues = new ReferenceQueue<V>();
@@ -2124,7 +2119,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for strong keys and {@link Dummy} values. */
+  /** Concrete implementation of {@code Segment} for strong keys and {@code Dummy} values. */
   static final class StrongKeyDummyValueSegment<K>
       extends Segment<K, Dummy, StrongKeyDummyValueEntry<K>, StrongKeyDummyValueSegment<K>> {
     StrongKeyDummyValueSegment(
@@ -2146,7 +2141,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for weak keys and strong values. */
+  /** Concrete implementation of {@code Segment} for weak keys and strong values. */
   static final class WeakKeyStrongValueSegment<K, V>
       extends Segment<K, V, WeakKeyStrongValueEntry<K, V>, WeakKeyStrongValueSegment<K, V>> {
     private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
@@ -2185,7 +2180,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for weak keys and weak values. */
+  /** Concrete implementation of {@code Segment} for weak keys and weak values. */
   static final class WeakKeyWeakValueSegment<K, V>
       extends Segment<K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> {
     private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
@@ -2256,7 +2251,7 @@ class MapMakerInternalMap<
     }
   }
 
-  /** Concrete implementation of {@link Segment} for weak keys and {@link Dummy} values. */
+  /** Concrete implementation of {@code Segment} for weak keys and {@code Dummy} values. */
   static final class WeakKeyDummyValueSegment<K>
       extends Segment<K, Dummy, WeakKeyDummyValueEntry<K>, WeakKeyDummyValueSegment<K>> {
     private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
@@ -2314,17 +2309,14 @@ class MapMakerInternalMap<
     }
   }
 
-  @VisibleForTesting
   Strength keyStrength() {
     return entryHelper.keyStrength();
   }
 
-  @VisibleForTesting
   Strength valueStrength() {
     return entryHelper.valueStrength();
   }
 
-  @VisibleForTesting
   Equivalence<Object> valueEquivalence() {
     return entryHelper.valueStrength().defaultEquivalence();
   }
@@ -2932,7 +2924,7 @@ class MapMakerInternalMap<
     }
 
     @SuppressWarnings("deprecation") // serialization of deprecated feature
-      // java.io.ObjectInputStream
+    // java.io.ObjectInputStream
     MapMaker readMapMaker(ObjectInputStream in) throws IOException {
       int size = in.readInt();
       return new MapMaker()
@@ -2944,7 +2936,7 @@ class MapMakerInternalMap<
     }
 
     @SuppressWarnings("unchecked")
-      // java.io.ObjectInputStream
+    // java.io.ObjectInputStream
     void readEntries(ObjectInputStream in) throws IOException, ClassNotFoundException {
       while (true) {
         K key = (K) in.readObject();

@@ -34,9 +34,9 @@ import dev.mccue.jsr305.CheckForNull;
  * A range (or "interval") defines the <i>boundaries</i> around a contiguous span of values of some
  * {@code Comparable} type; for example, "integers from 1 to 100 inclusive." Note that it is not
  * possible to <i>iterate</i> over these contained values. To do so, pass this range instance and an
- * appropriate {@link DiscreteDomain} to {@link ContiguousSet#create}.
+ * appropriate {@code DiscreteDomain} to {@code ContiguousSet#create}.
  *
- * <h2>Types of ranges</h2>
+ * <h3>Types of ranges</h3>
  *
  * <p>Each end of the range may be bounded or unbounded. If bounded, there is an associated
  * <i>endpoint</i> value, and the range is considered to be either <i>open</i> (does not include the
@@ -51,15 +51,15 @@ import dev.mccue.jsr305.CheckForNull;
  * <table>
  * <caption>Range Types</caption>
  * <tr><th>Notation        <th>Definition               <th>Factory method
- * <tr><td>{@code (a..b)}  <td>{@code {x | a < x < b}}  <td>{@link Range#open open}
- * <tr><td>{@code [a..b]}  <td>{@code {x | a <= x <= b}}<td>{@link Range#closed closed}
- * <tr><td>{@code (a..b]}  <td>{@code {x | a < x <= b}} <td>{@link Range#openClosed openClosed}
- * <tr><td>{@code [a..b)}  <td>{@code {x | a <= x < b}} <td>{@link Range#closedOpen closedOpen}
- * <tr><td>{@code (a..+∞)} <td>{@code {x | x > a}}      <td>{@link Range#greaterThan greaterThan}
- * <tr><td>{@code [a..+∞)} <td>{@code {x | x >= a}}     <td>{@link Range#atLeast atLeast}
- * <tr><td>{@code (-∞..b)} <td>{@code {x | x < b}}      <td>{@link Range#lessThan lessThan}
- * <tr><td>{@code (-∞..b]} <td>{@code {x | x <= b}}     <td>{@link Range#atMost atMost}
- * <tr><td>{@code (-∞..+∞)}<td>{@code {x}}              <td>{@link Range#all all}
+ * <tr><td>{@code (a..b)}  <td>{@code {x | a < x < b}}  <td>{@code Range#open open}
+ * <tr><td>{@code [a..b]}  <td>{@code {x | a <= x <= b}}<td>{@code Range#closed closed}
+ * <tr><td>{@code (a..b]}  <td>{@code {x | a < x <= b}} <td>{@code Range#openClosed openClosed}
+ * <tr><td>{@code [a..b)}  <td>{@code {x | a <= x < b}} <td>{@code Range#closedOpen closedOpen}
+ * <tr><td>{@code (a..+∞)} <td>{@code {x | x > a}}      <td>{@code Range#greaterThan greaterThan}
+ * <tr><td>{@code [a..+∞)} <td>{@code {x | x >= a}}     <td>{@code Range#atLeast atLeast}
+ * <tr><td>{@code (-∞..b)} <td>{@code {x | x < b}}      <td>{@code Range#lessThan lessThan}
+ * <tr><td>{@code (-∞..b]} <td>{@code {x | x <= b}}     <td>{@code Range#atMost atMost}
+ * <tr><td>{@code (-∞..+∞)}<td>{@code {x}}              <td>{@code Range#all all}
  * </table>
  *
  * </blockquote>
@@ -69,7 +69,7 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * <ul>
  *   <li>{@code [a..a]} : a singleton range
- *   <li>{@code [a..a); (a..a]} : {@linkplain #isEmpty empty} ranges; also valid
+ *   <li>{@code [a..a); (a..a]} : {@code #isEmpty empty} ranges; also valid
  *   <li>{@code (a..a)} : <b>invalid</b>; an exception will be thrown
  * </ul>
  *
@@ -78,10 +78,10 @@ import dev.mccue.jsr305.CheckForNull;
  * <ul>
  *   <li>Use immutable value types only, if at all possible. If you must use a mutable type, <b>do
  *       not</b> allow the endpoint instances to mutate after the range is created!
- *   <li>Your value type's comparison method should be {@linkplain Comparable consistent with
+ *   <li>Your value type's comparison method should be {@code Comparable consistent with
  *       equals} if at all possible. Otherwise, be aware that concepts used throughout this
- *       documentation such as "equal", "same", "unique" and so on actually refer to whether {@link
- *       Comparable#compareTo compareTo} returns zero, not whether {@link Object#equals equals}
+ *       documentation such as "equal", "same", "unique" and so on actually refer to whether {@code
+ *       Comparable#compareTo compareTo} returns zero, not whether {@code Object#equals equals}
  *       returns {@code true}.
  *   <li>A class which implements {@code Comparable<UnrelatedType>} is very broken, and will cause
  *       undefined horrible things to happen in {@code Range}. For now, the Range API does not
@@ -99,12 +99,12 @@ import dev.mccue.jsr305.CheckForNull;
  *       {@code r.contains(c1) && r.contains(c3)} implies {@code r.contains(c2)}). This means that a
  *       {@code Range<Integer>} can never be used to represent, say, "all <i>prime</i> numbers from
  *       1 to 100."
- *   <li>When evaluated as a {@link Predicate}, a range yields the same result as invoking {@link
+ *   <li>When evaluated as a {@code Predicate}, a range yields the same result as invoking {@code
  *       #contains}.
  *   <li>Terminology note: a range {@code a} is said to be the <i>maximal</i> range having property
  *       <i>P</i> if, for all ranges {@code b} also having property <i>P</i>, {@code a.encloses(b)}.
  *       Likewise, {@code a} is <i>minimal</i> when {@code b.encloses(a)} for all {@code b} having
- *       property <i>P</i>. See, for example, the definition of {@link #intersection intersection}.
+ *       property <i>P</i>. See, for example, the definition of {@code #intersection intersection}.
  *   <li>A {@code Range} is serializable if it has no bounds, or if each bound is serializable.
  * </ul>
  *
@@ -311,8 +311,8 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns a range that {@linkplain Range#contains(Comparable) contains} only the given value. The
-   * returned range is {@linkplain BoundType#CLOSED closed} on both ends.
+   * Returns a range that {@code Range#contains(Comparable) contains} only the given value. The
+   * returned range is {@code BoundType#CLOSED closed} on both ends.
    *
    * @since 14.0
    */
@@ -321,8 +321,8 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns the minimal range that {@linkplain Range#contains(Comparable) contains} all of the
-   * given values. The returned range is {@linkplain BoundType#CLOSED closed} on both ends.
+   * Returns the minimal range that {@code Range#contains(Comparable) contains} all of the
+   * given values. The returned range is {@code BoundType#CLOSED closed} on both ends.
    *
    * @throws ClassCastException if the values are not mutually comparable
    * @throws NoSuchElementException if {@code values} is empty
@@ -370,7 +370,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   /**
    * Returns the lower endpoint of this range.
    *
-   * @throws IllegalStateException if this range is unbounded below (that is, {@link
+   * @throws IllegalStateException if this range is unbounded below (that is, {@code
    *     #hasLowerBound()} returns {@code false})
    */
   public C lowerEndpoint() {
@@ -378,10 +378,10 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns the type of this range's lower bound: {@link BoundType#CLOSED} if the range includes
-   * its lower endpoint, {@link BoundType#OPEN} if it does not.
+   * Returns the type of this range's lower bound: {@code BoundType#CLOSED} if the range includes
+   * its lower endpoint, {@code BoundType#OPEN} if it does not.
    *
-   * @throws IllegalStateException if this range is unbounded below (that is, {@link
+   * @throws IllegalStateException if this range is unbounded below (that is, {@code
    *     #hasLowerBound()} returns {@code false})
    */
   public BoundType lowerBoundType() {
@@ -396,7 +396,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   /**
    * Returns the upper endpoint of this range.
    *
-   * @throws IllegalStateException if this range is unbounded above (that is, {@link
+   * @throws IllegalStateException if this range is unbounded above (that is, {@code
    *     #hasUpperBound()} returns {@code false})
    */
   public C upperEndpoint() {
@@ -404,10 +404,10 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns the type of this range's upper bound: {@link BoundType#CLOSED} if the range includes
-   * its upper endpoint, {@link BoundType#OPEN} if it does not.
+   * Returns the type of this range's upper bound: {@code BoundType#CLOSED} if the range includes
+   * its upper endpoint, {@code BoundType#OPEN} if it does not.
    *
-   * @throws IllegalStateException if this range is unbounded above (that is, {@link
+   * @throws IllegalStateException if this range is unbounded above (that is, {@code
    *     #hasUpperBound()} returns {@code false})
    */
   public BoundType upperBoundType() {
@@ -421,7 +421,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    *
    * <p>Note that certain discrete ranges such as the integer range {@code (3..4)} are <b>not</b>
    * considered empty, even though they contain no actual values. In these cases, it may be helpful
-   * to preprocess ranges with {@link #canonical(DiscreteDomain)}.
+   * to preprocess ranges with {@code #canonical(DiscreteDomain)}.
    */
   public boolean isEmpty() {
     return lowerBound.equals(upperBound);
@@ -439,7 +439,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * @deprecated Provided only to satisfy the {@link Predicate} interface; use {@link #contains}
+   * @deprecated Provided only to satisfy the {@code Predicate} interface; use {@code #contains}
    *     instead.
    */
   @Deprecated
@@ -449,7 +449,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns {@code true} if every element in {@code values} is {@linkplain #contains contained} in
+   * Returns {@code true} if every element in {@code values} is {@code #contains contained} in
    * this range.
    */
   public boolean containsAll(Iterable<? extends C> values) {
@@ -493,9 +493,9 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    * a.contains(v)}, but as the last two examples illustrate, the converse is not always true.
    *
    * <p>Being reflexive, antisymmetric and transitive, the {@code encloses} relation defines a
-   * <i>partial order</i> over ranges. There exists a unique {@linkplain Range#all maximal} range
-   * according to this relation, and also numerous {@linkplain #isEmpty minimal} ranges. Enclosure
-   * also implies {@linkplain #isConnected connectedness}.
+   * <i>partial order</i> over ranges. There exists a unique {@code Range#all maximal} range
+   * according to this relation, and also numerous {@code #isEmpty minimal} ranges. Enclosure
+   * also implies {@code #isConnected connectedness}.
    */
   public boolean encloses(Range<C> other) {
     return lowerBound.compareTo(other.lowerBound) <= 0
@@ -503,7 +503,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns {@code true} if there exists a (possibly empty) range which is {@linkplain #encloses
+   * Returns {@code true} if there exists a (possibly empty) range which is {@code #encloses
    * enclosed} by both this range and {@code other}.
    *
    * <p>For example,
@@ -515,16 +515,16 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    *       {@code [4, 4)}
    * </ul>
    *
-   * <p>Note that this range and {@code other} have a well-defined {@linkplain #span union} and
-   * {@linkplain #intersection intersection} (as a single, possibly-empty range) if and only if this
+   * <p>Note that this range and {@code other} have a well-defined {@code #span union} and
+   * {@code #intersection intersection} (as a single, possibly-empty range) if and only if this
    * method returns {@code true}.
    *
-   * <p>The connectedness relation is both reflexive and symmetric, but does not form an {@linkplain
+   * <p>The connectedness relation is both reflexive and symmetric, but does not form an {@code
    * Equivalence equivalence relation} as it is not transitive.
    *
    * <p>Note that certain discrete ranges are not considered connected, even though there are no
    * elements "between them." For example, {@code [3, 5]} is not considered connected to {@code [6,
-   * 10]}. In these cases, it may be desirable for both input ranges to be preprocessed with {@link
+   * 10]}. In these cases, it may be desirable for both input ranges to be preprocessed with {@code
    * #canonical(DiscreteDomain)} before testing for connectedness.
    */
   public boolean isConnected(Range<C> other) {
@@ -533,18 +533,18 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns the maximal range {@linkplain #encloses enclosed} by both this range and {@code
+   * Returns the maximal range {@code #encloses enclosed} by both this range and {@code
    * connectedRange}, if such a range exists.
    *
    * <p>For example, the intersection of {@code [1..5]} and {@code (3..7)} is {@code (3..5]}. The
    * resulting range may be empty; for example, {@code [1..5)} intersected with {@code [5..7)}
    * yields the empty range {@code [5..5)}.
    *
-   * <p>The intersection exists if and only if the two ranges are {@linkplain #isConnected
+   * <p>The intersection exists if and only if the two ranges are {@code #isConnected
    * connected}.
    *
    * <p>The intersection operation is commutative, associative and idempotent, and its identity
-   * element is {@link Range#all}).
+   * element is {@code Range#all}).
    *
    * @throws IllegalArgumentException if {@code isConnected(connectedRange)} is {@code false}
    */
@@ -612,14 +612,14 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /**
-   * Returns the minimal range that {@linkplain #encloses encloses} both this range and {@code
+   * Returns the minimal range that {@code #encloses encloses} both this range and {@code
    * other}. For example, the span of {@code [1..3]} and {@code (5..7)} is {@code [1..7)}.
    *
-   * <p><i>If</i> the input ranges are {@linkplain #isConnected connected}, the returned range can
+   * <p><i>If</i> the input ranges are {@code #isConnected connected}, the returned range can
    * also be called their <i>union</i>. If they are not, note that the span might contain values
    * that are not contained in either input range.
    *
-   * <p>Like {@link #intersection(Range) intersection}, this operation is commutative, associative
+   * <p>Like {@code #intersection(Range) intersection}, this operation is commutative, associative
    * and idempotent. Unlike it, it is always well-defined for any two input ranges.
    */
   public Range<C> span(Range<C> other) {

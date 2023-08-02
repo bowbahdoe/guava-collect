@@ -28,8 +28,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingNavigableSet} forward <i>indiscriminately</i>
- * to the methods of the delegate. For example, overriding {@link #add} alone <i>will not</i> change
- * the behavior of {@link #addAll}, which can lead to unexpected behavior. In this case, you should
+ * to the methods of the delegate. For example, overriding {@code #add} alone <i>will not</i> change
+ * the behavior of {@code #addAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code addAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardAddAll} method.
  *
@@ -65,9 +65,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #lower} in terms of the {@code descendingIterator} method of
-   * {@link #headSet(Object, boolean)}. If you override {@link #headSet(Object, boolean)}, you may
-   * wish to override {@link #lower} to forward to this implementation.
+   * A sensible definition of {@code #lower} in terms of the {@code descendingIterator} method of
+   * {@code #headSet(Object, boolean)}. If you override {@code #headSet(Object, boolean)}, you may
+   * wish to override {@code #lower} to forward to this implementation.
    */
   @CheckForNull
   protected E standardLower(@ParametricNullness E e) {
@@ -81,9 +81,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #floor} in terms of the {@code descendingIterator} method of
-   * {@link #headSet(Object, boolean)}. If you override {@link #headSet(Object, boolean)}, you may
-   * wish to override {@link #floor} to forward to this implementation.
+   * A sensible definition of {@code #floor} in terms of the {@code descendingIterator} method of
+   * {@code #headSet(Object, boolean)}. If you override {@code #headSet(Object, boolean)}, you may
+   * wish to override {@code #floor} to forward to this implementation.
    */
   @CheckForNull
   protected E standardFloor(@ParametricNullness E e) {
@@ -97,9 +97,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #ceiling} in terms of the {@code iterator} method of {@link
-   * #tailSet(Object, boolean)}. If you override {@link #tailSet(Object, boolean)}, you may wish to
-   * override {@link #ceiling} to forward to this implementation.
+   * A sensible definition of {@code #ceiling} in terms of the {@code iterator} method of {@code
+   * #tailSet(Object, boolean)}. If you override {@code #tailSet(Object, boolean)}, you may wish to
+   * override {@code #ceiling} to forward to this implementation.
    */
   @CheckForNull
   protected E standardCeiling(@ParametricNullness E e) {
@@ -113,9 +113,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #higher} in terms of the {@code iterator} method of {@link
-   * #tailSet(Object, boolean)}. If you override {@link #tailSet(Object, boolean)}, you may wish to
-   * override {@link #higher} to forward to this implementation.
+   * A sensible definition of {@code #higher} in terms of the {@code iterator} method of {@code
+   * #tailSet(Object, boolean)}. If you override {@code #tailSet(Object, boolean)}, you may wish to
+   * override {@code #higher} to forward to this implementation.
    */
   @CheckForNull
   protected E standardHigher(@ParametricNullness E e) {
@@ -129,8 +129,8 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #pollFirst} in terms of the {@code iterator} method. If you
-   * override {@link #iterator} you may wish to override {@link #pollFirst} to forward to this
+   * A sensible definition of {@code #pollFirst} in terms of the {@code iterator} method. If you
+   * override {@code #iterator} you may wish to override {@code #pollFirst} to forward to this
    * implementation.
    */
   @CheckForNull
@@ -145,8 +145,8 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #pollLast} in terms of the {@code descendingIterator} method.
-   * If you override {@link #descendingIterator} you may wish to override {@link #pollLast} to
+   * A sensible definition of {@code #pollLast} in terms of the {@code descendingIterator} method.
+   * If you override {@code #descendingIterator} you may wish to override {@code #pollLast} to
    * forward to this implementation.
    */
   @CheckForNull
@@ -170,10 +170,10 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible implementation of {@link NavigableSet#descendingSet} in terms of the other methods
-   * of {@link NavigableSet}, notably including {@link NavigableSet#descendingIterator}.
+   * A sensible implementation of {@code NavigableSet#descendingSet} in terms of the other methods
+   * of {@code NavigableSet}, notably including {@code NavigableSet#descendingIterator}.
    *
-   * <p>In many cases, you may wish to override {@link ForwardingNavigableSet#descendingSet} to
+   * <p>In many cases, you may wish to override {@code ForwardingNavigableSet#descendingSet} to
    * forward to this implementation or a subclass thereof.
    *
    * @since 12.0
@@ -200,8 +200,8 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #subSet(Object, boolean, Object, boolean)} in terms of the
-   * {@code headSet} and {@code tailSet} methods. In many cases, you may wish to override {@link
+   * A sensible definition of {@code #subSet(Object, boolean, Object, boolean)} in terms of the
+   * {@code headSet} and {@code tailSet} methods. In many cases, you may wish to override {@code
    * #subSet(Object, boolean, Object, boolean)} to forward to this implementation.
    */
   protected NavigableSet<E> standardSubSet(
@@ -213,9 +213,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #subSet(Object, Object)} in terms of the {@link #subSet(Object,
-   * boolean, Object, boolean)} method. If you override {@link #subSet(Object, boolean, Object,
-   * boolean)}, you may wish to override {@link #subSet(Object, Object)} to forward to this
+   * A sensible definition of {@code #subSet(Object, Object)} in terms of the {@code #subSet(Object,
+   * boolean, Object, boolean)} method. If you override {@code #subSet(Object, boolean, Object,
+   * boolean)}, you may wish to override {@code #subSet(Object, Object)} to forward to this
    * implementation.
    */
   @Override
@@ -230,9 +230,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #headSet(Object)} in terms of the {@link #headSet(Object,
-   * boolean)} method. If you override {@link #headSet(Object, boolean)}, you may wish to override
-   * {@link #headSet(Object)} to forward to this implementation.
+   * A sensible definition of {@code #headSet(Object)} in terms of the {@code #headSet(Object,
+   * boolean)} method. If you override {@code #headSet(Object, boolean)}, you may wish to override
+   * {@code #headSet(Object)} to forward to this implementation.
    */
   protected SortedSet<E> standardHeadSet(@ParametricNullness E toElement) {
     return headSet(toElement, false);
@@ -244,9 +244,9 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
   }
 
   /**
-   * A sensible definition of {@link #tailSet(Object)} in terms of the {@link #tailSet(Object,
-   * boolean)} method. If you override {@link #tailSet(Object, boolean)}, you may wish to override
-   * {@link #tailSet(Object)} to forward to this implementation.
+   * A sensible definition of {@code #tailSet(Object)} in terms of the {@code #tailSet(Object,
+   * boolean)} method. If you override {@code #tailSet(Object, boolean)}, you may wish to override
+   * {@code #tailSet(Object)} to forward to this implementation.
    */
   protected SortedSet<E> standardTailSet(@ParametricNullness E fromElement) {
     return tailSet(fromElement, true);

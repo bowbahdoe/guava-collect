@@ -24,7 +24,7 @@ import java.util.RandomAccess;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Static methods pertaining to sorted {@link List} instances.
+ * Static methods pertaining to sorted {@code List} instances.
  *
  * <p>In this documentation, the terms <i>greatest</i>, <i>greater</i>, <i>least</i>, and
  * <i>lesser</i> are considered to refer to the comparator on the elements, and the terms
@@ -175,7 +175,7 @@ final class SortedLists {
      * <p>Note that the return value will be {@code >= 0} if and only if there is an element of the
      * list that compares as equal to the key.
      *
-     * <p>This is equivalent to the behavior of {@link Collections#binarySearch(List,
+     * <p>This is equivalent to the behavior of {@code java.util.Collections#binarySearch(List,
      * Object)} when the key isn't present, since {@code ~insertionIndex} is equal to {@code -1 -
      * insertionIndex}.
      */
@@ -193,8 +193,8 @@ final class SortedLists {
    * Searches the specified naturally ordered list for the specified object using the binary search
    * algorithm.
    *
-   * <p>Equivalent to {@link #binarySearch(List, Function, Object, Comparator, KeyPresentBehavior,
-   * KeyAbsentBehavior)} using {@link Ordering#natural}.
+   * <p>Equivalent to {@code #binarySearch(List, Function, Object, Comparator, KeyPresentBehavior,
+   * KeyAbsentBehavior)} using {@code Ordering#natural}.
    */
   public static <E extends Comparable> int binarySearch(
       List<? extends E> list,
@@ -208,8 +208,8 @@ final class SortedLists {
   /**
    * Binary searches the list for the specified key, using the specified key function.
    *
-   * <p>Equivalent to {@link #binarySearch(List, Function, Object, Comparator, KeyPresentBehavior,
-   * KeyAbsentBehavior)} using {@link Ordering#natural}.
+   * <p>Equivalent to {@code #binarySearch(List, Function, Object, Comparator, KeyPresentBehavior,
+   * KeyAbsentBehavior)} using {@code Ordering#natural}.
    */
   public static <E extends @Nullable Object, K extends Comparable> int binarySearch(
       List<E> list,
@@ -225,8 +225,8 @@ final class SortedLists {
   /**
    * Binary searches the list for the specified key, using the specified key function.
    *
-   * <p>Equivalent to {@link #binarySearch(List, Object, Comparator, KeyPresentBehavior,
-   * KeyAbsentBehavior)} using {@link Lists#transform(List, Function) Lists.transform(list,
+   * <p>Equivalent to {@code #binarySearch(List, Object, Comparator, KeyPresentBehavior,
+   * KeyAbsentBehavior)} using {@code Lists#transform(List, Function) Lists.transform(list,
    * keyFunction)}.
    */
   public static <E extends @Nullable Object, K extends @Nullable Object> int binarySearch(
@@ -243,12 +243,12 @@ final class SortedLists {
   /**
    * Searches the specified list for the specified object using the binary search algorithm. The
    * list must be sorted into ascending order according to the specified comparator (as by the
-   * {@link Collections#sort(List, Comparator) Collections.sort(List, Comparator)} method), prior to
+   * {@code Collections#sort(List, Comparator) Collections.sort(List, Comparator)} method), prior to
    * making this call. If it is not sorted, the results are undefined.
    *
-   * <p>If there are elements in the list which compare as equal to the key, the choice of {@link
+   * <p>If there are elements in the list which compare as equal to the key, the choice of {@code
    * KeyPresentBehavior} decides which index is returned. If no elements compare as equal to the
-   * key, the choice of {@link KeyAbsentBehavior} decides which index is returned.
+   * key, the choice of {@code KeyAbsentBehavior} decides which index is returned.
    *
    * <p>This method runs in log(n) time on random-access lists, which offer near-constant-time
    * access to each list element.

@@ -24,10 +24,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Implementation of {@link Table} using linked hash tables. This guarantees predictable iteration
+ * Implementation of {@code Table} using linked hash tables. This guarantees predictable iteration
  * order of the various views.
  *
- * <p>The views returned by {@link #column}, {@link #columnKeySet()}, and {@link #columnMap()} have
+ * <p>The views returned by {@code #column}, {@code #columnKeySet()}, and {@code #columnMap()} have
  * iterators that don't support {@code remove()}. Otherwise, all optional operations are supported.
  * Null row keys, columns keys, and values are not supported.
  *
@@ -45,6 +45,7 @@ import java.util.Map;
  * @author Jared Levy
  * @since 7.0
  */
+
 @ElementTypesAreNonnullByDefault
 public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
   private static class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {

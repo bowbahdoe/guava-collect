@@ -17,7 +17,6 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -25,14 +24,15 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * This class provides a skeletal implementation of the {@link SortedMultiset} interface.
+ * This class provides a skeletal implementation of the {@code SortedMultiset} interface.
  *
- * <p>The {@link #count} and {@link #size} implementations all iterate across the set returned by
- * {@link Multiset#entrySet()}, as do many methods acting on the set returned by {@link
+ * <p>The {@code #count} and {@code #size} implementations all iterate across the set returned by
+ * {@code Multiset#entrySet()}, as do many methods acting on the set returned by {@code
  * #elementSet()}. Override those methods for better performance.
  *
  * @author Louis Wasserman
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class AbstractSortedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
     implements SortedMultiset<E> {

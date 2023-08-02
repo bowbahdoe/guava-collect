@@ -25,7 +25,6 @@ import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
 
-
 import dev.mccue.guava.base.Function;
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.math.IntMath;
@@ -50,8 +49,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Static utility methods pertaining to {@link List} instances. Also see this class's counterparts
- * {@link Sets}, {@link Maps} and {@link Queues}.
+ * Static utility methods pertaining to {@code List} instances. Also see this class's counterparts
+ * {@code Sets}, {@code Maps} and {@code Queues}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/CollectionUtilitiesExplained#lists">{@code Lists}</a>.
@@ -61,6 +60,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Lists {
   private Lists() {}
@@ -70,12 +70,13 @@ public final class Lists {
   /**
    * Creates a <i>mutable</i>, empty {@code ArrayList} instance (for Java 6 and earlier).
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableList#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableList#of()} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
-   * use the {@code ArrayList} {@linkplain ArrayList#ArrayList() constructor} directly, taking
+   * use the {@code ArrayList} {@code ArrayList#ArrayList() constructor} directly, taking
    * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    */
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayList() {
     return new ArrayList<>();
   }
@@ -84,17 +85,18 @@ public final class Lists {
    * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements.
    *
    * <p><b>Note:</b> essentially the only reason to use this method is when you will need to add or
-   * remove elements later. Otherwise, for non-null elements use {@link ImmutableList#of()} (for
-   * varargs) or {@link ImmutableList#copyOf(Object[])} (for an array) instead. If any elements
-   * might be null, or you need support for {@link List#set(int, Object)}, use {@link
+   * remove elements later. Otherwise, for non-null elements use {@code ImmutableList#of()} (for
+   * varargs) or {@code ImmutableList#copyOf(Object[])} (for an array) instead. If any elements
+   * might be null, or you need support for {@code List#set(int, Object)}, use {@code
    * Arrays#asList}.
    *
    * <p>Note that even when you do need the ability to add or remove, this method provides only a
-   * tiny bit of syntactic sugar for {@code newArrayList(}{@link Arrays#asList asList}{@code
-   * (...))}, or for creating an empty list then calling {@link Collections#addAll}. This method is
+   * tiny bit of syntactic sugar for {@code newArrayList(}{@code Arrays#asList asList}{@code
+   * (...))}, or for creating an empty list then calling {@code Collections#addAll}. This method is
    * not actually very useful and will likely be deprecated in the future.
    */
   @SafeVarargs
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(E... elements) {
     checkNotNull(elements); // for GWT
     // Avoid integer overflow when a large array is passed in
@@ -106,16 +108,17 @@ public final class Lists {
 
   /**
    * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements; a very thin
-   * shortcut for creating an empty list then calling {@link Iterables#addAll}.
+   * shortcut for creating an empty list then calling {@code Iterables#addAll}.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
-   * ImmutableList#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
+   * ImmutableList#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@code
    * FluentIterable} and call {@code elements.toList()}.)
    *
-   * <p><b>Note:</b> if {@code elements} is a {@link Collection}, you don't need this method. Use
-   * the {@code ArrayList} {@linkplain ArrayList#ArrayList(Collection) constructor} directly, taking
+   * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method. Use
+   * the {@code ArrayList} {@code ArrayList#ArrayList(Collection) constructor} directly, taking
    * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    */
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(
       Iterable<? extends E> elements) {
     checkNotNull(elements); // for GWT
@@ -127,11 +130,12 @@ public final class Lists {
 
   /**
    * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements; a very thin
-   * shortcut for creating an empty list and then calling {@link Iterators#addAll}.
+   * shortcut for creating an empty list and then calling {@code Iterators#addAll}.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
    * ImmutableList#copyOf(Iterator)} instead.
    */
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(
       Iterator<? extends E> elements) {
     ArrayList<E> list = newArrayList();
@@ -139,7 +143,6 @@ public final class Lists {
     return list;
   }
 
-  @VisibleForTesting
   static int computeArrayListCapacity(int arraySize) {
     checkNonnegative(arraySize, "arraySize");
 
@@ -149,10 +152,10 @@ public final class Lists {
 
   /**
    * Creates an {@code ArrayList} instance backed by an array with the specified initial size;
-   * simply delegates to {@link ArrayList#ArrayList(int)}.
+   * simply delegates to {@code ArrayList#ArrayList(int)}.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
-   * use {@code new }{@link ArrayList#ArrayList(int) ArrayList}{@code <>(int)} directly, taking
+   * use {@code new }{@code ArrayList#ArrayList(int) ArrayList}{@code <>(int)} directly, taking
    * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>. (Unlike here, there is no risk
    * of overload ambiguity, since the {@code ArrayList} constructors very wisely did not accept
    * varargs.)
@@ -163,6 +166,7 @@ public final class Lists {
    *     reaches {@code initialArraySize + 1}
    * @throws IllegalArgumentException if {@code initialArraySize} is negative
    */
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithCapacity(
       int initialArraySize) {
     checkNonnegative(initialArraySize, "initialArraySize"); // for GWT.
@@ -171,17 +175,18 @@ public final class Lists {
 
   /**
    * Creates an {@code ArrayList} instance to hold {@code estimatedSize} elements, <i>plus</i> an
-   * unspecified amount of padding; you almost certainly mean to call {@link
+   * unspecified amount of padding; you almost certainly mean to call {@code
    * #newArrayListWithCapacity} (see that method for further advice on usage).
    *
    * <p><b>Note:</b> This method will soon be deprecated. Even in the rare case that you do want
    * some amount of padding, it's best if you choose your desired amount explicitly.
    *
-   * @param estimatedSize an estimate of the eventual {@link List#size()} of the new list
+   * @param estimatedSize an estimate of the eventual {@code List#size()} of the new list
    * @return a new, empty {@code ArrayList}, sized appropriately to hold the estimated number of
    *     elements
    * @throws IllegalArgumentException if {@code estimatedSize} is negative
    */
+  
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithExpectedSize(
       int estimatedSize) {
     return new ArrayList<>(computeArrayListCapacity(estimatedSize));
@@ -192,37 +197,39 @@ public final class Lists {
   /**
    * Creates a <i>mutable</i>, empty {@code LinkedList} instance (for Java 6 and earlier).
    *
-   * <p><b>Note:</b> if you won't be adding any elements to the list, use {@link ImmutableList#of()}
+   * <p><b>Note:</b> if you won't be adding any elements to the list, use {@code ImmutableList#of()}
    * instead.
    *
-   * <p><b>Performance note:</b> {@link ArrayList} and {@link java.util.ArrayDeque} consistently
+   * <p><b>Performance note:</b> {@code ArrayList} and {@code java.util.ArrayDeque} consistently
    * outperform {@code LinkedList} except in certain rare and specific situations. Unless you have
    * spent a lot of time benchmarking your specific needs, use one of those instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
-   * use the {@code LinkedList} {@linkplain LinkedList#LinkedList() constructor} directly, taking
+   * use the {@code LinkedList} {@code LinkedList#LinkedList() constructor} directly, taking
    * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    */
+  
   public static <E extends @Nullable Object> LinkedList<E> newLinkedList() {
     return new LinkedList<>();
   }
 
   /**
    * Creates a <i>mutable</i> {@code LinkedList} instance containing the given elements; a very thin
-   * shortcut for creating an empty list then calling {@link Iterables#addAll}.
+   * shortcut for creating an empty list then calling {@code Iterables#addAll}.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
-   * ImmutableList#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
+   * ImmutableList#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@code
    * FluentIterable} and call {@code elements.toList()}.)
    *
-   * <p><b>Performance note:</b> {@link ArrayList} and {@link java.util.ArrayDeque} consistently
+   * <p><b>Performance note:</b> {@code ArrayList} and {@code java.util.ArrayDeque} consistently
    * outperform {@code LinkedList} except in certain rare and specific situations. Unless you have
    * spent a lot of time benchmarking your specific needs, use one of those instead.
    *
-   * <p><b>Note:</b> if {@code elements} is a {@link Collection}, you don't need this method. Use
-   * the {@code LinkedList} {@linkplain LinkedList#LinkedList(Collection) constructor} directly,
+   * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method. Use
+   * the {@code LinkedList} {@code LinkedList#LinkedList(Collection) constructor} directly,
    * taking advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    */
+  
   public static <E extends @Nullable Object> LinkedList<E> newLinkedList(
       Iterable<? extends E> elements) {
     LinkedList<E> list = newLinkedList();
@@ -233,7 +240,7 @@ public final class Lists {
   /**
    * Creates an empty {@code CopyOnWriteArrayList} instance.
    *
-   * <p><b>Note:</b> if you need an immutable empty {@link List}, use {@link Collections#emptyList}
+   * <p><b>Note:</b> if you need an immutable empty {@code List}, use {@code Collections#emptyList}
    * instead.
    *
    * @return a new, empty {@code CopyOnWriteArrayList}
@@ -266,12 +273,12 @@ public final class Lists {
   /**
    * Returns an unmodifiable list containing the specified first element and backed by the specified
    * array of additional elements. Changes to the {@code rest} array will be reflected in the
-   * returned list. Unlike {@link Arrays#asList}, the returned list is unmodifiable.
+   * returned list. Unlike {@code Arrays#asList}, the returned list is unmodifiable.
    *
    * <p>This is useful when a varargs method needs to use a signature such as {@code (Foo firstFoo,
    * Foo... moreFoos)}, in order to avoid overload ambiguity or to enforce a minimum argument count.
    *
-   * <p>The returned list is serializable and implements {@link RandomAccess}.
+   * <p>The returned list is serializable and implements {@code RandomAccess}.
    *
    * @param first the first element
    * @param rest an array of additional elements, possibly empty
@@ -284,13 +291,13 @@ public final class Lists {
   /**
    * Returns an unmodifiable list containing the specified first and second element, and backed by
    * the specified array of additional elements. Changes to the {@code rest} array will be reflected
-   * in the returned list. Unlike {@link Arrays#asList}, the returned list is unmodifiable.
+   * in the returned list. Unlike {@code Arrays#asList}, the returned list is unmodifiable.
    *
    * <p>This is useful when a varargs method needs to use a signature such as {@code (Foo firstFoo,
    * Foo secondFoo, Foo... moreFoos)}, in order to avoid overload ambiguity or to enforce a minimum
    * argument count.
    *
-   * <p>The returned list is serializable and implements {@link RandomAccess}.
+   * <p>The returned list is serializable and implements {@code RandomAccess}.
    *
    * @param first the first element
    * @param second the second element
@@ -411,10 +418,10 @@ public final class Lists {
    *
    * @param lists the lists to choose elements from, in the order that the elements chosen from
    *     those lists should appear in the resulting lists
-   * @param <B> any common base class shared by all axes (often just {@link Object})
+   * @param <B> any common base class shared by all axes (often just {@code Object})
    * @return the Cartesian product, as an immutable list containing immutable lists
    * @throws IllegalArgumentException if the size of the cartesian product would be greater than
-   *     {@link Integer#MAX_VALUE}
+   *     {@code Integer#MAX_VALUE}
    * @throws NullPointerException if {@code lists}, any one of the {@code lists}, or any element of
    *     a provided list is null
    * @since 19.0
@@ -469,10 +476,10 @@ public final class Lists {
    *
    * @param lists the lists to choose elements from, in the order that the elements chosen from
    *     those lists should appear in the resulting lists
-   * @param <B> any common base class shared by all axes (often just {@link Object})
+   * @param <B> any common base class shared by all axes (often just {@code Object})
    * @return the Cartesian product, as an immutable list containing immutable lists
    * @throws IllegalArgumentException if the size of the cartesian product would be greater than
-   *     {@link Integer#MAX_VALUE}
+   *     {@code Integer#MAX_VALUE}
    * @throws NullPointerException if {@code lists}, any one of the {@code lists}, or any element of
    *     a provided list is null
    * @since 19.0
@@ -493,24 +500,24 @@ public final class Lists {
    *
    * <p>The function is applied lazily, invoked when needed. This is necessary for the returned list
    * to be a view, but it means that the function will be applied many times for bulk operations
-   * like {@link List#contains} and {@link List#hashCode}. For this to perform well, {@code
+   * like {@code List#contains} and {@code List#hashCode}. For this to perform well, {@code
    * function} should be fast. To avoid lazy evaluation when the returned list doesn't need to be a
    * view, copy the returned list into a new list of your choosing.
    *
-   * <p>If {@code fromList} implements {@link RandomAccess}, so will the returned list. The returned
+   * <p>If {@code fromList} implements {@code RandomAccess}, so will the returned list. The returned
    * list is threadsafe if the supplied list and function are.
    *
-   * <p>If only a {@code Collection} or {@code Iterable} input is available, use {@link
-   * Collections2#transform} or {@link Iterables#transform}.
+   * <p>If only a {@code Collection} or {@code Iterable} input is available, use {@code
+   * Collections2#transform} or {@code Iterables#transform}.
    *
    * <p><b>Note:</b> serializing the returned list is implemented by serializing {@code fromList},
    * its contents, and {@code function} -- <i>not</i> by serializing the transformed values. This
    * can lead to surprising behavior, so serializing the returned list is <b>not recommended</b>.
-   * Instead, copy the list using {@link ImmutableList#copyOf(Collection)} (for example), then
+   * Instead, copy the list using {@code ImmutableList#copyOf(Collection)} (for example), then
    * serialize the copy. Other methods similar to this do not implement serialization at all for
    * this reason.
    *
-   * <p><b>Java 8 users:</b> many use cases for this method are better addressed by {@link
+   * <p><b>Java 8 users:</b> many use cases for this method are better addressed by {@code
    * java.util.stream.Stream#map}. This method is not being deprecated, but we gently encourage you
    * to migrate to streams.
    */
@@ -647,13 +654,13 @@ public final class Lists {
   }
 
   /**
-   * Returns consecutive {@linkplain List#subList(int, int) sublists} of a list, each of the same
+   * Returns consecutive {@code List#subList(int, int) sublists} of a list, each of the same
    * size (the final list may be smaller). For example, partitioning a list containing {@code [a, b,
    * c, d, e]} with a partition size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer list
    * containing two inner lists of three and two elements, all in the original order.
    *
    * <p>The outer list is unmodifiable, but reflects the latest state of the source list. The inner
-   * lists are sublist views of the original list, produced on demand using {@link List#subList(int,
+   * lists are sublist views of the original list, produced on demand using {@code List#subList(int,
    * int)}, and are subject to all the usual caveats about modification as explained in that API.
    *
    * @param list the list to return consecutive sublists of
@@ -964,7 +971,7 @@ public final class Lists {
     }
   }
 
-  /** An implementation of {@link List#hashCode()}. */
+  /** An implementation of {@code List#hashCode()}. */
   static int hashCodeImpl(List<?> list) {
     // TODO(lowasser): worth optimizing for RandomAccess?
     int hashCode = 1;
@@ -977,7 +984,7 @@ public final class Lists {
     return hashCode;
   }
 
-  /** An implementation of {@link List#equals(Object)}. */
+  /** An implementation of {@code List#equals(Object)}. */
   static boolean equalsImpl(List<?> thisList, @CheckForNull Object other) {
     if (other == checkNotNull(thisList)) {
       return true;
@@ -1003,7 +1010,7 @@ public final class Lists {
     }
   }
 
-  /** An implementation of {@link List#addAll(int, Collection)}. */
+  /** An implementation of {@code List#addAll(int, Collection)}. */
   static <E extends @Nullable Object> boolean addAllImpl(
       List<E> list, int index, Iterable<? extends E> elements) {
     boolean changed = false;
@@ -1015,7 +1022,7 @@ public final class Lists {
     return changed;
   }
 
-  /** An implementation of {@link List#indexOf(Object)}. */
+  /** An implementation of {@code List#indexOf(Object)}. */
   static int indexOfImpl(List<?> list, @CheckForNull Object element) {
     if (list instanceof RandomAccess) {
       return indexOfRandomAccess(list, element);
@@ -1048,7 +1055,7 @@ public final class Lists {
     return -1;
   }
 
-  /** An implementation of {@link List#lastIndexOf(Object)}. */
+  /** An implementation of {@code List#lastIndexOf(Object)}. */
   static int lastIndexOfImpl(List<?> list, @CheckForNull Object element) {
     if (list instanceof RandomAccess) {
       return lastIndexOfRandomAccess(list, element);
@@ -1080,12 +1087,12 @@ public final class Lists {
     return -1;
   }
 
-  /** Returns an implementation of {@link List#listIterator(int)}. */
+  /** Returns an implementation of {@code List#listIterator(int)}. */
   static <E extends @Nullable Object> ListIterator<E> listIteratorImpl(List<E> list, int index) {
     return new AbstractListWrapper<>(list).listIterator(index);
   }
 
-  /** An implementation of {@link List#subList(int, int)}. */
+  /** An implementation of {@code List#subList(int, int)}. */
   static <E extends @Nullable Object> List<E> subListImpl(
       final List<E> list, int fromIndex, int toIndex) {
     List<E> wrapper;

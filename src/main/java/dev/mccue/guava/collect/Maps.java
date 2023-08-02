@@ -36,7 +36,6 @@ import dev.mccue.guava.collect.MapDifference.ValueDifference;
 import dev.mccue.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.Serializable;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
@@ -72,9 +71,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Static utility methods pertaining to {@link Map} instances (including instances of {@link
- * SortedMap}, {@link BiMap}, etc.). Also see this class's counterparts {@link Lists}, {@link Sets}
- * and {@link Queues}.
+ * Static utility methods pertaining to {@code Map} instances (including instances of {@code
+ * SortedMap}, {@code BiMap}, etc.). Also see this class's counterparts {@code Lists}, {@code Sets}
+ * and {@code Queues}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/CollectionUtilitiesExplained#maps">{@code Maps}</a>.
@@ -85,6 +84,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Maps {
   private Maps() {}
@@ -140,7 +140,7 @@ public final class Maps {
 
   /**
    * Returns an immutable map instance containing the given entries. Internally, the returned map
-   * will be backed by an {@link EnumMap}.
+   * will be backed by an {@code EnumMap}.
    *
    * <p>The iteration order of the returned map follows the enum's iteration order, not the order in
    * which the elements appear in the given map.
@@ -149,6 +149,7 @@ public final class Maps {
    * @return an immutable map containing those entries
    * @since 14.0
    */
+  
   public static <K extends Enum<K>, V> ImmutableMap<K, V> immutableEnumMap(
       Map<K, ? extends V> map) {
     if (map instanceof ImmutableEnumMap) {
@@ -177,14 +178,14 @@ public final class Maps {
   }
 
   /**
-   * Returns a {@link Collector} that accumulates elements into an {@code ImmutableMap} whose keys
+   * Returns a {@code Collector} that accumulates elements into an {@code ImmutableMap} whose keys
    * and values are the result of applying the provided mapping functions to the input elements. The
    * resulting implementation is specialized for enum key types. The returned map and its views will
    * iterate over keys in their enum definition order, not encounter order.
    *
    * <p>If the mapped keys contain duplicates, an {@code IllegalArgumentException} is thrown when
    * the collection operation is performed. (This differs from the {@code Collector} returned by
-   * {@link java.util.stream.Collectors#toMap(java.util.function.Function,
+   * {@code java.util.stream.Collectors#toMap(java.util.function.Function,
    * java.util.function.Function) Collectors.toMap(Function, Function)}, which throws an {@code
    * IllegalStateException}.)
    *
@@ -198,7 +199,7 @@ public final class Maps {
   }
 
   /**
-   * Returns a {@link Collector} that accumulates elements into an {@code ImmutableMap} whose keys
+   * Returns a {@code Collector} that accumulates elements into an {@code ImmutableMap} whose keys
    * and values are the result of applying the provided mapping functions to the input elements. The
    * resulting implementation is specialized for enum key types. The returned map and its views will
    * iterate over keys in their enum definition order, not encounter order.
@@ -219,9 +220,9 @@ public final class Maps {
   /**
    * Creates a <i>mutable</i>, empty {@code HashMap} instance.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableMap#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableMap#of()} instead.
    *
-   * <p><b>Note:</b> if {@code K} is an {@code enum} type, use {@link #newEnumMap} instead.
+   * <p><b>Note:</b> if {@code K} is an {@code enum} type, use {@code #newEnumMap} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code HashMap} constructor directly, taking advantage of <a
@@ -237,9 +238,9 @@ public final class Maps {
   /**
    * Creates a <i>mutable</i> {@code HashMap} instance with the same mappings as the specified map.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableMap#copyOf(Map)} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableMap#copyOf(Map)} instead.
    *
-   * <p><b>Note:</b> if {@code K} is an {@link Enum} type, use {@link #newEnumMap} instead.
+   * <p><b>Note:</b> if {@code K} is an {@code Enum} type, use {@code #newEnumMap} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code HashMap} constructor directly, taking advantage of <a
@@ -299,7 +300,7 @@ public final class Maps {
   /**
    * Creates a <i>mutable</i>, empty, insertion-ordered {@code LinkedHashMap} instance.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableMap#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableMap#of()} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code LinkedHashMap} constructor directly, taking advantage of <a
@@ -316,7 +317,7 @@ public final class Maps {
    * Creates a <i>mutable</i>, insertion-ordered {@code LinkedHashMap} instance with the same
    * mappings as the specified map.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableMap#copyOf(Map)} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableMap#copyOf(Map)} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code LinkedHashMap} constructor directly, taking advantage of <a
@@ -348,7 +349,7 @@ public final class Maps {
   }
 
   /**
-   * Creates a new empty {@link ConcurrentHashMap} instance.
+   * Creates a new empty {@code ConcurrentHashMap} instance.
    *
    * @since 3.0
    */
@@ -360,7 +361,7 @@ public final class Maps {
    * Creates a <i>mutable</i>, empty {@code TreeMap} instance using the natural ordering of its
    * elements.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableSortedMap#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableSortedMap#of()} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeMap} constructor directly, taking advantage of <a
@@ -368,7 +369,6 @@ public final class Maps {
    *
    * @return a new, empty {@code TreeMap}
    */
-  @SuppressWarnings("rawtypes")
   public static <K extends Comparable, V extends @Nullable Object> TreeMap<K, V> newTreeMap() {
     return new TreeMap<>();
   }
@@ -377,7 +377,7 @@ public final class Maps {
    * Creates a <i>mutable</i> {@code TreeMap} instance with the same mappings as the specified map
    * and using the same ordering as the specified map.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link
+   * <p><b>Note:</b> if mutability is not required, use {@code
    * ImmutableSortedMap#copyOfSorted(SortedMap)} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
@@ -465,7 +465,7 @@ public final class Maps {
    * a later time.
    *
    * <p>Since this method uses {@code HashMap} instances internally, the keys of the supplied maps
-   * must be well-behaved with respect to {@link Object#equals} and {@link Object#hashCode}.
+   * must be well-behaved with respect to {@code Object#equals} and {@code Object#hashCode}.
    *
    * <p><b>Note:</b>If you only need to know whether two maps have the same mappings, call {@code
    * left.equals(right)} instead of this method.
@@ -491,7 +491,7 @@ public final class Maps {
    * a later time.
    *
    * <p>Since this method uses {@code HashMap} instances internally, the keys of the supplied maps
-   * must be well-behaved with respect to {@link Object#equals} and {@link Object#hashCode}.
+   * must be well-behaved with respect to {@code Object#equals} and {@code Object#hashCode}.
    *
    * @param left the map to treat as the "left" map for purposes of comparison
    * @param right the map to treat as the "right" map for purposes of comparison
@@ -768,8 +768,8 @@ public final class Maps {
   }
 
   /**
-   * Returns a live {@link Map} view whose keys are the contents of {@code set} and whose values are
-   * computed on demand using {@code function}. To get an immutable <i>copy</i> instead, use {@link
+   * Returns a live {@code Map} view whose keys are the contents of {@code set} and whose values are
+   * computed on demand using {@code function}. To get an immutable <i>copy</i> instead, use {@code
    * #toMap(Iterable, Function)}.
    *
    * <p>Specifically, for each {@code k} in the backing set, the returned map has an entry mapping
@@ -1235,7 +1235,7 @@ public final class Maps {
    * valueFunction} will be applied to more than one instance of that key and, if it is, which
    * result will be mapped to that key in the returned map.
    *
-   * <p>If {@code keys} is a {@link Set}, a live view can be obtained instead of a copy using {@link
+   * <p>If {@code keys} is a {@code Set}, a live view can be obtained instead of a copy using {@code
    * Maps#asMap(Set, Function)}.
    *
    * @throws NullPointerException if any element of {@code keys} is {@code null}, or if {@code
@@ -1288,7 +1288,7 @@ public final class Maps {
    * assertThat(colorForName).containsEntry("red", red);
    * }</pre>
    *
-   * <p>If your index may associate multiple values with each key, use {@link
+   * <p>If your index may associate multiple values with each key, use {@code
    * Multimaps#index(Iterable, Function) Multimaps.index}.
    *
    * <p><b>Note:</b> on Java 8 and later, it is usually better to use streams. For example:
@@ -1340,7 +1340,7 @@ public final class Maps {
    * assertThat(colorForName).containsEntry("red", red);
    * }</pre>
    *
-   * <p>If your index may associate multiple values with each key, use {@link
+   * <p>If your index may associate multiple values with each key, use {@code
    * Multimaps#index(Iterator, Function) Multimaps.index}.
    *
    * @param values the values to use when constructing the {@code Map}
@@ -1424,8 +1424,8 @@ public final class Maps {
   }
 
   /**
-   * Returns an immutable map entry with the specified key and value. The {@link Entry#setValue}
-   * operation throws an {@link UnsupportedOperationException}.
+   * Returns an immutable map entry with the specified key and value. The {@code Entry#setValue}
+   * operation throws an {@code UnsupportedOperationException}.
    *
    * <p>The returned entry is serializable.
    *
@@ -1435,14 +1435,15 @@ public final class Maps {
    * @param key the key to be associated with the returned entry
    * @param value the value to be associated with the returned entry
    */
+  
   public static <K extends @Nullable Object, V extends @Nullable Object> Entry<K, V> immutableEntry(
       @ParametricNullness K key, @ParametricNullness V value) {
     return new ImmutableEntry<>(key, value);
   }
 
   /**
-   * Returns an unmodifiable view of the specified set of entries. The {@link Entry#setValue}
-   * operation throws an {@link UnsupportedOperationException}, as do any operations that would
+   * Returns an unmodifiable view of the specified set of entries. The {@code Entry#setValue}
+   * operation throws an {@code UnsupportedOperationException}, as do any operations that would
    * modify the returned set.
    *
    * @param entrySet the entries for which to return an unmodifiable view
@@ -1454,8 +1455,8 @@ public final class Maps {
   }
 
   /**
-   * Returns an unmodifiable view of the specified map entry. The {@link Entry#setValue} operation
-   * throws an {@link UnsupportedOperationException}. This also has the side effect of redefining
+   * Returns an unmodifiable view of the specified map entry. The {@code Entry#setValue} operation
+   * throws an {@code UnsupportedOperationException}. This also has the side effect of redefining
    * {@code equals} to comply with the Entry contract, to avoid a possible nefarious implementation
    * of equals.
    *
@@ -1496,7 +1497,7 @@ public final class Maps {
     };
   }
 
-  /** The implementation of {@link Multimaps#unmodifiableEntries}. */
+  /** The implementation of {@code Multimaps#unmodifiableEntries}. */
   static class UnmodifiableEntries<K extends @Nullable Object, V extends @Nullable Object>
       extends ForwardingCollection<Entry<K, V>> {
     private final Collection<Entry<K, V>> entries;
@@ -1535,7 +1536,7 @@ public final class Maps {
     }
   }
 
-  /** The implementation of {@link Maps#unmodifiableEntrySet(Set)}. */
+  /** The implementation of {@code Maps#unmodifiableEntrySet(Set)}. */
   static class UnmodifiableEntrySet<K extends @Nullable Object, V extends @Nullable Object>
       extends UnmodifiableEntries<K, V> implements Set<Entry<K, V>> {
     UnmodifiableEntrySet(Set<Entry<K, V>> entries) {
@@ -1556,11 +1557,11 @@ public final class Maps {
   }
 
   /**
-   * Returns a {@link Converter} that converts values using {@link BiMap#get bimap.get()}, and whose
-   * inverse view converts values using {@link BiMap#inverse bimap.inverse()}{@code .get()}.
+   * Returns a {@code Converter} that converts values using {@code BiMap#get bimap.get()}, and whose
+   * inverse view converts values using {@code BiMap#inverse bimap.inverse()}{@code .get()}.
    *
-   * <p>To use a plain {@link Map} as a {@link Function}, see {@link
-   * dev.mccue.guava.base.Functions#forMap(Map)} or {@link
+   * <p>To use a plain {@code Map} as a {@code Function}, see {@code
+   * dev.mccue.guava.base.Functions#forMap(Map)} or {@code
    * dev.mccue.guava.base.Functions#forMap(Map, Object)}.
    *
    * @since 16.0
@@ -1672,8 +1673,7 @@ public final class Maps {
       extends ForwardingMap<K, V> implements BiMap<K, V>, Serializable {
     final Map<K, V> unmodifiableMap;
     final BiMap<? extends K, ? extends V> delegate;
-    @LazyInit
-    @CheckForNull BiMap<V, K> inverse;
+    @LazyInit @CheckForNull BiMap<V, K> inverse;
     @LazyInit @CheckForNull transient Set<V> values;
 
     UnmodifiableBiMap(BiMap<? extends K, ? extends V> delegate, @CheckForNull BiMap<V, K> inverse) {
@@ -1791,7 +1791,7 @@ public final class Maps {
    *
    * <p>The function is applied lazily, invoked when needed. This is necessary for the returned map
    * to be a view, but it means that the function will be applied many times for bulk operations
-   * like {@link Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
+   * like {@code Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
    * function} should be fast. To avoid lazy evaluation when the returned map doesn't need to be a
    * view, copy the returned map into a new map of your choosing.
    */
@@ -1831,7 +1831,7 @@ public final class Maps {
    *
    * <p>The function is applied lazily, invoked when needed. This is necessary for the returned map
    * to be a view, but it means that the function will be applied many times for bulk operations
-   * like {@link Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
+   * like {@code Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
    * function} should be fast. To avoid lazy evaluation when the returned map doesn't need to be a
    * view, copy the returned map into a new map of your choosing.
    *
@@ -1876,7 +1876,7 @@ public final class Maps {
    *
    * <p>The function is applied lazily, invoked when needed. This is necessary for the returned map
    * to be a view, but it means that the function will be applied many times for bulk operations
-   * like {@link Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
+   * like {@code Map#containsValue} and {@code Map.toString()}. For this to perform well, {@code
    * function} should be fast. To avoid lazy evaluation when the returned map doesn't need to be a
    * view, copy the returned map into a new map of your choosing.
    *
@@ -1892,7 +1892,7 @@ public final class Maps {
 
   /**
    * Returns a view of a map whose values are derived from the original map's entries. In contrast
-   * to {@link #transformValues}, this method's entry-transformation logic may depend on the key as
+   * to {@code #transformValues}, this method's entry-transformation logic may depend on the key as
    * well as the value.
    *
    * <p>All other properties of the transformed map, such as iteration order, are left intact. For
@@ -1925,7 +1925,7 @@ public final class Maps {
    *
    * <p>The transformer is applied lazily, invoked when needed. This is necessary for the returned
    * map to be a view, but it means that the transformer will be applied many times for bulk
-   * operations like {@link Map#containsValue} and {@link Object#toString}. For this to perform
+   * operations like {@code Map#containsValue} and {@code Object#toString}. For this to perform
    * well, {@code transformer} should be fast. To avoid lazy evaluation when the returned map
    * doesn't need to be a view, copy the returned map into a new map of your choosing.
    *
@@ -1946,7 +1946,7 @@ public final class Maps {
 
   /**
    * Returns a view of a sorted map whose values are derived from the original sorted map's entries.
-   * In contrast to {@link #transformValues}, this method's entry-transformation logic may depend on
+   * In contrast to {@code #transformValues}, this method's entry-transformation logic may depend on
    * the key as well as the value.
    *
    * <p>All other properties of the transformed map, such as iteration order, are left intact. For
@@ -1979,7 +1979,7 @@ public final class Maps {
    *
    * <p>The transformer is applied lazily, invoked when needed. This is necessary for the returned
    * map to be a view, but it means that the transformer will be applied many times for bulk
-   * operations like {@link Map#containsValue} and {@link Object#toString}. For this to perform
+   * operations like {@code Map#containsValue} and {@code Object#toString}. For this to perform
    * well, {@code transformer} should be fast. To avoid lazy evaluation when the returned map
    * doesn't need to be a view, copy the returned map into a new map of your choosing.
    *
@@ -2000,7 +2000,7 @@ public final class Maps {
 
   /**
    * Returns a view of a navigable map whose values are derived from the original navigable map's
-   * entries. In contrast to {@link #transformValues}, this method's entry-transformation logic may
+   * entries. In contrast to {@code #transformValues}, this method's entry-transformation logic may
    * depend on the key as well as the value.
    *
    * <p>All other properties of the transformed map, such as iteration order, are left intact. For
@@ -2034,7 +2034,7 @@ public final class Maps {
    *
    * <p>The transformer is applied lazily, invoked when needed. This is necessary for the returned
    * map to be a view, but it means that the transformer will be applied many times for bulk
-   * operations like {@link Map#containsValue} and {@link Object#toString}. For this to perform
+   * operations like {@code Map#containsValue} and {@code Object#toString}. For this to perform
    * well, {@code transformer} should be fast. To avoid lazy evaluation when the returned map
    * doesn't need to be a view, copy the returned map into a new map of your choosing.
    *
@@ -2056,7 +2056,7 @@ public final class Maps {
 
   /**
    * A transformation of the value of a key-value pair, using both key and value as inputs. To apply
-   * the transformation to a map, use {@link Maps#transformEntries(Map, EntryTransformer)}.
+   * the transformation to a map, use {@code Maps#transformEntries(Map, EntryTransformer)}.
    *
    * @param <K> the key type of the input and output entries
    * @param <V1> the value type of the input entry
@@ -2072,8 +2072,8 @@ public final class Maps {
      *
      * <ul>
      *   <li>Its execution does not cause any observable side effects.
-     *   <li>The computation is <i>consistent with equals</i>; that is, {@link Objects#equal
-     *       Objects.equal}{@code (k1, k2) &&} {@link Objects#equal}{@code (v1, v2)} implies that
+     *   <li>The computation is <i>consistent with equals</i>; that is, {@code Objects#equal
+     *       Objects.equal}{@code (k1, k2) &&} {@code Objects#equal}{@code (v1, v2)} implies that
      *       {@code Objects.equal(transformer.transform(k1, v1), transformer.transform(k2, v2))}.
      * </ul>
      *
@@ -2452,7 +2452,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key that doesn't satisfy the predicate, the map's {@code put()} and
-   * {@code putAll()} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose keys satisfy the filter will be removed from the underlying
@@ -2465,7 +2465,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code keyPredicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    */
   public static <K extends @Nullable Object, V extends @Nullable Object> Map<K, V> filterKeys(
@@ -2485,7 +2485,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key that doesn't satisfy the predicate, the map's {@code put()} and
-   * {@code putAll()} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose keys satisfy the filter will be removed from the underlying
@@ -2498,7 +2498,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code keyPredicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    *
    * @since 11.0
@@ -2518,7 +2518,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key that doesn't satisfy the predicate, the map's {@code put()} and
-   * {@code putAll()} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose keys satisfy the filter will be removed from the underlying
@@ -2531,7 +2531,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code keyPredicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    *
    * @since 14.0
@@ -2552,7 +2552,7 @@ public final class Maps {
    * <p>The resulting bimap's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the bimap
    * and its views. When given a key that doesn't satisfy the predicate, the bimap's {@code put()},
-   * {@code forcePut()} and {@code putAll()} methods throw an {@link IllegalArgumentException}.
+   * {@code forcePut()} and {@code putAll()} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered
    * bimap or its views, only mappings that satisfy the filter will be removed from the underlying
@@ -2565,7 +2565,7 @@ public final class Maps {
    * needed, it may be faster to copy the filtered bimap and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals </i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    *
    * @since 14.0
    */
@@ -2582,7 +2582,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a value that doesn't satisfy the predicate, the map's {@code put()},
-   * {@code putAll()}, and {@link Entry#setValue} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()}, and {@code Entry#setValue} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose values satisfy the filter will be removed from the underlying
@@ -2595,7 +2595,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code valuePredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * at {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    */
   public static <K extends @Nullable Object, V extends @Nullable Object> Map<K, V> filterValues(
@@ -2611,7 +2611,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a value that doesn't satisfy the predicate, the map's {@code put()},
-   * {@code putAll()}, and {@link Entry#setValue} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()}, and {@code Entry#setValue} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose values satisfy the filter will be removed from the underlying
@@ -2624,7 +2624,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code valuePredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * at {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    *
    * @since 11.0
@@ -2643,7 +2643,7 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a value that doesn't satisfy the predicate, the map's {@code put()},
-   * {@code putAll()}, and {@link Entry#setValue} methods throw an {@link IllegalArgumentException}.
+   * {@code putAll()}, and {@code Entry#setValue} methods throw an {@code IllegalArgumentException}.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered map
    * or its views, only mappings whose values satisfy the filter will be removed from the underlying
@@ -2656,7 +2656,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code valuePredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}. Do not provide a predicate such as {@code
+   * at {@code Predicate#apply}. Do not provide a predicate such as {@code
    * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals.
    *
    * @since 14.0
@@ -2675,9 +2675,9 @@ public final class Maps {
    * <p>The resulting bimap's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the bimap
    * and its views. When given a value that doesn't satisfy the predicate, the bimap's {@code
-   * put()}, {@code forcePut()} and {@code putAll()} methods throw an {@link
-   * IllegalArgumentException}. Similarly, the map's entries have a {@link Entry#setValue} method
-   * that throws an {@link IllegalArgumentException} when the provided value doesn't satisfy the
+   * put()}, {@code forcePut()} and {@code putAll()} methods throw an {@code
+   * IllegalArgumentException}. Similarly, the map's entries have a {@code Entry#setValue} method
+   * that throws an {@code IllegalArgumentException} when the provided value doesn't satisfy the
    * predicate.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered
@@ -2691,7 +2691,7 @@ public final class Maps {
    * needed, it may be faster to copy the filtered bimap and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals </i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    *
    * @since 14.0
    */
@@ -2707,8 +2707,8 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key/value pair that doesn't satisfy the predicate, the map's {@code
-   * put()} and {@code putAll()} methods throw an {@link IllegalArgumentException}. Similarly, the
-   * map's entries have a {@link Entry#setValue} method that throws an {@link
+   * put()} and {@code putAll()} methods throw an {@code IllegalArgumentException}. Similarly, the
+   * map's entries have a {@code Entry#setValue} method that throws an {@code
    * IllegalArgumentException} when the existing key and the provided value don't satisfy the
    * predicate.
    *
@@ -2722,7 +2722,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    */
   public static <K extends @Nullable Object, V extends @Nullable Object> Map<K, V> filterEntries(
       Map<K, V> unfiltered, Predicate<? super Entry<K, V>> entryPredicate) {
@@ -2739,8 +2739,8 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key/value pair that doesn't satisfy the predicate, the map's {@code
-   * put()} and {@code putAll()} methods throw an {@link IllegalArgumentException}. Similarly, the
-   * map's entries have a {@link Entry#setValue} method that throws an {@link
+   * put()} and {@code putAll()} methods throw an {@code IllegalArgumentException}. Similarly, the
+   * map's entries have a {@code Entry#setValue} method that throws an {@code
    * IllegalArgumentException} when the existing key and the provided value don't satisfy the
    * predicate.
    *
@@ -2754,7 +2754,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    *
    * @since 11.0
    */
@@ -2774,8 +2774,8 @@ public final class Maps {
    * <p>The resulting map's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the map
    * and its views. When given a key/value pair that doesn't satisfy the predicate, the map's {@code
-   * put()} and {@code putAll()} methods throw an {@link IllegalArgumentException}. Similarly, the
-   * map's entries have a {@link Entry#setValue} method that throws an {@link
+   * put()} and {@code putAll()} methods throw an {@code IllegalArgumentException}. Similarly, the
+   * map's entries have a {@code Entry#setValue} method that throws an {@code
    * IllegalArgumentException} when the existing key and the provided value don't satisfy the
    * predicate.
    *
@@ -2789,7 +2789,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered map and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals</i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    *
    * @since 14.0
    */
@@ -2810,9 +2810,9 @@ public final class Maps {
    * <p>The resulting bimap's {@code keySet()}, {@code entrySet()}, and {@code values()} views have
    * iterators that don't support {@code remove()}, but all other methods are supported by the bimap
    * and its views. When given a key/value pair that doesn't satisfy the predicate, the bimap's
-   * {@code put()}, {@code forcePut()} and {@code putAll()} methods throw an {@link
-   * IllegalArgumentException}. Similarly, the map's entries have an {@link Entry#setValue} method
-   * that throws an {@link IllegalArgumentException} when the existing key and the provided value
+   * {@code put()}, {@code forcePut()} and {@code putAll()} methods throw an {@code
+   * IllegalArgumentException}. Similarly, the map's entries have an {@code Entry#setValue} method
+   * that throws an {@code IllegalArgumentException} when the existing key and the provided value
    * don't satisfy the predicate.
    *
    * <p>When methods such as {@code removeAll()} and {@code clear()} are called on the filtered
@@ -2826,7 +2826,7 @@ public final class Maps {
    * <i>not</i> needed, it may be faster to copy the filtered bimap and use the copy.
    *
    * <p><b>Warning:</b> {@code entryPredicate} must be <i>consistent with equals </i>, as documented
-   * at {@link Predicate#apply}.
+   * at {@code Predicate#apply}.
    *
    * @since 14.0
    */
@@ -2949,7 +2949,7 @@ public final class Maps {
 
   private static final class FilteredMapValues<
           K extends @Nullable Object, V extends @Nullable Object>
-      extends Values<K, V> {
+      extends Maps.Values<K, V> {
     final Map<K, V> unfiltered;
     final Predicate<? super Entry<K, V>> predicate;
 
@@ -3295,7 +3295,7 @@ public final class Maps {
 
     @Override
     public NavigableSet<K> navigableKeySet() {
-      return new NavigableKeySet<K, V>(this) {
+      return new Maps.NavigableKeySet<K, V>(this) {
         @Override
         public boolean removeAll(Collection<?> collection) {
           return FilteredEntryMap.removeAllKeys(unfiltered, entryPredicate, collection);
@@ -3773,7 +3773,7 @@ public final class Maps {
           K extends @Nullable Object, V extends @Nullable Object>
       extends AbstractMap<K, V> {
     /**
-     * Creates the entry set to be returned by {@link #entrySet()}. This method is invoked at most
+     * Creates the entry set to be returned by {@code #entrySet()}. This method is invoked at most
      * once on a given map, at the time when {@code entrySet} is first called.
      */
     abstract Set<Entry<K, V>> createEntrySet();
@@ -3860,7 +3860,7 @@ public final class Maps {
   }
 
   /**
-   * Delegates to {@link Map#get}. Returns {@code null} on {@code ClassCastException} and {@code
+   * Delegates to {@code Map#get}. Returns {@code null} on {@code ClassCastException} and {@code
    * NullPointerException}.
    */
   @CheckForNull
@@ -3874,7 +3874,7 @@ public final class Maps {
   }
 
   /**
-   * Delegates to {@link Map#containsKey}. Returns {@code false} on {@code ClassCastException} and
+   * Delegates to {@code Map#containsKey}. Returns {@code false} on {@code ClassCastException} and
    * {@code NullPointerException}.
    */
   static boolean safeContainsKey(Map<?, ?> map, @CheckForNull Object key) {
@@ -3887,7 +3887,7 @@ public final class Maps {
   }
 
   /**
-   * Delegates to {@link Map#remove}. Returns {@code null} on {@code ClassCastException} and {@code
+   * Delegates to {@code Map#remove}. Returns {@code null} on {@code ClassCastException} and {@code
    * NullPointerException}.
    */
   @CheckForNull
@@ -3900,19 +3900,19 @@ public final class Maps {
     }
   }
 
-  /** An admittedly inefficient implementation of {@link Map#containsKey}. */
+  /** An admittedly inefficient implementation of {@code Map#containsKey}. */
   static boolean containsKeyImpl(Map<?, ?> map, @CheckForNull Object key) {
     return Iterators.contains(keyIterator(map.entrySet().iterator()), key);
   }
 
-  /** An implementation of {@link Map#containsValue}. */
+  /** An implementation of {@code Map#containsValue}. */
   static boolean containsValueImpl(Map<?, ?> map, @CheckForNull Object value) {
     return Iterators.contains(valueIterator(map.entrySet().iterator()), value);
   }
 
   /**
    * Implements {@code Collection.contains} safely for forwarding collections of map entries. If
-   * {@code o} is an instance of {@code Entry}, it is wrapped using {@link #unmodifiableEntry} to
+   * {@code o} is an instance of {@code Entry}, it is wrapped using {@code #unmodifiableEntry} to
    * protect against a possible nefarious equals method.
    *
    * <p>Note that {@code c} is the backing (delegate) collection, rather than the forwarding
@@ -3932,7 +3932,7 @@ public final class Maps {
 
   /**
    * Implements {@code Collection.remove} safely for forwarding collections of map entries. If
-   * {@code o} is an instance of {@code Entry}, it is wrapped using {@link #unmodifiableEntry} to
+   * {@code o} is an instance of {@code Entry}, it is wrapped using {@code #unmodifiableEntry} to
    * protect against a possible nefarious equals method.
    *
    * <p>Note that {@code c} is backing (delegate) collection, rather than the forwarding collection.
@@ -3949,7 +3949,7 @@ public final class Maps {
     return c.remove(unmodifiableEntry((Entry<?, ?>) o));
   }
 
-  /** An implementation of {@link Map#equals}. */
+  /** An implementation of {@code Map#equals}. */
   static boolean equalsImpl(Map<?, ?> map, @CheckForNull Object object) {
     if (map == object) {
       return true;
@@ -3960,7 +3960,7 @@ public final class Maps {
     return false;
   }
 
-  /** An implementation of {@link Map#toString}. */
+  /** An implementation of {@code Map#toString}. */
   static String toStringImpl(Map<?, ?> map) {
     StringBuilder sb = Collections2.newStringBuilderForCollection(map.size()).append('{');
     boolean first = true;
@@ -3974,7 +3974,7 @@ public final class Maps {
     return sb.append('}').toString();
   }
 
-  /** An implementation of {@link Map#putAll}. */
+  /** An implementation of {@code Map#putAll}. */
   static <K extends @Nullable Object, V extends @Nullable Object> void putAllImpl(
       Map<K, V> self, Map<? extends K, ? extends V> map) {
     for (Entry<? extends K, ? extends V> entry : map.entrySet()) {
@@ -4571,14 +4571,14 @@ public final class Maps {
   /**
    * Returns a view of the portion of {@code map} whose keys are contained by {@code range}.
    *
-   * <p>This method delegates to the appropriate methods of {@link NavigableMap} (namely {@link
-   * NavigableMap#subMap(Object, boolean, Object, boolean) subMap()}, {@link
-   * NavigableMap#tailMap(Object, boolean) tailMap()}, and {@link NavigableMap#headMap(Object,
+   * <p>This method delegates to the appropriate methods of {@code NavigableMap} (namely {@code
+   * NavigableMap#subMap(Object, boolean, Object, boolean) subMap()}, {@code
+   * NavigableMap#tailMap(Object, boolean) tailMap()}, and {@code NavigableMap#headMap(Object,
    * boolean) headMap()}) to actually construct the view. Consult these methods for a full
    * description of the returned view's behavior.
    *
    * <p><b>Warning:</b> {@code Range}s always represent a range of values using the values' natural
-   * ordering. {@code NavigableMap} on the other hand can specify a custom ordering via a {@link
+   * ordering. {@code NavigableMap} on the other hand can specify a custom ordering via a {@code
    * Comparator}, which can violate the natural ordering. Using this method (or in general using
    * {@code Range}) with unnaturally-ordered maps can lead to unexpected and undefined behavior.
    *

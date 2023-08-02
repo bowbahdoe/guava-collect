@@ -18,7 +18,6 @@ import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.collect.ImmutableMap.IteratorBasedImmutableMap;
 import com.google.errorprone.annotations.Immutable;
-
 import java.util.Map;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

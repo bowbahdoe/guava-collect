@@ -21,12 +21,10 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.math.IntMath;
 import dev.mccue.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -45,11 +43,12 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link Set} whose contents will never change, with many other important properties detailed at
- * {@link ImmutableCollection}.
+ * A {@code Set} whose contents will never change, with many other important properties detailed at
+ * {@code ImmutableCollection}.
  *
  * @since 2.0
  */
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements Set<E> {
@@ -59,7 +58,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code
    * ImmutableSet}. Elements appear in the resulting set in the encounter order of the stream; if
-   * the stream contains duplicates (according to {@link Object#equals(Object)}), only the first
+   * the stream contains duplicates (according to {@code Object#equals(Object)}), only the first
    * duplicate in encounter order will appear in the result.
    *
    * @since 21.0
@@ -69,7 +68,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   /**
-   * Returns the empty immutable set. Preferred over {@link Collections#emptySet} for code
+   * Returns the empty immutable set. Preferred over {@code Collections#emptySet} for code
    * consistency, and because the return type conveys the immutability guarantee.
    *
    * <p><b>Performance note:</b> the instance returned is a singleton.
@@ -80,7 +79,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   /**
-   * Returns an immutable set containing {@code element}. Preferred over {@link
+   * Returns an immutable set containing {@code element}. Preferred over {@code
    * Collections#singleton} for code consistency, {@code null} rejection, and because the return
    * type conveys the immutability guarantee.
    */
@@ -90,7 +89,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
   /**
    * Returns an immutable set containing the given elements, minus duplicates, in the order each was
-   * first specified. That is, if multiple elements are {@linkplain Object#equals equal}, all except
+   * first specified. That is, if multiple elements are {@code Object#equals equal}, all except
    * the first are ignored.
    */
   public static <E> ImmutableSet<E> of(E e1, E e2) {
@@ -99,7 +98,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
   /**
    * Returns an immutable set containing the given elements, minus duplicates, in the order each was
-   * first specified. That is, if multiple elements are {@linkplain Object#equals equal}, all except
+   * first specified. That is, if multiple elements are {@code Object#equals equal}, all except
    * the first are ignored.
    */
   public static <E> ImmutableSet<E> of(E e1, E e2, E e3) {
@@ -108,7 +107,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
   /**
    * Returns an immutable set containing the given elements, minus duplicates, in the order each was
-   * first specified. That is, if multiple elements are {@linkplain Object#equals equal}, all except
+   * first specified. That is, if multiple elements are {@code Object#equals equal}, all except
    * the first are ignored.
    */
   public static <E> ImmutableSet<E> of(E e1, E e2, E e3, E e4) {
@@ -117,7 +116,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
   /**
    * Returns an immutable set containing the given elements, minus duplicates, in the order each was
-   * first specified. That is, if multiple elements are {@linkplain Object#equals equal}, all except
+   * first specified. That is, if multiple elements are {@code Object#equals equal}, all except
    * the first are ignored.
    */
   public static <E> ImmutableSet<E> of(E e1, E e2, E e3, E e4, E e5) {
@@ -126,7 +125,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
   /**
    * Returns an immutable set containing the given elements, minus duplicates, in the order each was
-   * first specified. That is, if multiple elements are {@linkplain Object#equals equal}, all except
+   * first specified. That is, if multiple elements are {@code Object#equals equal}, all except
    * the first are ignored.
    *
    * <p>The array {@code others} must not be longer than {@code Integer.MAX_VALUE - 6}.
@@ -276,7 +275,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     if (!elements.hasNext()) {
       return of(first);
     } else {
-      return new Builder<E>().add(first).addAll(elements).build();
+      return new ImmutableSet.Builder<E>().add(first).addAll(elements).build();
     }
   }
 
@@ -335,8 +334,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   public abstract UnmodifiableIterator<E> iterator();
 
   abstract static class CachingAsList<E> extends ImmutableSet<E> {
-    @LazyInit
-    @CheckForNull private transient ImmutableList<E> asList;
+    @LazyInit @CheckForNull private transient ImmutableList<E> asList;
 
     @Override
     public ImmutableList<E> asList() {
@@ -419,7 +417,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   @Override
-    // serialization
+  // serialization
   Object writeReplace() {
     return new SerializedForm(toArray());
   }
@@ -430,7 +428,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   /**
-   * Returns a new builder. The generated builder is equivalent to the builder created by the {@link
+   * Returns a new builder. The generated builder is equivalent to the builder created by the {@code
    * Builder} constructor.
    */
   public static <E> Builder<E> builder() {
@@ -441,8 +439,8 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    * Returns a new builder, expecting the specified number of distinct elements to be added.
    *
    * <p>If {@code expectedSize} is exactly the number of distinct elements added to the builder
-   * before {@link Builder#build} is called, the builder is likely to perform better than an unsized
-   * {@link #builder()} would have.
+   * before {@code Builder#build} is called, the builder is likely to perform better than an unsized
+   * {@code #builder()} would have.
    *
    * <p>It is not specified if any performance benefits apply if {@code expectedSize} is close to,
    * but not exactly, the number of distinct elements added to the builder.
@@ -497,7 +495,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
       this.impl = null; // unused
     }
 
-    @VisibleForTesting
     void forceJdk() {
       requireNonNull(impl); // see the comment on the field
       this.impl = new JdkBackedSetBuilderImpl<E>(impl);
@@ -929,7 +926,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
     /**
      * If more than this many consecutive positions are filled in a table of the specified size,
-     * report probable hash flooding. ({@link #hashFloodingDetected} may also report hash flooding
+     * report probable hash flooding. ({@code #hashFloodingDetected} may also report hash flooding
      * if fewer consecutive positions are filled; see that method for details.)
      */
     static int maxRunBeforeFallback(int tableSize) {

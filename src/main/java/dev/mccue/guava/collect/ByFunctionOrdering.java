@@ -28,6 +28,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * An ordering that orders elements by applying an order to the result of a function on those
  * elements.
  */
+
 @ElementTypesAreNonnullByDefault
 final class ByFunctionOrdering<F extends @Nullable Object, T extends @Nullable Object>
     extends Ordering<F> implements Serializable {

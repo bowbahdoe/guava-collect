@@ -20,10 +20,11 @@ import java.io.Serializable;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * An immutable {@code Map.Entry}, used both by {@link
+ * An immutable {@code Map.Entry}, used both by {@code
  * dev.mccue.guava.collect.Maps#immutableEntry(Object, Object)} and by other parts of {@code
  * common.collect} as a superclass.
  */
+
 @ElementTypesAreNonnullByDefault
 class ImmutableEntry<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractMapEntry<K, V> implements Serializable {

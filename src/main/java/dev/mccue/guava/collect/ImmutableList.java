@@ -25,7 +25,6 @@ import static dev.mccue.guava.collect.ObjectArrays.checkElementsNotNull;
 import static dev.mccue.guava.collect.RegularImmutableList.EMPTY;
 import static java.util.Objects.requireNonNull;
 
-
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.InlineMe;
@@ -47,8 +46,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link List} whose contents will never change, with many other important properties detailed at
- * {@link ImmutableCollection}.
+ * A {@code List} whose contents will never change, with many other important properties detailed at
+ * {@code ImmutableCollection}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/ImmutableCollectionsExplained">immutable collections</a>.
@@ -58,6 +57,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 public abstract class ImmutableList<E> extends ImmutableCollection<E>
@@ -74,7 +74,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   /**
-   * Returns the empty immutable list. This list behaves and performs comparably to {@link
+   * Returns the empty immutable list. This list behaves and performs comparably to {@code
    * Collections#emptyList}, and is preferable mainly for consistency and maintainability of your
    * code.
    *
@@ -88,7 +88,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
   /**
    * Returns an immutable list containing a single element. This list behaves and performs
-   * comparably to {@link Collections#singletonList}, but will not accept a null element. It is
+   * comparably to {@code Collections#singletonList}, but will not accept a null element. It is
    * preferable mainly for consistency and maintainability of your code.
    *
    * @throws NullPointerException if {@code element} is null
@@ -224,7 +224,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
   /**
    * Returns an immutable list containing the given elements, in order. If {@code elements} is a
-   * {@link Collection}, this method behaves exactly as {@link #copyOf(Collection)}; otherwise, it
+   * {@code Collection}, this method behaves exactly as {@code #copyOf(Collection)}; otherwise, it
    * behaves exactly as {@code copyOf(elements.iterator()}.
    *
    * @throws NullPointerException if {@code elements} contains a null element
@@ -276,7 +276,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
     if (!elements.hasNext()) {
       return of(first);
     } else {
-      return new Builder<E>().add(first).addAll(elements).build();
+      return new ImmutableList.Builder<E>().add(first).addAll(elements).build();
     }
   }
 
@@ -306,7 +306,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    * ImmutableSortedSet.copyOf(elements)}; if you want a {@code List} you can use its {@code
    * asList()} view.
    *
-   * <p><b>Java 8 users:</b> If you want to convert a {@link java.util.stream.Stream} to a sorted
+   * <p><b>Java 8 users:</b> If you want to convert a {@code java.util.stream.Stream} to a sorted
    * {@code ImmutableList}, use {@code stream.sorted().collect(toImmutableList())}.
    *
    * @throws NullPointerException if any element in the input is null
@@ -329,7 +329,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    * ImmutableSortedSet.copyOf(comparator, elements)}; if you want a {@code List} you can use its
    * {@code asList()} view.
    *
-   * <p><b>Java 8 users:</b> If you want to convert a {@link java.util.stream.Stream} to a sorted
+   * <p><b>Java 8 users:</b> If you want to convert a {@code java.util.stream.Stream} to a sorted
    * {@code ImmutableList}, use {@code stream.sorted(comparator).collect(toImmutableList())}.
    *
    * @throws NullPointerException if any element in the input is null
@@ -458,7 +458,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   /**
-   * Called by the default implementation of {@link #subList} when {@code toIndex - fromIndex > 1},
+   * Called by the default implementation of {@code #subList} when {@code toIndex - fromIndex > 1},
    * after index validation has already been performed.
    */
   ImmutableList<E> subListUnchecked(int fromIndex, int toIndex) {
@@ -720,13 +720,13 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   @Override
-    // serialization
+  // serialization
   Object writeReplace() {
     return new SerializedForm(toArray());
   }
 
   /**
-   * Returns a new builder. The generated builder is equivalent to the builder created by the {@link
+   * Returns a new builder. The generated builder is equivalent to the builder created by the {@code
    * Builder} constructor.
    */
   public static <E> Builder<E> builder() {
@@ -736,8 +736,8 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   /**
    * Returns a new builder, expecting the specified number of elements to be added.
    *
-   * <p>If {@code expectedSize} is exactly the number of elements added to the builder before {@link
-   * Builder#build} is called, the builder is likely to perform better than an unsized {@link
+   * <p>If {@code expectedSize} is exactly the number of elements added to the builder before {@code
+   * Builder#build} is called, the builder is likely to perform better than an unsized {@code
    * #builder()} would have.
    *
    * <p>It is not specified if any performance benefits apply if {@code expectedSize} is close to,
@@ -747,7 +747,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    */
   public static <E> Builder<E> builderWithExpectedSize(int expectedSize) {
     checkNonnegative(expectedSize, "expectedSize");
-    return new Builder<E>(expectedSize);
+    return new ImmutableList.Builder<E>(expectedSize);
   }
 
   /**
@@ -764,7 +764,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    *
    * <p>Elements appear in the resulting list in the same order they were added to the builder.
    *
-   * <p>Builder instances can be reused; it is safe to call {@link #build} multiple times to build
+   * <p>Builder instances can be reused; it is safe to call {@code #build} multiple times to build
    * multiple lists in series. Each new list contains all the elements of the ones created before
    * it.
    *
@@ -772,12 +772,12 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    */
   public static final class Builder<E> extends ImmutableCollection.Builder<E> {
     // The first `size` elements are non-null.
-    @VisibleForTesting @Nullable Object[] contents;
+    @Nullable Object[] contents;
     private int size;
     private boolean forceCopy;
 
     /**
-     * Creates a new builder. The returned builder is equivalent to the builder generated by {@link
+     * Creates a new builder. The returned builder is equivalent to the builder generated by {@code
      * ImmutableList#builder}.
      */
     public Builder() {

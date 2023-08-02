@@ -25,8 +25,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Basic implementation of the {@link ListMultimap} interface. It's a wrapper around {@link
- * AbstractMapBasedMultimap} that converts the returned collections into {@code Lists}. The {@link
+ * Basic implementation of the {@code ListMultimap} interface. It's a wrapper around {@code
+ * AbstractMapBasedMultimap} that converts the returned collections into {@code Lists}. The {@code
  * #createCollection} method must return a {@code List}.
  *
  * @author Jared Levy
@@ -69,7 +69,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in the {@link
+   * this method returns a {@code List}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    */
   @Override
@@ -81,7 +81,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in the {@link
+   * this method returns a {@code List}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    */
   @CanIgnoreReturnValue
@@ -94,7 +94,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in the {@link
+   * this method returns a {@code List}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    */
   @CanIgnoreReturnValue
@@ -119,7 +119,7 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
   /**
    * {@inheritDoc}
    *
-   * <p>Though the method signature doesn't say so explicitly, the returned map has {@link List}
+   * <p>Though the method signature doesn't say so explicitly, the returned map has {@code List}
    * values.
    */
   @Override

@@ -21,11 +21,12 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * An {@link ImmutableAsList} implementation specialized for when the delegate collection is already
+ * An {@code ImmutableAsList} implementation specialized for when the delegate collection is already
  * backed by an {@code ImmutableList} or array.
  *
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial") // uses writeReplace, not default serialization
 @ElementTypesAreNonnullByDefault
 class RegularImmutableAsList<E> extends ImmutableAsList<E> {

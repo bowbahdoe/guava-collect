@@ -24,7 +24,6 @@ import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.collect.Maps.IteratorBasedAbstractMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -42,7 +41,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link BiMap} backed by two hash tables. This implementation allows null keys and values. A
+ * A {@code BiMap} backed by two hash tables. This implementation allows null keys and values. A
  * {@code HashBiMap} and its inverse are both serializable.
  *
  * <p>This implementation guarantees insertion-based iteration order of its keys.
@@ -54,6 +53,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Mike Bostock
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Object>
     extends IteratorBasedAbstractMap<K, V> implements BiMap<K, V>, Serializable {
@@ -92,8 +92,8 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
     // All BiEntry instances are strongly reachable from owning HashBiMap through
     // "HashBiMap.hashTableKToV" and "BiEntry.nextInKToVBucket" references.
-    // Under that assumption, the remaining references can be safely marked as @Weak.
-    // Using @Weak is necessary to avoid retain-cycles between BiEntry instances on iOS,
+    // Under that assumption, the remaining references can be safely marked as .
+    // Using is necessary to avoid retain-cycles between BiEntry instances on iOS,
     // which would cause memory leaks when non-empty HashBiMap with cyclic BiEntry
     // instances is deallocated.
     @CheckForNull BiEntry<K, V> nextInKToVBucket;
@@ -589,8 +589,7 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     }
   }
 
-  @LazyInit
-  @CheckForNull private transient BiMap<V, K> inverse;
+  @LazyInit @CheckForNull private transient BiMap<V, K> inverse;
 
   @Override
   public BiMap<V, K> inverse() {

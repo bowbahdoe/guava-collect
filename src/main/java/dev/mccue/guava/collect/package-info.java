@@ -23,100 +23,100 @@
  * <h2>Immutable collections</h2>
  *
  * These are collections whose contents will never change. They also offer a few additional
- * guarantees (see {@link ImmutableCollection} for details). Implementations are available for both
+ * guarantees (see {@code ImmutableCollection} for details). Implementations are available for both
  * the JDK collection types and the Guava collection types (listed below).
  *
  * <h2>Collection types</h2>
  *
  * <dl>
- *   <dt>{@link Multimap}
- *   <dd>A new type, which is similar to {@link java.util.Map}, but may contain multiple entries
- *       with the same key. Some behaviors of {@link Multimap} are left unspecified and are provided
+ *   <dt>{@code Multimap}
+ *   <dd>A new type, which is similar to {@code java.util.Map}, but may contain multiple entries
+ *       with the same key. Some behaviors of {@code Multimap} are left unspecified and are provided
  *       only by the subtypes mentioned below.
- *   <dt>{@link ListMultimap}
- *   <dd>An extension of {@link Multimap} which permits duplicate entries, supports random access of
+ *   <dt>{@code ListMultimap}
+ *   <dd>An extension of {@code Multimap} which permits duplicate entries, supports random access of
  *       values for a particular key, and has <i>partially order-dependent equality</i> as defined
- *       by {@link ListMultimap#equals(Object)}. {@code ListMultimap} takes its name from the fact
- *       that the {@linkplain ListMultimap#get collection of values} associated with a given key
- *       fulfills the {@link java.util.List} contract.
- *   <dt>{@link SetMultimap}
- *   <dd>An extension of {@link Multimap} which has order-independent equality and does not allow
+ *       by {@code ListMultimap#equals(Object)}. {@code ListMultimap} takes its name from the fact
+ *       that the {@code ListMultimap#get collection of values} associated with a given key
+ *       fulfills the {@code java.util.List} contract.
+ *   <dt>{@code SetMultimap}
+ *   <dd>An extension of {@code Multimap} which has order-independent equality and does not allow
  *       duplicate entries; that is, while a key may appear twice in a {@code SetMultimap}, each
  *       must map to a different value. {@code SetMultimap} takes its name from the fact that the
- *       {@linkplain SetMultimap#get collection of values} associated with a given key fulfills the
- *       {@link java.util.Set} contract.
- *   <dt>{@link SortedSetMultimap}
- *   <dd>An extension of {@link SetMultimap} for which the {@linkplain SortedSetMultimap#get
- *       collection values} associated with a given key is a {@link java.util.SortedSet}.
- *   <dt>{@link BiMap}
- *   <dd>An extension of {@link java.util.Map} that guarantees the uniqueness of its values as well
+ *       {@code SetMultimap#get collection of values} associated with a given key fulfills the
+ *       {@code java.util.Set} contract.
+ *   <dt>{@code SortedSetMultimap}
+ *   <dd>An extension of {@code SetMultimap} for which the {@code SortedSetMultimap#get
+ *       collection values} associated with a given key is a {@code java.util.SortedSet}.
+ *   <dt>{@code BiMap}
+ *   <dd>An extension of {@code java.util.Map} that guarantees the uniqueness of its values as well
  *       as that of its keys. This is sometimes called an "invertible map," since the restriction on
- *       values enables it to support an {@linkplain BiMap#inverse inverse view} -- which is another
+ *       values enables it to support an {@code BiMap#inverse inverse view} -- which is another
  *       instance of {@code BiMap}.
- *   <dt>{@link Table}
- *   <dd>A new type, which is similar to {@link java.util.Map}, but which indexes its values by an
+ *   <dt>{@code Table}
+ *   <dd>A new type, which is similar to {@code java.util.Map}, but which indexes its values by an
  *       ordered pair of keys, a row key and column key.
- *   <dt>{@link Multiset}
- *   <dd>An extension of {@link java.util.Collection} that may contain duplicate values like a
- *       {@link java.util.List}, yet has order-independent equality like a {@link java.util.Set}.
+ *   <dt>{@code Multiset}
+ *   <dd>An extension of {@code java.util.Collection} that may contain duplicate values like a
+ *       {@code java.util.List}, yet has order-independent equality like a {@code java.util.Set}.
  *       One typical use for a multiset is to represent a histogram.
- *   <dt>{@link ClassToInstanceMap}
- *   <dd>An extension of {@link java.util.Map} that associates a raw type with an instance of that
+ *   <dt>{@code ClassToInstanceMap}
+ *   <dd>An extension of {@code java.util.Map} that associates a raw type with an instance of that
  *       type.
  * </dl>
  *
  * <h2>Ranges</h2>
  *
  * <ul>
- *   <li>{@link Range}
- *   <li>{@link RangeMap}
- *   <li>{@link RangeSet}
- *   <li>{@link DiscreteDomain}
- *   <li>{@link ContiguousSet}
+ *   <li>{@code Range}
+ *   <li>{@code RangeMap}
+ *   <li>{@code RangeSet}
+ *   <li>{@code DiscreteDomain}
+ *   <li>{@code ContiguousSet}
  * </ul>
  *
  * <h2>Classes of static utility methods</h2>
  *
  * <ul>
- *   <li>{@link Collections2}
- *   <li>{@link Comparators}
- *   <li>{@link Iterables}
- *   <li>{@link Iterators}
- *   <li>{@link Lists}
- *   <li>{@link Maps}
- *   <li>{@link MoreCollectors}
- *   <li>{@link Multimaps}
- *   <li>{@link Multisets}
- *   <li>{@link ObjectArrays}
- *   <li>{@link Queues}
- *   <li>{@link Sets}
- *   <li>{@link Streams}
- *   <li>{@link Tables}
+ *   <li>{@code Collections2}
+ *   <li>{@code Comparators}
+ *   <li>{@code Iterables}
+ *   <li>{@code Iterators}
+ *   <li>{@code Lists}
+ *   <li>{@code Maps}
+ *   <li>{@code MoreCollectors}
+ *   <li>{@code Multimaps}
+ *   <li>{@code Multisets}
+ *   <li>{@code ObjectArrays}
+ *   <li>{@code Queues}
+ *   <li>{@code Sets}
+ *   <li>{@code Streams}
+ *   <li>{@code Tables}
  * </ul>
  *
  * <h2>Abstract implementations</h2>
  *
  * <ul>
- *   <li>{@link AbstractIterator}
- *   <li>{@link AbstractSequentialIterator}
- *   <li>{@link UnmodifiableIterator}
- *   <li>{@link UnmodifiableListIterator}
+ *   <li>{@code AbstractIterator}
+ *   <li>{@code AbstractSequentialIterator}
+ *   <li>{@code UnmodifiableIterator}
+ *   <li>{@code UnmodifiableListIterator}
  * </ul>
  *
  * <h2>Forwarding collections</h2>
  *
  * We provide implementations of collections that forward all method calls to a delegate collection
  * by default. Subclasses can override one or more methods to implement the decorator pattern. For
- * an example, see {@link ForwardingCollection}.
+ * an example, see {@code ForwardingCollection}.
  *
  * <h2>Other</h2>
  *
  * <ul>
- *   <li>{@link EvictingQueue}
- *   <li>{@link Interner}, {@link Interners}
- *   <li>{@link MapMaker}
- *   <li>{@link MinMaxPriorityQueue}
- *   <li>{@link PeekingIterator}
+ *   <li>{@code EvictingQueue}
+ *   <li>{@code Interner}, {@code Interners}
+ *   <li>{@code MapMaker}
+ *   <li>{@code MinMaxPriorityQueue}
+ *   <li>{@code PeekingIterator}
  * </ul>
  */
 @CheckReturnValue

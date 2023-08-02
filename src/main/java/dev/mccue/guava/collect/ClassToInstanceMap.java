@@ -26,16 +26,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * A map, each entry of which maps a Java <a href="http://tinyurl.com/2cmwkz">raw type</a> to an
  * instance of that type. In addition to implementing {@code Map}, the additional type-safe
- * operations {@link #putInstance} and {@link #getInstance} are available.
+ * operations {@code #putInstance} and {@code #getInstance} are available.
  *
  * <p>Like any other {@code Map<Class, Object>}, this map may contain entries for primitive types,
  * and a primitive type and its corresponding wrapper type may map to different values.
  *
- * <h2>Implementations</h2>
+ * <h3>Implementations</h3>
  *
  * <ul>
- *   <li>{@link ImmutableClassToInstanceMap}
- *   <li>{@link MutableClassToInstanceMap}
+ *   <li>{@code ImmutableClassToInstanceMap}
+ *   <li>{@code MutableClassToInstanceMap}
  * </ul>
  *
  * <p>To map a generic type to an instance of that type, use {@code
@@ -45,7 +45,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#classtoinstancemap">{@code
  * ClassToInstanceMap}</a>.
  *
- * @param <B> the common supertype that all values will share. When in doubt, just use {@link
+ * @param <B> the common supertype that all values will share. When in doubt, just use {@code
  *     Object}, or use {@code @Nullable Object} to allow null values.
  * @since 2.0
  */

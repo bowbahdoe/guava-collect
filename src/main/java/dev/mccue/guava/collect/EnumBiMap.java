@@ -36,6 +36,7 @@ import java.util.Map;
  * @author Mike Bostock
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends AbstractBiMap<K, V> {
   /*
@@ -44,7 +45,7 @@ public final class EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abstr
    * probably work around it by changing how we annotate the J2CL EnumMap, but that's probably more
    * trouble than just using Object.class.)
    *
-   * Then we declare the getters for these fields as @GwtIncompatible so that no one can try to use
+   * Then we declare the getters for these fields as so that no one can try to use
    * them under J2CL—or, as an unfortunate side effect, under GWT. We do still give the fields
    * themselves their proper values under GWT, since GWT's EnumMap does need the Class instance.
    *

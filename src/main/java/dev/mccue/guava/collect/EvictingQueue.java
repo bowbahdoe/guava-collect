@@ -19,7 +19,6 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
-
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.Serializable;
 import java.util.ArrayDeque;
@@ -46,7 +45,7 @@ public final class EvictingQueue<E> extends ForwardingQueue<E> implements Serial
 
   private final Queue<E> delegate;
 
-  @VisibleForTesting final int maxSize;
+  final int maxSize;
 
   private EvictingQueue(int maxSize) {
     checkArgument(maxSize >= 0, "maxSize (%s) must >= 0", maxSize);

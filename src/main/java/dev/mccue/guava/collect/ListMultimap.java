@@ -25,12 +25,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A {@code Multimap} that can hold duplicate key-value pairs and that maintains the insertion
- * ordering of values for a given key. See the {@link Multimap} documentation for information common
+ * ordering of values for a given key. See the {@code Multimap} documentation for information common
  * to all multimaps.
  *
- * <p>The {@link #get}, {@link #removeAll}, and {@link #replaceValues} methods each return a {@link
+ * <p>The {@code #get}, {@code #removeAll}, and {@code #replaceValues} methods each return a {@code
  * List} of values. Though the method signature doesn't say so explicitly, the map returned by
- * {@link #asMap} has {@code List} values.
+ * {@code #asMap} has {@code List} values.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multimap">{@code Multimap}</a>.
@@ -45,8 +45,8 @@ public interface ListMultimap<K extends @Nullable Object, V extends @Nullable Ob
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in
-   * the {@link Multimap} interface.
+   * this method returns a {@code List}, instead of the {@code java.util.Collection} specified in
+   * the {@code Multimap} interface.
    */
   @Override
   List<V> get(@ParametricNullness K key);
@@ -55,8 +55,8 @@ public interface ListMultimap<K extends @Nullable Object, V extends @Nullable Ob
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in
-   * the {@link Multimap} interface.
+   * this method returns a {@code List}, instead of the {@code java.util.Collection} specified in
+   * the {@code Multimap} interface.
    */
   @CanIgnoreReturnValue
   @Override
@@ -66,8 +66,8 @@ public interface ListMultimap<K extends @Nullable Object, V extends @Nullable Ob
    * {@inheritDoc}
    *
    * <p>Because the values for a given key may have duplicates and follow the insertion ordering,
-   * this method returns a {@link List}, instead of the {@link Collection} specified in
-   * the {@link Multimap} interface.
+   * this method returns a {@code List}, instead of the {@code java.util.Collection} specified in
+   * the {@code Multimap} interface.
    */
   @CanIgnoreReturnValue
   @Override
@@ -76,8 +76,8 @@ public interface ListMultimap<K extends @Nullable Object, V extends @Nullable Ob
   /**
    * {@inheritDoc}
    *
-   * <p><b>Note:</b> The returned map's values are guaranteed to be of type {@link List}. To obtain
-   * this map with the more specific generic type {@code Map<K, List<V>>}, call {@link
+   * <p><b>Note:</b> The returned map's values are guaranteed to be of type {@code List}. To obtain
+   * this map with the more specific generic type {@code Map<K, List<V>>}, call {@code
    * Multimaps#asMap(ListMultimap)} instead.
    */
   @Override

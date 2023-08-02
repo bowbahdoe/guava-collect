@@ -21,12 +21,10 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 
-
 import dev.mccue.guava.collect.Serialization.FieldSetter;
 import dev.mccue.guava.math.IntMath;
 import dev.mccue.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -91,7 +89,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
    * Creates a new {@code ConcurrentHashMultiset} containing the specified elements, using the
    * default initial capacity, load factor, and concurrency settings.
    *
-   * <p>This implementation is highly efficient when {@code elements} is itself a {@link Multiset}.
+   * <p>This implementation is highly efficient when {@code elements} is itself a {@code Multiset}.
    *
    * @param elements the elements that the multiset should contain
    */
@@ -119,7 +117,6 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
     return new ConcurrentHashMultiset<>(countMap);
   }
 
-  @VisibleForTesting
   ConcurrentHashMultiset(ConcurrentMap<E, AtomicInteger> countMap) {
     checkArgument(countMap.isEmpty(), "the backing map (%s) must be empty", countMap);
     this.countMap = countMap;
@@ -194,7 +191,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
    * @param occurrences the number of occurrences to add
    * @return the previous count of the element before the operation; possibly zero
    * @throws IllegalArgumentException if {@code occurrences} is negative, or if the resulting amount
-   *     would exceed {@link Integer#MAX_VALUE}
+   *     would exceed {@code Integer#MAX_VALUE}
    */
   @CanIgnoreReturnValue
   @Override
@@ -297,7 +294,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
    * Removes exactly the specified number of occurrences of {@code element}, or makes no change if
    * this is not possible.
    *
-   * <p>This method, in contrast to {@link #remove(Object, int)}, has no effect when the element
+   * <p>This method, in contrast to {@code #remove(Object, int)}, has no effect when the element
    * count is smaller than {@code occurrences}.
    *
    * @param element the element to remove
@@ -334,7 +331,7 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
   }
 
   /**
-   * Adds or removes occurrences of {@code element} such that the {@link #count} of the element
+   * Adds or removes occurrences of {@code element} such that the {@code #count} of the element
    * becomes {@code count}.
    *
    * @return the count of {@code element} in the multiset before this call
@@ -478,10 +475,10 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
     throw new AssertionError("should never be called");
   }
 
-  /** @deprecated Internal method, use {@link #entrySet()}. */
+  /** @deprecated Internal method, use {@code #entrySet()}. */
   @Deprecated
   @Override
-  public Set<Entry<E>> createEntrySet() {
+  public Set<Multiset.Entry<E>> createEntrySet() {
     return new EntrySet();
   }
 
@@ -575,8 +572,8 @@ public final class ConcurrentHashMultiset<E> extends AbstractMultiset<E> impleme
       return snapshot().toArray(array);
     }
 
-    private List<Entry<E>> snapshot() {
-      List<Entry<E>> list = Lists.newArrayListWithExpectedSize(size());
+    private List<Multiset.Entry<E>> snapshot() {
+      List<Multiset.Entry<E>> list = Lists.newArrayListWithExpectedSize(size());
       // Not Iterables.addAll(list, this), because that'll forward right back here.
       Iterators.addAll(list, iterator());
       return list;

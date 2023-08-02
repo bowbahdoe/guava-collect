@@ -21,7 +21,7 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import java.util.Map;
 
 /**
- * An implementation of {@link ImmutableTable} that holds a single cell.
+ * An implementation of {@code ImmutableTable} that holds a single cell.
  *
  * @author Gregory Kick
  */

@@ -20,16 +20,16 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
 
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.function.BiConsumer;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation of {@link ImmutableMap} with exactly one entry.
+ * Implementation of {@code ImmutableMap} with exactly one entry.
  *
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
@@ -92,8 +92,7 @@ final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   }
 
   @CheckForNull private final transient ImmutableBiMap<V, K> inverse;
-  @LazyInit
-  @CheckForNull private transient ImmutableBiMap<V, K> lazyInverse;
+  @LazyInit @CheckForNull private transient ImmutableBiMap<V, K> lazyInverse;
 
   @Override
   public ImmutableBiMap<V, K> inverse() {

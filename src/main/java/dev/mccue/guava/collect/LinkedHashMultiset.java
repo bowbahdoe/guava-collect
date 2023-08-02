@@ -36,6 +36,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class LinkedHashMultiset<E extends @Nullable Object>
     extends AbstractMapBasedMultiset<E> {
@@ -59,7 +60,7 @@ public final class LinkedHashMultiset<E extends @Nullable Object>
   /**
    * Creates a new {@code LinkedHashMultiset} containing the specified elements.
    *
-   * <p>This implementation is highly efficient when {@code elements} is itself a {@link Multiset}.
+   * <p>This implementation is highly efficient when {@code elements} is itself a {@code Multiset}.
    *
    * @param elements the elements that the multiset should contain
    */

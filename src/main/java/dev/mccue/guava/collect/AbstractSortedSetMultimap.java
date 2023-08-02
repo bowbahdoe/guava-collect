@@ -26,8 +26,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Basic implementation of the {@link SortedSetMultimap} interface. It's a wrapper around {@link
- * AbstractMapBasedMultimap} that converts the returned collections into sorted sets. The {@link
+ * Basic implementation of the {@code SortedSetMultimap} interface. It's a wrapper around {@code
+ * AbstractMapBasedMultimap} that converts the returned collections into sorted sets. The {@code
  * #createCollection} method must return a {@code SortedSet}.
  *
  * @author Jared Levy
@@ -80,7 +80,7 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
    * <p>Changes to the returned collection will update the underlying multimap, and vice versa.
    *
    * <p>Because a {@code SortedSetMultimap} has unique sorted values for a given key, this method
-   * returns a {@link SortedSet}, instead of the {@link Collection} specified in the {@link
+   * returns a {@code SortedSet}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    */
   @Override
@@ -92,7 +92,7 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
    * Removes all values associated with a given key. The returned collection is immutable.
    *
    * <p>Because a {@code SortedSetMultimap} has unique sorted values for a given key, this method
-   * returns a {@link SortedSet}, instead of the {@link Collection} specified in the {@link
+   * returns a {@code SortedSet}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    */
   @CanIgnoreReturnValue
@@ -106,7 +106,7 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
    * The returned collection is immutable.
    *
    * <p>Because a {@code SortedSetMultimap} has unique sorted values for a given key, this method
-   * returns a {@link SortedSet}, instead of the {@link Collection} specified in the {@link
+   * returns a {@code SortedSet}, instead of the {@code Collection} specified in the {@code
    * Multimap} interface.
    *
    * <p>Any duplicates in {@code values} will be stored in the multimap once.
@@ -123,10 +123,10 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
    * map does not support {@code setValue} on its entries, {@code put}, or {@code putAll}.
    *
    * <p>When passed a key that is present in the map, {@code asMap().get(Object)} has the same
-   * behavior as {@link #get}, returning a live collection. When passed a key that is not present,
+   * behavior as {@code #get}, returning a live collection. When passed a key that is not present,
    * however, {@code asMap().get(Object)} returns {@code null} instead of an empty collection.
    *
-   * <p>Though the method signature doesn't say so explicitly, the returned map has {@link
+   * <p>Though the method signature doesn't say so explicitly, the returned map has {@code
    * SortedSet} values.
    */
   @Override

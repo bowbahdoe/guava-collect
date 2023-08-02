@@ -16,7 +16,6 @@
 
 package dev.mccue.guava.collect;
 
-
 import dev.mccue.guava.base.Preconditions;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,7 +26,7 @@ import java.util.Set;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link Multimap} using hash tables.
+ * Implementation of {@code Multimap} using hash tables.
  *
  * <p>The multimap does not store duplicate key-value pairs. Adding a new key-value pair equal to an
  * existing key-value pair has no effect.
@@ -37,21 +36,22 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p>This class is not threadsafe when any concurrent operations update the multimap. Concurrent
  * read operations will work correctly if the last write <i>happens-before</i> any reads. To allow
- * concurrent update operations, wrap your multimap with a call to {@link
+ * concurrent update operations, wrap your multimap with a call to {@code
  * Multimaps#synchronizedSetMultimap}.
  *
  * <p><b>Warning:</b> Do not modify either a key <i>or a value</i> of a {@code HashMultimap} in a
- * way that affects its {@link Object#equals} behavior. Undefined behavior and bugs will result.
+ * way that affects its {@code Object#equals} behavior. Undefined behavior and bugs will result.
  *
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class HashMultimap<K extends @Nullable Object, V extends @Nullable Object>
     extends HashMultimapGwtSerializationDependencies<K, V> {
   private static final int DEFAULT_VALUES_PER_KEY = 2;
 
-  @VisibleForTesting transient int expectedValuesPerKey = DEFAULT_VALUES_PER_KEY;
+  transient int expectedValuesPerKey = DEFAULT_VALUES_PER_KEY;
 
   /**
    * Creates a new, empty {@code HashMultimap} with the default initial capacities.

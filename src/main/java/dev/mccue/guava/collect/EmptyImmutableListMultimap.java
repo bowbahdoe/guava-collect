@@ -19,10 +19,11 @@ package dev.mccue.guava.collect;
 import java.util.Collection;
 
 /**
- * Implementation of {@link ImmutableListMultimap} with no entries.
+ * Implementation of {@code ImmutableListMultimap} with no entries.
  *
  * @author Jared Levy
  */
+
 @ElementTypesAreNonnullByDefault
 class EmptyImmutableListMultimap extends ImmutableListMultimap<Object, Object> {
   static final EmptyImmutableListMultimap INSTANCE = new EmptyImmutableListMultimap();

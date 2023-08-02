@@ -17,7 +17,6 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
-
 import dev.mccue.guava.base.MoreObjects;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.Serializable;
@@ -32,7 +31,7 @@ import java.util.TreeMap;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * An implementation of {@link RangeSet} backed by a {@link TreeMap}.
+ * An implementation of {@code RangeSet} backed by a {@code TreeMap}.
  *
  * @author Louis Wasserman
  * @since 14.0
@@ -42,7 +41,7 @@ import dev.mccue.jsr305.CheckForNull;
 public class TreeRangeSet<C extends Comparable<?>> extends AbstractRangeSet<C>
     implements Serializable {
 
-  @VisibleForTesting final NavigableMap<Cut<C>, Range<C>> rangesByLowerBound;
+  final NavigableMap<Cut<C>, Range<C>> rangesByLowerBound;
 
   /** Creates an empty {@code TreeRangeSet} instance. */
   public static <C extends Comparable<?>> TreeRangeSet<C> create() {
@@ -280,7 +279,6 @@ public class TreeRangeSet<C extends Comparable<?>> extends AbstractRangeSet<C>
     return (result == null) ? complement = new Complement() : result;
   }
 
-  @VisibleForTesting
   static final class RangesByUpperBound<C extends Comparable<?>>
       extends AbstractNavigableMap<Cut<C>, Range<C>> {
     private final NavigableMap<Cut<C>, Range<C>> rangesByLowerBound;

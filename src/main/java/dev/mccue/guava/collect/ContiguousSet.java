@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
- * A sorted set of contiguous values in a given {@link DiscreteDomain}. Example:
+ * A sorted set of contiguous values in a given {@code DiscreteDomain}. Example:
  *
  * <pre>{@code
  * ContiguousSet.create(Range.closed(5, 42), DiscreteDomain.integers())
@@ -39,17 +39,18 @@ import java.util.Set;
  *
  * <p><b>Warning:</b> Be extremely careful what you do with conceptually large instances (such as
  * {@code ContiguousSet.create(Range.greaterThan(0), DiscreteDomain.integers()}). Certain operations
- * on such a set can be performed efficiently, but others (such as {@link Set#hashCode} or {@link
+ * on such a set can be performed efficiently, but others (such as {@code Set#hashCode} or {@code
  * Collections#frequency}) can cause major performance problems.
  *
  * @author Gregory Kick
  * @since 10.0
  */
+
 @SuppressWarnings("rawtypes") // allow ungenerified Comparable types
 @ElementTypesAreNonnullByDefault
 public abstract class ContiguousSet<C extends Comparable> extends ImmutableSortedSet<C> {
   /**
-   * Returns a {@code ContiguousSet} containing the same values in the given domain {@linkplain
+   * Returns a {@code ContiguousSet} containing the same values in the given domain {@code
    * Range#contains contained} by the range.
    *
    * @throws IllegalArgumentException if neither range nor the domain has a lower bound, or if
@@ -205,7 +206,7 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
   /**
    * Returns the set of values that are contained in both this set and the other.
    *
-   * <p>This method should always be used instead of {@link Sets#intersection} for {@link
+   * <p>This method should always be used instead of {@code Sets#intersection} for {@code
    * ContiguousSet} instances.
    */
   public abstract ContiguousSet<C> intersection(ContiguousSet<C> other);
@@ -220,9 +221,9 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
 
   /**
    * Returns the minimal range with the given boundary types for which all values in this set are
-   * {@linkplain Range#contains(Comparable) contained} within the range.
+   * {@code Range#contains(Comparable) contained} within the range.
    *
-   * <p>Note that this method will return ranges with unbounded endpoints if {@link BoundType#OPEN}
+   * <p>Note that this method will return ranges with unbounded endpoints if {@code BoundType#OPEN}
    * is requested for a domain minimum or maximum. For example, if {@code set} was created from the
    * range {@code [1..Integer.MAX_VALUE]} then {@code set.range(CLOSED, OPEN)} must return {@code
    * [1..∞)}.
@@ -232,7 +233,7 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
   public abstract Range<C> range(BoundType lowerBoundType, BoundType upperBoundType);
 
   @Override
-      // NavigableSet
+  // NavigableSet
   ImmutableSortedSet<C> createDescendingSet() {
     return new DescendingImmutableSortedSet<>(this);
   }
@@ -244,12 +245,12 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
   }
 
   /**
-   * Not supported. {@code ContiguousSet} instances are constructed with {@link #create}. This
-   * method exists only to hide {@link ImmutableSet#builder} from consumers of {@code
+   * Not supported. {@code ContiguousSet} instances are constructed with {@code #create}. This
+   * method exists only to hide {@code ImmutableSet#builder} from consumers of {@code
    * ContiguousSet}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link #create}.
+   * @deprecated Use {@code #create}.
    */
   @Deprecated
   @DoNotCall("Always throws UnsupportedOperationException")

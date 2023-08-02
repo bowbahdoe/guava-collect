@@ -27,13 +27,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * that of its keys. This constraint enables bimaps to support an "inverse view", which is another
  * bimap containing the same entries as this bimap but with reversed keys and values.
  *
- * <h2>Implementations</h2>
+ * <h3>Implementations</h3>
  *
  * <ul>
- *   <li>{@link ImmutableBiMap}
- *   <li>{@link HashBiMap}
- *   <li>{@link EnumBiMap}
- *   <li>{@link EnumHashBiMap}
+ *   <li>{@code ImmutableBiMap}
+ *   <li>{@code HashBiMap}
+ *   <li>{@code EnumBiMap}
+ *   <li>{@code EnumHashBiMap}
  * </ul>
  *
  * <p>See the Guava User Guide article on <a href=
@@ -50,7 +50,7 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
    * {@inheritDoc}
    *
    * @throws IllegalArgumentException if the given value is already bound to a different key in this
-   *     bimap. The bimap will remain unmodified in this event. To avoid this exception, call {@link
+   *     bimap. The bimap will remain unmodified in this event. To avoid this exception, call {@code
    *     #forcePut} instead.
    */
   @CanIgnoreReturnValue
@@ -60,7 +60,7 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
 
   /**
    * An alternate form of {@code put} that silently removes any existing entry with the value {@code
-   * value} before proceeding with the {@link #put} operation. If the bimap previously contained the
+   * value} before proceeding with the {@code #put} operation. If the bimap previously contained the
    * provided key-value mapping, this method has no effect.
    *
    * <p>Note that a successful call to this method could cause the size of the bimap to increase by
@@ -99,8 +99,8 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
   /**
    * {@inheritDoc}
    *
-   * <p>Because a bimap has unique values, this method returns a {@link Set}, instead of the {@link
-   * java.util.Collection} specified in the {@link Map} interface.
+   * <p>Because a bimap has unique values, this method returns a {@code Set}, instead of the {@code
+   * java.util.Collection} specified in the {@code Map} interface.
    */
   @Override
   Set<V> values();

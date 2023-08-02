@@ -18,9 +18,7 @@ package dev.mccue.guava.collect;
 
 import static java.util.Objects.requireNonNull;
 
-
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -41,7 +39,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * function doing a good job of distributing the elements to the buckets to a distribution not far
  * from uniform), and amortized since some operations can trigger a hash table resize.
  *
- * <p>As compared with {@link LinkedHashMap}, this structure places significantly reduced
+ * <p>As compared with {@code java.util.LinkedHashMap}, this structure places significantly reduced
  * load on the garbage collector by only using a constant number of internal objects.
  *
  * <p>This class should not be assumed to be universally superior to {@code
@@ -89,7 +87,7 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
    * <p>A node with "prev" pointer equal to {@code ENDPOINT} is the first node in the linked list,
    * and a node with "next" pointer equal to {@code ENDPOINT} is the last node.
    */
-  @CheckForNull @VisibleForTesting transient long[] links;
+  @CheckForNull transient long[] links;
 
   /** Pointer to the first node in the linked list, or {@code ENDPOINT} if there are no entries. */
   private transient int firstEntry;

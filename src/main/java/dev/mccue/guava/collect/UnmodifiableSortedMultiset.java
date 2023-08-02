@@ -24,12 +24,13 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link Multisets#unmodifiableSortedMultiset(SortedMultiset)}, split out into
+ * Implementation of {@code Multisets#unmodifiableSortedMultiset(SortedMultiset)}, split out into
  * its own file so it can be GWT emulated (to deal with the differing elementSet() types in GWT and
  * non-GWT).
  *
  * @author Louis Wasserman
  */
+
 @ElementTypesAreNonnullByDefault
 final class UnmodifiableSortedMultiset<E extends @Nullable Object> extends UnmodifiableMultiset<E>
     implements SortedMultiset<E> {

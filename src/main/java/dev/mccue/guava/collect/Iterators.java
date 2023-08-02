@@ -49,9 +49,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * This class contains static utility methods that operate on or return objects of type {@link
- * Iterator}. Except as noted, each method has a corresponding {@link Iterable}-based method in the
- * {@link Iterables} class.
+ * This class contains static utility methods that operate on or return objects of type {@code
+ * Iterator}. Except as noted, each method has a corresponding {@code Iterable}-based method in the
+ * {@code Iterables} class.
  *
  * <p><i>Performance notes:</i> Unless otherwise noted, all of the iterators produced in this class
  * are <i>lazy</i>, which means that they only advance the backing iteration when absolutely
@@ -65,6 +65,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Iterators {
   private Iterators() {}
@@ -72,7 +73,7 @@ public final class Iterators {
   /**
    * Returns the empty iterator.
    *
-   * <p>The {@link Iterable} equivalent of this method is {@link ImmutableSet#of()}.
+   * <p>The {@code Iterable} equivalent of this method is {@code ImmutableSet#of()}.
    */
   static <T extends @Nullable Object> UnmodifiableIterator<T> emptyIterator() {
     return emptyListIterator();
@@ -81,7 +82,7 @@ public final class Iterators {
   /**
    * Returns the empty iterator.
    *
-   * <p>The {@link Iterable} equivalent of this method is {@link ImmutableSet#of()}.
+   * <p>The {@code Iterable} equivalent of this method is {@code ImmutableSet#of()}.
    */
   // Casting to any type is safe since there are no actual elements.
   @SuppressWarnings("unchecked")
@@ -113,8 +114,8 @@ public final class Iterators {
   }
 
   /**
-   * Returns the empty {@code Iterator} that throws {@link IllegalStateException} instead of {@link
-   * UnsupportedOperationException} on a call to {@link Iterator#remove()}.
+   * Returns the empty {@code Iterator} that throws {@code IllegalStateException} instead of {@code
+   * UnsupportedOperationException} on a call to {@code Iterator#remove()}.
    */
   // Casting to any type is safe since there are no actual elements.
   @SuppressWarnings("unchecked")
@@ -580,10 +581,10 @@ public final class Iterators {
    * partition size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer iterator containing two
    * inner lists of three and two elements, all in the original order.
    *
-   * <p>The returned lists implement {@link java.util.RandomAccess}.
+   * <p>The returned lists implement {@code java.util.RandomAccess}.
    *
    * <p><b>Note:</b> The current implementation eagerly allocates storage for {@code size} elements.
-   * As a consequence, passing values like {@code Integer.MAX_VALUE} can lead to {@link
+   * As a consequence, passing values like {@code Integer.MAX_VALUE} can lead to {@code
    * OutOfMemoryError}.
    *
    * @param iterator the iterator to return a partitioned view of
@@ -603,7 +604,7 @@ public final class Iterators {
    * c, d, e]} with a partition size of 3 yields {@code [[a, b, c], [d, e, null]]} -- an outer
    * iterator containing two inner lists of three elements each, all in the original order.
    *
-   * <p>The returned lists implement {@link java.util.RandomAccess}.
+   * <p>The returned lists implement {@code java.util.RandomAccess}.
    *
    * @param iterator the iterator to return a partitioned view of
    * @param size the desired size of each partition
@@ -715,7 +716,7 @@ public final class Iterators {
    * Returns the first element in {@code iterator} that satisfies the given predicate; use this
    * method only when such an element is known to exist. If no such element is found, the iterator
    * will be left exhausted: its {@code hasNext()} method will return {@code false}. If it is
-   * possible that <i>no</i> element will match, use {@link #tryFind} or {@link #find(Iterator,
+   * possible that <i>no</i> element will match, use {@code #tryFind} or {@code #find(Iterator,
    * Predicate, Object)} instead.
    *
    * @throws NoSuchElementException if no element in {@code iterator} matches the given predicate
@@ -760,8 +761,8 @@ public final class Iterators {
   }
 
   /**
-   * Returns an {@link Optional} containing the first element in {@code iterator} that satisfies the
-   * given predicate, if such an element exists. If no such element is found, an empty {@link
+   * Returns an {@code Optional} containing the first element in {@code iterator} that satisfies the
+   * given predicate, if such an element exists. If no such element is found, an empty {@code
    * Optional} will be returned from this method and the iterator will be left exhausted: its {@code
    * hasNext()} method will return {@code false}.
    *
@@ -880,7 +881,7 @@ public final class Iterators {
 
   /**
    * Returns the next element in {@code iterator} or {@code defaultValue} if the iterator is empty.
-   * The {@link Iterables} analog to this method is {@link Iterables#getFirst}.
+   * The {@code Iterables} analog to this method is {@code Iterables#getFirst}.
    *
    * @param defaultValue the default value to return if the iterator is empty
    * @return the next element of {@code iterator} or the default value
@@ -984,8 +985,8 @@ public final class Iterators {
    * Returns a view of the supplied {@code iterator} that removes each element from the supplied
    * {@code iterator} as it is returned.
    *
-   * <p>The provided iterator must support {@link Iterator#remove()} or else the returned iterator
-   * will fail on the first call to {@code next}. The returned {@link Iterator} is also not
+   * <p>The provided iterator must support {@code Iterator#remove()} or else the returned iterator
+   * will fail on the first call to {@code next}. The returned {@code Iterator} is also not
    * thread-safe.
    *
    * @param iterator the iterator to remove and return elements from
@@ -1046,10 +1047,10 @@ public final class Iterators {
    * a view of the array; subsequent changes to the array will be reflected in the iterator.
    *
    * <p><b>Note:</b> It is often preferable to represent your data using a collection type, for
-   * example using {@link Arrays#asList(Object[])}, making this method unnecessary.
+   * example using {@code Arrays#asList(Object[])}, making this method unnecessary.
    *
-   * <p>The {@code Iterable} equivalent of this method is either {@link Arrays#asList(Object[])},
-   * {@link ImmutableList#copyOf(Object[])}}, or {@link ImmutableList#of}.
+   * <p>The {@code Iterable} equivalent of this method is either {@code Arrays#asList(Object[])},
+   * {@code ImmutableList#copyOf(Object[])}}, or {@code ImmutableList#of}.
    */
   @SafeVarargs
   public static <T extends @Nullable Object> UnmodifiableIterator<T> forArray(T... array) {
@@ -1100,7 +1101,7 @@ public final class Iterators {
   /**
    * Returns an iterator containing only {@code value}.
    *
-   * <p>The {@link Iterable} equivalent of this method is {@link Collections#singleton}.
+   * <p>The {@code Iterable} equivalent of this method is {@code Collections#singleton}.
    */
   public static <T extends @Nullable Object> UnmodifiableIterator<T> singletonIterator(
       @ParametricNullness T value) {
@@ -1127,9 +1128,9 @@ public final class Iterators {
   /**
    * Adapts an {@code Enumeration} to the {@code Iterator} interface.
    *
-   * <p>This method has no equivalent in {@link Iterables} because viewing an {@code Enumeration} as
+   * <p>This method has no equivalent in {@code Iterables} because viewing an {@code Enumeration} as
    * an {@code Iterable} is impossible. However, the contents can be <i>copied</i> into a collection
-   * using {@link Collections#list}.
+   * using {@code Collections#list}.
    *
    * <p><b>Java 9 users:</b> use {@code enumeration.asIterator()} instead, unless it is important to
    * return an {@code UnmodifiableIterator} instead of a plain {@code Iterator}.
@@ -1154,8 +1155,8 @@ public final class Iterators {
   /**
    * Adapts an {@code Iterator} to the {@code Enumeration} interface.
    *
-   * <p>The {@code Iterable} equivalent of this method is either {@link Collections#enumeration} (if
-   * you have a {@link Collection}), or {@code Iterators.asEnumeration(collection.iterator())}.
+   * <p>The {@code Iterable} equivalent of this method is either {@code Collections#enumeration} (if
+   * you have a {@code Collection}), or {@code Iterators.asEnumeration(collection.iterator())}.
    */
   public static <T extends @Nullable Object> Enumeration<T> asEnumeration(Iterator<T> iterator) {
     checkNotNull(iterator);
@@ -1236,10 +1237,10 @@ public final class Iterators {
    * }</pre>
    *
    * <p>Any structural changes to the underlying iteration (aside from those performed by the
-   * iterator's own {@link PeekingIterator#remove()} method) will leave the iterator in an undefined
+   * iterator's own {@code PeekingIterator#remove()} method) will leave the iterator in an undefined
    * state.
    *
-   * <p>The returned iterator does not support removal after peeking, as explained by {@link
+   * <p>The returned iterator does not support removal after peeking, as explained by {@code
    * PeekingIterator#remove()}.
    *
    * <p>Note: If the given iterator is already a {@code PeekingIterator}, it <i>might</i> be
@@ -1248,12 +1249,12 @@ public final class Iterators {
    * implementations of {@code PeekingIterator} when the behavior of the implementation is known to
    * meet the contract guaranteed by this method.
    *
-   * <p>There is no {@link Iterable} equivalent to this method, so use this method to wrap each
+   * <p>There is no {@code Iterable} equivalent to this method, so use this method to wrap each
    * individual iterator as it is generated.
    *
-   * @param iterator the backing iterator. The {@link PeekingIterator} assumes ownership of this
+   * @param iterator the backing iterator. The {@code PeekingIterator} assumes ownership of this
    *     iterator, so users should cease making direct calls to it after calling this method.
-   * @return a peeking iterator backed by that iterator. Apart from the additional {@link
+   * @return a peeking iterator backed by that iterator. Apart from the additional {@code
    *     PeekingIterator#peek()} method, this iterator behaves exactly the same as {@code iterator}.
    */
   public static <T extends @Nullable Object> PeekingIterator<T> peekingIterator(

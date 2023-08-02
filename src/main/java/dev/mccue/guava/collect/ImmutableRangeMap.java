@@ -38,8 +38,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link RangeMap} whose contents will never change, with many other important properties
- * detailed at {@link ImmutableCollection}.
+ * A {@code RangeMap} whose contents will never change, with many other important properties
+ * detailed at {@code ImmutableCollection}.
  *
  * @author Louis Wasserman
  * @since 14.0
@@ -53,7 +53,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code
-   * ImmutableRangeMap}. As in {@link Builder}, overlapping ranges are not permitted.
+   * ImmutableRangeMap}. As in {@code Builder}, overlapping ranges are not permitted.
    *
    * @since 23.1
    */
@@ -404,7 +404,7 @@ public class ImmutableRangeMap<K extends Comparable<?>, V> implements RangeMap<K
   }
 
   /**
-   * This class is used to serialize ImmutableRangeMap instances. Serializes the {@link
+   * This class is used to serialize ImmutableRangeMap instances. Serializes the {@code
    * #asMapOfRanges()} form.
    */
   private static class SerializedForm<K extends Comparable<?>, V> implements Serializable {

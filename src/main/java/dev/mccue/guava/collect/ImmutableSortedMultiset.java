@@ -36,11 +36,11 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link SortedMultiset} whose contents will never change, with many other important properties
- * detailed at {@link ImmutableCollection}.
+ * A {@code SortedMultiset} whose contents will never change, with many other important properties
+ * detailed at {@code ImmutableCollection}.
  *
- * <p><b>Warning:</b> as with any sorted collection, you are strongly advised not to use a {@link
- * Comparator} or {@link Comparable} type whose comparison behavior is <i>inconsistent with
+ * <p><b>Warning:</b> as with any sorted collection, you are strongly advised not to use a {@code
+ * Comparator} or {@code Comparable} type whose comparison behavior is <i>inconsistent with
  * equals</i>. That is, {@code a.compareTo(b)} or {@code comparator.compare(a, b)} should equal zero
  * <i>if and only if</i> {@code a.equals(b)}. If this advice is not followed, the resulting
  * collection will not correctly obey its specification.
@@ -62,7 +62,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
    * ImmutableMultiset}. Elements are sorted by the specified comparator.
    *
    * <p><b>Warning:</b> {@code comparator} should be <i>consistent with {@code equals}</i> as
-   * explained in the {@link Comparator} documentation.
+   * explained in the {@code Comparator} documentation.
    *
    * @since 21.0
    */
@@ -189,7 +189,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
   /**
    * Returns an immutable sorted multiset containing the given elements sorted by their natural
    * ordering. To create a copy of a {@code SortedMultiset} that preserves the comparator, call
-   * {@link #copyOfSorted} instead. This method iterates over {@code elements} at most once.
+   * {@code #copyOfSorted} instead. This method iterates over {@code elements} at most once.
    *
    * <p>Note that if {@code s} is a {@code Multiset<String>}, then {@code
    * ImmutableSortedMultiset.copyOf(s)} returns an {@code ImmutableSortedMultiset<String>}
@@ -276,7 +276,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
 
   /**
    * Returns an immutable sorted multiset containing the elements of a sorted multiset, sorted by
-   * the same {@code Comparator}. That behavior differs from {@link #copyOf(Iterable)}, which always
+   * the same {@code Comparator}. That behavior differs from {@code #copyOf(Iterable)}, which always
    * uses the natural ordering of the elements.
    *
    * <p>Despite the method name, this method attempts to avoid actually copying the data when it is
@@ -349,7 +349,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
   /**
    * {@inheritDoc}
    *
-   * <p>This implementation is guaranteed to throw an {@link UnsupportedOperationException}.
+   * <p>This implementation is guaranteed to throw an {@code UnsupportedOperationException}.
    *
    * @throws UnsupportedOperationException always
    * @deprecated Unsupported operation.
@@ -366,7 +366,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
   /**
    * {@inheritDoc}
    *
-   * <p>This implementation is guaranteed to throw an {@link UnsupportedOperationException}.
+   * <p>This implementation is guaranteed to throw an {@code UnsupportedOperationException}.
    *
    * @throws UnsupportedOperationException always
    * @deprecated Unsupported operation.
@@ -400,7 +400,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
   /**
    * Returns a builder that creates immutable sorted multisets with an explicit comparator. If the
    * comparator has a more general type than the set being generated, such as creating a {@code
-   * SortedMultiset<Integer>} with a {@code Comparator<Number>}, use the {@link Builder} constructor
+   * SortedMultiset<Integer>} with a {@code Comparator<Number>}, use the {@code Builder} constructor
    * instead.
    *
    * @throws NullPointerException if {@code comparator} is null
@@ -423,9 +423,9 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
 
   /**
    * Returns a builder that creates immutable sorted multisets whose elements are ordered by their
-   * natural ordering. The sorted multisets use {@link Ordering#natural()} as the comparator. This
-   * method provides more type-safety than {@link #builder}, as it can be called only for classes
-   * that implement {@link Comparable}.
+   * natural ordering. The sorted multisets use {@code Ordering#natural()} as the comparator. This
+   * method provides more type-safety than {@code #builder}, as it can be called only for classes
+   * that implement {@code Comparable}.
    *
    * <p>Note: the type parameter {@code E} extends {@code Comparable<?>} rather than {@code
    * Comparable<? super E>} as a workaround for javac <a
@@ -449,14 +449,14 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
    *         .build();
    * }</pre>
    *
-   * <p>Builder instances can be reused; it is safe to call {@link #build} multiple times to build
+   * <p>Builder instances can be reused; it is safe to call {@code #build} multiple times to build
    * multiple multisets in series.
    *
    * @since 12.0
    */
   public static class Builder<E> extends ImmutableMultiset.Builder<E> {
     /**
-     * Creates a new builder. The returned builder is equivalent to the builder generated by {@link
+     * Creates a new builder. The returned builder is equivalent to the builder generated by {@code
      * ImmutableSortedMultiset#orderedBy(Comparator)}.
      */
     public Builder(Comparator<? super E> comparator) {
@@ -500,7 +500,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
      * @return this {@code Builder} object
      * @throws NullPointerException if {@code element} is null
      * @throws IllegalArgumentException if {@code occurrences} is negative, or if this operation
-     *     would result in more than {@link Integer#MAX_VALUE} occurrences of the element
+     *     would result in more than {@code Integer#MAX_VALUE} occurrences of the element
      */
     @CanIgnoreReturnValue
     @Override
@@ -595,7 +595,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableSortedMultiset
   }
 
   @Override
-    // serialization
+  // serialization
   Object writeReplace() {
     return new SerializedForm<E>(this);
   }

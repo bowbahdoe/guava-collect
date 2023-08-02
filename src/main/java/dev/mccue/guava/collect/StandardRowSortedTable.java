@@ -19,7 +19,6 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
 import dev.mccue.guava.base.Supplier;
-
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
@@ -31,15 +30,15 @@ import dev.mccue.jsr305.CheckForNull;
  * Implementation of {@code Table} whose iteration ordering across row keys is sorted by their
  * natural ordering or by a supplied comparator. Note that iterations across the columns keys for a
  * single row key may or may not be ordered, depending on the implementation. When rows and columns
- * are both sorted, it's easier to use the {@link TreeBasedTable} subclass.
+ * are both sorted, it's easier to use the {@code TreeBasedTable} subclass.
  *
- * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap} method
- * returns a {@link SortedMap}, instead of the {@link Set} and {@link Map} specified by the {@link
+ * <p>The {@code #rowKeySet} method returns a {@code SortedSet} and the {@code #rowMap} method
+ * returns a {@code SortedMap}, instead of the {@code Set} and {@code Map} specified by the {@code
  * Table} interface.
  *
  * <p>Null keys and values are not supported.
  *
- * <p>See the {@link StandardTable} superclass for more information about the behavior of this
+ * <p>See the {@code StandardTable} superclass for more information about the behavior of this
  * class.
  *
  * @author Jared Levy
@@ -65,7 +64,7 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
   /**
    * {@inheritDoc}
    *
-   * <p>This method returns a {@link SortedSet}, instead of the {@code Set} specified in the {@link
+   * <p>This method returns a {@code SortedSet}, instead of the {@code Set} specified in the {@code
    * Table} interface.
    */
   @Override
@@ -76,7 +75,7 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
   /**
    * {@inheritDoc}
    *
-   * <p>This method returns a {@link SortedMap}, instead of the {@code Map} specified in the {@link
+   * <p>This method returns a {@code SortedMap}, instead of the {@code Map} specified in the {@code
    * Table} interface.
    */
   @Override

@@ -21,6 +21,7 @@ import java.util.List;
 import dev.mccue.jsr305.CheckForNull;
 
 /** An ordering that compares objects according to a given order. */
+
 @ElementTypesAreNonnullByDefault
 final class ExplicitOrdering<T> extends Ordering<T> implements Serializable {
   final ImmutableMap<T, Integer> rankMap;

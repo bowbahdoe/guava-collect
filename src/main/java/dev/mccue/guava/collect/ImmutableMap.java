@@ -22,12 +22,10 @@ import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static java.util.Objects.requireNonNull;
 
-
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.DoNotMock;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -53,8 +51,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link Map} whose contents will never change, with many other important properties detailed at
- * {@link ImmutableCollection}.
+ * A {@code Map} whose contents will never change, with many other important properties detailed at
+ * {@code ImmutableCollection}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/ImmutableCollectionsExplained">immutable collections</a>.
@@ -64,18 +62,19 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 2.0
  */
 @DoNotMock("Use ImmutableMap.of or another implementation")
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   /**
-   * Returns a {@link Collector} that accumulates elements into an {@code ImmutableMap} whose keys
+   * Returns a {@code Collector} that accumulates elements into an {@code ImmutableMap} whose keys
    * and values are the result of applying the provided mapping functions to the input elements.
    * Entries appear in the result {@code ImmutableMap} in encounter order.
    *
-   * <p>If the mapped keys contain duplicates (according to {@link Object#equals(Object)}, an {@code
+   * <p>If the mapped keys contain duplicates (according to {@code Object#equals(Object)}, an {@code
    * IllegalArgumentException} is thrown when the collection operation is performed. (This differs
-   * from the {@code Collector} returned by {@link Collectors#toMap(Function, Function)}, which
+   * from the {@code Collector} returned by {@code Collectors#toMap(Function, Function)}, which
    * throws an {@code IllegalStateException}.)
    *
    * @since 21.0
@@ -88,10 +87,10 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Returns a {@link Collector} that accumulates elements into an {@code ImmutableMap} whose keys
+   * Returns a {@code Collector} that accumulates elements into an {@code ImmutableMap} whose keys
    * and values are the result of applying the provided mapping functions to the input elements.
    *
-   * <p>If the mapped keys contain duplicates (according to {@link Object#equals(Object)}), the
+   * <p>If the mapped keys contain duplicates (according to {@code Object#equals(Object)}), the
    * values are merged using the specified merging function. Entries will appear in the encounter
    * order of the first occurrence of the key.
    *
@@ -106,7 +105,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Returns the empty map. This map behaves and performs comparably to {@link
+   * Returns the empty map. This map behaves and performs comparably to {@code
    * Collections#emptyMap}, and is preferable mainly for consistency and maintainability of your
    * code.
    *
@@ -119,7 +118,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Returns an immutable map containing a single entry. This map behaves and performs comparably to
-   * {@link Collections#singletonMap} but will not accept a null key or value. It is preferable
+   * {@code Collections#singletonMap} but will not accept a null key or value. It is preferable
    * mainly for consistency and maintainability of your code.
    */
   public static <K, V> ImmutableMap<K, V> of(K k1, V v1) {
@@ -330,7 +329,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
    * Verifies that {@code key} and {@code value} are non-null, and returns a new immutable entry
    * with those values.
    *
-   * <p>A call to {@link Entry#setValue} on the returned entry will always throw {@link
+   * <p>A call to {@code Entry#setValue} on the returned entry will always throw {@code
    * UnsupportedOperationException}.
    */
   static <K, V> Entry<K, V> entryOf(K key, V value) {
@@ -338,7 +337,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Returns a new builder. The generated builder is equivalent to the builder created by the {@link
+   * Returns a new builder. The generated builder is equivalent to the builder created by the {@code
    * Builder} constructor.
    */
   public static <K, V> Builder<K, V> builder() {
@@ -348,8 +347,8 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Returns a new builder, expecting the specified number of entries to be added.
    *
-   * <p>If {@code expectedSize} is exactly the number of entries added to the builder before {@link
-   * Builder#build} is called, the builder is likely to perform better than an unsized {@link
+   * <p>If {@code expectedSize} is exactly the number of entries added to the builder before {@code
+   * Builder#build} is called, the builder is likely to perform better than an unsized {@code
    * #builder()} would have.
    *
    * <p>It is not specified if any performance benefits apply if {@code expectedSize} is close to,
@@ -395,11 +394,11 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
    * were inserted into the builder, equivalently to {@code LinkedHashMap}. For example, in the
    * above example, {@code WORD_TO_INT.entrySet()} is guaranteed to iterate over the entries in the
    * order {@code "one"=1, "two"=2, "three"=3}, and {@code keySet()} and {@code values()} respect
-   * the same order. If you want a different order, consider using {@link ImmutableSortedMap} to
-   * sort by keys, or call {@link #orderEntriesByValue(Comparator)}, which changes this builder to
+   * the same order. If you want a different order, consider using {@code ImmutableSortedMap} to
+   * sort by keys, or call {@code #orderEntriesByValue(Comparator)}, which changes this builder to
    * sort entries by value.
    *
-   * <p>Builder instances can be reused - it is safe to call {@link #buildOrThrow} multiple times to
+   * <p>Builder instances can be reused - it is safe to call {@code #buildOrThrow} multiple times to
    * build multiple maps in series. Each map is a superset of the maps created before it.
    *
    * @since 2.0
@@ -412,7 +411,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     boolean entriesUsed;
 
     /**
-     * Creates a new builder. The returned builder is equivalent to the builder generated by {@link
+     * Creates a new builder. The returned builder is equivalent to the builder generated by {@code
      * ImmutableMap#builder}.
      */
     public Builder() {
@@ -437,7 +436,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     /**
      * Associates {@code key} with {@code value} in the built map. If the same key is put more than
-     * once, {@link #buildOrThrow} will fail, while {@link #buildKeepingLast} will keep the last
+     * once, {@code #buildOrThrow} will fail, while {@code #buildKeepingLast} will keep the last
      * value put for that key.
      */
     @CanIgnoreReturnValue
@@ -451,7 +450,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     /**
      * Adds the given {@code entry} to the map, making it immutable if necessary. If the same key is
-     * put more than once, {@link #buildOrThrow} will fail, while {@link #buildKeepingLast} will
+     * put more than once, {@code #buildOrThrow} will fail, while {@code #buildKeepingLast} will
      * keep the last value put for that key.
      *
      * @since 11.0
@@ -463,7 +462,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     /**
      * Associates all of the given map's keys and values in the built map. If the same key is put
-     * more than once, {@link #buildOrThrow} will fail, while {@link #buildKeepingLast} will keep
+     * more than once, {@code #buildOrThrow} will fail, while {@code #buildKeepingLast} will keep
      * the last value put for that key.
      *
      * @throws NullPointerException if any key or value in {@code map} is null
@@ -474,8 +473,8 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     }
 
     /**
-     * Adds all of the given entries to the built map. If the same key is put more than once, {@link
-     * #buildOrThrow} will fail, while {@link #buildKeepingLast} will keep the last value put for
+     * Adds all of the given entries to the built map. If the same key is put more than once, {@code
+     * #buildOrThrow} will fail, while {@code #buildKeepingLast} will keep the last value put for
      * that key.
      *
      * @throws NullPointerException if any key, value, or entry is null
@@ -570,10 +569,10 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     /**
      * Returns a newly-created immutable map. The iteration order of the returned map is the order
-     * in which entries were inserted into the builder, unless {@link #orderEntriesByValue} was
+     * in which entries were inserted into the builder, unless {@code #orderEntriesByValue} was
      * called, in which case entries are sorted by value.
      *
-     * <p>Prefer the equivalent method {@link #buildOrThrow()} to make it explicit that the method
+     * <p>Prefer the equivalent method {@code #buildOrThrow()} to make it explicit that the method
      * will throw an exception if there are duplicate keys. The {@code build()} method will soon be
      * deprecated.
      *
@@ -586,7 +585,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     /**
      * Returns a newly-created immutable map, or throws an exception if any key was added more than
      * once. The iteration order of the returned map is the order in which entries were inserted
-     * into the builder, unless {@link #orderEntriesByValue} was called, in which case entries are
+     * into the builder, unless {@code #orderEntriesByValue} was called, in which case entries are
      * sorted by value.
      *
      * @throws IllegalArgumentException if duplicate keys were added
@@ -599,14 +598,14 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     /**
      * Returns a newly-created immutable map, using the last value for any key that was added more
      * than once. The iteration order of the returned map is the order in which entries were
-     * inserted into the builder, unless {@link #orderEntriesByValue} was called, in which case
+     * inserted into the builder, unless {@code #orderEntriesByValue} was called, in which case
      * entries are sorted by value. If a key was added more than once, it appears in iteration order
-     * based on the first time it was added, again unless {@link #orderEntriesByValue} was called.
+     * based on the first time it was added, again unless {@code #orderEntriesByValue} was called.
      *
      * <p>In the current implementation, all values associated with a given key are stored in the
      * {@code Builder} object, even though only one of them will be used in the built map. If there
-     * can be many repeated keys, it may be more space-efficient to use a {@link
-     * java.util.LinkedHashMap LinkedHashMap} and {@link ImmutableMap#copyOf(Map)} rather than
+     * can be many repeated keys, it may be more space-efficient to use a {@code
+     * java.util.LinkedHashMap LinkedHashMap} and {@code ImmutableMap#copyOf(Map)} rather than
      * {@code ImmutableMap.Builder}.
      *
      * @since 31.1
@@ -615,7 +614,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
       return build(false);
     }
 
-    @VisibleForTesting // only for testing JDK backed implementation
+    // only for testing JDK backed implementation
     ImmutableMap<K, V> buildJdkBacked() {
       checkState(
           valueComparator == null, "buildJdkBacked is only for testing; can't use valueComparator");
@@ -1003,8 +1002,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     }
   }
 
-  @LazyInit
-  @CheckForNull private transient ImmutableSet<Entry<K, V>> entrySet;
+  @LazyInit @CheckForNull private transient ImmutableSet<Entry<K, V>> entrySet;
 
   /**
    * Returns an immutable set of the mappings in this map. The iteration order is specified by the
@@ -1018,11 +1016,10 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   abstract ImmutableSet<Entry<K, V>> createEntrySet();
 
-  @LazyInit
-  @CheckForNull private transient ImmutableSet<K> keySet;
+  @LazyInit @CheckForNull private transient ImmutableSet<K> keySet;
 
   /**
-   * Returns an immutable set of the keys in this map, in the same order that they appear in {@link
+   * Returns an immutable set of the keys in this map, in the same order that they appear in {@code
    * #entrySet}.
    */
   @Override
@@ -1057,12 +1054,11 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     return CollectSpliterators.map(entrySet().spliterator(), Entry::getKey);
   }
 
-  @LazyInit
-  @CheckForNull private transient ImmutableCollection<V> values;
+  @LazyInit @CheckForNull private transient ImmutableCollection<V> values;
 
   /**
    * Returns an immutable collection of the values in this map, in the same order that they appear
-   * in {@link #entrySet}.
+   * in {@code #entrySet}.
    */
   @Override
   public ImmutableCollection<V> values() {

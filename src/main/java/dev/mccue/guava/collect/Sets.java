@@ -55,8 +55,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Static utility methods pertaining to {@link Set} instances. Also see this class's counterparts
- * {@link Lists}, {@link Maps} and {@link Queues}.
+ * Static utility methods pertaining to {@code Set} instances. Also see this class's counterparts
+ * {@code Lists}, {@code Maps} and {@code Queues}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/CollectionUtilitiesExplained#sets">{@code Sets}</a>.
@@ -66,12 +66,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Chris Povirk
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Sets {
   private Sets() {}
 
   /**
-   * {@link AbstractSet} substitute without the potentially-quadratic {@code removeAll}
+   * {@code AbstractSet} substitute without the potentially-quadratic {@code removeAll}
    * implementation.
    */
   abstract static class ImprovedAbstractSet<E extends @Nullable Object> extends AbstractSet<E> {
@@ -88,7 +89,7 @@ public final class Sets {
 
   /**
    * Returns an immutable set instance containing the given enum elements. Internally, the returned
-   * set will be backed by an {@link EnumSet}.
+   * set will be backed by an {@code EnumSet}.
    *
    * <p>The iteration order of the returned set follows the enum's iteration order, not the order in
    * which the elements are provided to the method.
@@ -98,6 +99,7 @@ public final class Sets {
    * @return an immutable set containing those elements, minus duplicates
    */
   // http://code.google.com/p/google-web-toolkit/issues/detail?id=3028
+  
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(
       E anElement, E... otherElements) {
     return ImmutableEnumSet.asImmutable(EnumSet.of(anElement, otherElements));
@@ -105,7 +107,7 @@ public final class Sets {
 
   /**
    * Returns an immutable set instance containing the given enum elements. Internally, the returned
-   * set will be backed by an {@link EnumSet}.
+   * set will be backed by an {@code EnumSet}.
    *
    * <p>The iteration order of the returned set follows the enum's iteration order, not the order in
    * which the elements appear in the given collection.
@@ -114,6 +116,7 @@ public final class Sets {
    * @return an immutable set containing those elements, minus duplicates
    */
   // http://code.google.com/p/google-web-toolkit/issues/detail?id=3028
+  
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(Iterable<E> elements) {
     if (elements instanceof ImmutableEnumSet) {
       return (ImmutableEnumSet<E>) elements;
@@ -138,7 +141,7 @@ public final class Sets {
 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code ImmutableSet}
-   * with an implementation specialized for enums. Unlike {@link ImmutableSet#toImmutableSet}, the
+   * with an implementation specialized for enums. Unlike {@code ImmutableSet#toImmutableSet}, the
    * resulting set will iterate over elements in their enum definition order, not encounter order.
    *
    * @since 21.0
@@ -149,7 +152,7 @@ public final class Sets {
 
   /**
    * Returns a new, <i>mutable</i> {@code EnumSet} instance containing the given elements in their
-   * natural order. This method behaves identically to {@link EnumSet#copyOf(Collection)}, but also
+   * natural order. This method behaves identically to {@code EnumSet#copyOf(Collection)}, but also
    * accepts non-{@code Collection} iterables and empty iterables.
    */
   public static <E extends Enum<E>> EnumSet<E> newEnumSet(
@@ -164,8 +167,8 @@ public final class Sets {
   /**
    * Creates a <i>mutable</i>, initially empty {@code HashSet} instance.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableSet#of()} instead. If {@code
-   * E} is an {@link Enum} type, use {@link EnumSet#noneOf} instead. Otherwise, strongly consider
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableSet#of()} instead. If {@code
+   * E} is an {@code Enum} type, use {@code EnumSet#noneOf} instead. Otherwise, strongly consider
    * using a {@code LinkedHashSet} instead, at the cost of increased memory footprint, to get
    * deterministic iteration behavior.
    *
@@ -181,13 +184,13 @@ public final class Sets {
    * Creates a <i>mutable</i> {@code HashSet} instance initially containing the given elements.
    *
    * <p><b>Note:</b> if elements are non-null and won't be added or removed after this point, use
-   * {@link ImmutableSet#of()} or {@link ImmutableSet#copyOf(Object[])} instead. If {@code E} is an
-   * {@link Enum} type, use {@link EnumSet#of(Enum, Enum[])} instead. Otherwise, strongly consider
+   * {@code ImmutableSet#of()} or {@code ImmutableSet#copyOf(Object[])} instead. If {@code E} is an
+   * {@code Enum} type, use {@code EnumSet#of(Enum, Enum[])} instead. Otherwise, strongly consider
    * using a {@code LinkedHashSet} instead, at the cost of increased memory footprint, to get
    * deterministic iteration behavior.
    *
-   * <p>This method is just a small convenience, either for {@code newHashSet(}{@link Arrays#asList
-   * asList}{@code (...))}, or for creating an empty set then calling {@link Collections#addAll}.
+   * <p>This method is just a small convenience, either for {@code newHashSet(}{@code Arrays#asList
+   * asList}{@code (...))}, or for creating an empty set then calling {@code Collections#addAll}.
    * This method is not actually very useful and will likely be deprecated in the future.
    */
   public static <E extends @Nullable Object> HashSet<E> newHashSet(E... elements) {
@@ -198,17 +201,17 @@ public final class Sets {
 
   /**
    * Creates a <i>mutable</i> {@code HashSet} instance containing the given elements. A very thin
-   * convenience for creating an empty set then calling {@link Collection#addAll} or {@link
+   * convenience for creating an empty set then calling {@code Collection#addAll} or {@code
    * Iterables#addAll}.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
-   * ImmutableSet#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
+   * ImmutableSet#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@code
    * FluentIterable} and call {@code elements.toSet()}.)
    *
-   * <p><b>Note:</b> if {@code E} is an {@link Enum} type, use {@link #newEnumSet(Iterable, Class)}
+   * <p><b>Note:</b> if {@code E} is an {@code Enum} type, use {@code #newEnumSet(Iterable, Class)}
    * instead.
    *
-   * <p><b>Note:</b> if {@code elements} is a {@link Collection}, you don't need this method.
+   * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method.
    * Instead, use the {@code HashSet} constructor directly, taking advantage of <a
    * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    *
@@ -222,12 +225,12 @@ public final class Sets {
 
   /**
    * Creates a <i>mutable</i> {@code HashSet} instance containing the given elements. A very thin
-   * convenience for creating an empty set and then calling {@link Iterators#addAll}.
+   * convenience for creating an empty set and then calling {@code Iterators#addAll}.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
    * ImmutableSet#copyOf(Iterator)} instead.
    *
-   * <p><b>Note:</b> if {@code E} is an {@link Enum} type, you should create an {@link EnumSet}
+   * <p><b>Note:</b> if {@code E} is an {@code Enum} type, you should create an {@code EnumSet}
    * instead.
    *
    * <p>Overall, this method is not very useful and will likely be deprecated in the future.
@@ -240,7 +243,7 @@ public final class Sets {
 
   /**
    * Returns a new hash set using the smallest initial table size that can hold {@code expectedSize}
-   * elements without resizing. Note that this is not what {@link HashSet#HashSet(int)} does, but it
+   * elements without resizing. Note that this is not what {@code HashSet#HashSet(int)} does, but it
    * is what most users want and expect it to do.
    *
    * <p>This behavior can't be broadly guaranteed, but has been tested with OpenJDK 1.7 and 1.8.
@@ -256,7 +259,7 @@ public final class Sets {
   }
 
   /**
-   * Creates a thread-safe set backed by a hash map. The set is backed by a {@link
+   * Creates a thread-safe set backed by a hash map. The set is backed by a {@code
    * ConcurrentHashMap} instance, and thus carries the same concurrency guarantees.
    *
    * <p>Unlike {@code HashSet}, this class does NOT allow {@code null} to be used as an element. The
@@ -271,7 +274,7 @@ public final class Sets {
 
   /**
    * Creates a thread-safe set backed by a hash map and containing the given elements. The set is
-   * backed by a {@link ConcurrentHashMap} instance, and thus carries the same concurrency
+   * backed by a {@code ConcurrentHashMap} instance, and thus carries the same concurrency
    * guarantees.
    *
    * <p>Unlike {@code HashSet}, this class does NOT allow {@code null} to be used as an element. The
@@ -293,7 +296,7 @@ public final class Sets {
   /**
    * Creates a <i>mutable</i>, empty {@code LinkedHashSet} instance.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableSet#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableSet#of()} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code LinkedHashSet} constructor directly, taking advantage of <a
@@ -308,10 +311,10 @@ public final class Sets {
   /**
    * Creates a <i>mutable</i> {@code LinkedHashSet} instance containing the given elements in order.
    *
-   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
+   * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@code
    * ImmutableSet#copyOf(Iterable)} instead.
    *
-   * <p><b>Note:</b> if {@code elements} is a {@link Collection}, you don't need this method.
+   * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method.
    * Instead, use the {@code LinkedHashSet} constructor directly, taking advantage of <a
    * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    *
@@ -353,7 +356,7 @@ public final class Sets {
    * Creates a <i>mutable</i>, empty {@code TreeSet} instance sorted by the natural sort ordering of
    * its elements.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableSortedSet#of()} instead.
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableSortedSet#of()} instead.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeSet} constructor directly, taking advantage of <a
@@ -369,18 +372,18 @@ public final class Sets {
    * Creates a <i>mutable</i> {@code TreeSet} instance containing the given elements sorted by their
    * natural ordering.
    *
-   * <p><b>Note:</b> if mutability is not required, use {@link ImmutableSortedSet#copyOf(Iterable)}
+   * <p><b>Note:</b> if mutability is not required, use {@code ImmutableSortedSet#copyOf(Iterable)}
    * instead.
    *
    * <p><b>Note:</b> If {@code elements} is a {@code SortedSet} with an explicit comparator, this
-   * method has different behavior than {@link TreeSet#TreeSet(SortedSet)}, which returns a {@code
+   * method has different behavior than {@code TreeSet#TreeSet(SortedSet)}, which returns a {@code
    * TreeSet} with that comparator.
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeSet} constructor directly, taking advantage of <a
    * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
    *
-   * <p>This method is just a small convenience for creating an empty set and then calling {@link
+   * <p>This method is just a small convenience for creating an empty set and then calling {@code
    * Iterables#addAll}. This method is not very useful and will likely be deprecated in the future.
    *
    * @param elements the elements that the set should contain
@@ -429,7 +432,7 @@ public final class Sets {
   /**
    * Creates an empty {@code CopyOnWriteArraySet} instance.
    *
-   * <p><b>Note:</b> if you need an immutable empty {@link Set}, use {@link Collections#emptySet}
+   * <p><b>Note:</b> if you need an immutable empty {@code Set}, use {@code Collections#emptySet}
    * instead.
    *
    * @return a new, empty {@code CopyOnWriteArraySet}
@@ -461,9 +464,9 @@ public final class Sets {
 
   /**
    * Creates an {@code EnumSet} consisting of all enum values that are not in the specified
-   * collection. If the collection is an {@link EnumSet}, this method has the same behavior as
-   * {@link EnumSet#complementOf}. Otherwise, the specified collection must contain at least one
-   * element, in order to determine the element type. If the collection could be empty, use {@link
+   * collection. If the collection is an {@code EnumSet}, this method has the same behavior as
+   * {@code EnumSet#complementOf}. Otherwise, the specified collection must contain at least one
+   * element, in order to determine the element type. If the collection could be empty, use {@code
    * #complementOf(Collection, Class)} instead of this method.
    *
    * @param collection the collection whose complement should be stored in the enum set
@@ -484,7 +487,7 @@ public final class Sets {
 
   /**
    * Creates an {@code EnumSet} consisting of all enum values that are not in the specified
-   * collection. This is equivalent to {@link EnumSet#complementOf}, but can act on any input
+   * collection. This is equivalent to {@code EnumSet#complementOf}, but can act on any input
    * collection, as long as the elements are of enum type.
    *
    * @param collection the collection whose complement should be stored in the {@code EnumSet}
@@ -510,9 +513,9 @@ public final class Sets {
   /**
    * Returns a set backed by the specified map. The resulting set displays the same ordering,
    * concurrency, and performance characteristics as the backing map. In essence, this factory
-   * method provides a {@link Set} implementation corresponding to any {@link Map} implementation.
-   * There is no need to use this method on a {@link Map} implementation that already has a
-   * corresponding {@link Set} implementation (such as {@link java.util.HashMap} or {@link
+   * method provides a {@code Set} implementation corresponding to any {@code Map} implementation.
+   * There is no need to use this method on a {@code Map} implementation that already has a
+   * corresponding {@code Set} implementation (such as {@code java.util.HashMap} or {@code
    * java.util.TreeMap}).
    *
    * <p>Each method invocation on the set returned by this method results in exactly one method
@@ -534,7 +537,7 @@ public final class Sets {
    * @param map the backing map
    * @return the set backed by the map
    * @throws IllegalArgumentException if {@code map} is not empty
-   * @deprecated Use {@link Collections#newSetFromMap} instead.
+   * @deprecated Use {@code Collections#newSetFromMap} instead.
    */
   @Deprecated
   public static <E extends @Nullable Object> Set<E> newSetFromMap(
@@ -546,8 +549,8 @@ public final class Sets {
    * An unmodifiable view of a set which may be backed by other sets; this view will change as the
    * backing sets do. Contains methods to copy the data into a new set which will then remain
    * stable. There is usually no reason to retain a reference of type {@code SetView}; typically,
-   * you either use it as a plain {@link Set}, or immediately invoke {@link #immutableCopy} or
-   * {@link #copyInto} and forget the {@code SetView} itself.
+   * you either use it as a plain {@code Set}, or immediately invoke {@code #immutableCopy} or
+   * {@code #copyInto} and forget the {@code SetView} itself.
    *
    * @since 2.0
    */
@@ -559,8 +562,8 @@ public final class Sets {
      * elements.
      *
      * <p><b>Warning:</b> this may have unexpected results if a backing set of this view uses a
-     * nonstandard notion of equivalence, for example if it is a {@link TreeSet} using a comparator
-     * that is inconsistent with {@link Object#equals(Object)}.
+     * nonstandard notion of equivalence, for example if it is a {@code TreeSet} using a comparator
+     * that is inconsistent with {@code Object#equals(Object)}.
      */
     @SuppressWarnings("nullness") // Unsafe, but we can't fix it now.
     public ImmutableSet<@NonNull E> immutableCopy() {
@@ -680,9 +683,9 @@ public final class Sets {
     }
 
     /**
-     * Scope the return type to {@link UnmodifiableIterator} to ensure this is an unmodifiable view.
+     * Scope the return type to {@code UnmodifiableIterator} to ensure this is an unmodifiable view.
      *
-     * @since 20.0 (present with return type {@link Iterator} since 2.0)
+     * @since 20.0 (present with return type {@code Iterator} since 2.0)
      */
     @Override
     public abstract UnmodifiableIterator<E> iterator();
@@ -695,8 +698,8 @@ public final class Sets {
    * that is not contained in {@code set1}.
    *
    * <p>Results are undefined if {@code set1} and {@code set2} are sets based on different
-   * equivalence relations, for example if {@code set1} is a {@link HashSet} and {@code set2} is a
-   * {@link TreeSet} or the {@link Map#keySet} of an {@code IdentityHashMap}.
+   * equivalence relations, for example if {@code set1} is a {@code HashSet} and {@code set2} is a
+   * {@code TreeSet} or the {@code Map#keySet} of an {@code IdentityHashMap}.
    */
   public static <E extends @Nullable Object> SetView<E> union(
       final Set<? extends E> set1, final Set<? extends E> set2) {
@@ -783,8 +786,8 @@ public final class Sets {
    * matches that of {@code set1}.
    *
    * <p>Results are undefined if {@code set1} and {@code set2} are sets based on different
-   * equivalence relations, for example if {@code set1} is a {@link HashSet} and {@code set2} is a
-   * {@link TreeSet} or the {@link Map#keySet} of an {@code IdentityHashMap}.
+   * equivalence relations, for example if {@code set1} is a {@code HashSet} and {@code set2} is a
+   * {@code TreeSet} or the {@code Map#keySet} of an {@code IdentityHashMap}.
    *
    * <p><b>Note:</b> The returned view performs slightly better when {@code set1} is the smaller of
    * the two sets. If you have reason to believe one of your sets will generally be smaller than the
@@ -874,8 +877,8 @@ public final class Sets {
    * order of the returned set matches that of {@code set1}.
    *
    * <p>Results are undefined if {@code set1} and {@code set2} are sets based on different
-   * equivalence relations, for example if {@code set1} is a {@link HashSet} and {@code set2} is a
-   * {@link TreeSet} or the {@link Map#keySet} of an {@code IdentityHashMap}.
+   * equivalence relations, for example if {@code set1} is a {@code HashSet} and {@code set2} is a
+   * {@code TreeSet} or the {@code Map#keySet} of an {@code IdentityHashMap}.
    */
   public static <E extends @Nullable Object> SetView<E> difference(
       final Set<E> set1, final Set<?> set2) {
@@ -941,8 +944,8 @@ public final class Sets {
    * both. The iteration order of the returned set is undefined.
    *
    * <p>Results are undefined if {@code set1} and {@code set2} are sets based on different
-   * equivalence relations, for example if {@code set1} is a {@link HashSet} and {@code set2} is a
-   * {@link TreeSet} or the {@link Map#keySet} of an {@code IdentityHashMap}.
+   * equivalence relations, for example if {@code set1} is a {@code HashSet} and {@code set2} is a
+   * {@code TreeSet} or the {@code Map#keySet} of an {@code IdentityHashMap}.
    *
    * @since 3.0
    */
@@ -1011,7 +1014,7 @@ public final class Sets {
    *
    * <p>The resulting set's iterator does not support {@code remove()}, but all other set methods
    * are supported. When given an element that doesn't satisfy the predicate, the set's {@code
-   * add()} and {@code addAll()} methods throw an {@link IllegalArgumentException}. When methods
+   * add()} and {@code addAll()} methods throw an {@code IllegalArgumentException}. When methods
    * such as {@code removeAll()} and {@code clear()} are called on the filtered set, only elements
    * that satisfy the filter will be removed from the underlying set.
    *
@@ -1023,12 +1026,12 @@ public final class Sets {
    * use the copy.
    *
    * <p><b>Warning:</b> {@code predicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
-   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@link
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
+   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@code
    * Iterables#filter(Iterable, Class)} for related functionality.)
    *
-   * <p><b>Java 8 users:</b> many use cases for this method are better addressed by {@link
-   * Stream#filter}. This method is not being deprecated, but we gently encourage
+   * <p><b>Java 8 users:</b> many use cases for this method are better addressed by {@code
+   * java.util.stream.Stream#filter}. This method is not being deprecated, but we gently encourage
    * you to migrate to streams.
    */
   // TODO(kevinb): how to omit that last sentence when building GWT javadoc?
@@ -1054,7 +1057,7 @@ public final class Sets {
    *
    * <p>The resulting set's iterator does not support {@code remove()}, but all other set methods
    * are supported. When given an element that doesn't satisfy the predicate, the set's {@code
-   * add()} and {@code addAll()} methods throw an {@link IllegalArgumentException}. When methods
+   * add()} and {@code addAll()} methods throw an {@code IllegalArgumentException}. When methods
    * such as {@code removeAll()} and {@code clear()} are called on the filtered set, only elements
    * that satisfy the filter will be removed from the underlying set.
    *
@@ -1066,8 +1069,8 @@ public final class Sets {
    * use the copy.
    *
    * <p><b>Warning:</b> {@code predicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
-   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@link
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
+   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@code
    * Iterables#filter(Iterable, Class)} for related functionality.)
    *
    * @since 11.0
@@ -1091,7 +1094,7 @@ public final class Sets {
    *
    * <p>The resulting set's iterator does not support {@code remove()}, but all other set methods
    * are supported. When given an element that doesn't satisfy the predicate, the set's {@code
-   * add()} and {@code addAll()} methods throw an {@link IllegalArgumentException}. When methods
+   * add()} and {@code addAll()} methods throw an {@code IllegalArgumentException}. When methods
    * such as {@code removeAll()} and {@code clear()} are called on the filtered set, only elements
    * that satisfy the filter will be removed from the underlying set.
    *
@@ -1103,8 +1106,8 @@ public final class Sets {
    * use the copy.
    *
    * <p><b>Warning:</b> {@code predicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
-   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@link
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
+   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@code
    * Iterables#filter(Iterable, Class)} for related functionality.)
    *
    * @since 14.0
@@ -1320,7 +1323,7 @@ public final class Sets {
    *
    * @param sets the sets to choose elements from, in the order that the elements chosen from those
    *     sets should appear in the resulting lists
-   * @param <B> any common base class shared by all axes (often just {@link Object})
+   * @param <B> any common base class shared by all axes (often just {@code Object})
    * @return the Cartesian product, as an immutable set containing immutable lists
    * @throws NullPointerException if {@code sets}, any one of the {@code sets}, or any element of a
    *     provided set is null
@@ -1377,7 +1380,7 @@ public final class Sets {
    *
    * @param sets the sets to choose elements from, in the order that the elements chosen from those
    *     sets should appear in the resulting lists
-   * @param <B> any common base class shared by all axes (often just {@link Object})
+   * @param <B> any common base class shared by all axes (often just {@code Object})
    * @return the Cartesian product, as an immutable set containing immutable lists
    * @throws NullPointerException if {@code sets}, any one of the {@code sets}, or any element of a
    *     provided set is null
@@ -1511,6 +1514,7 @@ public final class Sets {
    * @see <a href="http://en.wikipedia.org/wiki/Power_set">Power set article at Wikipedia</a>
    * @since 4.0
    */
+  
   public static <E> Set<Set<E>> powerSet(Set<E> set) {
     return new PowerSet<E>(set);
   }
@@ -1746,7 +1750,7 @@ public final class Sets {
     };
   }
 
-  /** An implementation for {@link Set#hashCode()}. */
+  /** An implementation for {@code Set#hashCode()}. */
   static int hashCodeImpl(Set<?> s) {
     int hashCode = 0;
     for (Object o : s) {
@@ -1758,7 +1762,7 @@ public final class Sets {
     return hashCode;
   }
 
-  /** An implementation for {@link Set#equals(Object)}. */
+  /** An implementation for {@code Set#equals(Object)}. */
   static boolean equalsImpl(Set<?> s, @CheckForNull Object object) {
     if (s == object) {
       return true;
@@ -1784,7 +1788,7 @@ public final class Sets {
    * <p>The returned navigable set will be serializable if the specified navigable set is
    * serializable.
    *
-   * <p><b>Java 8 users and later:</b> Prefer {@link Collections#unmodifiableNavigableSet}.
+   * <p><b>Java 8 users and later:</b> Prefer {@code Collections#unmodifiableNavigableSet}.
    *
    * @param set the navigable set for which an unmodifiable view is to be returned
    * @return an unmodifiable view of the specified navigable set
@@ -1952,7 +1956,7 @@ public final class Sets {
    * <p>The returned navigable set will be serializable if the specified navigable set is
    * serializable.
    *
-   * <p><b>Java 8 users and later:</b> Prefer {@link Collections#synchronizedNavigableSet}.
+   * <p><b>Java 8 users and later:</b> Prefer {@code Collections#synchronizedNavigableSet}.
    *
    * @param navigableSet the navigable set to be "wrapped" in a synchronized navigable set.
    * @return a synchronized view of the specified navigable set.
@@ -2138,14 +2142,14 @@ public final class Sets {
   /**
    * Returns a view of the portion of {@code set} whose elements are contained by {@code range}.
    *
-   * <p>This method delegates to the appropriate methods of {@link NavigableSet} (namely {@link
-   * NavigableSet#subSet(Object, boolean, Object, boolean) subSet()}, {@link
-   * NavigableSet#tailSet(Object, boolean) tailSet()}, and {@link NavigableSet#headSet(Object,
+   * <p>This method delegates to the appropriate methods of {@code NavigableSet} (namely {@code
+   * NavigableSet#subSet(Object, boolean, Object, boolean) subSet()}, {@code
+   * NavigableSet#tailSet(Object, boolean) tailSet()}, and {@code NavigableSet#headSet(Object,
    * boolean) headSet()}) to actually construct the view. Consult these methods for a full
    * description of the returned view's behavior.
    *
    * <p><b>Warning:</b> {@code Range}s always represent a range of values using the values' natural
-   * ordering. {@code NavigableSet} on the other hand can specify a custom ordering via a {@link
+   * ordering. {@code NavigableSet} on the other hand can specify a custom ordering via a {@code
    * Comparator}, which can violate the natural ordering. Using this method (or in general using
    * {@code Range}) with unnaturally-ordered sets can lead to unexpected and undefined behavior.
    *

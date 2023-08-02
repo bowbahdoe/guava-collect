@@ -23,7 +23,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link Multimaps#filterKeys(SetMultimap, Predicate)}.
+ * Implementation of {@code Multimaps#filterKeys(SetMultimap, Predicate)}.
  *
  * @author Louis Wasserman
  */

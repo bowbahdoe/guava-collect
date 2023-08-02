@@ -40,8 +40,8 @@ import java.util.stream.Collector;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * A {@link RangeSet} whose contents will never change, with many other important properties
- * detailed at {@link ImmutableCollection}.
+ * A {@code RangeSet} whose contents will never change, with many other important properties
+ * detailed at {@code ImmutableCollection}.
  *
  * @author Louis Wasserman
  * @since 14.0
@@ -58,7 +58,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code
-   * ImmutableRangeSet}. As in {@link Builder}, overlapping ranges are not permitted and adjacent
+   * ImmutableRangeSet}. As in {@code Builder}, overlapping ranges are not permitted and adjacent
    * ranges will be merged.
    *
    * @since 23.1
@@ -79,8 +79,8 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
   }
 
   /**
-   * Returns an immutable range set containing the specified single range. If {@link Range#isEmpty()
-   * range.isEmpty()}, this is equivalent to {@link ImmutableRangeSet#of()}.
+   * Returns an immutable range set containing the specified single range. If {@code Range#isEmpty()
+   * range.isEmpty()}, this is equivalent to {@code ImmutableRangeSet#of()}.
    */
   public static <C extends Comparable> ImmutableRangeSet<C> of(Range<C> range) {
     checkNotNull(range);
@@ -93,7 +93,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     }
   }
 
-  /** Returns an immutable range set containing the single range {@link Range#all()}. */
+  /** Returns an immutable range set containing the single range {@code Range#all()}. */
   @SuppressWarnings("unchecked")
   static <C extends Comparable> ImmutableRangeSet<C> all() {
     return (ImmutableRangeSet<C>) ALL;
@@ -126,7 +126,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
    * @since 21.0
    */
   public static <C extends Comparable<?>> ImmutableRangeSet<C> copyOf(Iterable<Range<C>> ranges) {
-    return new Builder<C>().addAll(ranges).build();
+    return new ImmutableRangeSet.Builder<C>().addAll(ranges).build();
   }
 
   /**
@@ -503,8 +503,8 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
   }
 
   /**
-   * Returns an {@link ImmutableSortedSet} containing the same values in the given domain
-   * {@linkplain RangeSet#contains contained} by this range set.
+   * Returns an {@code ImmutableSortedSet} containing the same values in the given domain
+   * {@code RangeSet#contains contained} by this range set.
    *
    * <p><b>Note:</b> {@code a.asSet(d).equals(b.asSet(d))} does not imply {@code a.equals(b)}! For
    * example, {@code a} and {@code b} could be {@code [2..4]} and {@code (1..5)}, or the empty
@@ -512,10 +512,10 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
    *
    * <p><b>Warning:</b> Be extremely careful what you do with the {@code asSet} view of a large
    * range set (such as {@code ImmutableRangeSet.of(Range.greaterThan(0))}). Certain operations on
-   * such a set can be performed efficiently, but others (such as {@link Set#hashCode} or {@link
+   * such a set can be performed efficiently, but others (such as {@code Set#hashCode} or {@code
    * Collections#frequency}) can cause major performance problems.
    *
-   * <p>The returned set's {@link Object#toString} method returns a shorthand form of the set's
+   * <p>The returned set's {@code Object#toString} method returns a shorthand form of the set's
    * contents, such as {@code "[1..100]}"}.
    *
    * @throws IllegalArgumentException if neither this range nor the domain has a lower bound, or if
@@ -593,6 +593,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     }
 
     @Override
+    
     public UnmodifiableIterator<C> descendingIterator() {
       return new AbstractIterator<C>() {
         final Iterator<Range<C>> rangeItr = ranges.reverse().iterator();
@@ -687,7 +688,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     }
 
     @Override
-      // serialization
+    // serialization
     Object writeReplace() {
       return new AsSetSerializedForm<C>(ranges, domain);
     }
@@ -743,7 +744,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
     /**
      * Add the specified range to this builder. Adjacent ranges are permitted and will be merged,
-     * but overlapping ranges will cause an exception when {@link #build()} is called.
+     * but overlapping ranges will cause an exception when {@code #build()} is called.
      *
      * @throws IllegalArgumentException if {@code range} is empty
      */
@@ -756,7 +757,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
     /**
      * Add all ranges from the specified range set to this builder. Adjacent ranges are permitted
-     * and will be merged, but overlapping ranges will cause an exception when {@link #build()} is
+     * and will be merged, but overlapping ranges will cause an exception when {@code #build()} is
      * called.
      */
     @CanIgnoreReturnValue
@@ -766,7 +767,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
     /**
      * Add all of the specified ranges to this builder. Adjacent ranges are permitted and will be
-     * merged, but overlapping ranges will cause an exception when {@link #build()} is called.
+     * merged, but overlapping ranges will cause an exception when {@code #build()} is called.
      *
      * @throws IllegalArgumentException if any inserted ranges are empty
      * @since 21.0

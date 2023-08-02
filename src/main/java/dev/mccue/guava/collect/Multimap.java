@@ -31,7 +31,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A collection that maps keys to values, similar to {@link Map}, but in which each key may be
+ * A collection that maps keys to values, similar to {@code Map}, but in which each key may be
  * associated with <i>multiple</i> values. You can visualize the contents of a multimap either as a
  * map from keys to <i>nonempty</i> collections of values:
  *
@@ -50,12 +50,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p><b>Important:</b> although the first interpretation resembles how most multimaps are
  * <i>implemented</i>, the design of the {@code Multimap} API is based on the <i>second</i> form.
- * So, using the multimap shown above as an example, the {@link #size} is {@code 3}, not {@code 2},
- * and the {@link #values} collection is {@code [1, 2, 3]}, not {@code [[1, 2], [3]]}. For those
- * times when the first style is more useful, use the multimap's {@link #asMap} view (or create a
+ * So, using the multimap shown above as an example, the {@code #size} is {@code 3}, not {@code 2},
+ * and the {@code #values} collection is {@code [1, 2, 3]}, not {@code [[1, 2], [3]]}. For those
+ * times when the first style is more useful, use the multimap's {@code #asMap} view (or create a
  * {@code Map<K, Collection<V>>} in the first place).
  *
- * <h2>Example</h2>
+ * <h3>Example</h3>
  *
  * <p>The following code:
  *
@@ -88,29 +88,29 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * collections are:
  *
  * <ul>
- *   <li>{@link #asMap}, mentioned above
- *   <li>{@link #keys}, {@link #keySet}, {@link #values}, {@link #entries}, which are similar to the
- *       corresponding view collections of {@link Map}
- *   <li>and, notably, even the collection returned by {@link #get get(key)} is an active view of
+ *   <li>{@code #asMap}, mentioned above
+ *   <li>{@code #keys}, {@code #keySet}, {@code #values}, {@code #entries}, which are similar to the
+ *       corresponding view collections of {@code Map}
+ *   <li>and, notably, even the collection returned by {@code #get get(key)} is an active view of
  *       the values corresponding to {@code key}
  * </ul>
  *
- * <p>The collections returned by the {@link #replaceValues replaceValues} and {@link #removeAll
+ * <p>The collections returned by the {@code #replaceValues replaceValues} and {@code #removeAll
  * removeAll} methods, which contain values that have just been removed from the multimap, are
  * naturally <i>not</i> views.
  *
  * <h3>Subinterfaces</h3>
  *
- * <p>Instead of using the {@code Multimap} interface directly, prefer the subinterfaces {@link
- * ListMultimap} and {@link SetMultimap}. These take their names from the fact that the collections
- * they return from {@code get} behave like (and, of course, implement) {@link List} and {@link
+ * <p>Instead of using the {@code Multimap} interface directly, prefer the subinterfaces {@code
+ * ListMultimap} and {@code SetMultimap}. These take their names from the fact that the collections
+ * they return from {@code get} behave like (and, of course, implement) {@code List} and {@code
  * Set}, respectively.
  *
  * <p>For example, the "presidents" code snippet above used a {@code ListMultimap}; if it had used a
  * {@code SetMultimap} instead, two presidents would have vanished, and last names might or might
  * not appear in chronological order.
  *
- * <p><b>Warning:</b> instances of type {@code Multimap} may not implement {@link Object#equals} in
+ * <p><b>Warning:</b> instances of type {@code Multimap} may not implement {@code Object#equals} in
  * the way you expect. Multimaps containing the same key-value pairs, even in the same order, may or
  * may not be equal and may or may not have the same {@code hashCode}. The recommended subinterfaces
  * provide much stronger guarantees.
@@ -121,13 +121,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * have appeared. The differences include:
  *
  * <ul>
- *   <li>There is no need to populate an empty collection before adding an entry with {@link #put
+ *   <li>There is no need to populate an empty collection before adding an entry with {@code #put
  *       put}.
  *   <li>{@code get} never returns {@code null}, only an empty collection.
  *   <li>A key is contained in the multimap if and only if it maps to at least one value. Any
  *       operation that causes a key to have zero associated values has the effect of
  *       <i>removing</i> that key from the multimap.
- *   <li>The total entry count is available as {@link #size}.
+ *   <li>The total entry count is available as {@code #size}.
  *   <li>Many complex operations become easier; for example, {@code
  *       Collections.min(multimap.values())} finds the smallest value across all keys.
  * </ul>
@@ -135,14 +135,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <h3>Implementations</h3>
  *
  * <ul>
- *   <li>{@link ImmutableListMultimap}
- *   <li>{@link ImmutableSetMultimap}
- *   <li>Configure your own mutable multimap with {@link MultimapBuilder}
- *   <li>{@link LinkedListMultimap} (for one unusual kind of mutable {@code Multimap})
+ *   <li>{@code ImmutableListMultimap}
+ *   <li>{@code ImmutableSetMultimap}
+ *   <li>Configure your own mutable multimap with {@code MultimapBuilder}
+ *   <li>{@code LinkedListMultimap} (for one unusual kind of mutable {@code Multimap})
  * </ul>
  *
- * Guava contains a number of other multimap implementations, such as {@link ArrayListMultimap}. In
- * new code, we recommend using {@link MultimapBuilder} instead: It provides better control of how
+ * Guava contains a number of other multimap implementations, such as {@code ArrayListMultimap}. In
+ * new code, we recommend using {@code MultimapBuilder} instead: It provides better control of how
  * keys and values are stored.
  *
  * <h3>Other Notes</h3>
@@ -153,7 +153,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p>All methods that modify the multimap are optional. The view collections returned by the
  * multimap may or may not be modifiable. Any modification method that is not supported will throw
- * {@link UnsupportedOperationException}.
+ * {@code UnsupportedOperationException}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multimap">{@code Multimap}</a>.
@@ -171,7 +171,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
    *
    * <p><b>Note:</b> this method does not return the number of <i>distinct keys</i> in the multimap,
    * which is given by {@code keySet().size()} or {@code asMap().size()}. See the opening section of
-   * the {@link Multimap} class documentation for clarification.
+   * the {@code Multimap} class documentation for clarification.
    */
   int size();
 
@@ -259,7 +259,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
   /**
    * Stores a collection of values with the same key, replacing any existing values for that key.
    *
-   * <p>If {@code values} is empty, this is equivalent to {@link #removeAll(Object) removeAll(key)}.
+   * <p>If {@code values} is empty, this is equivalent to {@code #removeAll(Object) removeAll(key)}.
    *
    * @return the collection of replaced values, or an empty collection if no values were previously
    *     associated with the key. The collection <i>may</i> be modifiable, but updating it will have
@@ -272,7 +272,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
    * Removes all values associated with the key {@code key}.
    *
    * <p>Once this method returns, {@code key} will not be mapped to any values, so it will not
-   * appear in {@link #keySet()}, {@link #asMap()}, or any other views.
+   * appear in {@code #keySet()}, {@code #asMap()}, or any other views.
    *
    * @return the values that were removed (possibly empty). The returned collection <i>may</i> be
    *     modifiable, but updating it will have no effect on the multimap.
@@ -280,7 +280,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
   @CanIgnoreReturnValue
   Collection<V> removeAll(@CompatibleWith("K") @CheckForNull Object key);
 
-  /** Removes all key-value pairs from the multimap, leaving it {@linkplain #isEmpty empty}. */
+  /** Removes all key-value pairs from the multimap, leaving it {@code #isEmpty empty}. */
   void clear();
 
   // Views
@@ -323,7 +323,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
   Collection<V> values();
 
   /**
-   * Returns a view collection of all key-value pairs contained in this multimap, as {@link Entry}
+   * Returns a view collection of all key-value pairs contained in this multimap, as {@code Entry}
    * instances.
    *
    * <p>Changes to the returned collection or the entries it contains will update the underlying
@@ -334,7 +334,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
   /**
    * Performs the given action for all key-value pairs contained in this multimap. If an ordering is
    * specified by the {@code Multimap} implementation, actions will be performed in the order of
-   * iteration of {@link #entries()}. Exceptions thrown by the action are relayed to the caller.
+   * iteration of {@code #entries()}. Exceptions thrown by the action are relayed to the caller.
    *
    * <p>To loop over all keys and their associated value collections, write {@code
    * Multimaps.asMap(multimap).forEach((key, valueCollection) -> action())}.
@@ -354,7 +354,7 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
    *
    * <p>Changes to the returned map or the collections that serve as its values will update the
    * underlying multimap, and vice versa. The map does not support {@code put} or {@code putAll},
-   * nor do its entries support {@link Entry#setValue setValue}.
+   * nor do its entries support {@code Entry#setValue setValue}.
    */
   Map<K, Collection<V>> asMap();
 
@@ -362,16 +362,16 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
 
   /**
    * Compares the specified object with this multimap for equality. Two multimaps are equal when
-   * their map views, as returned by {@link #asMap}, are also equal.
+   * their map views, as returned by {@code #asMap}, are also equal.
    *
    * <p>In general, two multimaps with identical key-value mappings may or may not be equal,
-   * depending on the implementation. For example, two {@link SetMultimap} instances with the same
-   * key-value mappings are equal, but equality of two {@link ListMultimap} instances depends on the
+   * depending on the implementation. For example, two {@code SetMultimap} instances with the same
+   * key-value mappings are equal, but equality of two {@code ListMultimap} instances depends on the
    * ordering of the values for each key.
    *
-   * <p>A non-empty {@link SetMultimap} cannot be equal to a non-empty {@link ListMultimap}, since
-   * their {@link #asMap} views contain unequal collections as values. However, any two empty
-   * multimaps are equal, because they both have empty {@link #asMap} views.
+   * <p>A non-empty {@code SetMultimap} cannot be equal to a non-empty {@code ListMultimap}, since
+   * their {@code #asMap} views contain unequal collections as values. However, any two empty
+   * multimaps are equal, because they both have empty {@code #asMap} views.
    */
   @Override
   boolean equals(@CheckForNull Object obj);
@@ -380,12 +380,12 @@ public interface Multimap<K extends @Nullable Object, V extends @Nullable Object
    * Returns the hash code for this multimap.
    *
    * <p>The hash code of a multimap is defined as the hash code of the map view, as returned by
-   * {@link Multimap#asMap}.
+   * {@code Multimap#asMap}.
    *
    * <p>In general, two multimaps with identical key-value mappings may or may not have the same
-   * hash codes, depending on the implementation. For example, two {@link SetMultimap} instances
+   * hash codes, depending on the implementation. For example, two {@code SetMultimap} instances
    * with the same key-value mappings will have the same {@code hashCode}, but the {@code hashCode}
-   * of {@link ListMultimap} instances depends on the ordering of the values for each key.
+   * of {@code ListMultimap} instances depends on the ordering of the values for each key.
    */
   @Override
   int hashCode();

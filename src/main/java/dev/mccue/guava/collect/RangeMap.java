@@ -29,7 +29,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * A mapping from disjoint nonempty ranges to non-null values. Queries look up the value associated
  * with the range (if any) that contains a specified key.
  *
- * <p>In contrast to {@link RangeSet}, no "coalescing" is done of {@linkplain
+ * <p>In contrast to {@code RangeSet}, no "coalescing" is done of {@code
  * Range#isConnected(Range) connected} ranges, even if they are mapped to the same value.
  *
  * @author Louis Wasserman
@@ -60,7 +60,7 @@ public interface RangeMap<K extends Comparable, V> {
   Entry<Range<K>, V> getEntry(K key);
 
   /**
-   * Returns the minimal range {@linkplain Range#encloses(Range) enclosing} the ranges in this
+   * Returns the minimal range {@code Range#encloses(Range) enclosing} the ranges in this
    * {@code RangeMap}.
    *
    * @throws NoSuchElementException if this range map is empty
@@ -70,21 +70,21 @@ public interface RangeMap<K extends Comparable, V> {
   /**
    * Maps a range to a specified value (optional operation).
    *
-   * <p>Specifically, after a call to {@code put(range, value)}, if {@link
-   * Range#contains(Comparable) range.contains(k)}, then {@link #get(Comparable) get(k)} will return
+   * <p>Specifically, after a call to {@code put(range, value)}, if {@code
+   * Range#contains(Comparable) range.contains(k)}, then {@code #get(Comparable) get(k)} will return
    * {@code value}.
    *
-   * <p>If {@code range} {@linkplain Range#isEmpty() is empty}, then this is a no-op.
+   * <p>If {@code range} {@code Range#isEmpty() is empty}, then this is a no-op.
    */
   void put(Range<K> range, V value);
 
   /**
    * Maps a range to a specified value, coalescing this range with any existing ranges with the same
-   * value that are {@linkplain Range#isConnected connected} to this range.
+   * value that are {@code Range#isConnected connected} to this range.
    *
-   * <p>The behavior of {@link #get(Comparable) get(k)} after calling this method is identical to
-   * the behavior described in {@link #put(Range, Object) put(range, value)}, however the ranges
-   * returned from {@link #asMapOfRanges} will be different if there were existing entries which
+   * <p>The behavior of {@code #get(Comparable) get(k)} after calling this method is identical to
+   * the behavior described in {@code #put(Range, Object) put(range, value)}, however the ranges
+   * returned from {@code #asMapOfRanges} will be different if there were existing entries which
    * connect to the given range and value.
    *
    * <p>Even if the input range is empty, if it is connected on both sides by ranges mapped to the
@@ -92,7 +92,7 @@ public interface RangeMap<K extends Comparable, V> {
    *
    * <p><b>Note:</b> coalescing requires calling {@code .equals()} on any connected values, which
    * may be expensive depending on the value type. Using this method on range maps with large values
-   * such as {@link Collection} types is discouraged.
+   * such as {@code Collection} types is discouraged.
    *
    * @since 22.0
    */
@@ -107,7 +107,7 @@ public interface RangeMap<K extends Comparable, V> {
   /**
    * Removes all associations from this range map in the specified range (optional operation).
    *
-   * <p>If {@code !range.contains(k)}, {@link #get(Comparable) get(k)} will return the same result
+   * <p>If {@code !range.contains(k)}, {@code #get(Comparable) get(k)} will return the same result
    * before and after a call to {@code remove(range)}. If {@code range.contains(k)}, then after a
    * call to {@code remove(range)}, {@code get(k)} will return {@code null}.
    */
@@ -170,14 +170,14 @@ public interface RangeMap<K extends Comparable, V> {
    * <p>The returned range map supports all optional operations that this range map supports, except
    * for {@code asMapOfRanges().iterator().remove()}.
    *
-   * <p>The returned range map will throw an {@link IllegalArgumentException} on an attempt to
-   * insert a range not {@linkplain Range#encloses(Range) enclosed} by {@code range}.
+   * <p>The returned range map will throw an {@code IllegalArgumentException} on an attempt to
+   * insert a range not {@code Range#encloses(Range) enclosed} by {@code range}.
    */
   // TODO(cpovirk): Consider documenting that IAE on the various methods that can throw it.
   RangeMap<K, V> subRangeMap(Range<K> range);
 
   /**
-   * Returns {@code true} if {@code obj} is another {@code RangeMap} that has an equivalent {@link
+   * Returns {@code true} if {@code obj} is another {@code RangeMap} that has an equivalent {@code
    * #asMapOfRanges()}.
    */
   @Override

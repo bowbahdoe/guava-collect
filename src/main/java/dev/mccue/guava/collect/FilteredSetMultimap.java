@@ -19,7 +19,7 @@ package dev.mccue.guava.collect;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A supertype for filtered {@link SetMultimap} implementations.
+ * A supertype for filtered {@code SetMultimap} implementations.
  *
  * @author Louis Wasserman
  */

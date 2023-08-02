@@ -34,7 +34,6 @@ import dev.mccue.guava.collect.Maps.ViewCachingAbstractMap;
 import dev.mccue.guava.collect.Sets.ImprovedAbstractSet;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -47,11 +46,11 @@ import java.util.Spliterators;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * {@link Table} implementation backed by a map that associates row keys with column key / value
+ * {@code Table} implementation backed by a map that associates row keys with column key / value
  * secondary maps. This class provides rapid access to records by the row key alone or by both keys,
  * but not by just the column key.
  *
- * <p>The views returned by {@link #column}, {@link #columnKeySet()}, and {@link #columnMap()} have
+ * <p>The views returned by {@code #column}, {@code #columnKeySet()}, and {@code #columnMap()} have
  * iterators that don't support {@code remove()}. Otherwise, all optional operations are supported.
  * Null row keys, columns keys, and values are not supported.
  *

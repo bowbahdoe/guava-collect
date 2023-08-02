@@ -23,8 +23,8 @@ import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * "Overrides" the {@link ImmutableMap} static methods that lack {@link ImmutableBiMap} equivalents
- * with deprecated, exception-throwing versions. See {@link ImmutableSortedSetFauxverideShim} for
+ * "Overrides" the {@code ImmutableMap} static methods that lack {@code ImmutableBiMap} equivalents
+ * with deprecated, exception-throwing versions. See {@code ImmutableSortedSetFauxverideShim} for
  * details.
  *
  * @author Louis Wasserman
@@ -32,12 +32,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableBiMapFauxverideShim<K, V> extends ImmutableMap<K, V> {
   /**
-   * Not supported. Use {@link ImmutableBiMap#toImmutableBiMap} instead. This method exists only to
-   * hide {@link ImmutableMap#toImmutableMap(Function, Function)} from consumers of {@code
+   * Not supported. Use {@code ImmutableBiMap#toImmutableBiMap} instead. This method exists only to
+   * hide {@code ImmutableMap#toImmutableMap(Function, Function)} from consumers of {@code
    * ImmutableBiMap}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableBiMap#toImmutableBiMap}.
+   * @deprecated Use {@code ImmutableBiMap#toImmutableBiMap}.
    */
   @Deprecated
   @DoNotCall("Use toImmutableBiMap")
@@ -50,7 +50,7 @@ abstract class ImmutableBiMapFauxverideShim<K, V> extends ImmutableMap<K, V> {
 
   /**
    * Not supported. This method does not make sense for {@code BiMap}. This method exists only to
-   * hide {@link ImmutableMap#toImmutableMap(Function, Function, BinaryOperator)} from consumers of
+   * hide {@code ImmutableMap#toImmutableMap(Function, Function, BinaryOperator)} from consumers of
    * {@code ImmutableBiMap}.
    *
    * @throws UnsupportedOperationException always

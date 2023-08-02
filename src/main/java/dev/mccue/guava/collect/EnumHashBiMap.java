@@ -39,6 +39,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Mike Bostock
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
     extends AbstractBiMap<K, V> {
@@ -56,7 +57,7 @@ public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
 
   /**
    * Constructs a new bimap with the same mappings as the specified map. If the specified map is an
-   * {@code EnumHashBiMap} or an {@link EnumBiMap}, the new bimap has the same key type as the input
+   * {@code EnumHashBiMap} or an {@code EnumBiMap}, the new bimap has the same key type as the input
    * bimap. Otherwise, the specified map must contain at least one mapping, in order to determine
    * the key type.
    *

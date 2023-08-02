@@ -23,12 +23,13 @@ import java.util.HashMap;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Multiset implementation backed by a {@link HashMap}.
+ * Multiset implementation backed by a {@code HashMap}.
  *
  * @author Kevin Bourrillion
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class HashMultiset<E extends @Nullable Object> extends AbstractMapBasedMultiset<E> {
 
@@ -51,7 +52,7 @@ public final class HashMultiset<E extends @Nullable Object> extends AbstractMapB
   /**
    * Creates a new {@code HashMultiset} containing the specified elements.
    *
-   * <p>This implementation is highly efficient when {@code elements} is itself a {@link Multiset}.
+   * <p>This implementation is highly efficient when {@code elements} is itself a {@code Multiset}.
    *
    * @param elements the elements that the multiset should contain
    */

@@ -27,10 +27,11 @@ import java.util.Collection;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * An implementation of {@link ContiguousSet} that contains one or more elements.
+ * An implementation of {@code ContiguousSet} that contains one or more elements.
  *
  * @author Gregory Kick
  */
+
 @SuppressWarnings("unchecked") // allow ungenerified Comparable types
 @ElementTypesAreNonnullByDefault
 final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> {

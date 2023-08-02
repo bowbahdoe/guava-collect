@@ -18,7 +18,6 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkPositionIndexes;
 import static dev.mccue.guava.collect.BoundType.CLOSED;
 
-
 import dev.mccue.guava.primitives.Ints;
 import java.util.Comparator;
 import java.util.function.ObjIntConsumer;
@@ -37,7 +36,7 @@ final class RegularImmutableSortedMultiset<E> extends ImmutableSortedMultiset<E>
   static final ImmutableSortedMultiset<Comparable> NATURAL_EMPTY_MULTISET =
       new RegularImmutableSortedMultiset<>(Ordering.natural());
 
-  @VisibleForTesting final transient RegularImmutableSortedSet<E> elementSet;
+  final transient RegularImmutableSortedSet<E> elementSet;
   private final transient long[] cumulativeCounts;
   private final transient int offset;
   private final transient int length;

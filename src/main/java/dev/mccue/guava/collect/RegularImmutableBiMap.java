@@ -24,11 +24,9 @@ import static dev.mccue.guava.collect.RegularImmutableMap.MAX_HASH_BUCKET_LENGTH
 import static dev.mccue.guava.collect.RegularImmutableMap.checkNoConflictInKeyBucket;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.collect.ImmutableMapEntry.NonTerminalImmutableBiMapEntry;
 import dev.mccue.guava.collect.RegularImmutableMap.BucketOverflowException;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -42,6 +40,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
@@ -53,7 +52,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
 
   @CheckForNull private final transient @Nullable ImmutableMapEntry<K, V>[] keyTable;
   @CheckForNull private final transient @Nullable ImmutableMapEntry<K, V>[] valueTable;
-  @VisibleForTesting final transient Entry<K, V>[] entries;
+  final transient Entry<K, V>[] entries;
   private final transient int mask;
   private final transient int hashCode;
 
@@ -187,8 +186,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     return entries.length;
   }
 
-  @LazyInit
-  @CheckForNull private transient ImmutableBiMap<V, K> inverse;
+  @LazyInit @CheckForNull private transient ImmutableBiMap<V, K> inverse;
 
   @Override
   public ImmutableBiMap<V, K> inverse() {
@@ -293,7 +291,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-      // serialization
+    // serialization
     Object writeReplace() {
       return new InverseSerializedForm<>(RegularImmutableBiMap.this);
     }

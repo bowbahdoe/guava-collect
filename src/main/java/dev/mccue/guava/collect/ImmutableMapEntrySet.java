@@ -26,11 +26,12 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * {@code entrySet()} implementation for {@link ImmutableMap}.
+ * {@code entrySet()} implementation for {@code ImmutableMap}.
  *
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Entry<K, V>> {
   static final class RegularEntrySet<K, V> extends ImmutableMapEntrySet<K, V> {
@@ -52,6 +53,7 @@ abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Ent
     }
 
     @Override
+    
     int copyIntoArray(@Nullable Object[] dst, int offset) {
       return entries.copyIntoArray(dst, offset);
     }
@@ -102,7 +104,7 @@ abstract class ImmutableMapEntrySet<K, V> extends ImmutableSet.CachingAsList<Ent
   }
 
   @Override
-      // not used in GWT
+  // not used in GWT
   boolean isHashCodeFast() {
     return map().isHashCodeFast();
   }

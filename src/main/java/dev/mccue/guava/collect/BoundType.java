@@ -14,6 +14,7 @@
 
 package dev.mccue.guava.collect;
 
+
 /**
  * Indicates whether an endpoint of some range is contained in the range itself ("closed") or not
  * ("open"). If a range is unbounded on a side, it is neither open nor closed on that side; the

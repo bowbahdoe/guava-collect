@@ -22,7 +22,6 @@ import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
 import static dev.mccue.guava.collect.ImmutableMapEntry.createEntryArray;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.collect.ImmutableMapEntry.NonTerminalImmutableMapEntry;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.Serializable;
@@ -32,12 +31,13 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link ImmutableMap} with two or more entries.
+ * Implementation of {@code ImmutableMap} with two or more entries.
  *
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  * @author Gregory Kick
  */
+
 @ElementTypesAreNonnullByDefault
 final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
   @SuppressWarnings("unchecked")
@@ -49,22 +49,22 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
    * ensures that the table is still likely to be relatively sparse (hence it misses fast) while
    * saving space.
    */
-  @VisibleForTesting static final double MAX_LOAD_FACTOR = 1.2;
+  static final double MAX_LOAD_FACTOR = 1.2;
 
   /**
    * Maximum allowed false positive probability of detecting a hash flooding attack given random
    * input.
    */
-  @VisibleForTesting static final double HASH_FLOODING_FPP = 0.001;
+  static final double HASH_FLOODING_FPP = 0.001;
 
   /**
    * Maximum allowed length of a hash table bucket before falling back to a j.u.HashMap based
    * implementation. Experimentally determined.
    */
-  @VisibleForTesting static final int MAX_HASH_BUCKET_LENGTH = 8;
+  static final int MAX_HASH_BUCKET_LENGTH = 8;
 
   // entries in insertion order
-  @VisibleForTesting final transient Entry<K, V>[] entries;
+  final transient Entry<K, V>[] entries;
   // array of linked lists of entries
   @CheckForNull private final transient @Nullable ImmutableMapEntry<K, V>[] table;
   // 'and' with an int to get a table index
@@ -173,8 +173,8 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
    * @param entries the original array of entries including duplicates
    * @param n the number of valid entries in {@code entries}
    * @param newN the expected number of entries once duplicates are removed
-   * @param duplicates a map of canonical {@link Entry} objects for each duplicate key. This map
-   *     will be updated by the method, setting each value to false as soon as the {@link Entry} has
+   * @param duplicates a map of canonical {@code Entry} objects for each duplicate key. This map
+   *     will be updated by the method, setting each value to false as soon as the {@code Entry} has
    *     been included in the new entry array.
    * @return an array of {@code newN} entries where no key appears more than once.
    */
@@ -219,7 +219,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
   /**
    * Checks if the given key already appears in the hash chain starting at {@code keyBucketHead}. If
    * it does not, then null is returned. If it does, then if {@code throwIfDuplicateKeys} is true an
-   * {@code IllegalArgumentException} is thrown, and otherwise the existing {@link Entry} is
+   * {@code IllegalArgumentException} is thrown, and otherwise the existing {@code Entry} is
    * returned.
    *
    * @throws IllegalArgumentException if another entry in the bucket has the same key and {@code
@@ -314,6 +314,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     return new KeySet<>(this);
   }
 
+  
   private static final class KeySet<K> extends IndexedImmutableSet<K> {
     private final RegularImmutableMap<K, ?> map;
 
@@ -365,6 +366,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     return new Values<>(this);
   }
 
+  
   private static final class Values<K, V> extends ImmutableList<V> {
     final RegularImmutableMap<K, V> map;
 

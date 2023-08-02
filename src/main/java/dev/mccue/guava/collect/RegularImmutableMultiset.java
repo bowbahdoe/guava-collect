@@ -16,7 +16,6 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
-
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.collect.Multisets.ImmutableEntry;
 import dev.mccue.guava.primitives.Ints;
@@ -27,11 +26,12 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link ImmutableMultiset} with zero or more elements.
+ * Implementation of {@code ImmutableMultiset} with zero or more elements.
  *
  * @author Jared Levy
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
@@ -101,19 +101,19 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
    * ensures that the table is still likely to be relatively sparse (hence it misses fast) while
    * saving space.
    */
-  @VisibleForTesting static final double MAX_LOAD_FACTOR = 1.0;
+  static final double MAX_LOAD_FACTOR = 1.0;
 
   /**
    * Maximum allowed false positive probability of detecting a hash flooding attack given random
    * input.
    */
-  @VisibleForTesting static final double HASH_FLOODING_FPP = 0.001;
+  static final double HASH_FLOODING_FPP = 0.001;
 
   /**
    * Maximum allowed length of a hash table bucket before falling back to a j.u.HashMap based
    * implementation. Experimentally determined.
    */
-  @VisibleForTesting static final int MAX_HASH_BUCKET_LENGTH = 9;
+  static final int MAX_HASH_BUCKET_LENGTH = 9;
 
   private final transient ImmutableEntry<E>[] entries;
   private final transient @Nullable ImmutableEntry<?>[] hashTable;

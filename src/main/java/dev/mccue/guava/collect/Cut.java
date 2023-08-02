@@ -22,7 +22,7 @@ import java.util.NoSuchElementException;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation detail for the internal structure of {@link Range} instances. Represents a unique
+ * Implementation detail for the internal structure of {@code Range} instances. Represents a unique
  * way of "cutting" a "number line" (actually of instances of type {@code C}, not necessarily
  * "numbers") into two sections; this can be done below a certain value, above a certain value,
  * below all values or above all values. With this object defined in this way, an interval can

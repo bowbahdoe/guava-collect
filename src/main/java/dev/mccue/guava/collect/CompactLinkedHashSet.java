@@ -108,13 +108,13 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
 
   /**
    * Pointer to the predecessor of an entry in insertion order. ENDPOINT indicates a node is the
-   * first node in insertion order; all values at indices ≥ {@link #size()} are UNSET.
+   * first node in insertion order; all values at indices ≥ {@code #size()} are UNSET.
    */
   @CheckForNull private transient int[] predecessor;
 
   /**
    * Pointer to the successor of an entry in insertion order. ENDPOINT indicates a node is the last
-   * node in insertion order; all values at indices ≥ {@link #size()} are UNSET.
+   * node in insertion order; all values at indices ≥ {@code #size()} are UNSET.
    */
   @CheckForNull private transient int[] successor;
 

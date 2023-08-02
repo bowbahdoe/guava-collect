@@ -24,6 +24,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /** An ordering for a pre-existing comparator. */
+
 @ElementTypesAreNonnullByDefault
 final class ComparatorOrdering<T extends @Nullable Object> extends Ordering<T>
     implements Serializable {

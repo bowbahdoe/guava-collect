@@ -27,7 +27,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Skeletal implementation of {@link NavigableMap}.
+ * Skeletal implementation of {@code NavigableMap}.
  *
  * @author Louis Wasserman
  */

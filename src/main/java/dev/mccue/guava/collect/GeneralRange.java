@@ -28,7 +28,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A generalized interval on any ordering, for internal use. Supports {@code null}. Unlike {@link
+ * A generalized interval on any ordering, for internal use. Supports {@code null}. Unlike {@code
  * Range}, this allows the use of an arbitrary comparator. This is designed for use in the
  * implementation of subcollections of sorted collection types.
  *
@@ -36,6 +36,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Louis Wasserman
  */
+
 @ElementTypesAreNonnullByDefault
 final class GeneralRange<T extends @Nullable Object> implements Serializable {
   /** Converts a Range to a GeneralRange. */

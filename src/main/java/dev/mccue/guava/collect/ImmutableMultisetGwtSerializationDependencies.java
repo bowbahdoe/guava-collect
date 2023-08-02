@@ -16,8 +16,9 @@
 
 package dev.mccue.guava.collect;
 
+
 /**
- * A dummy superclass to support GWT serialization of the element type of an {@link
+ * A dummy superclass to support GWT serialization of the element type of an {@code
  * ImmutableMultiset}. The GWT supersource for this class contains a field of type {@code E}.
  *
  * <p>For details about this hack, see {@code GwtSerializationDependencies}, which takes the same
@@ -34,5 +35,6 @@ package dev.mccue.guava.collect;
  * anyway, since it doesn't require us to declare dummy methods (though occasionally constructors)
  * and make types non-final.
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableMultisetGwtSerializationDependencies<E> extends ImmutableCollection<E> {}

@@ -42,11 +42,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * An assortment of mainly legacy static utility methods that operate on or return objects of type
- * {@code Iterable}. Except as noted, each method has a corresponding {@link Iterator}-based method
- * in the {@link Iterators} class.
+ * {@code Iterable}. Except as noted, each method has a corresponding {@code Iterator}-based method
+ * in the {@code Iterators} class.
  *
  * <p><b>Java 8 users:</b> several common uses for this class are now more comprehensively addressed
- * by the new {@link Stream} library. Read the method documentation below for
+ * by the new {@code java.util.stream.Stream} library. Read the method documentation below for
  * comparisons. This class is not being deprecated, but we gently encourage you to migrate to
  * streams.
  *
@@ -62,6 +62,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Iterables {
   private Iterables() {}
@@ -130,7 +131,7 @@ public final class Iterables {
   /**
    * Returns {@code true} if {@code iterable} contains any element {@code o} for which {@code
    * Objects.equals(o, element)} would return {@code true}. Otherwise returns {@code false}, even in
-   * cases where {@link Collection#contains} might throw {@link NullPointerException} or {@link
+   * cases where {@code Collection#contains} might throw {@code NullPointerException} or {@code
    * ClassCastException}.
    */
   // <? extends @Nullable Object> instead of <?> because of Kotlin b/189937072, discussed in Joiner.
@@ -146,8 +147,8 @@ public final class Iterables {
   /**
    * Removes, from an iterable, every element that belongs to the provided collection.
    *
-   * <p>This method calls {@link Collection#removeAll} if {@code iterable} is a collection, and
-   * {@link Iterators#removeAll} otherwise.
+   * <p>This method calls {@code Collection#removeAll} if {@code iterable} is a collection, and
+   * {@code Iterators#removeAll} otherwise.
    *
    * @param removeFrom the iterable to (potentially) remove elements from
    * @param elementsToRemove the elements to remove
@@ -163,8 +164,8 @@ public final class Iterables {
   /**
    * Removes, from an iterable, every element that does not belong to the provided collection.
    *
-   * <p>This method calls {@link Collection#retainAll} if {@code iterable} is a collection, and
-   * {@link Iterators#retainAll} otherwise.
+   * <p>This method calls {@code Collection#retainAll} if {@code iterable} is a collection, and
+   * {@code Iterators#retainAll} otherwise.
    *
    * @param removeFrom the iterable to (potentially) remove elements from
    * @param elementsToRetain the elements to retain
@@ -184,7 +185,7 @@ public final class Iterables {
    * The behavior of this method is not specified if {@code predicate} is dependent on {@code
    * removeFrom}.
    *
-   * <p><b>Java 8 users:</b> if {@code removeFrom} is a {@link Collection}, use {@code
+   * <p><b>Java 8 users:</b> if {@code removeFrom} is a {@code Collection}, use {@code
    * removeFrom.removeIf(predicate)} instead.
    *
    * @param removeFrom the iterable to (potentially) remove elements from
@@ -237,8 +238,8 @@ public final class Iterables {
 
   /**
    * Returns a string representation of {@code iterable}, with the format {@code [e1, e2, ..., en]}
-   * (that is, identical to {@link java.util.Arrays Arrays}{@code
-   * .toString(Iterables.toArray(iterable))}). Note that for <i>most</i> implementations of {@link
+   * (that is, identical to {@code java.util.Arrays Arrays}{@code
+   * .toString(Iterables.toArray(iterable))}). Note that for <i>most</i> implementations of {@code
    * Collection}, {@code collection.toString()} also gives the same result, but that behavior is not
    * generally guaranteed.
    */
@@ -305,7 +306,7 @@ public final class Iterables {
 
   /**
    * Converts an iterable into a collection. If the iterable is already a collection, it is
-   * returned. Otherwise, an {@link java.util.ArrayList} is created with the contents of the
+   * returned. Otherwise, an {@code java.util.ArrayList} is created with the contents of the
    * iterable in the same iteration order.
    */
   private static <E extends @Nullable Object> Collection<E> castOrCopyToCollection(
@@ -332,7 +333,7 @@ public final class Iterables {
 
   /**
    * Returns the number of elements in the specified iterable that equal the specified object. This
-   * implementation avoids a full iteration when the iterable is a {@link Multiset} or {@link Set}.
+   * implementation avoids a full iteration when the iterable is a {@code Multiset} or {@code Set}.
    *
    * <p><b>Java 8 users:</b> In most cases, the {@code Stream} equivalent of this method is {@code
    * stream.filter(element::equals).count()}. If {@code element} might be null, use {@code
@@ -506,14 +507,14 @@ public final class Iterables {
    * partition size of 3 yields {@code [[a, b, c], [d, e]]} -- an outer iterable containing two
    * inner lists of three and two elements, all in the original order.
    *
-   * <p>Iterators returned by the returned iterable do not support the {@link Iterator#remove()}
-   * method. The returned lists implement {@link RandomAccess}, whether or not the input list does.
+   * <p>Iterators returned by the returned iterable do not support the {@code Iterator#remove()}
+   * method. The returned lists implement {@code RandomAccess}, whether or not the input list does.
    *
    * <p><b>Note:</b> The current implementation eagerly allocates storage for {@code size} elements.
-   * As a consequence, passing values like {@code Integer.MAX_VALUE} can lead to {@link
+   * As a consequence, passing values like {@code Integer.MAX_VALUE} can lead to {@code
    * OutOfMemoryError}.
    *
-   * <p><b>Note:</b> if {@code iterable} is a {@link List}, use {@link Lists#partition(List, int)}
+   * <p><b>Note:</b> if {@code iterable} is a {@code List}, use {@code Lists#partition(List, int)}
    * instead.
    *
    * @param iterable the iterable to return a partitioned view of
@@ -540,7 +541,7 @@ public final class Iterables {
    * c, d, e]} with a partition size of 3 yields {@code [[a, b, c], [d, e, null]]} -- an outer
    * iterable containing two inner lists of three elements each, all in the original order.
    *
-   * <p>Iterators returned by the returned iterable do not support the {@link Iterator#remove()}
+   * <p>Iterators returned by the returned iterable do not support the {@code Iterator#remove()}
    * method.
    *
    * @param iterable the iterable to return a partitioned view of
@@ -565,7 +566,7 @@ public final class Iterables {
    * Returns a view of {@code unfiltered} containing all elements that satisfy the input predicate
    * {@code retainIfTrue}. The returned iterable's iterator does not support {@code remove()}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#filter}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#filter}.
    */
   public static <T extends @Nullable Object> Iterable<T> filter(
       final Iterable<T> unfiltered, final Predicate<? super T> retainIfTrue) {
@@ -620,7 +621,7 @@ public final class Iterables {
   /**
    * Returns {@code true} if any element in {@code iterable} satisfies the predicate.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#anyMatch}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#anyMatch}.
    */
   public static <T extends @Nullable Object> boolean any(
       Iterable<T> iterable, Predicate<? super T> predicate) {
@@ -631,7 +632,7 @@ public final class Iterables {
    * Returns {@code true} if every element in {@code iterable} satisfies the predicate. If {@code
    * iterable} is empty, {@code true} is returned.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#allMatch}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#allMatch}.
    */
   public static <T extends @Nullable Object> boolean all(
       Iterable<T> iterable, Predicate<? super T> predicate) {
@@ -641,7 +642,7 @@ public final class Iterables {
   /**
    * Returns the first element in {@code iterable} that satisfies the given predicate; use this
    * method only when such an element is known to exist. If it is possible that <i>no</i> element
-   * will match, use {@link #tryFind} or {@link #find(Iterable, Predicate, Object)} instead.
+   * will match, use {@code #tryFind} or {@code #find(Iterable, Predicate, Object)} instead.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code stream.filter(predicate).findFirst().get()}
    *
@@ -687,7 +688,7 @@ public final class Iterables {
   }
 
   /**
-   * Returns an {@link Optional} containing the first element in {@code iterable} that satisfies the
+   * Returns an {@code Optional} containing the first element in {@code iterable} that satisfies the
    * given predicate, if such an element exists.
    *
    * <p><b>Warning:</b> avoid using a {@code predicate} that matches {@code null}. If {@code null}
@@ -725,9 +726,9 @@ public final class Iterables {
    * contains the corresponding element.
    *
    * <p>If the input {@code Iterable} is known to be a {@code List} or other {@code Collection},
-   * consider {@link Lists#transform} and {@link Collections2#transform}.
+   * consider {@code Lists#transform} and {@code Collections2#transform}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#map}
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#map}
    */
   public static <F extends @Nullable Object, T extends @Nullable Object> Iterable<T> transform(
       final Iterable<F> fromIterable, final Function<? super F, ? extends T> function) {
@@ -803,14 +804,14 @@ public final class Iterables {
 
   /**
    * Returns the first element in {@code iterable} or {@code defaultValue} if the iterable is empty.
-   * The {@link Iterators} analog to this method is {@link Iterators#getNext}.
+   * The {@code Iterators} analog to this method is {@code Iterators#getNext}.
    *
-   * <p>If no default value is desired (and the caller instead wants a {@link
+   * <p>If no default value is desired (and the caller instead wants a {@code
    * NoSuchElementException} to be thrown), it is recommended that {@code
    * iterable.iterator().next()} is used instead.
    *
-   * <p>To get the only element in a single-element {@code Iterable}, consider using {@link
-   * #getOnlyElement(Iterable)} or {@link #getOnlyElement(Iterable, Object)} instead.
+   * <p>To get the only element in a single-element {@code Iterable}, consider using {@code
+   * #getOnlyElement(Iterable)} or {@code #getOnlyElement(Iterable, Object)} instead.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code stream.findFirst().orElse(defaultValue)}
    *
@@ -825,10 +826,10 @@ public final class Iterables {
   }
 
   /**
-   * Returns the last element of {@code iterable}. If {@code iterable} is a {@link List} with {@link
+   * Returns the last element of {@code iterable}. If {@code iterable} is a {@code List} with {@code
    * RandomAccess} support, then this operation is guaranteed to be {@code O(1)}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Streams#findLast Streams.findLast(stream).get()}
+   * <p><b>{@code Stream} equivalent:</b> {@code Streams#findLast Streams.findLast(stream).get()}
    *
    * @return the last element of {@code iterable}
    * @throws NoSuchElementException if the iterable is empty
@@ -849,7 +850,7 @@ public final class Iterables {
 
   /**
    * Returns the last element of {@code iterable} or {@code defaultValue} if the iterable is empty.
-   * If {@code iterable} is a {@link List} with {@link RandomAccess} support, then this operation is
+   * If {@code iterable} is a {@code List} with {@code RandomAccess} support, then this operation is
    * guaranteed to be {@code O(1)}.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code Streams.findLast(stream).orElse(defaultValue)}
@@ -883,17 +884,17 @@ public final class Iterables {
    * {@code iterable} contains fewer than {@code numberToSkip} elements, the returned iterable skips
    * all of its elements.
    *
-   * <p>Modifications to the underlying {@link Iterable} before a call to {@code iterator()} are
+   * <p>Modifications to the underlying {@code Iterable} before a call to {@code iterator()} are
    * reflected in the returned iterator. That is, the iterator skips the first {@code numberToSkip}
    * elements that exist when the {@code Iterator} is created, not when {@code skip()} is called.
    *
    * <p>The returned iterable's iterator supports {@code remove()} if the iterator of the underlying
    * iterable supports it. Note that it is <i>not</i> possible to delete the last skipped element by
    * immediately calling {@code remove()} on that iterator, as the {@code Iterator} contract states
-   * that a call to {@code remove()} before a call to {@code next()} will throw an {@link
+   * that a call to {@code remove()} before a call to {@code next()} will throw an {@code
    * IllegalStateException}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#skip}
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#skip}
    *
    * @since 3.0
    */
@@ -962,7 +963,7 @@ public final class Iterables {
    * elements. The returned iterable's iterator supports {@code remove()} if {@code iterable}'s
    * iterator does.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#limit}
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#limit}
    *
    * @param iterable the iterable to limit
    * @param limitSize the maximum number of elements in the returned iterable
@@ -987,19 +988,19 @@ public final class Iterables {
   }
 
   /**
-   * Returns a view of the supplied iterable that wraps each generated {@link Iterator} through
-   * {@link Iterators#consumingIterator(Iterator)}.
+   * Returns a view of the supplied iterable that wraps each generated {@code Iterator} through
+   * {@code Iterators#consumingIterator(Iterator)}.
    *
-   * <p>Note: If {@code iterable} is a {@link Queue}, the returned iterable will instead use {@link
-   * Queue#isEmpty} and {@link Queue#remove()}, since {@link Queue}'s iteration order is undefined.
-   * Calling {@link Iterator#hasNext()} on a generated iterator from the returned iterable may cause
-   * an item to be immediately dequeued for return on a subsequent call to {@link Iterator#next()}.
+   * <p>Note: If {@code iterable} is a {@code Queue}, the returned iterable will instead use {@code
+   * Queue#isEmpty} and {@code Queue#remove()}, since {@code Queue}'s iteration order is undefined.
+   * Calling {@code Iterator#hasNext()} on a generated iterator from the returned iterable may cause
+   * an item to be immediately dequeued for return on a subsequent call to {@code Iterator#next()}.
    *
-   * <p>Whether the input {@code iterable} is a {@link Queue} or not, the returned {@code Iterable}
+   * <p>Whether the input {@code iterable} is a {@code Queue} or not, the returned {@code Iterable}
    * is not thread-safe.
    *
    * @param iterable the iterable to wrap
-   * @return a view of the supplied iterable that wraps each generated iterator through {@link
+   * @return a view of the supplied iterable that wraps each generated iterator through {@code
    *     Iterators#consumingIterator(Iterator)}; for queues, an iterable that generates iterators
    *     that return and consume the queue's elements in queue order
    * @see Iterators#consumingIterator(Iterator)
@@ -1029,8 +1030,8 @@ public final class Iterables {
   /**
    * Determines if the given iterable contains no elements.
    *
-   * <p>There is no precise {@link Iterator} equivalent to this method, since one can only ask an
-   * iterator whether it has any elements <i>remaining</i> (which one does using {@link
+   * <p>There is no precise {@code Iterator} equivalent to this method, since one can only ask an
+   * iterator whether it has any elements <i>remaining</i> (which one does using {@code
    * Iterator#hasNext}).
    *
    * <p><b>{@code Stream} equivalent:</b> {@code !stream.findAny().isPresent()}

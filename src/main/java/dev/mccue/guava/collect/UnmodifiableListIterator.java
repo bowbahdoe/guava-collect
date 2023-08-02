@@ -21,7 +21,7 @@ import java.util.ListIterator;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A list iterator that does not support {@link #remove}, {@link #add}, or {@link #set}.
+ * A list iterator that does not support {@code #remove}, {@code #add}, or {@code #set}.
  *
  * @since 7.0
  * @author Louis Wasserman

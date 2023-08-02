@@ -31,8 +31,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingMap} forward <i>indiscriminately</i> to the
- * methods of the delegate. For example, overriding {@link #put} alone <i>will not</i> change the
- * behavior of {@link #putAll}, which can lead to unexpected behavior. In this case, you should
+ * methods of the delegate. For example, overriding {@code #put} alone <i>will not</i> change the
+ * behavior of {@code #putAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code putAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardPutAll} method.
  *
@@ -40,7 +40,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * default} methods. Instead, it inherits their default implementations. When those implementations
  * invoke methods, they invoke methods on the {@code ForwardingMap}.
  *
- * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equal} to test
+ * <p>Each of the {@code standard} methods, where appropriate, use {@code Objects#equal} to test
  * equality for both keys and values. This may not be the desired behavior for map implementations
  * that use non-standard notions of key equality, such as a {@code SortedMap} whose comparator is
  * not consistent with {@code equals}.
@@ -140,8 +140,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #putAll(Map)} in terms of {@link #put(Object, Object)}. If you
-   * override {@link #put(Object, Object)}, you may wish to override {@link #putAll(Map)} to forward
+   * A sensible definition of {@code #putAll(Map)} in terms of {@code #put(Object, Object)}. If you
+   * override {@code #put(Object, Object)}, you may wish to override {@code #putAll(Map)} to forward
    * to this implementation.
    *
    * @since 7.0
@@ -151,11 +151,11 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible, albeit inefficient, definition of {@link #remove} in terms of the {@code iterator}
-   * method of {@link #entrySet}. If you override {@link #entrySet}, you may wish to override {@link
+   * A sensible, albeit inefficient, definition of {@code #remove} in terms of the {@code iterator}
+   * method of {@code #entrySet}. If you override {@code #entrySet}, you may wish to override {@code
    * #remove} to forward to this implementation.
    *
-   * <p>Alternately, you may wish to override {@link #remove} with {@code keySet().remove}, assuming
+   * <p>Alternately, you may wish to override {@code #remove} with {@code keySet().remove}, assuming
    * that approach would not lead to an infinite loop.
    *
    * @since 7.0
@@ -175,8 +175,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #clear} in terms of the {@code iterator} method of {@link
-   * #entrySet}. In many cases, you may wish to override {@link #clear} to forward to this
+   * A sensible definition of {@code #clear} in terms of the {@code iterator} method of {@code
+   * #entrySet}. In many cases, you may wish to override {@code #clear} to forward to this
    * implementation.
    *
    * @since 7.0
@@ -186,10 +186,10 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible implementation of {@link Map#keySet} in terms of the following methods: {@link
-   * ForwardingMap#clear}, {@link ForwardingMap#containsKey}, {@link ForwardingMap#isEmpty}, {@link
-   * ForwardingMap#remove}, {@link ForwardingMap#size}, and the {@link Set#iterator} method of
-   * {@link ForwardingMap#entrySet}. In many cases, you may wish to override {@link
+   * A sensible implementation of {@code Map#keySet} in terms of the following methods: {@code
+   * ForwardingMap#clear}, {@code ForwardingMap#containsKey}, {@code ForwardingMap#isEmpty}, {@code
+   * ForwardingMap#remove}, {@code ForwardingMap#size}, and the {@code Set#iterator} method of
+   * {@code ForwardingMap#entrySet}. In many cases, you may wish to override {@code
    * ForwardingMap#keySet} to forward to this implementation or a subclass thereof.
    *
    * @since 10.0
@@ -202,9 +202,9 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible, albeit inefficient, definition of {@link #containsKey} in terms of the {@code
-   * iterator} method of {@link #entrySet}. If you override {@link #entrySet}, you may wish to
-   * override {@link #containsKey} to forward to this implementation.
+   * A sensible, albeit inefficient, definition of {@code #containsKey} in terms of the {@code
+   * iterator} method of {@code #entrySet}. If you override {@code #entrySet}, you may wish to
+   * override {@code #containsKey} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -213,10 +213,10 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible implementation of {@link Map#values} in terms of the following methods: {@link
-   * ForwardingMap#clear}, {@link ForwardingMap#containsValue}, {@link ForwardingMap#isEmpty},
-   * {@link ForwardingMap#size}, and the {@link Set#iterator} method of {@link
-   * ForwardingMap#entrySet}. In many cases, you may wish to override {@link ForwardingMap#values}
+   * A sensible implementation of {@code Map#values} in terms of the following methods: {@code
+   * ForwardingMap#clear}, {@code ForwardingMap#containsValue}, {@code ForwardingMap#isEmpty},
+   * {@code ForwardingMap#size}, and the {@code Set#iterator} method of {@code
+   * ForwardingMap#entrySet}. In many cases, you may wish to override {@code ForwardingMap#values}
    * to forward to this implementation or a subclass thereof.
    *
    * @since 10.0
@@ -229,8 +229,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #containsValue} in terms of the {@code iterator} method of
-   * {@link #entrySet}. If you override {@link #entrySet}, you may wish to override {@link
+   * A sensible definition of {@code #containsValue} in terms of the {@code iterator} method of
+   * {@code #entrySet}. If you override {@code #entrySet}, you may wish to override {@code
    * #containsValue} to forward to this implementation.
    *
    * @since 7.0
@@ -240,10 +240,10 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible implementation of {@link Map#entrySet} in terms of the following methods: {@link
-   * ForwardingMap#clear}, {@link ForwardingMap#containsKey}, {@link ForwardingMap#get}, {@link
-   * ForwardingMap#isEmpty}, {@link ForwardingMap#remove}, and {@link ForwardingMap#size}. In many
-   * cases, you may wish to override {@link #entrySet} to forward to this implementation or a
+   * A sensible implementation of {@code Map#entrySet} in terms of the following methods: {@code
+   * ForwardingMap#clear}, {@code ForwardingMap#containsKey}, {@code ForwardingMap#get}, {@code
+   * ForwardingMap#isEmpty}, {@code ForwardingMap#remove}, and {@code ForwardingMap#size}. In many
+   * cases, you may wish to override {@code #entrySet} to forward to this implementation or a
    * subclass thereof.
    *
    * @since 10.0
@@ -259,8 +259,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #isEmpty} in terms of the {@code iterator} method of {@link
-   * #entrySet}. If you override {@link #entrySet}, you may wish to override {@link #isEmpty} to
+   * A sensible definition of {@code #isEmpty} in terms of the {@code iterator} method of {@code
+   * #entrySet}. If you override {@code #entrySet}, you may wish to override {@code #isEmpty} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -270,8 +270,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #equals} in terms of the {@code equals} method of {@link
-   * #entrySet}. If you override {@link #entrySet}, you may wish to override {@link #equals} to
+   * A sensible definition of {@code #equals} in terms of the {@code equals} method of {@code
+   * #entrySet}. If you override {@code #entrySet}, you may wish to override {@code #equals} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -281,8 +281,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #hashCode} in terms of the {@code iterator} method of {@link
-   * #entrySet}. If you override {@link #entrySet}, you may wish to override {@link #hashCode} to
+   * A sensible definition of {@code #hashCode} in terms of the {@code iterator} method of {@code
+   * #entrySet}. If you override {@code #entrySet}, you may wish to override {@code #hashCode} to
    * forward to this implementation.
    *
    * @since 7.0
@@ -292,8 +292,8 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
   }
 
   /**
-   * A sensible definition of {@link #toString} in terms of the {@code iterator} method of {@link
-   * #entrySet}. If you override {@link #entrySet}, you may wish to override {@link #toString} to
+   * A sensible definition of {@code #toString} in terms of the {@code iterator} method of {@code
+   * #entrySet}. If you override {@code #entrySet}, you may wish to override {@code #toString} to
    * forward to this implementation.
    *
    * @since 7.0

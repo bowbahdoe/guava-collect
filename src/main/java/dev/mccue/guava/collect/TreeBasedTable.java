@@ -37,11 +37,11 @@ import dev.mccue.jsr305.CheckForNull;
  * ordering or by supplied comparators. When constructing a {@code TreeBasedTable}, you may provide
  * comparators for the row keys and the column keys, or you may use natural ordering for both.
  *
- * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap} method
- * returns a {@link SortedMap}, instead of the {@link Set} and {@link Map} specified by the {@link
+ * <p>The {@code #rowKeySet} method returns a {@code SortedSet} and the {@code #rowMap} method
+ * returns a {@code SortedMap}, instead of the {@code Set} and {@code Map} specified by the {@code
  * Table} interface.
  *
- * <p>The views returned by {@link #column}, {@link #columnKeySet()}, and {@link #columnMap()} have
+ * <p>The views returned by {@code #column}, {@code #columnKeySet()}, and {@code #columnMap()} have
  * iterators that don't support {@code remove()}. Otherwise, all optional operations are supported.
  * Null row keys, columns keys, and values are not supported.
  *
@@ -51,8 +51,8 @@ import dev.mccue.jsr305.CheckForNull;
  * since an iteration across all row keys occurs.
  *
  * <p>Because a {@code TreeBasedTable} has unique sorted values for a given row, both {@code
- * row(rowKey)} and {@code rowMap().get(rowKey)} are {@link SortedMap} instances, instead of the
- * {@link Map} specified in the {@link Table} interface.
+ * row(rowKey)} and {@code rowMap().get(rowKey)} are {@code SortedMap} instances, instead of the
+ * {@code Map} specified in the {@code Table} interface.
  *
  * <p>Note that this implementation is not synchronized. If multiple threads access this table
  * concurrently and one of the threads modifies the table, it must be synchronized externally.
@@ -64,6 +64,7 @@ import dev.mccue.jsr305.CheckForNull;
  * @author Louis Wasserman
  * @since 7.0
  */
+
 @ElementTypesAreNonnullByDefault
 public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   private final Comparator<? super C> columnComparator;
@@ -87,7 +88,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
    * Creates an empty {@code TreeBasedTable} that uses the natural orderings of both row and column
    * keys.
    *
-   * <p>The method signature specifies {@code R extends Comparable} with a raw {@link Comparable},
+   * <p>The method signature specifies {@code R extends Comparable} with a raw {@code Comparable},
    * instead of {@code R extends Comparable<? super R>}, and the same for {@code C}. That's
    * necessary to support classes defined without generics.
    */
@@ -127,7 +128,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   // TODO(jlevy): Move to StandardRowSortedTable?
 
   /**
-   * Returns the comparator that orders the rows. With natural ordering, {@link Ordering#natural()}
+   * Returns the comparator that orders the rows. With natural ordering, {@code Ordering#natural()}
    * is returned.
    *
    * @deprecated Use {@code table.rowKeySet().comparator()} instead.
@@ -142,11 +143,11 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   }
 
   /**
-   * Returns the comparator that orders the columns. With natural ordering, {@link
+   * Returns the comparator that orders the columns. With natural ordering, {@code
    * Ordering#natural()} is returned.
    *
-   * @deprecated Store the {@link Comparator} alongside the {@link Table}. Or, if you know that the
-   *     {@link Table} contains at least one value, you can retrieve the {@link Comparator} with:
+   * @deprecated Store the {@code Comparator} alongside the {@code Table}. Or, if you know that the
+   *     {@code Table} contains at least one value, you can retrieve the {@code Comparator} with:
    *     {@code ((SortedMap<C, V>) table.rowMap().values().iterator().next()).comparator();}.
    */
   @Deprecated
@@ -160,7 +161,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
    * {@inheritDoc}
    *
    * <p>Because a {@code TreeBasedTable} has unique sorted values for a given row, this method
-   * returns a {@link SortedMap}, instead of the {@link Map} specified in the {@link Table}
+   * returns a {@code SortedMap}, instead of the {@code Map} specified in the {@code Table}
    * interface.
    *
    * @since 10.0 (<a href="https://github.com/google/guava/wiki/Compatibility" >mostly

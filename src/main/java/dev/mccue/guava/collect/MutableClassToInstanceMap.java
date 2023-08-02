@@ -34,7 +34,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A mutable class-to-instance map backed by an arbitrary user-provided map. See also {@link
+ * A mutable class-to-instance map backed by an arbitrary user-provided map. See also {@code
  * ImmutableClassToInstanceMap}.
  *
  * <p>See the Guava User Guide article on <a href=
@@ -51,7 +51,7 @@ public final class MutableClassToInstanceMap<B extends @Nullable Object>
     implements ClassToInstanceMap<B>, Serializable {
 
   /**
-   * Returns a new {@code MutableClassToInstanceMap} instance backed by a {@link HashMap} using the
+   * Returns a new {@code MutableClassToInstanceMap} instance backed by a {@code HashMap} using the
    * default initial capacity and load factor.
    */
   public static <B extends @Nullable Object> MutableClassToInstanceMap<B> create() {

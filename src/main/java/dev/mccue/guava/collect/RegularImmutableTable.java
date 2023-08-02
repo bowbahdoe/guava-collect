@@ -25,7 +25,7 @@ import java.util.Set;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * An implementation of {@link ImmutableTable} holding an arbitrary number of cells.
+ * An implementation of {@code ImmutableTable} holding an arbitrary number of cells.
  *
  * @author Gregory Kick
  */

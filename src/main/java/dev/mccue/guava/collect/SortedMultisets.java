@@ -20,7 +20,6 @@ import static dev.mccue.guava.collect.BoundType.CLOSED;
 import static dev.mccue.guava.collect.BoundType.OPEN;
 
 import dev.mccue.guava.collect.Multiset.Entry;
-
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -30,15 +29,16 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Provides static utility methods for creating and working with {@link SortedMultiset} instances.
+ * Provides static utility methods for creating and working with {@code SortedMultiset} instances.
  *
  * @author Louis Wasserman
  */
+
 @ElementTypesAreNonnullByDefault
 final class SortedMultisets {
   private SortedMultisets() {}
 
-  /** A skeleton implementation for {@link SortedMultiset#elementSet}. */
+  /** A skeleton implementation for {@code SortedMultiset#elementSet}. */
   @SuppressWarnings("JdkObsolete") // TODO(b/6160855): Switch GWT emulations to NavigableSet.
   static class ElementSet<E extends @Nullable Object> extends Multisets.ElementSet<E>
       implements SortedSet<E> {
@@ -91,7 +91,7 @@ final class SortedMultisets {
     }
   }
 
-  /** A skeleton navigable implementation for {@link SortedMultiset#elementSet}. */
+  /** A skeleton navigable implementation for {@code SortedMultiset#elementSet}. */
   // Navigable
   static class NavigableElementSet<E extends @Nullable Object> extends ElementSet<E>
       implements NavigableSet<E> {

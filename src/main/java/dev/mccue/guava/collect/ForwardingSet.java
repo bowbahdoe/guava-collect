@@ -29,8 +29,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingSet} forward <b>indiscriminately</b> to the
- * methods of the delegate. For example, overriding {@link #add} alone <b>will not</b> change the
- * behavior of {@link #addAll}, which can lead to unexpected behavior. In this case, you should
+ * methods of the delegate. For example, overriding {@code #add} alone <b>will not</b> change the
+ * behavior of {@code #addAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code addAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardAddAll} method.
  *
@@ -67,8 +67,8 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
   }
 
   /**
-   * A sensible definition of {@link #removeAll} in terms of {@link #iterator} and {@link #remove}.
-   * If you override {@code iterator} or {@code remove}, you may wish to override {@link #removeAll}
+   * A sensible definition of {@code #removeAll} in terms of {@code #iterator} and {@code #remove}.
+   * If you override {@code iterator} or {@code remove}, you may wish to override {@code #removeAll}
    * to forward to this implementation.
    *
    * @since 7.0 (this version overrides the {@code ForwardingCollection} version as of 12.0)
@@ -79,8 +79,8 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
   }
 
   /**
-   * A sensible definition of {@link #equals} in terms of {@link #size} and {@link #containsAll}. If
-   * you override either of those methods, you may wish to override {@link #equals} to forward to
+   * A sensible definition of {@code #equals} in terms of {@code #size} and {@code #containsAll}. If
+   * you override either of those methods, you may wish to override {@code #equals} to forward to
    * this implementation.
    *
    * @since 7.0
@@ -90,8 +90,8 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
   }
 
   /**
-   * A sensible definition of {@link #hashCode} in terms of {@link #iterator}. If you override
-   * {@link #iterator}, you may wish to override {@link #equals} to forward to this implementation.
+   * A sensible definition of {@code #hashCode} in terms of {@code #iterator}. If you override
+   * {@code #iterator}, you may wish to override {@code #equals} to forward to this implementation.
    *
    * @since 7.0
    */

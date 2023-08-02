@@ -16,17 +16,17 @@
 
 package dev.mccue.guava.collect;
 
-
 import java.util.Spliterator;
 import java.util.Spliterators;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link ImmutableSet} with two or more elements.
+ * Implementation of {@code ImmutableSet} with two or more elements.
  *
  * @author Kevin Bourrillion
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
@@ -37,7 +37,7 @@ final class RegularImmutableSet<E> extends ImmutableSet.CachingAsList<E> {
   private final transient Object[] elements;
   private final transient int hashCode;
   // the same values as `elements` in hashed positions (plus nulls)
-  @VisibleForTesting final transient @Nullable Object[] table;
+  final transient @Nullable Object[] table;
   // 'and' with an int to get a valid table index.
   private final transient int mask;
 

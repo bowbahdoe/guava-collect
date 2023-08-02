@@ -43,7 +43,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * Provides static methods for working with {@code Collection} instances.
  *
  * <p><b>Java 8 users:</b> several common uses for this class are now more comprehensively addressed
- * by the new {@link java.util.stream.Stream} library. Read the method documentation below for
+ * by the new {@code java.util.stream.Stream} library. Read the method documentation below for
  * comparisons. These methods are not being deprecated, but we gently encourage you to migrate to
  * streams.
  *
@@ -62,7 +62,7 @@ public final class Collections2 {
    *
    * <p>The resulting collection's iterator does not support {@code remove()}, but all other
    * collection methods are supported. When given an element that doesn't satisfy the predicate, the
-   * collection's {@code add()} and {@code addAll()} methods throw an {@link
+   * collection's {@code add()} and {@code addAll()} methods throw an {@code
    * IllegalArgumentException}. When methods such as {@code removeAll()} and {@code clear()} are
    * called on the filtered collection, only elements that satisfy the filter will be removed from
    * the underlying collection.
@@ -75,11 +75,11 @@ public final class Collections2 {
    * predicate)} and use the copy.
    *
    * <p><b>Warning:</b> {@code predicate} must be <i>consistent with equals</i>, as documented at
-   * {@link Predicate#apply}. Do not provide a predicate such as {@code
-   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@link
+   * {@code Predicate#apply}. Do not provide a predicate such as {@code
+   * Predicates.instanceOf(ArrayList.class)}, which is inconsistent with equals. (See {@code
    * Iterables#filter(Iterable, Class)} for related functionality.)
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link java.util.stream.Stream#filter Stream.filter}.
+   * <p><b>{@code Stream} equivalent:</b> {@code java.util.stream.Stream#filter Stream.filter}.
    */
   // TODO(kevinb): how can we omit that Iterables link when building gwt
   // javadoc?
@@ -95,7 +95,7 @@ public final class Collections2 {
   }
 
   /**
-   * Delegates to {@link Collection#contains}. Returns {@code false} if the {@code contains} method
+   * Delegates to {@code Collection#contains}. Returns {@code false} if the {@code contains} method
    * throws a {@code ClassCastException} or {@code NullPointerException}.
    */
   static boolean safeContains(Collection<?> collection, @CheckForNull Object object) {
@@ -108,7 +108,7 @@ public final class Collections2 {
   }
 
   /**
-   * Delegates to {@link Collection#remove}. Returns {@code false} if the {@code remove} method
+   * Delegates to {@code Collection#remove}. Returns {@code false} if the {@code remove} method
    * throws a {@code ClassCastException} or {@code NullPointerException}.
    */
   static boolean safeRemove(Collection<?> collection, @CheckForNull Object object) {
@@ -244,7 +244,7 @@ public final class Collections2 {
    * The returned collection is a live view of {@code fromCollection}; changes to one affect the
    * other.
    *
-   * <p>The returned collection's {@code add()} and {@code addAll()} methods throw an {@link
+   * <p>The returned collection's {@code add()} and {@code addAll()} methods throw an {@code
    * UnsupportedOperationException}. All other collection methods are supported, as long as {@code
    * fromCollection} supports them.
    *
@@ -253,10 +253,10 @@ public final class Collections2 {
    * <p>When a live view is <i>not</i> needed, it may be faster to copy the transformed collection
    * and use the copy.
    *
-   * <p>If the input {@code Collection} is known to be a {@code List}, consider {@link
-   * Lists#transform}. If only an {@code Iterable} is available, use {@link Iterables#transform}.
+   * <p>If the input {@code Collection} is known to be a {@code List}, consider {@code
+   * Lists#transform}. If only an {@code Iterable} is available, use {@code Iterables#transform}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link java.util.stream.Stream#map Stream.map}.
+   * <p><b>{@code Stream} equivalent:</b> {@code java.util.stream.Stream#map Stream.map}.
    */
   public static <F extends @Nullable Object, T extends @Nullable Object> Collection<T> transform(
       Collection<F> fromCollection, Function<? super F, T> function) {
@@ -331,7 +331,7 @@ public final class Collections2 {
     return true;
   }
 
-  /** An implementation of {@link Collection#toString()}. */
+  /** An implementation of {@code Collection#toString()}. */
   static String toStringImpl(final Collection<?> collection) {
     StringBuilder sb = newStringBuilderForCollection(collection.size()).append('[');
     boolean first = true;
@@ -356,7 +356,7 @@ public final class Collections2 {
   }
 
   /**
-   * Returns a {@link Collection} of all the permutations of the specified {@link Iterable}.
+   * Returns a {@code Collection} of all the permutations of the specified {@code Iterable}.
    *
    * <p><i>Notes:</i> This is an implementation of the algorithm for Lexicographical Permutations
    * Generation, described in Knuth's "The Art of Computer Programming", Volume 4, Chapter 7,
@@ -364,7 +364,7 @@ public final class Collections2 {
    * first permutation will be in ascending order, and the last will be in descending order.
    *
    * <p>Duplicate elements are considered equal. For example, the list [1, 1] will have only one
-   * permutation, instead of two. This is why the elements have to implement {@link Comparable}.
+   * permutation, instead of two. This is why the elements have to implement {@code Comparable}.
    *
    * <p>An empty iterable has only one permutation, which is an empty list.
    *
@@ -372,7 +372,7 @@ public final class Collections2 {
    * Ordering.natural())}.
    *
    * @param elements the original iterable whose elements have to be permuted.
-   * @return an immutable {@link Collection} containing all the different permutations of the
+   * @return an immutable {@code Collection} containing all the different permutations of the
    *     original iterable.
    * @throws NullPointerException if the specified iterable is null or has any null elements.
    * @since 12.0
@@ -383,8 +383,8 @@ public final class Collections2 {
   }
 
   /**
-   * Returns a {@link Collection} of all the permutations of the specified {@link Iterable} using
-   * the specified {@link Comparator} for establishing the lexicographical ordering.
+   * Returns a {@code Collection} of all the permutations of the specified {@code Iterable} using
+   * the specified {@code Comparator} for establishing the lexicographical ordering.
    *
    * <p>Examples:
    *
@@ -422,7 +422,7 @@ public final class Collections2 {
    *
    * @param elements the original iterable whose elements have to be permuted.
    * @param comparator a comparator for the iterable's elements.
-   * @return an immutable {@link Collection} containing all the different permutations of the
+   * @return an immutable {@code Collection} containing all the different permutations of the
    *     original iterable.
    * @throws NullPointerException If the specified iterable is null, has any null elements, or if
    *     the specified comparator is null.
@@ -573,7 +573,7 @@ public final class Collections2 {
   }
 
   /**
-   * Returns a {@link Collection} of all the permutations of the specified {@link Collection}.
+   * Returns a {@code Collection} of all the permutations of the specified {@code Collection}.
    *
    * <p><i>Notes:</i> This is an implementation of the Plain Changes algorithm for permutations
    * generation, described in Knuth's "The Art of Computer Programming", Volume 4, Chapter 7,
@@ -584,7 +584,7 @@ public final class Collections2 {
    * <p>An empty collection has only one permutation, which is an empty list.
    *
    * @param elements the original collection whose elements have to be permuted.
-   * @return an immutable {@link Collection} containing all the different permutations of the
+   * @return an immutable {@code Collection} containing all the different permutations of the
    *     original collection.
    * @throws NullPointerException if the specified collection is null or has any null elements.
    * @since 12.0

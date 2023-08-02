@@ -44,6 +44,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Kevin Bourrillion
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
     implements Serializable {
@@ -73,12 +74,12 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   /**
    * {@inheritDoc}
    *
-   * <p>Invoking {@link Multiset.Entry#getCount} on an entry in the returned set always returns the
+   * <p>Invoking {@code Multiset.Entry#getCount} on an entry in the returned set always returns the
    * current count of that element in the multiset, as opposed to the count at the time the entry
    * was retrieved.
    */
   @Override
-  public Set<Entry<E>> entrySet() {
+  public Set<Multiset.Entry<E>> entrySet() {
     return super.entrySet();
   }
 
@@ -114,7 +115,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   @Override
   Iterator<Entry<E>> entryIterator() {
     final Iterator<Map.Entry<E, Count>> backingEntries = backingMap.entrySet().iterator();
-    return new Iterator<Entry<E>>() {
+    return new Iterator<Multiset.Entry<E>>() {
       @CheckForNull Map.Entry<E, Count> toRemove;
 
       @Override
@@ -255,7 +256,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   /**
    * {@inheritDoc}
    *
-   * @throws IllegalArgumentException if the call would result in more than {@link
+   * @throws IllegalArgumentException if the call would result in more than {@code
    *     Integer#MAX_VALUE} occurrences of {@code element} in this multiset.
    */
   @CanIgnoreReturnValue

@@ -23,10 +23,8 @@ import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.math.IntMath;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.util.AbstractQueue;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -56,10 +54,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *     .create();
  * }</pre>
  *
- * <p>As a {@link Queue} it functions exactly as a {@link PriorityQueue}: its head element -- the
- * implicit target of the methods {@link #peek()}, {@link #poll()} and {@link #remove()} -- is
+ * <p>As a {@code Queue} it functions exactly as a {@code PriorityQueue}: its head element -- the
+ * implicit target of the methods {@code #peek()}, {@code #poll()} and {@code #remove()} -- is
  * defined as the <i>least</i> element in the queue according to the queue's comparator. But unlike
- * a regular priority queue, the methods {@link #peekLast}, {@link #pollLast} and {@link
+ * a regular priority queue, the methods {@code #peekLast}, {@code #pollLast} and {@code
  * #removeLast} are also provided, to act on the <i>greatest</i> element in the queue instead.
  *
  * <p>A min-max priority queue can be configured with a maximum size. If so, each time the size of
@@ -70,7 +68,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <p>This implementation is based on the <a
  * href="http://portal.acm.org/citation.cfm?id=6621">min-max heap</a> developed by Atkinson, et al.
  * Unlike many other double-ended priority queues, it stores elements in a single array, as compact
- * as the traditional heap data structure used in {@link PriorityQueue}.
+ * as the traditional heap data structure used in {@code PriorityQueue}.
  *
  * <p>This class is not thread-safe, and does not accept null elements.
  *
@@ -79,16 +77,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <ul>
  *   <li>If you only access one end of the queue, and do use a maximum size, this class will perform
  *       significantly worse than a {@code PriorityQueue} with manual eviction above the maximum
- *       size. In many cases {@link Ordering#leastOf} may work for your use case with significantly
+ *       size. In many cases {@code Ordering#leastOf} may work for your use case with significantly
  *       improved (and asymptotically superior) performance.
- *   <li>The retrieval operations {@link #peek}, {@link #peekFirst}, {@link #peekLast}, {@link
- *       #element}, and {@link #size} are constant-time.
- *   <li>The enqueuing and dequeuing operations ({@link #offer}, {@link #add}, and all the forms of
- *       {@link #poll} and {@link #remove()}) run in {@code O(log n) time}.
- *   <li>The {@link #remove(Object)} and {@link #contains} operations require linear ({@code O(n)})
+ *   <li>The retrieval operations {@code #peek}, {@code #peekFirst}, {@code #peekLast}, {@code
+ *       #element}, and {@code #size} are constant-time.
+ *   <li>The enqueuing and dequeuing operations ({@code #offer}, {@code #add}, and all the forms of
+ *       {@code #poll} and {@code #remove()}) run in {@code O(log n) time}.
+ *   <li>The {@code #remove(Object)} and {@code #contains} operations require linear ({@code O(n)})
  *       time.
  *   <li>If you only access one end of the queue, and don't use a maximum size, this class is
- *       functionally equivalent to {@link PriorityQueue}, but significantly slower.
+ *       functionally equivalent to {@code PriorityQueue}, but significantly slower.
  * </ul>
  *
  * @author Sverre Sundsdal
@@ -149,8 +147,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   /**
    * The builder class used in creation of min-max priority queues. Instead of constructing one
-   * directly, use {@link MinMaxPriorityQueue#orderedBy(Comparator)}, {@link
-   * MinMaxPriorityQueue#expectedSize(int)} or {@link MinMaxPriorityQueue#maximumSize(int)}.
+   * directly, use {@code MinMaxPriorityQueue#orderedBy(Comparator)}, {@code
+   * MinMaxPriorityQueue#expectedSize(int)} or {@code MinMaxPriorityQueue#maximumSize(int)}.
    *
    * @param <B> the upper bound on the eventual type that can be produced by this builder (for
    *     example, a {@code Builder<Number>} can produce a {@code Queue<Number>} or {@code
@@ -226,7 +224,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   private final Heap minHeap;
   private final Heap maxHeap;
-  @VisibleForTesting final int maximumSize;
+  final int maximumSize;
   private @Nullable Object[] queue;
   private int size;
   private int modCount;
@@ -398,12 +396,11 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *
    * <p>Occasionally, in order to maintain the heap invariant, it must swap a later element of the
    * list with one before {@code index}. Under these circumstances it returns a pair of elements as
-   * a {@link MoveDesc}. The first one is the element that was previously at the end of the heap and
+   * a {@code MoveDesc}. The first one is the element that was previously at the end of the heap and
    * is now at some position before {@code index}. The second element is the one that was swapped
    * down to replace the element at {@code index}. This fact is used by iterator.remove so as to
    * visit elements during a traversal once and only once.
    */
-  @VisibleForTesting
   @CanIgnoreReturnValue
   @CheckForNull
   MoveDesc<E> removeAt(int index) {
@@ -489,7 +486,6 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
   private static final int EVEN_POWERS_OF_TWO = 0x55555555;
   private static final int ODD_POWERS_OF_TWO = 0xaaaaaaaa;
 
-  @VisibleForTesting
   static boolean isEvenLevel(int index) {
     int oneBased = ~~(index + 1); // for GWT
     checkState(oneBased > 0, "negative index");
@@ -501,7 +497,6 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *
    * <p>TODO(kevinb): move to the test class?
    */
-  @VisibleForTesting
   boolean isIntact() {
     for (int i = 1; i < size; i++) {
       if (!heapForIndex(i).verifyIndex(i)) {
@@ -532,7 +527,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
     /**
      * Tries to move {@code toTrickle} from a min to a max level and bubble up there. If it moved
-     * before {@code removeIndex} this method returns a pair as described in {@link #removeAt}.
+     * before {@code removeIndex} this method returns a pair as described in {@code #removeAt}.
      */
     @CheckForNull
     MoveDesc<E> tryCrossOverAndBubbleUp(int removeIndex, int vacated, E toTrickle) {
@@ -884,7 +879,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *
    * <p>The iterator is <i>fail-fast</i>: If the MinMaxPriorityQueue is modified at any time after
    * the iterator is created, in any way except through the iterator's own remove method, the
-   * iterator will generally throw a {@link ConcurrentModificationException}. Thus, in the face of
+   * iterator will generally throw a {@code ConcurrentModificationException}. Thus, in the face of
    * concurrent modification, the iterator fails quickly and cleanly, rather than risking arbitrary,
    * non-deterministic behavior at an undetermined time in the future.
    *
@@ -920,14 +915,13 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   /**
    * Returns the comparator used to order the elements in this queue. Obeys the general contract of
-   * {@link PriorityQueue#comparator}, but returns {@link Ordering#natural} instead of {@code null}
+   * {@code PriorityQueue#comparator}, but returns {@code Ordering#natural} instead of {@code null}
    * to indicate natural ordering.
    */
   public Comparator<? super E> comparator() {
     return minHeap.ordering;
   }
 
-  @VisibleForTesting
   int capacity() {
     return queue.length;
   }
@@ -936,7 +930,6 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   private static final int DEFAULT_CAPACITY = 11;
 
-  @VisibleForTesting
   static int initialQueueSize(
       int configuredExpectedSize, int maximumSize, Iterable<?> initialContents) {
     // Start with what they said, if they said it, otherwise DEFAULT_CAPACITY

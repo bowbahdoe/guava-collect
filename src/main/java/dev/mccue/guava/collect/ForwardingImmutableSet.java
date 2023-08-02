@@ -16,11 +16,13 @@
 
 package dev.mccue.guava.collect;
 
+
 /**
  * Unused stub class, unreferenced under Java and manually emulated under GWT.
  *
  * @author Chris Povirk
  */
+
 @ElementTypesAreNonnullByDefault
 abstract class ForwardingImmutableSet<E> {
   private ForwardingImmutableSet() {}

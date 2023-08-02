@@ -24,7 +24,6 @@ import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import dev.mccue.guava.base.MoreObjects;
 import dev.mccue.guava.base.Predicate;
 import dev.mccue.guava.collect.Maps.ViewCachingAbstractMap;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -36,7 +35,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link Multimaps#filterEntries(Multimap, Predicate)}.
+ * Implementation of {@code Multimaps#filterEntries(Multimap, Predicate)}.
  *
  * @author Jared Levy
  * @author Louis Wasserman
@@ -371,7 +370,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
     }
 
     @Override
-    public Set<Entry<K>> entrySet() {
+    public Set<Multiset.Entry<K>> entrySet() {
       return new Multisets.EntrySet<K>() {
 
         @Override
@@ -380,7 +379,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
         }
 
         @Override
-        public Iterator<Entry<K>> iterator() {
+        public Iterator<Multiset.Entry<K>> iterator() {
           return Keys.this.entryIterator();
         }
 

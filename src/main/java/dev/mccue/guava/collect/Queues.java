@@ -32,12 +32,13 @@ import java.util.concurrent.TimeUnit;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Static utility methods pertaining to {@link Queue} and {@link Deque} instances. Also see this
- * class's counterparts {@link Lists}, {@link Sets}, and {@link Maps}.
+ * Static utility methods pertaining to {@code Queue} and {@code Deque} instances. Also see this
+ * class's counterparts {@code Lists}, {@code Sets}, and {@code Maps}.
  *
  * @author Kurt Alfred Kluever
  * @since 11.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class Queues {
   private Queues() {}
@@ -105,7 +106,7 @@ public final class Queues {
   // LinkedBlockingDeque
 
   /**
-   * Creates an empty {@code LinkedBlockingDeque} with a capacity of {@link Integer#MAX_VALUE}.
+   * Creates an empty {@code LinkedBlockingDeque} with a capacity of {@code Integer#MAX_VALUE}.
    *
    * @since 12.0
    */
@@ -126,7 +127,7 @@ public final class Queues {
   }
 
   /**
-   * Creates a {@code LinkedBlockingDeque} with a capacity of {@link Integer#MAX_VALUE}, containing
+   * Creates a {@code LinkedBlockingDeque} with a capacity of {@code Integer#MAX_VALUE}, containing
    * the elements of the specified iterable, in the order they are returned by the iterable's
    * iterator.
    *
@@ -144,7 +145,7 @@ public final class Queues {
 
   // LinkedBlockingQueue
 
-  /** Creates an empty {@code LinkedBlockingQueue} with a capacity of {@link Integer#MAX_VALUE}. */
+  /** Creates an empty {@code LinkedBlockingQueue} with a capacity of {@code Integer#MAX_VALUE}. */
   // LinkedBlockingQueue
   public static <E> LinkedBlockingQueue<E> newLinkedBlockingQueue() {
     return new LinkedBlockingQueue<E>();
@@ -161,7 +162,7 @@ public final class Queues {
   }
 
   /**
-   * Creates a {@code LinkedBlockingQueue} with a capacity of {@link Integer#MAX_VALUE}, containing
+   * Creates a {@code LinkedBlockingQueue} with a capacity of {@code Integer#MAX_VALUE}, containing
    * the elements of the specified iterable, in the order they are returned by the iterable's
    * iterator.
    *
@@ -178,7 +179,7 @@ public final class Queues {
     return queue;
   }
 
-  // LinkedList: see {@link dev.mccue.guava.collect.Lists}
+  // LinkedList: see {@code dev.mccue.guava.collect.Lists}
 
   // PriorityBlockingQueue
 
@@ -255,7 +256,7 @@ public final class Queues {
   }
 
   /**
-   * Drains the queue as {@link BlockingQueue#drainTo(Collection, int)}, but if the requested {@code
+   * Drains the queue as {@code BlockingQueue#drainTo(Collection, int)}, but if the requested {@code
    * numElements} elements are not available, it will wait for them up to the specified timeout.
    *
    * @param q the blocking queue to be drained
@@ -276,7 +277,7 @@ public final class Queues {
   }
 
   /**
-   * Drains the queue as {@link BlockingQueue#drainTo(Collection, int)}, but if the requested {@code
+   * Drains the queue as {@code BlockingQueue#drainTo(Collection, int)}, but if the requested {@code
    * numElements} elements are not available, it will wait for them up to the specified timeout.
    *
    * @param q the blocking queue to be drained
@@ -322,7 +323,7 @@ public final class Queues {
   }
 
   /**
-   * Drains the queue as {@linkplain #drain(BlockingQueue, Collection, int, Duration)}, but with a
+   * Drains the queue as {@code #drain(BlockingQueue, Collection, int, Duration)}, but with a
    * different behavior in case it is interrupted while waiting. In that case, the operation will
    * continue as usual, and in the end the thread's interruption status will be set (no {@code
    * InterruptedException} is thrown).
@@ -346,7 +347,7 @@ public final class Queues {
   }
 
   /**
-   * Drains the queue as {@linkplain #drain(BlockingQueue, Collection, int, long, TimeUnit)}, but
+   * Drains the queue as {@code #drain(BlockingQueue, Collection, int, long, TimeUnit)}, but
    * with a different behavior in case it is interrupted while waiting. In that case, the operation
    * will continue as usual, and in the end the thread's interruption status will be set (no {@code
    * InterruptedException} is thrown).

@@ -39,9 +39,9 @@ public interface PeekingIterator<E extends @Nullable Object> extends Iterator<E>
    * Returns the next element in the iteration, without advancing the iteration.
    *
    * <p>Calls to {@code peek()} should not change the state of the iteration, except that it
-   * <i>may</i> prevent removal of the most recent element via {@link #remove()}.
+   * <i>may</i> prevent removal of the most recent element via {@code #remove()}.
    *
-   * @throws NoSuchElementException if the iteration has no more elements according to {@link
+   * @throws NoSuchElementException if the iteration has no more elements according to {@code
    *     #hasNext()}
    */
   @ParametricNullness
@@ -50,7 +50,7 @@ public interface PeekingIterator<E extends @Nullable Object> extends Iterator<E>
   /**
    * {@inheritDoc}
    *
-   * <p>The objects returned by consecutive calls to {@link #peek()} then {@link #next()} are
+   * <p>The objects returned by consecutive calls to {@code #peek()} then {@code #next()} are
    * guaranteed to be equal to each other.
    */
   @CanIgnoreReturnValue
@@ -61,11 +61,11 @@ public interface PeekingIterator<E extends @Nullable Object> extends Iterator<E>
   /**
    * {@inheritDoc}
    *
-   * <p>Implementations may or may not support removal when a call to {@link #peek()} has occurred
-   * since the most recent call to {@link #next()}.
+   * <p>Implementations may or may not support removal when a call to {@code #peek()} has occurred
+   * since the most recent call to {@code #next()}.
    *
-   * @throws IllegalStateException if there has been a call to {@link #peek()} since the most recent
-   *     call to {@link #next()} and this implementation does not support this sequence of calls
+   * @throws IllegalStateException if there has been a call to {@code #peek()} since the most recent
+   *     call to {@code #next()} and this implementation does not support this sequence of calls
    *     (optional)
    */
   @Override

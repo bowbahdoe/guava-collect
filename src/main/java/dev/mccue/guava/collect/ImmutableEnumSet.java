@@ -27,10 +27,11 @@ import java.util.function.Consumer;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation of {@link ImmutableSet} backed by a non-empty {@link EnumSet}.
+ * Implementation of {@code ImmutableSet} backed by a non-empty {@code java.util.EnumSet}.
  *
  * @author Jared Levy
  */
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
@@ -51,7 +52,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
    * This class isn't an arbitrary ForwardingImmutableSet because we need to
    * know that calling {@code clone()} during deserialization will return an
    * object that no one else has a reference to, allowing us to guarantee
-   * immutability. Hence, we support only {@link EnumSet}.
+   * immutability. Hence, we support only {@code EnumSet}.
    */
   private final transient EnumSet<E> delegate;
 

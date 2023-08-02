@@ -16,7 +16,6 @@ package dev.mccue.guava.collect;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -28,7 +27,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Skeletal, implementation-agnostic implementation of the {@link Table} interface.
+ * Skeletal, implementation-agnostic implementation of the {@code Table} interface.
  *
  * @author Louis Wasserman
  */
@@ -125,9 +124,9 @@ abstract class AbstractTable<
     return new CellSet();
   }
 
-  abstract Iterator<Cell<R, C, V>> cellIterator();
+  abstract Iterator<Table.Cell<R, C, V>> cellIterator();
 
-  abstract Spliterator<Cell<R, C, V>> cellSpliterator();
+  abstract Spliterator<Table.Cell<R, C, V>> cellSpliterator();
 
   class CellSet extends AbstractSet<Cell<R, C, V>> {
     @Override
@@ -160,7 +159,7 @@ abstract class AbstractTable<
     }
 
     @Override
-    public Iterator<Cell<R, C, V>> iterator() {
+    public Iterator<Table.Cell<R, C, V>> iterator() {
       return cellIterator();
     }
 

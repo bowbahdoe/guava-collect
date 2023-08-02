@@ -27,11 +27,11 @@ import java.util.stream.Collector;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Provides static methods for working with {@link Comparator} instances. For many other helpful
+ * Provides static methods for working with {@code Comparator} instances. For many other helpful
  * comparator utilities, see either {@code Comparator} itself (for Java 8 or later), or {@code
  * dev.mccue.guava.collect.Ordering} (otherwise).
  *
- * <h2>Relationship to {@code Ordering}</h2>
+ * <h3>Relationship to {@code Ordering}</h3>
  *
  * <p>In light of the significant enhancements to {@code Comparator} in Java 8, the overwhelming
  * majority of usages of {@code Ordering} can be written using only built-in JDK APIs. This class is
@@ -166,7 +166,7 @@ public final class Comparators {
   }
 
   /**
-   * Returns a comparator of {@link Optional} values which treats {@link Optional#empty} as less
+   * Returns a comparator of {@code Optional} values which treats {@code Optional#empty} as less
    * than all other values, and orders the rest using {@code valueComparator} on the contained
    * value.
    *
@@ -179,7 +179,7 @@ public final class Comparators {
   }
 
   /**
-   * Returns a comparator of {@link Optional} values which treats {@link Optional#empty} as greater
+   * Returns a comparator of {@code Optional} values which treats {@code Optional#empty} as greater
    * than all other values, and orders the rest using {@code valueComparator} on the contained
    * value.
    *

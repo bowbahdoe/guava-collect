@@ -22,7 +22,7 @@ import dev.mccue.jsr305.CheckForNull;
 /**
  * This class provides a skeletal implementation of the {@code Iterator} interface for sequences
  * whose next element can always be derived from the previous element. Null elements are not
- * supported, nor is the {@link #remove()} method.
+ * supported, nor is the {@code #remove()} method.
  *
  * <p>Example:
  *
@@ -52,7 +52,7 @@ public abstract class AbstractSequentialIterator<T> extends UnmodifiableIterator
 
   /**
    * Returns the element that follows {@code previous}, or returns {@code null} if no elements
-   * remain. This method is invoked during each call to {@link #next()} in order to compute the
+   * remain. This method is invoked during each call to {@code #next()} in order to compute the
    * result of a <i>future</i> call to {@code next()}.
    */
   @CheckForNull

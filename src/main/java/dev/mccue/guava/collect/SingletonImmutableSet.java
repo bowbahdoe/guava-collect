@@ -21,11 +21,12 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@link ImmutableSet} with exactly one element.
+ * Implementation of {@code ImmutableSet} with exactly one element.
  *
  * @author Kevin Bourrillion
  * @author Nick Kralevich
  */
+
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 final class SingletonImmutableSet<E> extends ImmutableSet<E> {

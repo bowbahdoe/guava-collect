@@ -24,6 +24,7 @@ import dev.mccue.jsr305.CheckForNull;
  * @author Jared Levy
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial")
 @ElementTypesAreNonnullByDefault
 final class ImmutableSortedAsList<E> extends RegularImmutableAsList<E>

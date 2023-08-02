@@ -32,24 +32,24 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A collection that supports order-independent equality, like {@link Set}, but may have duplicate
+ * A collection that supports order-independent equality, like {@code Set}, but may have duplicate
  * elements. A multiset is also sometimes called a <i>bag</i>.
  *
  * <p>Elements of a multiset that are equal to one another are referred to as <i>occurrences</i> of
  * the same single element. The total number of occurrences of an element in a multiset is called
  * the <i>count</i> of that element (the terms "frequency" and "multiplicity" are equivalent, but
  * not used in this API). Since the count of an element is represented as an {@code int}, a multiset
- * may never contain more than {@link Integer#MAX_VALUE} occurrences of any one element.
+ * may never contain more than {@code Integer#MAX_VALUE} occurrences of any one element.
  *
  * <p>{@code Multiset} refines the specifications of several methods from {@code Collection}. It
- * also defines an additional query operation, {@link #count}, which returns the count of an
- * element. There are five new bulk-modification operations, for example {@link #add(Object, int)},
+ * also defines an additional query operation, {@code #count}, which returns the count of an
+ * element. There are five new bulk-modification operations, for example {@code #add(Object, int)},
  * to add or remove multiple occurrences of an element at once, or to set the count of an element to
  * a specific value. These modification operations are optional, but implementations which support
- * the standard collection operations {@link #add(Object)} or {@link #remove(Object)} are encouraged
- * to implement the related methods as well. Finally, two collection views are provided: {@link
+ * the standard collection operations {@code #add(Object)} or {@code #remove(Object)} are encouraged
+ * to implement the related methods as well. Finally, two collection views are provided: {@code
  * #elementSet} contains the distinct elements of the multiset "with duplicates collapsed", and
- * {@link #entrySet} is similar but contains {@link Entry Multiset.Entry} instances, each providing
+ * {@code #entrySet} is similar but contains {@code Entry Multiset.Entry} instances, each providing
  * both a distinct element and the count of that element.
  *
  * <p>In addition to these required methods, implementations of {@code Multiset} are expected to
@@ -59,31 +59,31 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * reflecting the new developments of Java 5.
  *
  * <p>As with other collection types, the modification operations are optional, and should throw
- * {@link UnsupportedOperationException} when they are not implemented. Most implementations should
+ * {@code UnsupportedOperationException} when they are not implemented. Most implementations should
  * support either all add operations or none of them, all removal operations or none of them, and if
  * and only if all of these are supported, the {@code setCount} methods as well.
  *
- * <p>A multiset uses {@link Object#equals} to determine whether two instances should be considered
+ * <p>A multiset uses {@code Object#equals} to determine whether two instances should be considered
  * "the same," <i>unless specified otherwise</i> by the implementation.
  *
- * <p><b>Warning:</b> as with normal {@link Set}s, it is almost always a bad idea to modify an
- * element (in a way that affects its {@link Object#equals} behavior) while it is contained in a
+ * <p><b>Warning:</b> as with normal {@code Set}s, it is almost always a bad idea to modify an
+ * element (in a way that affects its {@code Object#equals} behavior) while it is contained in a
  * multiset. Undefined behavior and bugs will result.
  *
- * <h2>Implementations</h2>
+ * <h3>Implementations</h3>
  *
  * <ul>
- *   <li>{@link ImmutableMultiset}
- *   <li>{@link ImmutableSortedMultiset}
- *   <li>{@link HashMultiset}
- *   <li>{@link LinkedHashMultiset}
- *   <li>{@link TreeMultiset}
- *   <li>{@link EnumMultiset}
- *   <li>{@link ConcurrentHashMultiset}
+ *   <li>{@code ImmutableMultiset}
+ *   <li>{@code ImmutableSortedMultiset}
+ *   <li>{@code HashMultiset}
+ *   <li>{@code LinkedHashMultiset}
+ *   <li>{@code TreeMultiset}
+ *   <li>{@code EnumMultiset}
+ *   <li>{@code ConcurrentHashMultiset}
  * </ul>
  *
  * <p>If your values may be zero, negative, or outside the range of an int, you may wish to use
- * {@code dev.mccue.guava.util.concurrent.AtomicLongMap} instead. Note, however, that unlike
+ * {@code dev.mccue.guava.concurrent.AtomicLongMap} instead. Note, however, that unlike
  * {@code Multiset}, {@code AtomicLongMap} does not automatically remove zeros.
  *
  * <p>See the Guava User Guide article on <a href=
@@ -107,10 +107,10 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
 
   /**
    * Returns the number of occurrences of an element in this multiset (the <i>count</i> of the
-   * element). Note that for an {@link Object#equals}-based multiset, this gives the same result as
-   * {@link Collections#frequency} (which would presumably perform more poorly).
+   * element). Note that for an {@code Object#equals}-based multiset, this gives the same result as
+   * {@code Collections#frequency} (which would presumably perform more poorly).
    *
-   * <p><b>Note:</b> the utility method {@link Iterables#frequency} generalizes this operation; it
+   * <p><b>Note:</b> the utility method {@code Iterables#frequency} generalizes this operation; it
    * correctly delegates to this method when dealing with a multiset, but it can also accept any
    * other iterable type.
    *
@@ -124,7 +124,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
 
   /**
    * Adds a number of occurrences of an element to this multiset. Note that if {@code occurrences ==
-   * 1}, this method has the identical effect to {@link #add(Object)}. This method is functionally
+   * 1}, this method has the identical effect to {@code #add(Object)}. This method is functionally
    * equivalent (except in the case of overflow) to the call {@code
    * addAll(Collections.nCopies(element, occurrences))}, which would presumably perform much more
    * poorly.
@@ -135,7 +135,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    *     no change will be made.
    * @return the count of the element before the operation; possibly zero
    * @throws IllegalArgumentException if {@code occurrences} is negative, or if this operation would
-   *     result in more than {@link Integer#MAX_VALUE} occurrences of the element
+   *     result in more than {@code Integer#MAX_VALUE} occurrences of the element
    * @throws NullPointerException if {@code element} is null and this implementation does not permit
    *     null elements. Note that if {@code occurrences} is zero, the implementation may opt to
    *     return normally.
@@ -146,20 +146,20 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   /**
    * Adds a single occurrence of the specified element to this multiset.
    *
-   * <p>This method refines {@link Collection#add}, which only <i>ensures</i> the presence of the
+   * <p>This method refines {@code Collection#add}, which only <i>ensures</i> the presence of the
    * element, to further specify that a successful call must always increment the count of the
    * element, and the overall size of the collection, by one.
    *
-   * <p>To both add the element and obtain the previous count of that element, use {@link
+   * <p>To both add the element and obtain the previous count of that element, use {@code
    * #add(Object, int) add}{@code (element, 1)} instead.
    *
    * @param element the element to add one occurrence of; may be null only if explicitly allowed by
    *     the implementation
    * @return {@code true} always, since this call is required to modify the multiset, unlike other
-   *     {@link Collection} types
+   *     {@code Collection} types
    * @throws NullPointerException if {@code element} is null and this implementation does not permit
    *     null elements
-   * @throws IllegalArgumentException if {@link Integer#MAX_VALUE} occurrences of {@code element}
+   * @throws IllegalArgumentException if {@code Integer#MAX_VALUE} occurrences of {@code element}
    *     are already contained in this multiset
    */
   @CanIgnoreReturnValue
@@ -184,10 +184,10 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   /**
    * Removes a <i>single</i> occurrence of the specified element from this multiset, if present.
    *
-   * <p>This method refines {@link Collection#remove} to further specify that it <b>may not</b>
+   * <p>This method refines {@code Collection#remove} to further specify that it <b>may not</b>
    * throw an exception in response to {@code element} being null or of the wrong type.
    *
-   * <p>To both remove the element and obtain the previous count of that element, use {@link
+   * <p>To both remove the element and obtain the previous count of that element, use {@code
    * #remove(Object, int) remove}{@code (element, 1)} instead.
    *
    * @param element the element to remove one occurrence of
@@ -214,7 +214,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   int setCount(@ParametricNullness E element, int count);
 
   /**
-   * Conditionally sets the count of an element to a new value, as described in {@link
+   * Conditionally sets the count of an element to a new value, as described in {@code
    * #setCount(Object, int)}, provided that the element has the expected current count. If the
    * current count is not {@code oldCount}, no change is made.
    *
@@ -254,7 +254,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    * Returns a view of the contents of this multiset, grouped into {@code Multiset.Entry} instances,
    * each providing an element of the multiset and the count of that element. This set contains
    * exactly one entry for each distinct element in the multiset (thus it always has the same size
-   * as the {@link #elementSet}). The order of the elements in the element set is unspecified.
+   * as the {@code #elementSet}). The order of the elements in the element set is unspecified.
    *
    * <p>The entry set is backed by the same data as the multiset, so any change to either is
    * immediately reflected in the other. However, multiset changes may or may not be reflected in
@@ -269,7 +269,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   Set<Entry<E>> entrySet();
 
   /**
-   * An unmodifiable element-count pair for a multiset. The {@link Multiset#entrySet} method returns
+   * An unmodifiable element-count pair for a multiset. The {@code Multiset#entrySet} method returns
    * a view of the multiset whose elements are of this class. A multiset implementation may return
    * Entry instances that are either live "read-through" views to the Multiset, or immutable
    * snapshots. Note that this type is unrelated to the similarly-named type {@code Map.Entry}.
@@ -340,7 +340,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   /**
    * Runs the specified action for each distinct element in this multiset, and the number of
    * occurrences of that element. For some {@code Multiset} implementations, this may be more
-   * efficient than iterating over the {@link #entrySet()} either explicitly or with {@code
+   * efficient than iterating over the {@code #entrySet()} either explicitly or with {@code
    * entrySet().forEach(action)}.
    *
    * @since 21.0
@@ -378,7 +378,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    * {@inheritDoc}
    *
    * <p>It is recommended, though not mandatory, that this method return the result of invoking
-   * {@link #toString} on the {@link #entrySet}, yielding a result such as {@code [a x 3, c, d x 2,
+   * {@code #toString} on the {@code #entrySet}, yielding a result such as {@code [a x 3, c, d x 2,
    * e]}.
    */
   @Override
@@ -398,7 +398,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   /**
    * Determines whether this multiset contains the specified element.
    *
-   * <p>This method refines {@link Collection#contains} to further specify that it <b>may not</b>
+   * <p>This method refines {@code Collection#contains} to further specify that it <b>may not</b>
    * throw an exception in response to {@code element} being null or of the wrong type.
    *
    * @param element the element to check for
@@ -411,13 +411,13 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    * Returns {@code true} if this multiset contains at least one occurrence of each element in the
    * specified collection.
    *
-   * <p>This method refines {@link Collection#containsAll} to further specify that it <b>may not</b>
+   * <p>This method refines {@code Collection#containsAll} to further specify that it <b>may not</b>
    * throw an exception in response to any of {@code elements} being null or of the wrong type.
    *
    * <p><b>Note:</b> this method does not take into account the occurrence count of an element in
    * the two collections; it may still return {@code true} even if {@code elements} contains several
    * occurrences of an element and this multiset contains only one. This is no different than any
-   * other collection type like {@link List}, but it may be unexpected to the user of a multiset.
+   * other collection type like {@code List}, but it may be unexpected to the user of a multiset.
    *
    * @param elements the collection of elements to be checked for containment in this multiset
    * @return {@code true} if this multiset contains at least one occurrence of each element
@@ -432,10 +432,10 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    *
    * <p><b>Note:</b> This method ignores how often any element might appear in {@code c}, and only
    * cares whether or not an element appears at all. If you wish to remove one occurrence in this
-   * multiset for every occurrence in {@code c}, see {@link Multisets#removeOccurrences(Multiset,
+   * multiset for every occurrence in {@code c}, see {@code Multisets#removeOccurrences(Multiset,
    * Multiset)}.
    *
-   * <p>This method refines {@link Collection#removeAll} to further specify that it <b>may not</b>
+   * <p>This method refines {@code Collection#removeAll} to further specify that it <b>may not</b>
    * throw an exception in response to any of {@code elements} being null or of the wrong type.
    */
   @CanIgnoreReturnValue
@@ -447,10 +447,10 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
    *
    * <p><b>Note:</b> This method ignores how often any element might appear in {@code c}, and only
    * cares whether or not an element appears at all. If you wish to remove one occurrence in this
-   * multiset for every occurrence in {@code c}, see {@link Multisets#retainOccurrences(Multiset,
+   * multiset for every occurrence in {@code c}, see {@code Multisets#retainOccurrences(Multiset,
    * Multiset)}.
    *
-   * <p>This method refines {@link Collection#retainAll} to further specify that it <b>may not</b>
+   * <p>This method refines {@code Collection#retainAll} to further specify that it <b>may not</b>
    * throw an exception in response to any of {@code elements} being null or of the wrong type.
    *
    * @see Multisets#retainOccurrences(Multiset, Multiset)

@@ -25,8 +25,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Interface that extends {@code Table} and whose rows are sorted.
  *
- * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap} method
- * returns a {@link SortedMap}, instead of the {@link Set} and {@link Map} specified by the {@link
+ * <p>The {@code #rowKeySet} method returns a {@code SortedSet} and the {@code #rowMap} method
+ * returns a {@code SortedMap}, instead of the {@code Set} and {@code Map} specified by the {@code
  * Table} interface.
  *
  * @author Warren Dukes
@@ -39,7 +39,7 @@ public interface RowSortedTable<
   /**
    * {@inheritDoc}
    *
-   * <p>This method returns a {@link SortedSet}, instead of the {@code Set} specified in the {@link
+   * <p>This method returns a {@code SortedSet}, instead of the {@code Set} specified in the {@code
    * Table} interface.
    */
   @Override
@@ -48,7 +48,7 @@ public interface RowSortedTable<
   /**
    * {@inheritDoc}
    *
-   * <p>This method returns a {@link SortedMap}, instead of the {@code Map} specified in the {@link
+   * <p>This method returns a {@code SortedMap}, instead of the {@code Map} specified in the {@code
    * Table} interface.
    */
   @Override

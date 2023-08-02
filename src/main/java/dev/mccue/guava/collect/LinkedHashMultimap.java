@@ -21,10 +21,8 @@ import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -67,10 +65,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p>This class is not threadsafe when any concurrent operations update the multimap. Concurrent
  * read operations will work correctly. To allow concurrent update operations, wrap your multimap
- * with a call to {@link Multimaps#synchronizedSetMultimap}.
+ * with a call to {@code Multimaps#synchronizedSetMultimap}.
  *
  * <p><b>Warning:</b> Do not modify either a key <i>or a value</i> of a {@code LinkedHashMultimap}
- * in a way that affects its {@link Object#equals} behavior. Undefined behavior and bugs will
+ * in a way that affects its {@code Object#equals} behavior. Undefined behavior and bugs will
  * result.
  *
  * <p>See the Guava User Guide article on <a href=
@@ -80,6 +78,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nullable Object>
     extends LinkedHashMultimapGwtSerializationDependencies<K, V> {
@@ -108,7 +107,7 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
   /**
    * Constructs a {@code LinkedHashMultimap} with the same mappings as the specified multimap. If a
    * key-value mapping appears multiple times in the input multimap, it only appears once in the
-   * constructed multimap. The new multimap has the same {@link Multimap#entries()} iteration order
+   * constructed multimap. The new multimap has the same {@code Multimap#entries()} iteration order
    * as the input multimap, except for excluding duplicate mappings.
    *
    * @param multimap the multimap whose contents are copied to this multimap
@@ -158,7 +157,6 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
    * entries in that {@code Set<V>}, and the linked list of entries in the LinkedHashMultimap as a
    * whole.
    */
-  @VisibleForTesting
   static final class ValueEntry<K extends @Nullable Object, V extends @Nullable Object>
       extends ImmutableEntry<K, V> implements ValueSetLink<K, V> {
     final int smearedValueHash;
@@ -253,9 +251,9 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
 
   private static final int DEFAULT_KEY_CAPACITY = 16;
   private static final int DEFAULT_VALUE_SET_CAPACITY = 2;
-  @VisibleForTesting static final double VALUE_SET_LOAD_FACTOR = 1.0;
+  static final double VALUE_SET_LOAD_FACTOR = 1.0;
 
-  @VisibleForTesting transient int valueSetCapacity = DEFAULT_VALUE_SET_CAPACITY;
+  transient int valueSetCapacity = DEFAULT_VALUE_SET_CAPACITY;
   private transient ValueEntry<K, V> multimapHeaderEntry;
 
   private LinkedHashMultimap(int keyCapacity, int valueSetCapacity) {
@@ -298,7 +296,7 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
    *
    * <p>If {@code values} is not empty and the multimap already contains a mapping for {@code key},
    * the {@code keySet()} ordering is unchanged. However, the provided values always come last in
-   * the {@link #entries()} and {@link #values()} iteration orderings.
+   * the {@code #entries()} and {@code #values()} iteration orderings.
    */
   @CanIgnoreReturnValue
   @Override
@@ -349,7 +347,6 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
     return super.values();
   }
 
-  @VisibleForTesting
   final class ValueSet extends Sets.ImprovedAbstractSet<V> implements ValueSetLink<K, V> {
     /*
      * We currently use a fixed load factor of 1.0, a bit higher than normal to reduce memory
@@ -357,7 +354,7 @@ public final class LinkedHashMultimap<K extends @Nullable Object, V extends @Nul
      */
 
     @ParametricNullness private final K key;
-    @VisibleForTesting @Nullable ValueEntry<K, V>[] hashTable;
+    @Nullable ValueEntry<K, V>[] hashTable;
     private int size = 0;
     private int modCount = 0;
 

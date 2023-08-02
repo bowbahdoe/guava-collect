@@ -19,7 +19,7 @@ package dev.mccue.guava.collect;
 import java.io.Serializable;
 
 /**
- * A dummy superclass to support GWT serialization of the element type of a {@link Range}. The GWT
+ * A dummy superclass to support GWT serialization of the element type of a {@code Range}. The GWT
  * supersource for this class contains a field of type {@code C}.
  *
  * <p>For details about this hack, see {@code GwtSerializationDependencies}, which takes the same
@@ -27,4 +27,5 @@ import java.io.Serializable;
  *
  * <p>TODO(cpovirk): Consider applying this subclass approach to our other types.
  */
+
 abstract class RangeGwtSerializationDependencies<C extends Comparable> implements Serializable {}

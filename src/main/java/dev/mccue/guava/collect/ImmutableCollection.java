@@ -37,33 +37,33 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link Collection} whose contents will never change, and which offers a few additional
+ * A {@code Collection} whose contents will never change, and which offers a few additional
  * guarantees detailed below.
  *
- * <p><b>Warning:</b> avoid <i>direct</i> usage of {@link ImmutableCollection} as a type (just as
- * with {@link Collection} itself). Prefer subtypes such as {@link ImmutableSet} or {@link
- * ImmutableList}, which have well-defined {@link #equals} semantics, thus avoiding a common source
+ * <p><b>Warning:</b> avoid <i>direct</i> usage of {@code ImmutableCollection} as a type (just as
+ * with {@code Collection} itself). Prefer subtypes such as {@code ImmutableSet} or {@code
+ * ImmutableList}, which have well-defined {@code #equals} semantics, thus avoiding a common source
  * of bugs and confusion.
  *
- * <h2>About <i>all</i> {@code Immutable-} collections</h2>
+ * <h3>About <i>all</i> {@code Immutable-} collections</h3>
  *
  * <p>The remainder of this documentation applies to every public {@code Immutable-} type in this
  * package, whether it is a subtype of {@code ImmutableCollection} or not.
  *
- * <h3>Guarantees</h3>
+ * <h4>Guarantees</h4>
  *
  * <p>Each makes the following guarantees:
  *
  * <ul>
  *   <li><b>Shallow immutability.</b> Elements can never be added, removed or replaced in this
- *       collection. This is a stronger guarantee than that of {@link
+ *       collection. This is a stronger guarantee than that of {@code
  *       Collections#unmodifiableCollection}, whose contents change whenever the wrapped collection
  *       is modified.
  *   <li><b>Null-hostility.</b> This collection will never contain a null element.
  *   <li><b>Deterministic iteration.</b> The iteration order is always well-defined, depending on
  *       how the collection was created. Typically this is insertion order unless an explicit
- *       ordering is otherwise specified (e.g. {@link ImmutableSortedSet#naturalOrder}). See the
- *       appropriate factory method for details. View collections such as {@link
+ *       ordering is otherwise specified (e.g. {@code ImmutableSortedSet#naturalOrder}). See the
+ *       appropriate factory method for details. View collections such as {@code
  *       ImmutableMultiset#elementSet} iterate in the same order as the parent, except as noted.
  *   <li><b>Thread safety.</b> It is safe to access this collection concurrently from multiple
  *       threads.
@@ -74,23 +74,23 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <h4>"Interfaces", not implementations</h4>
  *
  * <p>These are classes instead of interfaces to prevent external subtyping, but should be thought
- * of as interfaces in every important sense. Each public class such as {@link ImmutableSet} is a
+ * of as interfaces in every important sense. Each public class such as {@code ImmutableSet} is a
  * <i>type</i> offering meaningful behavioral guarantees. This is substantially different from the
- * case of (say) {@link HashSet}, which is an <i>implementation</i>, with semantics that were
+ * case of (say) {@code HashSet}, which is an <i>implementation</i>, with semantics that were
  * largely defined by its supertype.
  *
  * <p>For field types and method return types, you should generally use the immutable type (such as
- * {@link ImmutableList}) instead of the general collection interface type (such as {@link List}).
+ * {@code ImmutableList}) instead of the general collection interface type (such as {@code List}).
  * This communicates to your callers all of the semantic guarantees listed above, which is almost
  * always very useful information.
  *
- * <p>On the other hand, a <i>parameter</i> type of {@link ImmutableList} is generally a nuisance to
- * callers. Instead, accept {@link Iterable} and have your method or constructor body pass it to the
+ * <p>On the other hand, a <i>parameter</i> type of {@code ImmutableList} is generally a nuisance to
+ * callers. Instead, accept {@code Iterable} and have your method or constructor body pass it to the
  * appropriate {@code copyOf} method itself.
  *
  * <p>Expressing the immutability guarantee directly in the type that user code references is a
  * powerful advantage. Although Java offers certain immutable collection factory methods, such as
- * {@link Collections#singleton(Object)} and <a
+ * {@code Collections#singleton(Object)} and <a
  * href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html#immutable">{@code Set.of}</a>,
  * we recommend using <i>these</i> classes instead for this reason (as well as for consistency).
  *
@@ -112,7 +112,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <ul>
  *   <li><b>Warning:</b> as with any collection, it is almost always a bad idea to modify an element
- *       (in a way that affects its {@link Object#equals} behavior) while it is contained in a
+ *       (in a way that affects its {@code Object#equals} behavior) while it is contained in a
  *       collection. Undefined behavior and bugs will result. It's generally best to avoid using
  *       mutable objects as elements at all, as many users may expect your "immutable" object to be
  *       <i>deeply</i> immutable.
@@ -127,7 +127,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *       unnecessary; for example, {@code copyOf(copyOf(anArrayList))} should copy the data only
  *       once. This reduces the expense of habitually making defensive copies at API boundaries.
  *       However, the precise conditions for skipping the copy operation are undefined.
- *   <li><b>Warning:</b> a view collection such as {@link ImmutableMap#keySet} or {@link
+ *   <li><b>Warning:</b> a view collection such as {@code ImmutableMap#keySet} or {@code
  *       ImmutableList#subList} may retain a reference to the entire data set, preventing it from
  *       being garbage collected. If some of the data is no longer reachable through other means,
  *       this constitutes a memory leak. Pass the view collection to the appropriate {@code copyOf}
@@ -162,6 +162,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 2.0
  */
 @DoNotMock("Use ImmutableList.of or another implementation")
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 // TODO(kevinb): I think we should push everything down to "BaseImmutableCollection" or something,
@@ -400,7 +401,7 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
   }
 
   /**
-   * Abstract base class for builders of {@link ImmutableCollection} types.
+   * Abstract base class for builders of {@code ImmutableCollection} types.
    *
    * @since 10.0
    */

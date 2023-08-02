@@ -20,7 +20,7 @@ import com.google.errorprone.annotations.DoNotCall;
 import java.util.stream.Collector;
 
 /**
- * "Overrides" the {@link ImmutableSet} static methods that lack {@link ImmutableSortedSet}
+ * "Overrides" the {@code ImmutableSet} static methods that lack {@code ImmutableSortedSet}
  * equivalents with deprecated, exception-throwing versions. This prevents accidents like the
  * following:
  *
@@ -31,7 +31,7 @@ import java.util.stream.Collector;
  * // BAD CODE! The returned set is actually an unsorted ImmutableSet!
  * }</pre>
  *
- * <p>While we could put the overrides in {@link ImmutableSortedSet} itself, it seems clearer to
+ * <p>While we could put the overrides in {@code ImmutableSortedSet} itself, it seems clearer to
  * separate these "do not call" methods from those intended for normal use.
  *
  * @author Chris Povirk
@@ -39,11 +39,11 @@ import java.util.stream.Collector;
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingAsList<E> {
   /**
-   * Not supported. Use {@link ImmutableSortedSet#toImmutableSortedSet} instead. This method exists
-   * only to hide {@link ImmutableSet#toImmutableSet} from consumers of {@code ImmutableSortedSet}.
+   * Not supported. Use {@code ImmutableSortedSet#toImmutableSortedSet} instead. This method exists
+   * only to hide {@code ImmutableSet#toImmutableSet} from consumers of {@code ImmutableSortedSet}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableSortedSet#toImmutableSortedSet}.
+   * @deprecated Use {@code ImmutableSortedSet#toImmutableSortedSet}.
    * @since 21.0
    */
   @DoNotCall("Use toImmutableSortedSet")
@@ -53,12 +53,12 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
   }
 
   /**
-   * Not supported. Use {@link ImmutableSortedSet#naturalOrder}, which offers better type-safety,
-   * instead. This method exists only to hide {@link ImmutableSet#builder} from consumers of {@code
+   * Not supported. Use {@code ImmutableSortedSet#naturalOrder}, which offers better type-safety,
+   * instead. This method exists only to hide {@code ImmutableSet#builder} from consumers of {@code
    * ImmutableSortedSet}.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated Use {@link ImmutableSortedSet#naturalOrder}, which offers better type-safety.
+   * @deprecated Use {@code ImmutableSortedSet#naturalOrder}, which offers better type-safety.
    */
   @DoNotCall("Use naturalOrder")
   @Deprecated
@@ -67,7 +67,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
   }
 
   /**
-   * Not supported. This method exists only to hide {@link ImmutableSet#builderWithExpectedSize}
+   * Not supported. This method exists only to hide {@code ImmutableSet#builderWithExpectedSize}
    * from consumers of {@code ImmutableSortedSet}.
    *
    * @throws UnsupportedOperationException always
@@ -85,7 +85,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass a parameter of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass a parameter of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of(Comparable)}.</b>
    */
   @DoNotCall("Pass a parameter of type Comparable")
@@ -100,7 +100,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of(Comparable, Comparable)}.</b>
    */
   @DoNotCall("Pass parameters of type Comparable")
@@ -115,7 +115,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of(Comparable, Comparable, Comparable)}.</b>
    */
   @DoNotCall("Pass parameters of type Comparable")
@@ -130,7 +130,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of(Comparable, Comparable, Comparable, Comparable)}. </b>
    */
   @DoNotCall("Pass parameters of type Comparable")
@@ -145,7 +145,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of( Comparable, Comparable, Comparable, Comparable, Comparable)}. </b>
    */
   @DoNotCall("Pass parameters of type Comparable")
@@ -160,7 +160,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#of(Comparable, Comparable, Comparable, Comparable, Comparable,
    *     Comparable, Comparable...)}. </b>
    */
@@ -176,7 +176,7 @@ abstract class ImmutableSortedSetFauxverideShim<E> extends ImmutableSet.CachingA
    * dummy version.
    *
    * @throws UnsupportedOperationException always
-   * @deprecated <b>Pass parameters of type {@code Comparable} to use {@link
+   * @deprecated <b>Pass parameters of type {@code Comparable} to use {@code
    *     ImmutableSortedSet#copyOf(Comparable[])}.</b>
    */
   @DoNotCall("Pass parameters of type Comparable")

@@ -22,12 +22,13 @@ import java.io.Serializable;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * List returned by {@link ImmutableCollection#asList} that delegates {@code contains} checks to the
+ * List returned by {@code ImmutableCollection#asList} that delegates {@code contains} checks to the
  * backing collection.
  *
  * @author Jared Levy
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial")
 @ElementTypesAreNonnullByDefault
 abstract class ImmutableAsList<E> extends ImmutableList<E> {

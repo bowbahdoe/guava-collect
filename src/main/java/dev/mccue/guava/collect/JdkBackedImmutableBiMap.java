@@ -17,9 +17,7 @@ package dev.mccue.guava.collect;
 
 import static java.util.Objects.requireNonNull;
 
-
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.Map;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -28,9 +26,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * Implementation of ImmutableBiMap backed by a pair of JDK HashMaps, which have smartness
  * protecting against hash flooding.
  */
+
 @ElementTypesAreNonnullByDefault
 final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
-  @VisibleForTesting
   static <K, V> ImmutableBiMap<K, V> create(int n, @Nullable Entry<K, V>[] entryArray) {
     Map<K, V> forwardDelegate = Maps.newHashMapWithExpectedSize(n);
     Map<V, K> backwardDelegate = Maps.newHashMapWithExpectedSize(n);
@@ -67,8 +65,7 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     return entries.size();
   }
 
-  @LazyInit
-  @CheckForNull private transient JdkBackedImmutableBiMap<V, K> inverse;
+  @LazyInit @CheckForNull private transient JdkBackedImmutableBiMap<V, K> inverse;
 
   @Override
   public ImmutableBiMap<V, K> inverse() {

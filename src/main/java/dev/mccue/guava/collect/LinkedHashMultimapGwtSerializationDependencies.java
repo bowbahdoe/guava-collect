@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * A dummy superclass to support GWT serialization of the element types of a {@link
+ * A dummy superclass to support GWT serialization of the element types of a {@code
  * LinkedHashMultimap}. The GWT supersource for this class contains a field for each type.
  *
  * <p>For details about this hack, see {@code GwtSerializationDependencies}, which takes the same
@@ -28,6 +28,7 @@ import java.util.Map;
  *
  * <p>TODO(cpovirk): Consider applying this subclass approach to our other types.
  */
+
 abstract class LinkedHashMultimapGwtSerializationDependencies<K, V>
     extends AbstractSetMultimap<K, V> {
   LinkedHashMultimapGwtSerializationDependencies(Map<K, Collection<V>> map) {

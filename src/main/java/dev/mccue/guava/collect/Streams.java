@@ -21,7 +21,6 @@ import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
 
-
 import dev.mccue.guava.math.LongMath;
 import com.google.errorprone.annotations.InlineMe;
 import java.util.ArrayDeque;
@@ -58,7 +57,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @ElementTypesAreNonnullByDefault
 public final class Streams {
   /**
-   * Returns a sequential {@link Stream} of the contents of {@code iterable}, delegating to {@link
+   * Returns a sequential {@code Stream} of the contents of {@code iterable}, delegating to {@code
    * Collection#stream} if possible.
    */
   public static <T extends @Nullable Object> Stream<T> stream(Iterable<T> iterable) {
@@ -68,7 +67,7 @@ public final class Streams {
   }
 
   /**
-   * Returns {@link Collection#stream}.
+   * Returns {@code Collection#stream}.
    *
    * @deprecated There is no reason to use this; just invoke {@code collection.stream()} directly.
    */
@@ -79,7 +78,7 @@ public final class Streams {
   }
 
   /**
-   * Returns a sequential {@link Stream} of the remaining contents of {@code iterator}. Do not use
+   * Returns a sequential {@code Stream} of the remaining contents of {@code iterator}. Do not use
    * {@code iterator} directly after passing it to this method.
    */
   public static <T extends @Nullable Object> Stream<T> stream(Iterator<T> iterator) {
@@ -100,7 +99,6 @@ public final class Streams {
    *
    * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
    */
-  @Beta
   @InlineMe(replacement = "optional.stream()")
   @com.google.errorprone.annotations.InlineMeValidationDisabled("Java 9+ API only")
   public static <T> Stream<T> stream(java.util.Optional<T> optional) {
@@ -113,7 +111,6 @@ public final class Streams {
    *
    * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
    */
-  @Beta
   @InlineMe(replacement = "optional.stream()")
   @com.google.errorprone.annotations.InlineMeValidationDisabled("Java 9+ API only")
   public static IntStream stream(OptionalInt optional) {
@@ -126,7 +123,6 @@ public final class Streams {
    *
    * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
    */
-  @Beta
   @InlineMe(replacement = "optional.stream()")
   @com.google.errorprone.annotations.InlineMeValidationDisabled("Java 9+ API only")
   public static LongStream stream(OptionalLong optional) {
@@ -139,7 +135,6 @@ public final class Streams {
    *
    * <p><b>Java 9 users:</b> use {@code optional.stream()} instead.
    */
-  @Beta
   @InlineMe(replacement = "optional.stream()")
   @com.google.errorprone.annotations.InlineMeValidationDisabled("Java 9+ API only")
   public static DoubleStream stream(OptionalDouble optional) {
@@ -154,7 +149,7 @@ public final class Streams {
   }
 
   /**
-   * Returns a {@link Stream} containing the elements of the first stream, followed by the elements
+   * Returns a {@code Stream} containing the elements of the first stream, followed by the elements
    * of the second stream, and so on.
    *
    * <p>This is equivalent to {@code Stream.of(streams).flatMap(stream -> stream)}, but the returned
@@ -188,7 +183,7 @@ public final class Streams {
   }
 
   /**
-   * Returns an {@link IntStream} containing the elements of the first stream, followed by the
+   * Returns an {@code IntStream} containing the elements of the first stream, followed by the
    * elements of the second stream, and so on.
    *
    * <p>This is equivalent to {@code Stream.of(streams).flatMapToInt(stream -> stream)}, but the
@@ -220,7 +215,7 @@ public final class Streams {
   }
 
   /**
-   * Returns a {@link LongStream} containing the elements of the first stream, followed by the
+   * Returns a {@code LongStream} containing the elements of the first stream, followed by the
    * elements of the second stream, and so on.
    *
    * <p>This is equivalent to {@code Stream.of(streams).flatMapToLong(stream -> stream)}, but the
@@ -252,7 +247,7 @@ public final class Streams {
   }
 
   /**
-   * Returns a {@link DoubleStream} containing the elements of the first stream, followed by the
+   * Returns a {@code DoubleStream} containing the elements of the first stream, followed by the
    * elements of the second stream, and so on.
    *
    * <p>This is equivalent to {@code Stream.of(streams).flatMapToDouble(stream -> stream)}, but the
@@ -301,14 +296,13 @@ public final class Streams {
    * <p>The resulting stream will only be as long as the shorter of the two input streams; if one
    * stream is longer, its extra elements will be ignored.
    *
-   * <p>Note that if you are calling {@link Stream#forEach} on the resulting stream, you might want
-   * to consider using {@link #forEachPair} instead of this method.
+   * <p>Note that if you are calling {@code Stream#forEach} on the resulting stream, you might want
+   * to consider using {@code #forEachPair} instead of this method.
    *
    * <p><b>Performance note:</b> The resulting stream is not <a
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>.
    * This may harm parallel performance.
    */
-  @Beta
   public static <A extends @Nullable Object, B extends @Nullable Object, R extends @Nullable Object>
       Stream<R> zip(
           Stream<A> streamA, Stream<B> streamB, BiFunction<? super A, ? super B, R> function) {
@@ -365,13 +359,12 @@ public final class Streams {
    * between elements will be made, but the order in which those pairs of elements are passed to the
    * consumer is <i>not</i> defined.
    *
-   * <p>Note that many usages of this method can be replaced with simpler calls to {@link #zip}.
-   * This method behaves equivalently to {@linkplain #zip zipping} the stream elements into
-   * temporary pair objects and then using {@link Stream#forEach} on that stream.
+   * <p>Note that many usages of this method can be replaced with simpler calls to {@code #zip}.
+   * This method behaves equivalently to {@code #zip zipping} the stream elements into
+   * temporary pair objects and then using {@code Stream#forEach} on that stream.
    *
    * @since 22.0
    */
-  @Beta
   public static <A extends @Nullable Object, B extends @Nullable Object> void forEachPair(
       Stream<A> streamA, Stream<B> streamB, BiConsumer<? super A, ? super B> consumer) {
     checkNotNull(consumer);
@@ -413,7 +406,7 @@ public final class Streams {
    * <p>The resulting stream is <a
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>
    * if and only if {@code stream} was efficiently splittable and its underlying spliterator
-   * reported {@link Spliterator#SUBSIZED}. This is generally the case if the underlying stream
+   * reported {@code Spliterator#SUBSIZED}. This is generally the case if the underlying stream
    * comes from a data structure supporting efficient indexed random access, typically an array or
    * list.
    *
@@ -496,7 +489,7 @@ public final class Streams {
    * <p>The resulting stream is <a
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>
    * if and only if {@code stream} was efficiently splittable and its underlying spliterator
-   * reported {@link Spliterator#SUBSIZED}. This is generally the case if the underlying stream
+   * reported {@code Spliterator#SUBSIZED}. This is generally the case if the underlying stream
    * comes from a data structure supporting efficient indexed random access, typically an array or
    * list.
    *
@@ -534,7 +527,7 @@ public final class Streams {
         implements IntConsumer, Spliterator<R> {
       int holder;
 
-      Splitr(OfInt splitr, long index) {
+      Splitr(Spliterator.OfInt splitr, long index) {
         super(splitr, index);
       }
 
@@ -553,7 +546,7 @@ public final class Streams {
       }
 
       @Override
-      Splitr createSplit(OfInt from, long i) {
+      Splitr createSplit(Spliterator.OfInt from, long i) {
         return new Splitr(from, i);
       }
     }
@@ -575,7 +568,7 @@ public final class Streams {
    * <p>The resulting stream is <a
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>
    * if and only if {@code stream} was efficiently splittable and its underlying spliterator
-   * reported {@link Spliterator#SUBSIZED}. This is generally the case if the underlying stream
+   * reported {@code Spliterator#SUBSIZED}. This is generally the case if the underlying stream
    * comes from a data structure supporting efficient indexed random access, typically an array or
    * list.
    *
@@ -613,7 +606,7 @@ public final class Streams {
         implements LongConsumer, Spliterator<R> {
       long holder;
 
-      Splitr(OfLong splitr, long index) {
+      Splitr(Spliterator.OfLong splitr, long index) {
         super(splitr, index);
       }
 
@@ -632,7 +625,7 @@ public final class Streams {
       }
 
       @Override
-      Splitr createSplit(OfLong from, long i) {
+      Splitr createSplit(Spliterator.OfLong from, long i) {
         return new Splitr(from, i);
       }
     }
@@ -654,7 +647,7 @@ public final class Streams {
    * <p>The resulting stream is <a
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>
    * if and only if {@code stream} was efficiently splittable and its underlying spliterator
-   * reported {@link Spliterator#SUBSIZED}. This is generally the case if the underlying stream
+   * reported {@code Spliterator#SUBSIZED}. This is generally the case if the underlying stream
    * comes from a data structure supporting efficient indexed random access, typically an array or
    * list.
    *
@@ -692,7 +685,7 @@ public final class Streams {
         implements DoubleConsumer, Spliterator<R> {
       double holder;
 
-      Splitr(OfDouble splitr, long index) {
+      Splitr(Spliterator.OfDouble splitr, long index) {
         super(splitr, index);
       }
 
@@ -711,7 +704,7 @@ public final class Streams {
       }
 
       @Override
-      Splitr createSplit(OfDouble from, long i) {
+      Splitr createSplit(Spliterator.OfDouble from, long i) {
         return new Splitr(from, i);
       }
     }
@@ -719,9 +712,9 @@ public final class Streams {
   }
 
   /**
-   * An analogue of {@link java.util.function.Function} also accepting an index.
+   * An analogue of {@code java.util.function.Function} also accepting an index.
    *
-   * <p>This interface is only intended for use by callers of {@link #mapWithIndex(Stream,
+   * <p>This interface is only intended for use by callers of {@code #mapWithIndex(Stream,
    * FunctionWithIndex)}.
    *
    * @since 21.0
@@ -774,9 +767,9 @@ public final class Streams {
   }
 
   /**
-   * An analogue of {@link java.util.function.IntFunction} also accepting an index.
+   * An analogue of {@code java.util.function.IntFunction} also accepting an index.
    *
-   * <p>This interface is only intended for use by callers of {@link #mapWithIndex(IntStream,
+   * <p>This interface is only intended for use by callers of {@code #mapWithIndex(IntStream,
    * IntFunctionWithIndex)}.
    *
    * @since 21.0
@@ -788,9 +781,9 @@ public final class Streams {
   }
 
   /**
-   * An analogue of {@link java.util.function.LongFunction} also accepting an index.
+   * An analogue of {@code java.util.function.LongFunction} also accepting an index.
    *
-   * <p>This interface is only intended for use by callers of {@link #mapWithIndex(LongStream,
+   * <p>This interface is only intended for use by callers of {@code #mapWithIndex(LongStream,
    * LongFunctionWithIndex)}.
    *
    * @since 21.0
@@ -802,9 +795,9 @@ public final class Streams {
   }
 
   /**
-   * An analogue of {@link java.util.function.DoubleFunction} also accepting an index.
+   * An analogue of {@code java.util.function.DoubleFunction} also accepting an index.
    *
-   * <p>This interface is only intended for use by callers of {@link #mapWithIndex(DoubleStream,
+   * <p>This interface is only intended for use by callers of {@code #mapWithIndex(DoubleStream,
    * DoubleFunctionWithIndex)}.
    *
    * @since 21.0
@@ -816,7 +809,7 @@ public final class Streams {
   }
 
   /**
-   * Returns the last element of the specified stream, or {@link java.util.Optional#empty} if the
+   * Returns the last element of the specified stream, or {@code java.util.Optional#empty} if the
    * stream is empty.
    *
    * <p>Equivalent to {@code stream.reduce((a, b) -> b)}, but may perform significantly better. This
@@ -824,7 +817,7 @@ public final class Streams {
    * href="http://gee.cs.oswego.edu/dl/html/StreamParallelGuidance.html">efficiently splittable</a>
    * streams.
    *
-   * <p>If the stream has nondeterministic order, this has equivalent semantics to {@link
+   * <p>If the stream has nondeterministic order, this has equivalent semantics to {@code
    * Stream#findAny} (which you might as well use).
    *
    * @see Stream#findFirst()
@@ -907,7 +900,7 @@ public final class Streams {
   }
 
   /**
-   * Returns the last element of the specified stream, or {@link OptionalInt#empty} if the stream is
+   * Returns the last element of the specified stream, or {@code OptionalInt#empty} if the stream is
    * empty.
    *
    * <p>Equivalent to {@code stream.reduce((a, b) -> b)}, but may perform significantly better. This
@@ -925,7 +918,7 @@ public final class Streams {
   }
 
   /**
-   * Returns the last element of the specified stream, or {@link OptionalLong#empty} if the stream
+   * Returns the last element of the specified stream, or {@code OptionalLong#empty} if the stream
    * is empty.
    *
    * <p>Equivalent to {@code stream.reduce((a, b) -> b)}, but may perform significantly better. This
@@ -943,7 +936,7 @@ public final class Streams {
   }
 
   /**
-   * Returns the last element of the specified stream, or {@link OptionalDouble#empty} if the stream
+   * Returns the last element of the specified stream, or {@code OptionalDouble#empty} if the stream
    * is empty.
    *
    * <p>Equivalent to {@code stream.reduce((a, b) -> b)}, but may perform significantly better. This

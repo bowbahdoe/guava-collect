@@ -28,10 +28,11 @@ import java.util.function.BiConsumer;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation of {@link ImmutableMap} backed by a non-empty {@link EnumMap}.
+ * Implementation of {@code ImmutableMap} backed by a non-empty {@code java.util.EnumMap}.
  *
  * @author Louis Wasserman
  */
+
 @SuppressWarnings("serial") // we're overriding default serialization
 @ElementTypesAreNonnullByDefault
 final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutableMap<K, V> {

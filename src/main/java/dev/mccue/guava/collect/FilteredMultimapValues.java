@@ -19,7 +19,6 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.base.Predicate;
 import dev.mccue.guava.base.Predicates;
-
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,7 +27,7 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation for {@link FilteredMultimap#values()}.
+ * Implementation for {@code FilteredMultimap#values()}.
  *
  * @author Louis Wasserman
  */

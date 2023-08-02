@@ -35,37 +35,37 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A discouraged (but not deprecated) precursor to Java's superior {@link Stream} library.
+ * A discouraged (but not deprecated) precursor to Java's superior {@code Stream} library.
  *
  * <p>The following types of methods are provided:
  *
  * <ul>
  *   <li>chaining methods which return a new {@code FluentIterable} based in some way on the
- *       contents of the current one (for example {@link #transform})
+ *       contents of the current one (for example {@code #transform})
  *   <li>element extraction methods which facilitate the retrieval of certain elements (for example
- *       {@link #last})
+ *       {@code #last})
  *   <li>query methods which answer questions about the {@code FluentIterable}'s contents (for
- *       example {@link #anyMatch})
+ *       example {@code #anyMatch})
  *   <li>conversion methods which copy the {@code FluentIterable}'s contents into a new collection
- *       or array (for example {@link #toList})
+ *       or array (for example {@code #toList})
  * </ul>
  *
- * <p>Several lesser-used features are currently available only as static methods on the {@link
+ * <p>Several lesser-used features are currently available only as static methods on the {@code
  * Iterables} class.
  *
  * <p><a id="streams"></a>
  *
- * <h2>Comparison to streams</h2>
+ * <h3>Comparison to streams</h3>
  *
- * <p>{@link Stream} is similar to this class, but generally more powerful, and certainly more
+ * <p>{@code Stream} is similar to this class, but generally more powerful, and certainly more
  * standard. Key differences include:
  *
  * <ul>
  *   <li>A stream is <i>single-use</i>; it becomes invalid as soon as any "terminal operation" such
  *       as {@code findFirst()} or {@code iterator()} is invoked. (Even though {@code Stream}
- *       contains all the right method <i>signatures</i> to implement {@link Iterable}, it does not
+ *       contains all the right method <i>signatures</i> to implement {@code Iterable}, it does not
  *       actually do so, to avoid implying repeat-iterability.) {@code FluentIterable}, on the other
- *       hand, is multiple-use, and does implement {@link Iterable}.
+ *       hand, is multiple-use, and does implement {@code Iterable}.
  *   <li>Streams offer many features not found here, including {@code min/max}, {@code distinct},
  *       {@code reduce}, {@code sorted}, the very powerful {@code collect}, and built-in support for
  *       parallelizing stream operations.
@@ -106,6 +106,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Marcin Mikosik
  * @since 12.0
  */
+
 @ElementTypesAreNonnullByDefault
 public abstract class FluentIterable<E extends @Nullable Object> implements Iterable<E> {
   // We store 'iterable' and use it instead of 'this' to allow Iterables to perform instanceof
@@ -132,8 +133,8 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns a fluent iterable that wraps {@code iterable}, or {@code iterable} itself if it is
    * already a {@code FluentIterable}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Collection#stream} if {@code iterable} is a {@link
-   * Collection}; {@link Streams#stream(Iterable)} otherwise.
+   * <p><b>{@code Stream} equivalent:</b> {@code Collection#stream} if {@code iterable} is a {@code
+   * Collection}; {@code Streams#stream(Iterable)} otherwise.
    */
   public static <E extends @Nullable Object> FluentIterable<E> from(final Iterable<E> iterable) {
     return (iterable instanceof FluentIterable)
@@ -151,7 +152,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    *
    * <p>The returned iterable is an unmodifiable view of the input array.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#of(Object[])
+   * <p><b>{@code Stream} equivalent:</b> {@code java.util.stream.Stream#of(Object[])
    * Stream.of(T...)}.
    *
    * @since 20.0 (since 18.0 as an overload of {@code of})
@@ -184,7 +185,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p>The returned iterable's iterator supports {@code remove()} when the corresponding input
    * iterator supports it.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#concat}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#concat}.
    *
    * @since 20.0
    */
@@ -201,8 +202,8 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p>The returned iterable's iterator supports {@code remove()} when the corresponding input
    * iterator supports it.
    *
-   * <p><b>{@code Stream} equivalent:</b> use nested calls to {@link Stream#concat}, or see the
-   * advice in {@link #concat(Iterable...)}.
+   * <p><b>{@code Stream} equivalent:</b> use nested calls to {@code Stream#concat}, or see the
+   * advice in {@code #concat(Iterable...)}.
    *
    * @since 20.0
    */
@@ -220,8 +221,8 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p>The returned iterable's iterator supports {@code remove()} when the corresponding input
    * iterator supports it.
    *
-   * <p><b>{@code Stream} equivalent:</b> use nested calls to {@link Stream#concat}, or see the
-   * advice in {@link #concat(Iterable...)}.
+   * <p><b>{@code Stream} equivalent:</b> use nested calls to {@code Stream#concat}, or see the
+   * advice in {@code #concat(Iterable...)}.
    *
    * @since 20.0
    */
@@ -263,7 +264,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * NullPointerException} if any of the input iterators is {@code null}.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code streamOfStreams.flatMap(s -> s)} or {@code
-   * streamOfIterables.flatMap(Streams::stream)}. (See {@link Streams#stream}.)
+   * streamOfIterables.flatMap(Streams::stream)}. (See {@code Streams#stream}.)
    *
    * @since 20.0
    */
@@ -302,7 +303,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   /**
    * Returns a fluent iterable containing no elements.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#empty}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#empty}.
    *
    * @since 20.0
    */
@@ -313,7 +314,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   /**
    * Returns a fluent iterable containing the specified elements in order.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#of(Object[])
+   * <p><b>{@code Stream} equivalent:</b> {@code java.util.stream.Stream#of(Object[])
    * Stream.of(T...)}.
    *
    * @since 20.0
@@ -338,7 +339,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   /**
    * Returns the number of elements in this fluent iterable.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#count}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#count}.
    */
   public final int size() {
     return Iterables.size(getDelegate());
@@ -382,7 +383,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p>The returned iterable's {@code Iterator} supports {@code remove()} when the corresponding
    * {@code Iterator} supports it.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#concat}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#concat}.
    *
    * @since 18.0
    */
@@ -406,7 +407,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns the elements from this fluent iterable that satisfy a predicate. The resulting fluent
    * iterable's iterator does not support {@code remove()}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#filter} (same).
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#filter} (same).
    */
   public final FluentIterable<E> filter(Predicate<? super E> predicate) {
     return from(Iterables.filter(getDelegate(), predicate));
@@ -433,7 +434,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   /**
    * Returns {@code true} if any element in this fluent iterable satisfies the predicate.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#anyMatch} (same).
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#anyMatch} (same).
    */
   public final boolean anyMatch(Predicate<? super E> predicate) {
     return Iterables.any(getDelegate(), predicate);
@@ -443,18 +444,18 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns {@code true} if every element in this fluent iterable satisfies the predicate. If this
    * fluent iterable is empty, {@code true} is returned.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#allMatch} (same).
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#allMatch} (same).
    */
   public final boolean allMatch(Predicate<? super E> predicate) {
     return Iterables.all(getDelegate(), predicate);
   }
 
   /**
-   * Returns an {@link Optional} containing the first element in this fluent iterable that satisfies
+   * Returns an {@code Optional} containing the first element in this fluent iterable that satisfies
    * the given predicate, if such an element exists.
    *
    * <p><b>Warning:</b> avoid using a {@code predicate} that matches {@code null}. If {@code null}
-   * is matched in this fluent iterable, a {@link NullPointerException} will be thrown.
+   * is matched in this fluent iterable, a {@code NullPointerException} will be thrown.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code stream.filter(predicate).findFirst()}.
    */
@@ -471,7 +472,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * iterator does. After a successful {@code remove()} call, this fluent iterable no longer
    * contains the corresponding element.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#map}.
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#map}.
    */
   public final <T extends @Nullable Object> FluentIterable<T> transform(
       Function<? super E, T> function) {
@@ -486,7 +487,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * iterables' iterator does. After a successful {@code remove()} call, the returned fluent
    * iterable no longer contains the corresponding element.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#flatMap} (using a function that produces
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#flatMap} (using a function that produces
    * streams, not iterables).
    *
    * @since 13.0 (required {@code Function<E, Iterable<T>>} until 14.0)
@@ -497,14 +498,14 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   }
 
   /**
-   * Returns an {@link Optional} containing the first element in this fluent iterable. If the
+   * Returns an {@code Optional} containing the first element in this fluent iterable. If the
    * iterable is empty, {@code Optional.absent()} is returned.
    *
-   * <p><b>{@code Stream} equivalent:</b> if the goal is to obtain any element, {@link
+   * <p><b>{@code Stream} equivalent:</b> if the goal is to obtain any element, {@code
    * Stream#findAny}; if it must specifically be the <i>first</i> element, {@code Stream#findFirst}.
    *
    * @throws NullPointerException if the first element is null; if this is a possibility, use {@code
-   *     iterator().next()} or {@link Iterables#getFirst} instead.
+   *     iterator().next()} or {@code Iterables#getFirst} instead.
    */
   @SuppressWarnings("nullness") // Unsafe, but we can't do much about it now.
   public final Optional<@NonNull E> first() {
@@ -513,14 +514,14 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   }
 
   /**
-   * Returns an {@link Optional} containing the last element in this fluent iterable. If the
+   * Returns an {@code Optional} containing the last element in this fluent iterable. If the
    * iterable is empty, {@code Optional.absent()} is returned. If the underlying {@code iterable} is
-   * a {@link List} with {@link java.util.RandomAccess} support, then this operation is guaranteed
+   * a {@code List} with {@code java.util.RandomAccess} support, then this operation is guaranteed
    * to be {@code O(1)}.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code stream.reduce((a, b) -> b)}.
    *
-   * @throws NullPointerException if the last element is null; if this is a possibility, use {@link
+   * @throws NullPointerException if the last element is null; if this is a possibility, use {@code
    *     Iterables#getLast} instead.
    */
   @SuppressWarnings("nullness") // Unsafe, but we can't do much about it now.
@@ -571,9 +572,9 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * this fluent iterable supports it. Note that it is <i>not</i> possible to delete the last
    * skipped element by immediately calling {@code remove()} on the returned fluent iterable's
    * iterator, as the {@code Iterator} contract states that a call to {@code * remove()} before a
-   * call to {@code next()} will throw an {@link IllegalStateException}.
+   * call to {@code next()} will throw an {@code IllegalStateException}.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#skip} (same).
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#skip} (same).
    */
   public final FluentIterable<E> skip(int numberToSkip) {
     return from(Iterables.skip(getDelegate(), numberToSkip));
@@ -585,7 +586,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * same behavior as this fluent iterable. The returned fluent iterable's iterator supports {@code
    * remove()} if this fluent iterable's iterator does.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@link Stream#limit} (same).
+   * <p><b>{@code Stream} equivalent:</b> {@code Stream#limit} (same).
    *
    * @param maxSize the maximum number of elements in the returned fluent iterable
    * @throws IllegalArgumentException if {@code size} is negative
@@ -607,7 +608,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns an {@code ImmutableList} containing all of the elements from this fluent iterable in
    * proper sequence.
    *
-   * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableList#toImmutableList} to {@code
+   * <p><b>{@code Stream} equivalent:</b> pass {@code ImmutableList#toImmutableList} to {@code
    * stream.collect()}.
    *
    * @throws NullPointerException if any element is {@code null}
@@ -623,7 +624,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * FluentIterable} in the order specified by {@code comparator}. To produce an {@code
    * ImmutableList} sorted by its natural ordering, use {@code toSortedList(Ordering.natural())}.
    *
-   * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableList#toImmutableList} to {@code
+   * <p><b>{@code Stream} equivalent:</b> pass {@code ImmutableList#toImmutableList} to {@code
    * stream.sorted(comparator).collect()}.
    *
    * @param comparator the function by which to sort list elements
@@ -639,7 +640,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * Returns an {@code ImmutableSet} containing all of the elements from this fluent iterable with
    * duplicates removed.
    *
-   * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableSet#toImmutableSet} to {@code
+   * <p><b>{@code Stream} equivalent:</b> pass {@code ImmutableSet#toImmutableSet} to {@code
    * stream.collect()}.
    *
    * @throws NullPointerException if any element is {@code null}
@@ -656,7 +657,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * {@code comparator.compare(x, y) == 0}) removed. To produce an {@code ImmutableSortedSet} sorted
    * by its natural ordering, use {@code toSortedSet(Ordering.natural())}.
    *
-   * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableSortedSet#toImmutableSortedSet} to
+   * <p><b>{@code Stream} equivalent:</b> pass {@code ImmutableSortedSet#toImmutableSortedSet} to
    * {@code stream.collect()}.
    *
    * @param comparator the function by which to sort set elements
@@ -671,7 +672,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   /**
    * Returns an {@code ImmutableMultiset} containing all of the elements from this fluent iterable.
    *
-   * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableMultiset#toImmutableMultiset} to
+   * <p><b>{@code Stream} equivalent:</b> pass {@code ImmutableMultiset#toImmutableMultiset} to
    * {@code stream.collect()}.
    *
    * @throws NullPointerException if any element is null
@@ -741,7 +742,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * assertThat(colorForName).containsEntry("red", red);
    * }</pre>
    *
-   * <p>If your index may associate multiple values with each key, use {@link #index(Function)
+   * <p>If your index may associate multiple values with each key, use {@code #index(Function)
    * index}.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code
@@ -804,7 +805,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   }
 
   /**
-   * Returns a {@link String} containing all of the elements of this fluent iterable joined with
+   * Returns a {@code String} containing all of the elements of this fluent iterable joined with
    * {@code joiner}.
    *
    * <p><b>{@code Stream} equivalent:</b> {@code joiner.join(stream.iterator())}, or, if you are not
@@ -835,7 +836,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
   }
 
   /**
-   * Returns a stream of this fluent iterable's contents (similar to calling {@link
+   * Returns a stream of this fluent iterable's contents (similar to calling {@code
    * Collection#stream} on a collection).
    *
    * <p><b>Note:</b> the earlier in the chain you can switch to {@code Stream} usage (ideally not

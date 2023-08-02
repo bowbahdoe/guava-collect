@@ -19,13 +19,13 @@ package dev.mccue.guava.collect;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -34,8 +34,8 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A {@link ListMultimap} whose contents will never change, with many other important properties
- * detailed at {@link ImmutableCollection}.
+ * A {@code ListMultimap} whose contents will never change, with many other important properties
+ * detailed at {@code ImmutableCollection}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/ImmutableCollectionsExplained">immutable collections</a>.
@@ -43,15 +43,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
     implements ListMultimap<K, V> {
   /**
-   * Returns a {@link Collector} that accumulates elements into an {@code ImmutableListMultimap}
+   * Returns a {@code Collector} that accumulates elements into an {@code ImmutableListMultimap}
    * whose keys and values are the result of applying the provided mapping functions to the input
    * elements.
    *
-   * <p>For streams with defined encounter order (as defined in the Ordering section of the {@link
+   * <p>For streams with defined encounter order (as defined in the Ordering section of the {@code
    * java.util.stream} Javadoc), that order is preserved, but entries are <a
    * href="ImmutableMultimap.html#iteration">grouped by key</a>.
    *
@@ -132,14 +133,14 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Returns an immutable multimap containing a single entry. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1) {
-    Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
     builder.put(k1, v1);
     return builder.build();
   }
 
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1, K k2, V v2) {
-    Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     return builder.build();
@@ -147,7 +148,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-    Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -157,7 +158,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-    Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -168,7 +169,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -180,7 +181,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
   // looking for of() with > 5 entries? Use the builder instead.
 
   /**
-   * Returns a new builder. The generated builder is equivalent to the builder created by the {@link
+   * Returns a new builder. The generated builder is equivalent to the builder created by the {@code
    * Builder} constructor.
    */
   public static <K, V> Builder<K, V> builder() {
@@ -200,7 +201,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    *         .build();
    * }</pre>
    *
-   * <p>Builder instances can be reused; it is safe to call {@link #build} multiple times to build
+   * <p>Builder instances can be reused; it is safe to call {@code #build} multiple times to build
    * multiple multimaps in series. Each multimap contains the key-value mappings in the previously
    * created multimaps.
    *
@@ -208,7 +209,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    */
   public static final class Builder<K, V> extends ImmutableMultimap.Builder<K, V> {
     /**
-     * Creates a new builder. The returned builder is equivalent to the builder generated by {@link
+     * Creates a new builder. The returned builder is equivalent to the builder generated by {@code
      * ImmutableListMultimap#builder}.
      */
     public Builder() {}
@@ -347,7 +348,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Creates an ImmutableListMultimap from an asMap.entrySet. */
   static <K, V> ImmutableListMultimap<K, V> fromMapEntries(
-      Collection<? extends Entry<? extends K, ? extends Collection<? extends V>>> mapEntries,
+      Collection<? extends Map.Entry<? extends K, ? extends Collection<? extends V>>> mapEntries,
       @CheckForNull Comparator<? super V> valueComparator) {
     if (mapEntries.isEmpty()) {
       return of();
@@ -390,8 +391,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
     return (list == null) ? ImmutableList.<V>of() : list;
   }
 
-  @LazyInit
-  @CheckForNull private transient ImmutableListMultimap<V, K> inverse;
+  @LazyInit @CheckForNull private transient ImmutableListMultimap<V, K> inverse;
 
   /**
    * {@inheritDoc}

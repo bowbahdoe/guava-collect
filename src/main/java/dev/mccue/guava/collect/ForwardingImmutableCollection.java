@@ -16,11 +16,13 @@
 
 package dev.mccue.guava.collect;
 
+
 /**
  * Dummy class that makes the GWT serialization policy happy. It isn't used on the server-side.
  *
  * @author Hayward Chan
  */
+
 @ElementTypesAreNonnullByDefault
 class ForwardingImmutableCollection {
   private ForwardingImmutableCollection() {}

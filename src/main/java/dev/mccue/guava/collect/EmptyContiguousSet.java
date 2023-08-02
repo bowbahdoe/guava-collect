@@ -25,6 +25,7 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * @author Gregory Kick
  */
+
 @SuppressWarnings("rawtypes") // allow ungenerified Comparable types
 @ElementTypesAreNonnullByDefault
 final class EmptyContiguousSet<C extends Comparable> extends ContiguousSet<C> {

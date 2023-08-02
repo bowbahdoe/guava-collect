@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 /**
  * An abstract base class for implementing the <a
- * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>. The {@link
+ * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>. The {@code
  * #delegate()} method must be overridden to return the instance being decorated.
  *
  * <p>This class does <i>not</i> forward the {@code hashCode} and {@code equals} methods through to
@@ -31,12 +31,12 @@ import java.io.Serializable;
  * such custom interfaces directly; they are implemented only in subclasses. Therefore, forwarding
  * {@code equals} would break symmetry, as the forwarding object might consider itself equal to the
  * object being tested, but the reverse could not be true. This behavior is consistent with the
- * JDK's collection wrappers, such as {@link java.util.Collections#unmodifiableCollection}. Use an
- * interface-specific subclass of {@code ForwardingObject}, such as {@link ForwardingList}, to
+ * JDK's collection wrappers, such as {@code java.util.Collections#unmodifiableCollection}. Use an
+ * interface-specific subclass of {@code ForwardingObject}, such as {@code ForwardingList}, to
  * preserve equality behavior, or override {@code equals} directly.
  *
  * <p>The {@code toString} method is forwarded to the delegate. Although this class does not
- * implement {@link Serializable}, a serializable subclass may be created since this class has a
+ * implement {@code Serializable}, a serializable subclass may be created since this class has a
  * parameter-less constructor.
  *
  * @author Mike Bostock
@@ -51,7 +51,7 @@ public abstract class ForwardingObject {
   /**
    * Returns the backing delegate instance that methods are forwarded to. Abstract subclasses
    * generally override this method with an abstract method that has a more specific return type,
-   * such as {@link ForwardingSet#delegate}. Concrete subclasses override this method to supply the
+   * such as {@code ForwardingSet#delegate}. Concrete subclasses override this method to supply the
    * instance being decorated.
    */
   protected abstract Object delegate();

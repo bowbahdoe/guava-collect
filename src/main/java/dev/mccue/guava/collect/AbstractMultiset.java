@@ -20,7 +20,6 @@ import static dev.mccue.guava.collect.Multisets.setCountImpl;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
@@ -29,13 +28,13 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * This class provides a skeletal implementation of the {@link Multiset} interface. A new multiset
- * implementation can be created easily by extending this class and implementing the {@link
- * Multiset#entrySet()} method, plus optionally overriding {@link #add(Object, int)} and {@link
+ * This class provides a skeletal implementation of the {@code Multiset} interface. A new multiset
+ * implementation can be created easily by extending this class and implementing the {@code
+ * Multiset#entrySet()} method, plus optionally overriding {@code #add(Object, int)} and {@code
  * #remove(Object, int)} to enable modifications to the multiset.
  *
- * <p>The {@link #count} and {@link #size} implementations all iterate across the set returned by
- * {@link Multiset#entrySet()}, as do many methods acting on the set returned by {@link
+ * <p>The {@code #count} and {@code #size} implementations all iterate across the set returned by
+ * {@code Multiset#entrySet()}, as do many methods acting on the set returned by {@code
  * #elementSet()}. Override those methods for better performance.
  *
  * @author Kevin Bourrillion
@@ -99,7 +98,7 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
   /**
    * {@inheritDoc}
    *
-   * <p>This implementation is highly efficient when {@code elementsToAdd} is itself a {@link
+   * <p>This implementation is highly efficient when {@code elementsToAdd} is itself a {@code
    * Multiset}.
    */
   @CanIgnoreReturnValue
@@ -137,7 +136,7 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
   }
 
   /**
-   * Creates a new instance of this multiset's element set, which will be returned by {@link
+   * Creates a new instance of this multiset's element set, which will be returned by {@code
    * #elementSet()}.
    */
   Set<E> createElementSet() {
@@ -210,7 +209,7 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
   /**
    * {@inheritDoc}
    *
-   * <p>This implementation returns the hash code of {@link Multiset#entrySet()}.
+   * <p>This implementation returns the hash code of {@code Multiset#entrySet()}.
    */
   @Override
   public final int hashCode() {
@@ -220,7 +219,7 @@ abstract class AbstractMultiset<E extends @Nullable Object> extends AbstractColl
   /**
    * {@inheritDoc}
    *
-   * <p>This implementation returns the result of invoking {@code toString} on {@link
+   * <p>This implementation returns the result of invoking {@code toString} on {@code
    * Multiset#entrySet()}.
    */
   @Override

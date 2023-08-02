@@ -27,8 +27,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @author Hayward Chan
  */
+
 @ElementTypesAreNonnullByDefault
 final class Platform {
+  private static final java.lang.System.Logger logger =
+      java.lang.System.getLogger(Platform.class.getName());
 
   /** Returns the platform preferred implementation of a map based on a hash table. */
   static <K extends @Nullable Object, V extends @Nullable Object>

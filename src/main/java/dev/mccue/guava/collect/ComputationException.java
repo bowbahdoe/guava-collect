@@ -23,12 +23,13 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * @author Bob Lee
  * @since 2.0
- * @deprecated This exception is no longer thrown by guava. Previously, it was
- *     thrown by {@link MapMaker} computing maps. When support for computing maps was removed from
+ * @deprecated This exception is no longer thrown by {@code com.google.common}. Previously, it was
+ *     thrown by {@code MapMaker} computing maps. When support for computing maps was removed from
  *     {@code MapMaker}, it was added to {@code CacheBuilder}, which throws {@code
  *     ExecutionException}, {@code UncheckedExecutionException}, and {@code ExecutionError}. Any
  *     code that is still catching {@code ComputationException} may need to be updated to catch some
- *     of those types instead. (Note that this type, though deprecated, is not planned to be removed from Guava.)
+ *     of those types instead. (Note that this type, though deprecated, is not planned to be removed
+ *     from Guava.)
  */
 @Deprecated
 @ElementTypesAreNonnullByDefault

@@ -24,7 +24,7 @@ import java.util.RandomAccess;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation of {@link Lists#cartesianProduct(List)}.
+ * Implementation of {@code Lists#cartesianProduct(List)}.
  *
  * @author Louis Wasserman
  */

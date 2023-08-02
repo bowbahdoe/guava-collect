@@ -28,8 +28,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingQueue} forward <b>indiscriminately</b> to the
- * methods of the delegate. For example, overriding {@link #add} alone <b>will not</b> change the
- * behavior of {@link #offer} which can lead to unexpected behavior. In this case, you should
+ * methods of the delegate. For example, overriding {@code #add} alone <b>will not</b> change the
+ * behavior of {@code #offer} which can lead to unexpected behavior. In this case, you should
  * override {@code offer} as well, either providing your own implementation, or delegating to the
  * provided {@code standardOffer} method.
  *
@@ -87,8 +87,8 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
   }
 
   /**
-   * A sensible definition of {@link #offer} in terms of {@link #add}. If you override {@link #add},
-   * you may wish to override {@link #offer} to forward to this implementation.
+   * A sensible definition of {@code #offer} in terms of {@code #add}. If you override {@code #add},
+   * you may wish to override {@code #offer} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -101,8 +101,8 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
   }
 
   /**
-   * A sensible definition of {@link #peek} in terms of {@link #element}. If you override {@link
-   * #element}, you may wish to override {@link #peek} to forward to this implementation.
+   * A sensible definition of {@code #peek} in terms of {@code #element}. If you override {@code
+   * #element}, you may wish to override {@code #peek} to forward to this implementation.
    *
    * @since 7.0
    */
@@ -116,8 +116,8 @@ public abstract class ForwardingQueue<E extends @Nullable Object> extends Forwar
   }
 
   /**
-   * A sensible definition of {@link #poll} in terms of {@link #remove}. If you override {@link
-   * #remove}, you may wish to override {@link #poll} to forward to this implementation.
+   * A sensible definition of {@code #poll} in terms of {@code #remove}. If you override {@code
+   * #remove}, you may wish to override {@code #poll} to forward to this implementation.
    *
    * @since 7.0
    */

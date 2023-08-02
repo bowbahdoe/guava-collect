@@ -19,7 +19,6 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 
-
 import dev.mccue.guava.base.Function;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,23 +41,23 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A comparator, with additional methods to support common operations. This is an "enriched" version
- * of {@code Comparator} for pre-Java-8 users, in the same sense that {@link FluentIterable} is an
- * enriched {@link Iterable} for pre-Java-8 users.
+ * of {@code Comparator} for pre-Java-8 users, in the same sense that {@code FluentIterable} is an
+ * enriched {@code Iterable} for pre-Java-8 users.
  *
- * <h2>Three types of methods</h2>
+ * <h3>Three types of methods</h3>
  *
  * Like other fluent types, there are three types of methods present: methods for <i>acquiring</i>,
  * <i>chaining</i>, and <i>using</i>.
  *
- * <h3>Acquiring</h3>
+ * <h4>Acquiring</h4>
  *
  * <p>The common ways to get an instance of {@code Ordering} are:
  *
  * <ul>
- *   <li>Subclass it and implement {@link #compare} instead of implementing {@link Comparator}
+ *   <li>Subclass it and implement {@code #compare} instead of implementing {@code Comparator}
  *       directly
- *   <li>Pass a <i>pre-existing</i> {@link Comparator} instance to {@link #from(Comparator)}
- *   <li>Use the natural ordering, {@link Ordering#natural}
+ *   <li>Pass a <i>pre-existing</i> {@code Comparator} instance to {@code #from(Comparator)}
+ *   <li>Use the natural ordering, {@code Ordering#natural}
  * </ul>
  *
  * <h4>Chaining</h4>
@@ -67,21 +66,21 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * Ordering}, including:
  *
  * <ul>
- *   <li>{@link #reverse}
- *   <li>{@link #compound(Comparator)}
- *   <li>{@link #onResultOf(Function)}
- *   <li>{@link #nullsFirst} / {@link #nullsLast}
+ *   <li>{@code #reverse}
+ *   <li>{@code #compound(Comparator)}
+ *   <li>{@code #onResultOf(Function)}
+ *   <li>{@code #nullsFirst} / {@code #nullsLast}
  * </ul>
  *
  * <h4>Using</h4>
  *
- * <p>Finally, use the resulting {@code Ordering} anywhere a {@link Comparator} is required, or use
+ * <p>Finally, use the resulting {@code Ordering} anywhere a {@code Comparator} is required, or use
  * any of its special operations, such as:
  *
  * <ul>
- *   <li>{@link #immutableSortedCopy}
- *   <li>{@link #isOrdered} / {@link #isStrictlyOrdered}
- *   <li>{@link #min} / {@link #max}
+ *   <li>{@code #immutableSortedCopy}
+ *   <li>{@code #isOrdered} / {@code #isStrictlyOrdered}
+ *   <li>{@code #min} / {@code #max}
  * </ul>
  *
  * <h3>Understanding complex orderings</h3>
@@ -110,7 +109,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *       returned)
  * </ol>
  *
- * <p>Alas, {@link #reverse} is a little different. As you read backwards through a chain and
+ * <p>Alas, {@code #reverse} is a little different. As you read backwards through a chain and
  * encounter a call to {@code reverse}, continue working backwards until a result is determined, and
  * then reverse that result.
  *
@@ -124,8 +123,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * <h3>For Java 8 users</h3>
  *
  * <p>If you are using Java 8, this class is now obsolete. Most of its functionality is now provided
- * by {@link java.util.stream.Stream Stream} and by {@link Comparator} itself, and the rest can now
- * be found as static methods in our new {@link Comparators} class. See each method below for
+ * by {@code java.util.stream.Stream Stream} and by {@code Comparator} itself, and the rest can now
+ * be found as static methods in our new {@code Comparators} class. See each method below for
  * further instructions. Whenever possible, you should change any references of type {@code
  * Ordering} to be of type {@code Comparator} instead. However, at this time we have no plan to
  * <i>deprecate</i> this class.
@@ -149,14 +148,15 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
 
   /**
    * Returns a serializable ordering that uses the natural order of the values. The ordering throws
-   * a {@link NullPointerException} when passed a null parameter.
+   * a {@code NullPointerException} when passed a null parameter.
    *
    * <p>The type specification is {@code <C extends Comparable>}, instead of the technically correct
    * {@code <C extends Comparable<? super C>>}, to support legacy types from before Java 5.
    *
-   * <p><b>Java 8 users:</b> use {@link Comparator#naturalOrder} instead.
+   * <p><b>Java 8 users:</b> use {@code Comparator#naturalOrder} instead.
    */
-  @SuppressWarnings({"unchecked", "rawtypes"}) // TODO(kevinb): right way to explain this??
+  
+  @SuppressWarnings("unchecked") // TODO(kevinb): right way to explain this??
   public static <C extends Comparable> Ordering<C> natural() {
     return (Ordering<C>) NaturalOrdering.INSTANCE;
   }
@@ -178,6 +178,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * @return comparator itself if it is already an {@code Ordering}; otherwise an ordering that
    *     wraps that comparator
    */
+  
   public static <T extends @Nullable Object> Ordering<T> from(Comparator<T> comparator) {
     return (comparator instanceof Ordering)
         ? (Ordering<T>) comparator
@@ -189,6 +190,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *
    * @deprecated no need to use this
    */
+  
   @Deprecated
   public static <T extends @Nullable Object> Ordering<T> from(Ordering<T> ordering) {
     return checkNotNull(ordering);
@@ -196,12 +198,12 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
 
   /**
    * Returns an ordering that compares objects according to the order in which they appear in the
-   * given list. Only objects present in the list (according to {@link Object#equals}) may be
+   * given list. Only objects present in the list (according to {@code Object#equals}) may be
    * compared. This comparator imposes a "partial ordering" over the type {@code T}. Subsequent
    * changes to the {@code valuesInOrder} list will have no effect on the returned comparator. Null
    * values in the list are not supported.
    *
-   * <p>The returned comparator throws a {@link ClassCastException} when it receives an input
+   * <p>The returned comparator throws a {@code ClassCastException} when it receives an input
    * parameter that isn't among the provided values.
    *
    * <p>The generated comparator is serializable if all the provided values are serializable.
@@ -211,20 +213,21 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * @return the comparator described above
    * @throws NullPointerException if any of the provided values is null
    * @throws IllegalArgumentException if {@code valuesInOrder} contains any duplicate values
-   *     (according to {@link Object#equals})
+   *     (according to {@code Object#equals})
    */
   // TODO(kevinb): provide replacement
+  
   public static <T> Ordering<T> explicit(List<T> valuesInOrder) {
     return new ExplicitOrdering<T>(valuesInOrder);
   }
 
   /**
    * Returns an ordering that compares objects according to the order in which they are given to
-   * this method. Only objects present in the argument list (according to {@link Object#equals}) may
+   * this method. Only objects present in the argument list (according to {@code Object#equals}) may
    * be compared. This comparator imposes a "partial ordering" over the type {@code T}. Null values
    * in the argument list are not supported.
    *
-   * <p>The returned comparator throws a {@link ClassCastException} when it receives an input
+   * <p>The returned comparator throws a {@code ClassCastException} when it receives an input
    * parameter that isn't among the provided values.
    *
    * <p>The generated comparator is serializable if all the provided values are serializable.
@@ -235,10 +238,11 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *     to compare, in the order the comparator should follow
    * @return the comparator described above
    * @throws NullPointerException if any of the provided values is null
-   * @throws IllegalArgumentException if any duplicate values (according to {@link
+   * @throws IllegalArgumentException if any duplicate values (according to {@code
    *     Object#equals(Object)}) are present among the method arguments
    */
   // TODO(kevinb): provide replacement
+  
   public static <T> Ordering<T> explicit(T leastValue, T... remainingValuesInOrder) {
     return explicit(Lists.asList(leastValue, remainingValuesInOrder));
   }
@@ -248,7 +252,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   /**
    * Returns an ordering which treats all values as equal, indicating "no ordering." Passing this
    * ordering to any <i>stable</i> sort algorithm results in no change to the order of elements.
-   * Note especially that {@link #sortedCopy} and {@link #immutableSortedCopy} are stable, and in
+   * Note especially that {@code #sortedCopy} and {@code #immutableSortedCopy} are stable, and in
    * the returned instance these are implemented by simply copying the source list.
    *
    * <p>Example:
@@ -260,10 +264,10 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *
    * <p>Assuming {@code t}, {@code e} and {@code s} are non-null, this returns {@code [t, e, s, t,
    * null, null, null]} regardless of the true comparison order of those three values (which might
-   * not even implement {@link Comparable} at all).
+   * not even implement {@code Comparable} at all).
    *
    * <p><b>Warning:</b> by definition, this comparator is not <i>consistent with equals</i> (as
-   * defined {@linkplain Comparator here}). Avoid its use in APIs, such as {@link
+   * defined {@code Comparator here}). Avoid its use in APIs, such as {@code
    * TreeSet#TreeSet(Comparator)}, where such consistency is expected.
    *
    * <p>The returned comparator is serializable.
@@ -273,6 +277,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *
    * @since 13.0
    */
+  
   @SuppressWarnings("unchecked")
   public static Ordering<@Nullable Object> allEqual() {
     return AllEqualOrdering.INSTANCE;
@@ -286,6 +291,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *
    * <p><b>Java 8 users:</b> Use {@code Comparator.comparing(Object::toString)} instead.
    */
+  
   public static Ordering<Object> usingToString() {
     return UsingToStringOrdering.INSTANCE;
   }
@@ -295,12 +301,12 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * {@code a == b} (identity equality). There is no meaning whatsoever to the order imposed, but it
    * is constant for the life of the VM.
    *
-   * <p>Because the ordering is identity-based, it is not "consistent with {@link
-   * Object#equals(Object)}" as defined by {@link Comparator}. Use caution when building a {@link
-   * SortedSet} or {@link SortedMap} from it, as the resulting collection will not behave exactly
+   * <p>Because the ordering is identity-based, it is not "consistent with {@code
+   * Object#equals(Object)}" as defined by {@code Comparator}. Use caution when building a {@code
+   * SortedSet} or {@code SortedMap} from it, as the resulting collection will not behave exactly
    * according to spec.
    *
-   * <p>This ordering is not serializable, as its implementation relies on {@link
+   * <p>This ordering is not serializable, as its implementation relies on {@code
    * System#identityHashCode(Object)}, so its behavior cannot be preserved across serialization.
    *
    * @since 2.0
@@ -317,7 +323,6 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   }
 
   // MapMaker
-  @VisibleForTesting
   static class ArbitraryOrdering extends Ordering<@Nullable Object> {
 
     private final AtomicInteger counter = new AtomicInteger(0);
@@ -391,13 +396,14 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   // Instance-based factories (and any static equivalents)
 
   /**
-   * Returns the reverse of this ordering; the {@code Ordering} equivalent to {@link
+   * Returns the reverse of this ordering; the {@code Ordering} equivalent to {@code
    * Collections#reverseOrder(Comparator)}.
    *
    * <p><b>Java 8 users:</b> Use {@code thisComparator.reversed()} instead.
    */
   // type parameter <S> lets us avoid the extra <String> in statements like:
   // Ordering<String> o = Ordering.<String>natural().reverse();
+  
   public <S extends T> Ordering<S> reverse() {
     return new ReverseOrdering<S>(this);
   }
@@ -412,6 +418,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    */
   // type parameter <S> lets us avoid the extra <String> in statements like:
   // Ordering<String> o = Ordering.<String>natural().nullsFirst();
+  
   public <S extends T> Ordering<@Nullable S> nullsFirst() {
     return new NullsFirstOrdering<S>(this);
   }
@@ -426,6 +433,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    */
   // type parameter <S> lets us avoid the extra <String> in statements like:
   // Ordering<String> o = Ordering.<String>natural().nullsLast();
+  
   public <S extends T> Ordering<@Nullable S> nullsLast() {
     return new NullsLastOrdering<S>(this);
   }
@@ -443,6 +451,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * <p><b>Java 8 users:</b> Use {@code Comparator.comparing(function, thisComparator)} instead (you
    * can omit the comparator if it is the natural order).
    */
+  
   public <F extends @Nullable Object> Ordering<F> onResultOf(Function<F, ? extends T> function) {
     return new ByFunctionOrdering<>(function, this);
   }
@@ -458,7 +467,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * compound ordering with three or more components, simply chain multiple calls to this method.
    *
    * <p>An ordering produced by this method, or a chain of calls to this method, is equivalent to
-   * one created using {@link Ordering#compound(Iterable)} on the same component comparators.
+   * one created using {@code Ordering#compound(Iterable)} on the same component comparators.
    *
    * <p>The returned object is serializable if this object and {@code secondaryComparator} are both
    * serializable.
@@ -467,6 +476,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * Depending on what {@code secondaryComparator} is, one of the other overloads of {@code
    * thenComparing} may be even more useful.
    */
+  
   public <U extends T> Ordering<U> compound(Comparator<? super U> secondaryComparator) {
     return new CompoundOrdering<U>(this, checkNotNull(secondaryComparator));
   }
@@ -482,16 +492,17 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    *
    * <p>The returned object is serializable if each of the {@code comparators} is serializable.
    *
-   * <p><b>Warning:</b> Supplying an argument with undefined iteration order, such as a {@link
+   * <p><b>Warning:</b> Supplying an argument with undefined iteration order, such as a {@code
    * HashSet}, will produce non-deterministic results.
    *
-   * <p><b>Java 8 users:</b> Use a chain of calls to {@link Comparator#thenComparing(Comparator)},
+   * <p><b>Java 8 users:</b> Use a chain of calls to {@code Comparator#thenComparing(Comparator)},
    * or {@code comparatorCollection.stream().reduce(Comparator::thenComparing).get()} (if the
    * collection might be empty, also provide a default comparator as the {@code identity} parameter
    * to {@code reduce}).
    *
    * @param comparators the comparators to try in order
    */
+  
   public static <T extends @Nullable Object> Ordering<T> compound(
       Iterable<? extends Comparator<? super T>> comparators) {
     return new CompoundOrdering<T>(comparators);
@@ -508,10 +519,11 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * ordering.reverse().lexicographical()} (consider how each would order {@code [1]} and {@code [1,
    * 1]}).
    *
-   * <p><b>Java 8 users:</b> Use {@link Comparators#lexicographical(Comparator)} instead.
+   * <p><b>Java 8 users:</b> Use {@code Comparators#lexicographical(Comparator)} instead.
    *
    * @since 2.0
    */
+  
   // type parameter <S> lets us avoid the extra <String> in statements like:
   // Ordering<Iterable<String>> o =
   //     Ordering.<String>natural().lexicographical();
@@ -561,7 +573,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * Returns the least of the specified values according to this ordering. If there are multiple
    * least values, the first of those is returned.
    *
-   * <p><b>Java 8 users:</b> If {@code iterable} is a {@link Collection}, use {@code
+   * <p><b>Java 8 users:</b> If {@code iterable} is a {@code Collection}, use {@code
    * Collections.min(collection, thisComparator)} instead. Otherwise, use {@code
    * Streams.stream(iterable).min(thisComparator).get()} instead. Note that these alternatives do
    * not guarantee which tied minimum element is returned.
@@ -584,7 +596,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * other {@code min} overloads, so overriding it will affect their behavior.
    *
    * <p><b>Note:</b> Consider using {@code Comparators.min(a, b, thisComparator)} instead. If {@code
-   * thisComparator} is {@link Ordering#natural}, then use {@code Comparators.min(a, b)}.
+   * thisComparator} is {@code Ordering#natural}, then use {@code Comparators.min(a, b)}.
    *
    * @param a value to compare, returned if less than or equal to b.
    * @param b value to compare.
@@ -652,7 +664,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * Returns the greatest of the specified values according to this ordering. If there are multiple
    * greatest values, the first of those is returned.
    *
-   * <p><b>Java 8 users:</b> If {@code iterable} is a {@link Collection}, use {@code
+   * <p><b>Java 8 users:</b> If {@code iterable} is a {@code Collection}, use {@code
    * Collections.max(collection, thisComparator)} instead. Otherwise, use {@code
    * Streams.stream(iterable).max(thisComparator).get()} instead. Note that these alternatives do
    * not guarantee which tied maximum element is returned.
@@ -675,7 +687,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * other {@code max} overloads, so overriding it will affect their behavior.
    *
    * <p><b>Note:</b> Consider using {@code Comparators.max(a, b, thisComparator)} instead. If {@code
-   * thisComparator} is {@link Ordering#natural}, then use {@code Comparators.max(a, b)}.
+   * thisComparator} is {@code Ordering#natural}, then use {@code Comparators.max(a, b)}.
    *
    * @param a value to compare, returned if greater than or equal to b.
    * @param b value to compare.
@@ -834,15 +846,15 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * only when the resulting list may need further modification, or may contain {@code null}. The
    * input is not modified. The returned list is serializable and has random access.
    *
-   * <p>Unlike {@link Sets#newTreeSet(Iterable)}, this method does not discard elements that are
+   * <p>Unlike {@code Sets#newTreeSet(Iterable)}, this method does not discard elements that are
    * duplicates according to the comparator. The sort performed is <i>stable</i>, meaning that such
    * elements will appear in the returned list in the same order they appeared in {@code elements}.
    *
    * <p><b>Performance note:</b> According to our
    * benchmarking
-   * on Open JDK 7, {@link #immutableSortedCopy} generally performs better (in both time and space)
+   * on Open JDK 7, {@code #immutableSortedCopy} generally performs better (in both time and space)
    * than this method, and this method in turn generally performs better than copying the list and
-   * calling {@link Collections#sort(List)}.
+   * calling {@code Collections#sort(List)}.
    */
   // TODO(kevinb): rerun benchmarks including new options
   public <E extends T> List<E> sortedCopy(Iterable<E> elements) {
@@ -856,7 +868,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * Returns an <b>immutable</b> list containing {@code elements} sorted by this ordering. The input
    * is not modified.
    *
-   * <p>Unlike {@link Sets#newTreeSet(Iterable)}, this method does not discard elements that are
+   * <p>Unlike {@code Sets#newTreeSet(Iterable)}, this method does not discard elements that are
    * duplicates according to the comparator. The sort performed is <i>stable</i>, meaning that such
    * elements will appear in the returned list in the same order they appeared in {@code elements}.
    *
@@ -877,7 +889,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * equal to the element that preceded it, according to this ordering. Note that this is always
    * true when the iterable has fewer than two elements.
    *
-   * <p><b>Java 8 users:</b> Use the equivalent {@link Comparators#isInOrder(Iterable, Comparator)}
+   * <p><b>Java 8 users:</b> Use the equivalent {@code Comparators#isInOrder(Iterable, Comparator)}
    * instead, since the rest of {@code Ordering} is mostly obsolete (as explained in the class
    * documentation).
    */
@@ -901,7 +913,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * greater than the element that preceded it, according to this ordering. Note that this is always
    * true when the iterable has fewer than two elements.
    *
-   * <p><b>Java 8 users:</b> Use the equivalent {@link Comparators#isInStrictOrder(Iterable,
+   * <p><b>Java 8 users:</b> Use the equivalent {@code Comparators#isInStrictOrder(Iterable,
    * Comparator)} instead, since the rest of {@code Ordering} is mostly obsolete (as explained in
    * the class documentation).
    */
@@ -921,12 +933,12 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   }
 
   /**
-   * {@link Collections#binarySearch(List, Object, Comparator) Searches} {@code sortedList} for
+   * {@code Collections#binarySearch(List, Object, Comparator) Searches} {@code sortedList} for
    * {@code key} using the binary search algorithm. The list must be sorted using this ordering.
    *
    * @param sortedList the list to be searched
    * @param key the key to be searched for
-   * @deprecated Use {@link Collections#binarySearch(List, Object, Comparator)} directly.
+   * @deprecated Use {@code Collections#binarySearch(List, Object, Comparator)} directly.
    */
   @Deprecated
   public int binarySearch(
@@ -935,11 +947,10 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   }
 
   /**
-   * Exception thrown by a {@link Ordering#explicit(List)} or {@link Ordering#explicit(Object,
+   * Exception thrown by a {@code Ordering#explicit(List)} or {@code Ordering#explicit(Object,
    * Object[])} comparator when comparing a value outside the set of values it can compare.
-   * Extending {@link ClassCastException} may seem odd, but it is required.
+   * Extending {@code ClassCastException} may seem odd, but it is required.
    */
-  @VisibleForTesting
   static class IncomparableValueException extends ClassCastException {
     final Object value;
 

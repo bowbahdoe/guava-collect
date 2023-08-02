@@ -33,13 +33,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Implementation of {@code Multimap} whose keys and values are ordered by their natural ordering or
- * by supplied comparators. In all cases, this implementation uses {@link Comparable#compareTo} or
- * {@link Comparator#compare} instead of {@link Object#equals} to determine equivalence of
+ * by supplied comparators. In all cases, this implementation uses {@code Comparable#compareTo} or
+ * {@code Comparator#compare} instead of {@code Object#equals} to determine equivalence of
  * instances.
  *
  * <p><b>Warning:</b> The comparators or comparables used must be <i>consistent with equals</i> as
- * explained by the {@link Comparable} class specification. Otherwise, the resulting multiset will
- * violate the general contract of {@link SetMultimap}, which is specified in terms of {@link
+ * explained by the {@code Comparable} class specification. Otherwise, the resulting multiset will
+ * violate the general contract of {@code SetMultimap}, which is specified in terms of {@code
  * Object#equals}.
  *
  * <p>The collections returned by {@code keySet} and {@code asMap} iterate through the keys
@@ -59,7 +59,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * <p>This class is not threadsafe when any concurrent operations update the multimap. Concurrent
  * read operations will work correctly. To allow concurrent update operations, wrap your multimap
- * with a call to {@link Multimaps#synchronizedSortedSetMultimap}.
+ * with a call to {@code Multimaps#synchronizedSortedSetMultimap}.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multimap">{@code Multimap}</a>.
@@ -68,6 +68,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
+
 @ElementTypesAreNonnullByDefault
 public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractSortedKeySortedSetMultimap<K, V> {
@@ -83,7 +84,7 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
 
   /**
    * Creates an empty {@code TreeMultimap} instance using explicit comparators. Neither comparator
-   * may be null; use {@link Ordering#natural()} to specify natural order.
+   * may be null; use {@code Ordering#natural()} to specify natural order.
    *
    * @param keyComparator the comparator that determines the key ordering
    * @param valueComparator the comparator that determines the value ordering
@@ -168,8 +169,8 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
   /**
    * {@inheritDoc}
    *
-   * <p>Because a {@code TreeMultimap} has unique sorted keys, this method returns a {@link
-   * NavigableSet}, instead of the {@link java.util.Set} specified in the {@link Multimap}
+   * <p>Because a {@code TreeMultimap} has unique sorted keys, this method returns a {@code
+   * NavigableSet}, instead of the {@code java.util.Set} specified in the {@code Multimap}
    * interface.
    *
    * @since 14.0 (present with return type {@code SortedSet} since 2.0)
@@ -182,8 +183,8 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
   /**
    * {@inheritDoc}
    *
-   * <p>Because a {@code TreeMultimap} has unique sorted keys, this method returns a {@link
-   * NavigableMap}, instead of the {@link Map} specified in the {@link Multimap}
+   * <p>Because a {@code TreeMultimap} has unique sorted keys, this method returns a {@code
+   * NavigableMap}, instead of the {@code java.util.Map} specified in the {@code Multimap}
    * interface.
    *
    * @since 14.0 (present with return type {@code SortedMap} since 2.0)

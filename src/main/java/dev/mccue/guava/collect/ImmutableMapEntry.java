@@ -21,8 +21,8 @@ import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
 import dev.mccue.jsr305.CheckForNull;
 
 /**
- * Implementation of {@code Entry} for {@link ImmutableMap} that adds extra methods to traverse hash
- * buckets for the key and the value. This allows reuse in {@link RegularImmutableMap} and {@link
+ * Implementation of {@code Entry} for {@code ImmutableMap} that adds extra methods to traverse hash
+ * buckets for the key and the value. This allows reuse in {@code RegularImmutableMap} and {@code
  * RegularImmutableBiMap}, which don't have to recopy the entries created by their {@code Builder}
  * implementations.
  *

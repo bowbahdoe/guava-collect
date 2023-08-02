@@ -34,7 +34,7 @@ interface SortedIterable<T extends @Nullable Object> extends Iterable<T> {
 
   /**
    * Returns an iterator over elements of type {@code T}. The elements are returned in nondecreasing
-   * order according to the associated {@link #comparator}.
+   * order according to the associated {@code #comparator}.
    */
   @Override
   Iterator<T> iterator();

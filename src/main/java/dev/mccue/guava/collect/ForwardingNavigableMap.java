@@ -33,8 +33,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a>.
  *
  * <p><b>Warning:</b> The methods of {@code ForwardingNavigableMap} forward <i>indiscriminately</i>
- * to the methods of the delegate. For example, overriding {@link #put} alone <i>will not</i> change
- * the behavior of {@link #putAll}, which can lead to unexpected behavior. In this case, you should
+ * to the methods of the delegate. For example, overriding {@code #put} alone <i>will not</i> change
+ * the behavior of {@code #putAll}, which can lead to unexpected behavior. In this case, you should
  * override {@code putAll} as well, either providing your own implementation, or delegating to the
  * provided {@code standardPutAll} method.
  *
@@ -70,7 +70,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #lowerEntry} in terms of the {@code lastEntry()} of {@link
+   * A sensible definition of {@code #lowerEntry} in terms of the {@code lastEntry()} of {@code
    * #headMap(Object, boolean)}. If you override {@code headMap}, you may wish to override {@code
    * lowerEntry} to forward to this implementation.
    */
@@ -86,8 +86,8 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #lowerKey} in terms of {@code lowerEntry}. If you override
-   * {@link #lowerEntry}, you may wish to override {@code lowerKey} to forward to this
+   * A sensible definition of {@code #lowerKey} in terms of {@code lowerEntry}. If you override
+   * {@code #lowerEntry}, you may wish to override {@code lowerKey} to forward to this
    * implementation.
    */
   @CheckForNull
@@ -102,7 +102,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #floorEntry} in terms of the {@code lastEntry()} of {@link
+   * A sensible definition of {@code #floorEntry} in terms of the {@code lastEntry()} of {@code
    * #headMap(Object, boolean)}. If you override {@code headMap}, you may wish to override {@code
    * floorEntry} to forward to this implementation.
    */
@@ -118,7 +118,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #floorKey} in terms of {@code floorEntry}. If you override
+   * A sensible definition of {@code #floorKey} in terms of {@code floorEntry}. If you override
    * {@code floorEntry}, you may wish to override {@code floorKey} to forward to this
    * implementation.
    */
@@ -134,7 +134,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #ceilingEntry} in terms of the {@code firstEntry()} of {@link
+   * A sensible definition of {@code #ceilingEntry} in terms of the {@code firstEntry()} of {@code
    * #tailMap(Object, boolean)}. If you override {@code tailMap}, you may wish to override {@code
    * ceilingEntry} to forward to this implementation.
    */
@@ -150,7 +150,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #ceilingKey} in terms of {@code ceilingEntry}. If you override
+   * A sensible definition of {@code #ceilingKey} in terms of {@code ceilingEntry}. If you override
    * {@code ceilingEntry}, you may wish to override {@code ceilingKey} to forward to this
    * implementation.
    */
@@ -166,7 +166,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #higherEntry} in terms of the {@code firstEntry()} of {@link
+   * A sensible definition of {@code #higherEntry} in terms of the {@code firstEntry()} of {@code
    * #tailMap(Object, boolean)}. If you override {@code tailMap}, you may wish to override {@code
    * higherEntry} to forward to this implementation.
    */
@@ -182,7 +182,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #higherKey} in terms of {@code higherEntry}. If you override
+   * A sensible definition of {@code #higherKey} in terms of {@code higherEntry}. If you override
    * {@code higherEntry}, you may wish to override {@code higherKey} to forward to this
    * implementation.
    */
@@ -198,7 +198,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #firstEntry} in terms of the {@code iterator()} of {@link
+   * A sensible definition of {@code #firstEntry} in terms of the {@code iterator()} of {@code
    * #entrySet}. If you override {@code entrySet}, you may wish to override {@code firstEntry} to
    * forward to this implementation.
    */
@@ -208,7 +208,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #firstKey} in terms of {@code firstEntry}. If you override
+   * A sensible definition of {@code #firstKey} in terms of {@code firstEntry}. If you override
    * {@code firstEntry}, you may wish to override {@code firstKey} to forward to this
    * implementation.
    */
@@ -228,8 +228,8 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #lastEntry} in terms of the {@code iterator()} of the {@link
-   * #entrySet} of {@link #descendingMap}. If you override {@code descendingMap}, you may wish to
+   * A sensible definition of {@code #lastEntry} in terms of the {@code iterator()} of the {@code
+   * #entrySet} of {@code #descendingMap}. If you override {@code descendingMap}, you may wish to
    * override {@code lastEntry} to forward to this implementation.
    */
   @CheckForNull
@@ -238,7 +238,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #lastKey} in terms of {@code lastEntry}. If you override {@code
+   * A sensible definition of {@code #lastKey} in terms of {@code lastEntry}. If you override {@code
    * lastEntry}, you may wish to override {@code lastKey} to forward to this implementation.
    */
   protected K standardLastKey() {
@@ -257,7 +257,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #pollFirstEntry} in terms of the {@code iterator} of {@code
+   * A sensible definition of {@code #pollFirstEntry} in terms of the {@code iterator} of {@code
    * entrySet}. If you override {@code entrySet}, you may wish to override {@code pollFirstEntry} to
    * forward to this implementation.
    */
@@ -273,7 +273,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #pollFirstEntry} in terms of the {@code iterator} of the {@code
+   * A sensible definition of {@code #pollFirstEntry} in terms of the {@code iterator} of the {@code
    * entrySet} of {@code descendingMap}. If you override {@code descendingMap}, you may wish to
    * override {@code pollFirstEntry} to forward to this implementation.
    */
@@ -288,11 +288,11 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible implementation of {@link NavigableMap#descendingMap} in terms of the methods of this
-   * {@code NavigableMap}. In many cases, you may wish to override {@link
+   * A sensible implementation of {@code NavigableMap#descendingMap} in terms of the methods of this
+   * {@code NavigableMap}. In many cases, you may wish to override {@code
    * ForwardingNavigableMap#descendingMap} to forward to this implementation or a subclass thereof.
    *
-   * <p>In particular, this map iterates over entries with repeated calls to {@link
+   * <p>In particular, this map iterates over entries with repeated calls to {@code
    * NavigableMap#lowerEntry}. If a more efficient means of iteration is available, you may wish to
    * override the {@code entryIterator()} method of this class.
    *
@@ -324,7 +324,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
         }
 
         @Override
-        public Entry<K, V> next() {
+        public java.util.Map.Entry<K, V> next() {
           if (nextOrNull == null) {
             throw new NoSuchElementException();
           }
@@ -354,8 +354,8 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible implementation of {@link NavigableMap#navigableKeySet} in terms of the methods of
-   * this {@code NavigableMap}. In many cases, you may wish to override {@link
+   * A sensible implementation of {@code NavigableMap#navigableKeySet} in terms of the methods of
+   * this {@code NavigableMap}. In many cases, you may wish to override {@code
    * ForwardingNavigableMap#navigableKeySet} to forward to this implementation or a subclass
    * thereof.
    *
@@ -374,8 +374,8 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #descendingKeySet} as the {@code navigableKeySet} of {@link
-   * #descendingMap}. (The {@link StandardDescendingMap} implementation implements {@code
+   * A sensible definition of {@code #descendingKeySet} as the {@code navigableKeySet} of {@code
+   * #descendingMap}. (The {@code StandardDescendingMap} implementation implements {@code
    * navigableKeySet} on its own, so as not to cause an infinite loop.) If you override {@code
    * descendingMap}, you may wish to override {@code descendingKeySet} to forward to this
    * implementation.
@@ -385,7 +385,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #subMap(Object, Object)} in terms of {@link #subMap(Object,
+   * A sensible definition of {@code #subMap(Object, Object)} in terms of {@code #subMap(Object,
    * boolean, Object, boolean)}. If you override {@code subMap(K, boolean, K, boolean)}, you may
    * wish to override {@code subMap} to forward to this implementation.
    */
@@ -415,7 +415,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #headMap(Object)} in terms of {@link #headMap(Object,
+   * A sensible definition of {@code #headMap(Object)} in terms of {@code #headMap(Object,
    * boolean)}. If you override {@code headMap(K, boolean)}, you may wish to override {@code
    * headMap} to forward to this implementation.
    */
@@ -424,7 +424,7 @@ public abstract class ForwardingNavigableMap<K extends @Nullable Object, V exten
   }
 
   /**
-   * A sensible definition of {@link #tailMap(Object)} in terms of {@link #tailMap(Object,
+   * A sensible definition of {@code #tailMap(Object)} in terms of {@code #tailMap(Object,
    * boolean)}. If you override {@code tailMap(K, boolean)}, you may wish to override {@code
    * tailMap} to forward to this implementation.
    */

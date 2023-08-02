@@ -31,7 +31,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * single value. A table may be sparse, with only a small fraction of row key / column key pairs
  * possessing a corresponding value.
  *
- * <p>The mappings corresponding to a given row key may be viewed as a {@link Map} whose keys are
+ * <p>The mappings corresponding to a given row key may be viewed as a {@code Map} whose keys are
  * the columns. The reverse is also available, associating a column with a row key / value map. Note
  * that, in some implementations, data access by column key may have fewer supported operations or
  * worse performance than data access by row key.
@@ -41,17 +41,17 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * will change the table.
  *
  * <p>All methods that modify the table are optional, and the views returned by the table may or may
- * not be modifiable. When modification isn't supported, those methods will throw an {@link
+ * not be modifiable. When modification isn't supported, those methods will throw an {@code
  * UnsupportedOperationException}.
  *
- * <h2>Implementations</h2>
+ * <h3>Implementations</h3>
  *
  * <ul>
- *   <li>{@link ImmutableTable}
- *   <li>{@link HashBasedTable}
- *   <li>{@link TreeBasedTable}
- *   <li>{@link ArrayTable}
- *   <li>{@link Tables#newCustomTable Tables.newCustomTable}
+ *   <li>{@code ImmutableTable}
+ *   <li>{@code HashBasedTable}
+ *   <li>{@code TreeBasedTable}
+ *   <li>{@code ArrayTable}
+ *   <li>{@code Tables#newCustomTable Tables.newCustomTable}
  * </ul>
  *
  * <p>See the Guava User Guide article on <a href=
@@ -122,14 +122,14 @@ public interface Table<
 
   /**
    * Compares the specified object with this table for equality. Two tables are equal when their
-   * cell views, as returned by {@link #cellSet}, are equal.
+   * cell views, as returned by {@code #cellSet}, are equal.
    */
   @Override
   boolean equals(@CheckForNull Object obj);
 
   /**
    * Returns the hash code for this table. The hash code of a table is defined as the hash code of
-   * its cell view, as returned by {@link #cellSet}.
+   * its cell view, as returned by {@code #cellSet}.
    */
   @Override
   int hashCode();
@@ -155,7 +155,7 @@ public interface Table<
 
   /**
    * Copies all mappings from the specified table to this table. The effect is equivalent to calling
-   * {@link #put} with each row key / column key / value mapping in {@code table}.
+   * {@code #put} with each row key / column key / value mapping in {@code table}.
    *
    * @param table the table to add to this table
    */
@@ -239,7 +239,7 @@ public interface Table<
    * {@code put()} or {@code putAll()}, or {@code setValue()} on its entries.
    *
    * <p>In contrast, the maps returned by {@code rowMap().get()} have the same behavior as those
-   * returned by {@link #row}. Those maps may support {@code setValue()}, {@code put()}, and {@code
+   * returned by {@code #row}. Those maps may support {@code setValue()}, {@code put()}, and {@code
    * putAll()}.
    *
    * @return a map view from each row key to a secondary map from column keys to values
@@ -252,7 +252,7 @@ public interface Table<
    * {@code put()} or {@code putAll()}, or {@code setValue()} on its entries.
    *
    * <p>In contrast, the maps returned by {@code columnMap().get()} have the same behavior as those
-   * returned by {@link #column}. Those maps may support {@code setValue()}, {@code put()}, and
+   * returned by {@code #column}. Those maps may support {@code setValue()}, {@code put()}, and
    * {@code putAll()}.
    *
    * @return a map view from each column key to a secondary map from row keys to values
@@ -288,7 +288,7 @@ public interface Table<
     /**
      * Returns the hash code of this cell.
      *
-     * <p>The hash code of a table cell is equal to {@link Objects#hashCode}{@code (e.getRowKey(),
+     * <p>The hash code of a table cell is equal to {@code Objects#hashCode}{@code (e.getRowKey(),
      * e.getColumnKey(), e.getValue())}.
      */
     @Override

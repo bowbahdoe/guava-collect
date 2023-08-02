@@ -62,8 +62,8 @@ public interface MapDifference<K extends @Nullable Object, V extends @Nullable O
 
   /**
    * Compares the specified object with this instance for equality. Returns {@code true} if the
-   * given object is also a {@code MapDifference} and the values returned by the {@link
-   * #entriesOnlyOnLeft()}, {@link #entriesOnlyOnRight()}, {@link #entriesInCommon()} and {@link
+   * given object is also a {@code MapDifference} and the values returned by the {@code
+   * #entriesOnlyOnLeft()}, {@code #entriesOnlyOnRight()}, {@code #entriesInCommon()} and {@code
    * #entriesDiffering()} of the two instances are equal.
    */
   @Override
@@ -81,8 +81,8 @@ public interface MapDifference<K extends @Nullable Object, V extends @Nullable O
   int hashCode();
 
   /**
-   * A difference between the mappings from two maps with the same key. The {@link #leftValue} and
-   * {@link #rightValue} are not equal, and one but not both of them may be null.
+   * A difference between the mappings from two maps with the same key. The {@code #leftValue} and
+   * {@code #rightValue} are not equal, and one but not both of them may be null.
    *
    * @since 2.0
    */
@@ -97,8 +97,8 @@ public interface MapDifference<K extends @Nullable Object, V extends @Nullable O
     V rightValue();
 
     /**
-     * Two instances are considered equal if their {@link #leftValue()} values are equal and their
-     * {@link #rightValue()} values are also equal.
+     * Two instances are considered equal if their {@code #leftValue()} values are equal and their
+     * {@code #rightValue()} values are also equal.
      */
     @Override
     boolean equals(@CheckForNull Object other);
