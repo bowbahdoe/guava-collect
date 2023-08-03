@@ -1,4 +1,4 @@
-# guava-base
+# guava-collect
 
 ## Usage
 
