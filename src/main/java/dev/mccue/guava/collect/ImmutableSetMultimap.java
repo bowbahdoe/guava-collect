@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.MoreObjects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -607,7 +608,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     int tmpSize = 0;
 
     for (int i = 0; i < keyCount; i++) {
-      Object key = stream.readObject();
+      Object key = requireNonNull(stream.readObject());
       int valueCount = stream.readInt();
       if (valueCount <= 0) {
         throw new InvalidObjectException("Invalid value count " + valueCount);
@@ -615,7 +616,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
 
       ImmutableSet.Builder<Object> valuesBuilder = valuesBuilder(valueComparator);
       for (int j = 0; j < valueCount; j++) {
-        valuesBuilder.add(stream.readObject());
+        valuesBuilder.add(requireNonNull(stream.readObject()));
       }
       ImmutableSet<Object> valueSet = valuesBuilder.build();
       if (valueSet.size() != valueCount) {

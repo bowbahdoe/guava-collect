@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
+import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -491,7 +492,7 @@ abstract class AbstractBiMap<K extends @Nullable Object, V extends @Nullable Obj
     @SuppressWarnings("unchecked") // reading data stored by writeObject
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
       stream.defaultReadObject();
-      setInverse((AbstractBiMap<V, K>) stream.readObject());
+      setInverse((AbstractBiMap<V, K>) requireNonNull(stream.readObject()));
     }
 
     // Not needed in the emulated source.

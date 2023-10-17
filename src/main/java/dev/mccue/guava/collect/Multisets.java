@@ -194,6 +194,11 @@ public final class Multisets {
     }
 
     @Override
+    public boolean removeIf(java.util.function.Predicate<? super E> filter) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean retainAll(Collection<?> elementsToRetain) {
       throw new UnsupportedOperationException();
     }
