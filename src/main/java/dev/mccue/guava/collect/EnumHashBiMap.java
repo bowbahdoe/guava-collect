@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.IOException;
@@ -123,7 +124,7 @@ public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
   // java.io.ObjectInputStream
   private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    keyTypeOrObjectUnderJ2cl = (Class<K>) stream.readObject();
+    keyTypeOrObjectUnderJ2cl = (Class<K>) requireNonNull(stream.readObject());
     /*
      * TODO: cpovirk - Pre-size the HashMap based on the number of enum values? (But *not* based on
      * the number of entries in the map, as that makes it easy for hostile inputs to trigger lots of

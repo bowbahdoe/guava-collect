@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.Platform.getDeclaringClassOrObjectForJ2cl;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -145,8 +146,8 @@ public final class EnumBiMap<K extends Enum<K>, V extends Enum<V>> extends Abstr
   // java.io.ObjectInputStream
   private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    keyTypeOrObjectUnderJ2cl = (Class<K>) stream.readObject();
-    valueTypeOrObjectUnderJ2cl = (Class<V>) stream.readObject();
+    keyTypeOrObjectUnderJ2cl = (Class<K>) requireNonNull(stream.readObject());
+    valueTypeOrObjectUnderJ2cl = (Class<V>) requireNonNull(stream.readObject());
     setDelegates(
         new EnumMap<K, V>(keyTypeOrObjectUnderJ2cl), new EnumMap<V, K>(valueTypeOrObjectUnderJ2cl));
     Serialization.populateMap(this, stream);
