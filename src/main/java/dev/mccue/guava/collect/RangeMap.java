@@ -35,6 +35,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Louis Wasserman
  * @since 14.0
  */
+@SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @DoNotMock("Use ImmutableRangeMap or TreeRangeMap")
 @ElementTypesAreNonnullByDefault
 public interface RangeMap<K extends Comparable, V> {

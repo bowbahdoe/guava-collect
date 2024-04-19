@@ -119,4 +119,12 @@ final class DescendingImmutableSortedSet<E> extends ImmutableSortedSet<E> {
   boolean isPartialView() {
     return forward.isPartialView();
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

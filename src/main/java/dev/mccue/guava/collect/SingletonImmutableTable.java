@@ -75,7 +75,9 @@ class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
   }
 
   @Override
-  SerializedForm createSerializedForm() {
+  // serialization
+  // serialization
+  Object writeReplace() {
     return SerializedForm.create(this, new int[] {0}, new int[] {0});
   }
 }

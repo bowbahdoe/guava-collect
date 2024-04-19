@@ -54,4 +54,13 @@ final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
   public int size() {
     return delegateList.size();
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

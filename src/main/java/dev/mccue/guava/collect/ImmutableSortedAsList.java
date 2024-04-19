@@ -91,4 +91,13 @@ final class ImmutableSortedAsList<E> extends RegularImmutableAsList<E>
         delegateList()::get,
         comparator());
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

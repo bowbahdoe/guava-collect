@@ -46,6 +46,7 @@ import dev.mccue.jsr305.CheckForNull;
  * @author Louis Wasserman
  * @since 14.0
  */
+@SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @ElementTypesAreNonnullByDefault
 public final class ImmutableRangeSet<C extends Comparable> extends AbstractRangeSet<C>
     implements Serializable {
@@ -157,7 +158,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     int ceilingIndex =
         SortedLists.binarySearch(
             ranges,
-            Range.<C>lowerBoundFn(),
+            Range::lowerBound,
             otherRange.lowerBound,
             Ordering.natural(),
             ANY_PRESENT,
@@ -177,7 +178,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     int index =
         SortedLists.binarySearch(
             ranges,
-            Range.<C>lowerBoundFn(),
+            Range::lowerBound,
             otherRange.lowerBound,
             Ordering.natural(),
             ANY_PRESENT,
@@ -191,7 +192,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     int index =
         SortedLists.binarySearch(
             ranges,
-            Range.<C>lowerBoundFn(),
+            Range::lowerBound,
             Cut.belowValue(value),
             Ordering.natural(),
             ANY_PRESENT,
@@ -365,6 +366,14 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     boolean isPartialView() {
       return true;
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   @Override
@@ -440,7 +449,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
       fromIndex =
           SortedLists.binarySearch(
               ranges,
-              Range.<C>upperBoundFn(),
+              Range::upperBound,
               range.lowerBound,
               KeyPresentBehavior.FIRST_AFTER,
               KeyAbsentBehavior.NEXT_HIGHER);
@@ -453,7 +462,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
       toIndex =
           SortedLists.binarySearch(
               ranges,
-              Range.<C>lowerBoundFn(),
+              Range::lowerBound,
               range.upperBound,
               KeyPresentBehavior.FIRST_PRESENT,
               KeyAbsentBehavior.NEXT_HIGHER);
@@ -483,6 +492,15 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
         @Override
         boolean isPartialView() {
           return true;
+        }
+
+        // redeclare to help optimizers with b/310253115
+        @SuppressWarnings("RedundantOverride")
+        @Override
+        // serialization
+        // serialization
+        Object writeReplace() {
+          return super.writeReplace();
         }
       };
     }

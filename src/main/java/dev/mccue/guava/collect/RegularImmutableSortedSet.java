@@ -327,4 +327,13 @@ final class RegularImmutableSortedSet<E> extends ImmutableSortedSet<E> {
         ? emptySet(reversedOrder)
         : new RegularImmutableSortedSet<E>(elements.reverse(), reversedOrder);
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

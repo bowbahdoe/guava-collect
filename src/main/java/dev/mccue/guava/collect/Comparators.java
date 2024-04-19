@@ -28,7 +28,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Provides static methods for working with {@code Comparator} instances. For many other helpful
- * comparator utilities, see either {@code Comparator} itself (for Java 8 or later), or {@code
+ * comparator utilities, see either {@code Comparator} itself (for Java 8+), or {@code
  * dev.mccue.guava.collect.Ordering} (otherwise).
  *
  * <h3>Relationship to {@code Ordering}</h3>

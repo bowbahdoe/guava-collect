@@ -390,6 +390,7 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
   }
 
   // serialization
+  // serialization
   Object writeReplace() {
     // We serialize by default to ImmutableList, the simplest thing that works.
     return new ImmutableList.SerializedForm(toArray());
@@ -502,4 +503,6 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
      */
     public abstract ImmutableCollection<E> build();
   }
+
+  private static final long serialVersionUID = 0xcafebabe;
 }

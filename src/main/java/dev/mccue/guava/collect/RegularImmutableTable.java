@@ -65,6 +65,15 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     boolean isPartialView() {
       return false;
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   abstract V getValue(int iterationIndex);
@@ -88,6 +97,15 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     @Override
     boolean isPartialView() {
       return true;
+    }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
     }
   }
 
@@ -176,4 +194,10 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
         newValue,
         existingValue);
   }
+
+  // redeclare to satisfy our test for b/310253115
+  @Override
+  // serialization
+  // serialization
+  abstract Object writeReplace();
 }

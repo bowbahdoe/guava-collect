@@ -96,6 +96,15 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     public int size() {
       return entries.size();
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   @Override
@@ -117,5 +126,14 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   @Override
   boolean isPartialView() {
     return false;
+  }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
   }
 }

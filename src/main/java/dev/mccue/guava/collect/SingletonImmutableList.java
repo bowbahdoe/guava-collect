@@ -74,4 +74,13 @@ final class SingletonImmutableList<E> extends ImmutableList<E> {
   boolean isPartialView() {
     return false;
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

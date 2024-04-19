@@ -1028,10 +1028,6 @@ public final class Multisets {
     @Override
     public boolean contains(@CheckForNull Object o) {
       if (o instanceof Entry) {
-        /*
-         * The GWT compiler wrongly issues a warning here.
-         */
-        @SuppressWarnings("cast")
         Entry<?> entry = (Entry<?>) o;
         if (entry.getCount() <= 0) {
           return false;
@@ -1042,8 +1038,6 @@ public final class Multisets {
       return false;
     }
 
-    // GWT compiler warning; see contains().
-    @SuppressWarnings("cast")
     @Override
     public boolean remove(@CheckForNull Object object) {
       if (object instanceof Multiset.Entry) {
@@ -1163,13 +1157,15 @@ public final class Multisets {
    * @since 11.0
    */
   public static <E> ImmutableMultiset<E> copyHighestCountFirst(Multiset<E> multiset) {
-    Entry<E>[] entries = (Entry<E>[]) multiset.entrySet().toArray(new Entry[0]);
+    @SuppressWarnings("unchecked") // generics+arrays
+    // TODO(cpovirk): Consider storing an Entry<?> instead of Entry<E>.
+    Entry<E>[] entries = (Entry<E>[]) multiset.entrySet().toArray((Entry<E>[]) new Entry<?>[0]);
     Arrays.sort(entries, DecreasingCount.INSTANCE);
     return ImmutableMultiset.copyFromEntries(Arrays.asList(entries));
   }
 
   private static final class DecreasingCount implements Comparator<Entry<?>> {
-    static final DecreasingCount INSTANCE = new DecreasingCount();
+    static final Comparator<Entry<?>> INSTANCE = new DecreasingCount();
 
     @Override
     public int compare(Entry<?> entry1, Entry<?> entry2) {

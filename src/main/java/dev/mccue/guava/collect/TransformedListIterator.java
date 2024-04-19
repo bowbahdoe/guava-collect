@@ -34,7 +34,7 @@ abstract class TransformedListIterator<F extends @Nullable Object, T extends @Nu
   }
 
   private ListIterator<? extends F> backingIterator() {
-    return Iterators.cast(backingIterator);
+    return (ListIterator<? extends F>) backingIterator;
   }
 
   @Override

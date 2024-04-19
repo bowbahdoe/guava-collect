@@ -21,6 +21,7 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * @author Louis Wasserman
  */
+@SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @ElementTypesAreNonnullByDefault
 abstract class AbstractRangeSet<C extends Comparable> implements RangeSet<C> {
   AbstractRangeSet() {}

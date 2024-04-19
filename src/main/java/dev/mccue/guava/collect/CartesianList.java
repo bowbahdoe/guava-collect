@@ -130,6 +130,15 @@ final class CartesianList<E> extends AbstractList<List<E>> implements RandomAcce
       boolean isPartialView() {
         return true;
       }
+
+      // redeclare to help optimizers with b/310253115
+      @SuppressWarnings("RedundantOverride")
+      // serialization
+      @Override
+      // serialization
+      Object writeReplace() {
+        return super.writeReplace();
+      }
     };
   }
 

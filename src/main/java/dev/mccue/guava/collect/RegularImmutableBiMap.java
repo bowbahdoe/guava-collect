@@ -44,6 +44,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 @ElementTypesAreNonnullByDefault
 class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
+  @SuppressWarnings("unchecked") // TODO(cpovirk): Consider storing Entry<?, ?>[] instead.
   static final RegularImmutableBiMap<Object, Object> EMPTY =
       new RegularImmutableBiMap<>(
           null, null, (Entry<Object, Object>[]) ImmutableMap.EMPTY_ENTRY_ARRAY, 0, 0);
@@ -281,7 +282,25 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
           ImmutableCollection<Entry<V, K>> delegateCollection() {
             return InverseEntrySet.this;
           }
+
+          // redeclare to help optimizers with b/310253115
+          @SuppressWarnings("RedundantOverride")
+          @Override
+          // serialization
+          // serialization
+          Object writeReplace() {
+            return super.writeReplace();
+          }
         };
+      }
+
+      // redeclare to help optimizers with b/310253115
+      @SuppressWarnings("RedundantOverride")
+      @Override
+      // serialization
+      // serialization
+      Object writeReplace() {
+        return super.writeReplace();
       }
     }
 
@@ -291,6 +310,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
+    // serialization
     // serialization
     Object writeReplace() {
       return new InverseSerializedForm<>(RegularImmutableBiMap.this);
@@ -315,5 +335,14 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     private static final long serialVersionUID = 1;
+  }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
   }
 }

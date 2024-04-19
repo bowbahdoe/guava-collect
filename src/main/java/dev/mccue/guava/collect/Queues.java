@@ -190,6 +190,7 @@ public final class Queues {
    * @since 11.0 (but the bound of {@code E} was changed from {@code Object} to {@code Comparable}
    *     in 15.0)
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   // PriorityBlockingQueue
   public static <E extends Comparable> PriorityBlockingQueue<E> newPriorityBlockingQueue() {
     return new PriorityBlockingQueue<E>();
@@ -204,6 +205,7 @@ public final class Queues {
    * @since 11.0 (but the bound of {@code E} was changed from {@code Object} to {@code Comparable}
    *     in 15.0)
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   // PriorityBlockingQueue
   public static <E extends Comparable> PriorityBlockingQueue<E> newPriorityBlockingQueue(
       Iterable<? extends E> elements) {
@@ -224,6 +226,7 @@ public final class Queues {
    * @since 11.0 (but the bound of {@code E} was changed from {@code Object} to {@code Comparable}
    *     in 15.0)
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   public static <E extends Comparable> PriorityQueue<E> newPriorityQueue() {
     return new PriorityQueue<E>();
   }
@@ -237,6 +240,7 @@ public final class Queues {
    * @since 11.0 (but the bound of {@code E} was changed from {@code Object} to {@code Comparable}
    *     in 15.0)
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   public static <E extends Comparable> PriorityQueue<E> newPriorityQueue(
       Iterable<? extends E> elements) {
     if (elements instanceof Collection) {

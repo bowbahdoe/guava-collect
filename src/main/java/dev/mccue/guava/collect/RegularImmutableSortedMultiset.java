@@ -33,7 +33,7 @@ import dev.mccue.jsr305.CheckForNull;
 final class RegularImmutableSortedMultiset<E> extends ImmutableSortedMultiset<E> {
   private static final long[] ZERO_CUMULATIVE_COUNTS = {0};
 
-  static final ImmutableSortedMultiset<Comparable> NATURAL_EMPTY_MULTISET =
+  static final ImmutableSortedMultiset<?> NATURAL_EMPTY_MULTISET =
       new RegularImmutableSortedMultiset<>(Ordering.natural());
 
   final transient RegularImmutableSortedSet<E> elementSet;
@@ -129,5 +129,13 @@ final class RegularImmutableSortedMultiset<E> extends ImmutableSortedMultiset<E>
   @Override
   boolean isPartialView() {
     return offset > 0 || length < cumulativeCounts.length - 1;
+  }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
   }
 }

@@ -192,4 +192,13 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
   public int hashCode() {
     return hashCode;
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

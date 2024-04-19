@@ -257,4 +257,13 @@ public abstract class ContiguousSet<C extends Comparable> extends ImmutableSorte
   public static <E> ImmutableSortedSet.Builder<E> builder() {
     throw new UnsupportedOperationException();
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  // serialization
+  @Override
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

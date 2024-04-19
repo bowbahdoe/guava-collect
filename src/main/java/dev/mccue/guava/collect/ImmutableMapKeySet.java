@@ -74,6 +74,15 @@ final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
     return true;
   }
 
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
+
   // No longer used for new writes, but kept so that old data can still be read.
   // serialization
   @SuppressWarnings("unused")

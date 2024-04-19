@@ -36,7 +36,7 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
 
   static <E> ImmutableMultiset<E> create(Collection<? extends Entry<? extends E>> entries) {
     @SuppressWarnings("unchecked")
-    Entry<E>[] entriesArray = entries.toArray(new Entry[0]);
+    Entry<E>[] entriesArray = entries.toArray((Entry<E>[]) new Entry<?>[0]);
     Map<E, Integer> delegateMap = Maps.newHashMapWithExpectedSize(entriesArray.length);
     long size = 0;
     for (int i = 0; i < entriesArray.length; i++) {
@@ -86,5 +86,14 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
   @Override
   public int size() {
     return Ints.saturatedCast(size);
+  }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
   }
 }

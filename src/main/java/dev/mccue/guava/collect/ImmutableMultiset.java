@@ -613,6 +613,15 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     public int size() {
       return entries.size();
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   static final class SerializedForm implements Serializable {
@@ -642,4 +651,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
 
     private static final long serialVersionUID = 0;
   }
+
+  private static final long serialVersionUID = 0xcafebabe;
 }

@@ -30,6 +30,7 @@ import dev.mccue.jsr305.CheckForNull;
  *
  * @author Kevin Bourrillion
  */
+@SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @ElementTypesAreNonnullByDefault
 abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializable {
   final C endpoint;

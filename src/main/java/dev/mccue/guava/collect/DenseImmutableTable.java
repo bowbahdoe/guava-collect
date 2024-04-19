@@ -141,6 +141,15 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
         }
       };
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    // serialization
+    @Override
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   private final class Row extends ImmutableArrayMap<C, V> {
@@ -165,6 +174,15 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     @Override
     boolean isPartialView() {
       return true;
+    }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
     }
   }
 
@@ -191,6 +209,15 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     boolean isPartialView() {
       return true;
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   private final class RowMap extends ImmutableArrayMap<R, ImmutableMap<C, V>> {
@@ -212,6 +239,15 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     boolean isPartialView() {
       return false;
     }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
+    }
   }
 
   private final class ColumnMap extends ImmutableArrayMap<C, ImmutableMap<R, V>> {
@@ -232,6 +268,15 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     @Override
     boolean isPartialView() {
       return false;
+    }
+
+    // redeclare to help optimizers with b/310253115
+    @SuppressWarnings("RedundantOverride")
+    @Override
+    // serialization
+    // serialization
+    Object writeReplace() {
+      return super.writeReplace();
     }
   }
 
@@ -280,7 +325,9 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
   }
 
   @Override
-  SerializedForm createSerializedForm() {
+  // serialization
+  // serialization
+  Object writeReplace() {
     return SerializedForm.create(this, cellRowIndices, cellColumnIndices);
   }
 }

@@ -47,6 +47,7 @@ import dev.mccue.jsr305.CheckForNull;
  * @author Louis Wasserman
  * @since 14.0
  */
+@SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @DoNotMock("Use ImmutableRangeSet or TreeRangeSet")
 @ElementTypesAreNonnullByDefault
 public interface RangeSet<C extends Comparable> {

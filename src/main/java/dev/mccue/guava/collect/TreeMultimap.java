@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -78,6 +79,7 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
   /**
    * Creates an empty {@code TreeMultimap} ordered by the natural ordering of its keys and values.
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   public static <K extends Comparable, V extends Comparable> TreeMultimap<K, V> create() {
     return new TreeMultimap<>(Ordering.natural(), Ordering.natural());
   }
@@ -100,6 +102,7 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
    *
    * @param multimap the multimap whose contents are copied to this multimap
    */
+  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
   public static <K extends Comparable, V extends Comparable> TreeMultimap<K, V> create(
       Multimap<? extends K, ? extends V> multimap) {
     return new TreeMultimap<>(Ordering.natural(), Ordering.natural(), multimap);
@@ -210,8 +213,8 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
   @SuppressWarnings("unchecked") // reading data stored by writeObject
   private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    keyComparator = checkNotNull((Comparator<? super K>) stream.readObject());
-    valueComparator = checkNotNull((Comparator<? super V>) stream.readObject());
+    keyComparator = requireNonNull((Comparator<? super K>) stream.readObject());
+    valueComparator = requireNonNull((Comparator<? super V>) stream.readObject());
     setMap(new TreeMap<K, Collection<V>>(keyComparator));
     Serialization.populateMultimap(this, stream);
   }

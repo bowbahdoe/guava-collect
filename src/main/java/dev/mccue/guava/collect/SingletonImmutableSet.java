@@ -79,4 +79,13 @@ final class SingletonImmutableSet<E> extends ImmutableSet<E> {
   public String toString() {
     return '[' + element.toString() + ']';
   }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
+  }
 }

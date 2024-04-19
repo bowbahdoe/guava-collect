@@ -89,6 +89,15 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
       ImmutableCollection<V> delegateCollection() {
         return ImmutableMapValues.this;
       }
+
+      // redeclare to help optimizers with b/310253115
+      @SuppressWarnings("RedundantOverride")
+      @Override
+      // serialization
+      // serialization
+      Object writeReplace() {
+        return super.writeReplace();
+      }
     };
   }
 
@@ -97,6 +106,15 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
   public void forEach(Consumer<? super V> action) {
     checkNotNull(action);
     map.forEach((k, v) -> action.accept(v));
+  }
+
+  // redeclare to help optimizers with b/310253115
+  @SuppressWarnings("RedundantOverride")
+  @Override
+  // serialization
+  // serialization
+  Object writeReplace() {
+    return super.writeReplace();
   }
 
   // No longer used for new writes, but kept so that old data can still be read.
