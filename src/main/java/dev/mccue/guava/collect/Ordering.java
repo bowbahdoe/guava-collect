@@ -220,7 +220,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   // TODO(kevinb): provide replacement
   
   public static <T> Ordering<T> explicit(List<T> valuesInOrder) {
-    return new ExplicitOrdering<T>(valuesInOrder);
+    return new ExplicitOrdering<>(valuesInOrder);
   }
 
   /**
@@ -406,7 +406,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   // Ordering<String> o = Ordering.<String>natural().reverse();
   
   public <S extends T> Ordering<S> reverse() {
-    return new ReverseOrdering<S>(this);
+    return new ReverseOrdering<>(this);
   }
 
   /**
@@ -479,7 +479,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    */
   
   public <U extends T> Ordering<U> compound(Comparator<? super U> secondaryComparator) {
-    return new CompoundOrdering<U>(this, checkNotNull(secondaryComparator));
+    return new CompoundOrdering<>(this, checkNotNull(secondaryComparator));
   }
 
   /**
@@ -506,7 +506,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
   
   public static <T extends @Nullable Object> Ordering<T> compound(
       Iterable<? extends Comparator<? super T>> comparators) {
-    return new CompoundOrdering<T>(comparators);
+    return new CompoundOrdering<>(comparators);
   }
 
   /**
@@ -564,7 +564,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
     E minSoFar = iterator.next();
 
     while (iterator.hasNext()) {
-      minSoFar = min(minSoFar, iterator.next());
+      minSoFar = this.<E>min(minSoFar, iterator.next());
     }
 
     return minSoFar;
@@ -655,7 +655,7 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
     E maxSoFar = iterator.next();
 
     while (iterator.hasNext()) {
-      maxSoFar = max(maxSoFar, iterator.next());
+      maxSoFar = this.<E>max(maxSoFar, iterator.next());
     }
 
     return maxSoFar;

@@ -306,7 +306,6 @@ final class CollectSpliterators {
           OutSpliteratorT extends Spliterator<OutElementT>>
       implements Spliterator<OutElementT> {
     /** Factory for constructing {@code FlatMapSpliterator} instances. */
-    @FunctionalInterface
     interface Factory<InElementT extends @Nullable Object, OutSpliteratorT extends Spliterator<?>> {
       OutSpliteratorT newFlatMapSpliterator(
           @CheckForNull OutSpliteratorT prefix,

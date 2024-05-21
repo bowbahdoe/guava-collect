@@ -629,7 +629,7 @@ class MapMakerInternalMap<
           MapMakerInternalMap<K, Dummy, StrongKeyDummyValueEntry<K>, StrongKeyDummyValueSegment<K>>
               map,
           int initialCapacity) {
-        return new StrongKeyDummyValueSegment<K>(map, initialCapacity);
+        return new StrongKeyDummyValueSegment<>(map, initialCapacity);
       }
 
       @Override
@@ -1265,7 +1265,7 @@ class MapMakerInternalMap<
     }
 
     AtomicReferenceArray<E> newEntryArray(int size) {
-      return new AtomicReferenceArray<E>(size);
+      return new AtomicReferenceArray<>(size);
     }
 
     void initTable(AtomicReferenceArray<E> newTable) {
@@ -2056,7 +2056,7 @@ class MapMakerInternalMap<
   /** Concrete implementation of {@code Segment} for strong keys and weak values. */
   static final class StrongKeyWeakValueSegment<K, V>
       extends Segment<K, V, StrongKeyWeakValueEntry<K, V>, StrongKeyWeakValueSegment<K, V>> {
-    private final ReferenceQueue<V> queueForValues = new ReferenceQueue<V>();
+    private final ReferenceQueue<V> queueForValues = new ReferenceQueue<>();
 
     StrongKeyWeakValueSegment(
         MapMakerInternalMap<K, V, StrongKeyWeakValueEntry<K, V>, StrongKeyWeakValueSegment<K, V>>
@@ -2144,7 +2144,7 @@ class MapMakerInternalMap<
   /** Concrete implementation of {@code Segment} for weak keys and strong values. */
   static final class WeakKeyStrongValueSegment<K, V>
       extends Segment<K, V, WeakKeyStrongValueEntry<K, V>, WeakKeyStrongValueSegment<K, V>> {
-    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
+    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<>();
 
     WeakKeyStrongValueSegment(
         MapMakerInternalMap<K, V, WeakKeyStrongValueEntry<K, V>, WeakKeyStrongValueSegment<K, V>>
@@ -2183,8 +2183,8 @@ class MapMakerInternalMap<
   /** Concrete implementation of {@code Segment} for weak keys and weak values. */
   static final class WeakKeyWeakValueSegment<K, V>
       extends Segment<K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> {
-    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
-    private final ReferenceQueue<V> queueForValues = new ReferenceQueue<V>();
+    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<>();
+    private final ReferenceQueue<V> queueForValues = new ReferenceQueue<>();
 
     WeakKeyWeakValueSegment(
         MapMakerInternalMap<K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> map,
@@ -2254,7 +2254,7 @@ class MapMakerInternalMap<
   /** Concrete implementation of {@code Segment} for weak keys and {@code Dummy} values. */
   static final class WeakKeyDummyValueSegment<K>
       extends Segment<K, Dummy, WeakKeyDummyValueEntry<K>, WeakKeyDummyValueSegment<K>> {
-    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<K>();
+    private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<>();
 
     WeakKeyDummyValueSegment(
         MapMakerInternalMap<K, Dummy, WeakKeyDummyValueEntry<K>, WeakKeyDummyValueSegment<K>> map,
@@ -2293,7 +2293,7 @@ class MapMakerInternalMap<
     final WeakReference<MapMakerInternalMap<?, ?, ?, ?>> mapReference;
 
     public CleanupMapTask(MapMakerInternalMap<?, ?, ?, ?> map) {
-      this.mapReference = new WeakReference<MapMakerInternalMap<?, ?, ?, ?>>(map);
+      this.mapReference = new WeakReference<>(map);
     }
 
     @Override

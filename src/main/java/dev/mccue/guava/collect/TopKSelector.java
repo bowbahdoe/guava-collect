@@ -75,7 +75,7 @@ final class TopKSelector<
    */
   public static <T extends @Nullable Object> TopKSelector<T> least(
       int k, Comparator<? super T> comparator) {
-    return new TopKSelector<T>(comparator, k);
+    return new TopKSelector<>(comparator, k);
   }
 
   /**
@@ -97,7 +97,7 @@ final class TopKSelector<
    */
   public static <T extends @Nullable Object> TopKSelector<T> greatest(
       int k, Comparator<? super T> comparator) {
-    return new TopKSelector<T>(Ordering.from(comparator).reverse(), k);
+    return new TopKSelector<>(Ordering.from(comparator).reverse(), k);
   }
 
   private final int k;

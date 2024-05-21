@@ -1098,35 +1098,56 @@ public final class Iterators {
    */
   public static <T extends @Nullable Object> UnmodifiableIterator<T> singletonIterator(
       @ParametricNullness T value) {
-    return new SingletonIterator<>(value);
+    if (value != null) {
+      return new SingletonIterator<>(value);
+    }
+    @SuppressWarnings("nullness") // For `value` to be null, T must be a nullable type.
+    UnmodifiableIterator<T> result = (UnmodifiableIterator<T>) new SingletonNullIterator<T>();
+    return result;
   }
 
   private static final class SingletonIterator<T extends @Nullable Object>
       extends UnmodifiableIterator<T> {
-    private static final Object SENTINEL = new Object();
+    private @Nullable T valueOrNull;
 
-    private @Nullable Object valueOrSentinel;
-
-    SingletonIterator(T value) {
-      this.valueOrSentinel = value;
+    SingletonIterator(@NonNull T value) {
+      this.valueOrNull = value;
     }
 
     @Override
     public boolean hasNext() {
-      return valueOrSentinel != SENTINEL;
+      return valueOrNull != null;
     }
 
     @Override
-    @ParametricNullness
-    public T next() {
-      if (valueOrSentinel == SENTINEL) {
-        throw new NoSuchElementException();
+    public @NonNull T next() {
+      T result = valueOrNull;
+      valueOrNull = null;
+      // We put the common case first, even though it's unlikely to matter if the code is run much:
+      // https://shipilev.net/jvm/anatomy-quarks/28-frequency-based-code-layout/
+      if (result != null) {
+        return result;
       }
-      // The field held either a T or SENTINEL, and it turned out not to be SENTINEL.
-      @SuppressWarnings("unchecked")
-      T t = (T) valueOrSentinel;
-      valueOrSentinel = SENTINEL;
-      return t;
+      throw new NoSuchElementException();
+    }
+  }
+
+  private static final class SingletonNullIterator<T> extends UnmodifiableIterator<@Nullable T> {
+    private boolean returned;
+
+    @Override
+    public boolean hasNext() {
+      return !returned;
+    }
+
+    @Override
+    public @Nullable T next() {
+      if (!returned) {
+        // common case first, as in SingletonIterator
+        returned = true;
+        return null;
+      }
+      throw new NoSuchElementException();
     }
   }
 

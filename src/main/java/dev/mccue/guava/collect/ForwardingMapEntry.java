@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import dev.mccue.guava.base.Objects;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Map;
 import java.util.Map.Entry;
 import dev.mccue.jsr305.CheckForNull;
@@ -70,6 +71,7 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
 
   @Override
   @ParametricNullness
+  @CanIgnoreReturnValue
   public V setValue(@ParametricNullness V value) {
     return delegate().setValue(value);
   }
