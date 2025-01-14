@@ -14,8 +14,11 @@
 
 package dev.mccue.guava.collect;
 
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
+
 import dev.mccue.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
@@ -269,15 +272,15 @@ public final class Queues {
    * @param timeout how long to wait before giving up
    * @return the number of elements transferred
    * @throws InterruptedException if interrupted while waiting
-   * @since 28.0
+   * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   @CanIgnoreReturnValue
   // BlockingQueue
   public static <E> int drain(
-      BlockingQueue<E> q, Collection<? super E> buffer, int numElements, java.time.Duration timeout)
+      BlockingQueue<E> q, Collection<? super E> buffer, int numElements, Duration timeout)
       throws InterruptedException {
     // TODO(b/126049426): Consider using saturateToNanos(timeout) instead.
-    return drain(q, buffer, numElements, timeout.toNanos(), TimeUnit.NANOSECONDS);
+    return drain(q, buffer, numElements, timeout.toNanos(), NANOSECONDS);
   }
 
   /**
@@ -315,7 +318,7 @@ public final class Queues {
       // elements already available (e.g. LinkedBlockingQueue#drainTo locks only once)
       added += q.drainTo(buffer, numElements - added);
       if (added < numElements) { // not enough elements immediately available; will have to poll
-        E e = q.poll(deadline - System.nanoTime(), TimeUnit.NANOSECONDS);
+        E e = q.poll(deadline - System.nanoTime(), NANOSECONDS);
         if (e == null) {
           break; // we already waited enough, and there are no more elements in sight
         }
@@ -337,17 +340,14 @@ public final class Queues {
    * @param numElements the number of elements to be waited for
    * @param timeout how long to wait before giving up
    * @return the number of elements transferred
-   * @since 28.0
+   * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   @CanIgnoreReturnValue
   // BlockingQueue
   public static <E> int drainUninterruptibly(
-      BlockingQueue<E> q,
-      Collection<? super E> buffer,
-      int numElements,
-      java.time.Duration timeout) {
+      BlockingQueue<E> q, Collection<? super E> buffer, int numElements, Duration timeout) {
     // TODO(b/126049426): Consider using saturateToNanos(timeout) instead.
-    return drainUninterruptibly(q, buffer, numElements, timeout.toNanos(), TimeUnit.NANOSECONDS);
+    return drainUninterruptibly(q, buffer, numElements, timeout.toNanos(), NANOSECONDS);
   }
 
   /**
@@ -385,7 +385,7 @@ public final class Queues {
           E e; // written exactly once, by a successful (uninterrupted) invocation of #poll
           while (true) {
             try {
-              e = q.poll(deadline - System.nanoTime(), TimeUnit.NANOSECONDS);
+              e = q.poll(deadline - System.nanoTime(), NANOSECONDS);
               break;
             } catch (InterruptedException ex) {
               interrupted = true; // note interruption and retry
@@ -435,6 +435,7 @@ public final class Queues {
    * @return a synchronized view of the specified queue
    * @since 14.0
    */
+  // Synchronized
   public static <E extends @Nullable Object> Queue<E> synchronizedQueue(Queue<E> queue) {
     return Synchronized.queue(queue, null);
   }
@@ -468,6 +469,7 @@ public final class Queues {
    * @return a synchronized view of the specified deque
    * @since 15.0
    */
+  // Synchronized
   public static <E extends @Nullable Object> Deque<E> synchronizedDeque(Deque<E> deque) {
     return Synchronized.deque(deque, null);
   }

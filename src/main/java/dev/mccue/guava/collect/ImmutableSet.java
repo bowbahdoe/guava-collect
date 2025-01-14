@@ -19,6 +19,8 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static dev.mccue.guava.math.IntMath.sqrt;
+import static java.lang.Math.max;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.math.IntMath;
@@ -79,12 +81,12 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   /**
-   * Returns an immutable set containing {@code element}. Preferred over {@code
+   * Returns an immutable set containing the given element. Preferred over {@code
    * Collections#singleton} for code consistency, {@code null} rejection, and because the return
    * type conveys the immutability guarantee.
    */
-  public static <E> ImmutableSet<E> of(E element) {
-    return new SingletonImmutableSet<>(element);
+  public static <E> ImmutableSet<E> of(E e1) {
+    return new SingletonImmutableSet<>(e1);
   }
 
   /*
@@ -688,7 +690,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    */
   // TODO(cpovirk): Move to Hashing or something, since it's used elsewhere in the Android version.
   static int chooseTableSize(int setSize) {
-    setSize = Math.max(setSize, 2);
+    setSize = max(setSize, 2);
     // Correct the size for open addressing to match desired load factor.
     if (setSize < CUTOFF) {
       // Round up to the next highest power of 2.
@@ -984,9 +986,9 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
       return inputElementsIncludingAnyDuplicates;
     }
     // Guess the size is "halfway between" all duplicates and no duplicates, on a log scale.
-    return Math.max(
+    return max(
         ImmutableCollection.Builder.DEFAULT_INITIAL_CAPACITY,
-        IntMath.sqrt(inputElementsIncludingAnyDuplicates, RoundingMode.CEILING));
+        sqrt(inputElementsIncludingAnyDuplicates, RoundingMode.CEILING));
   }
 
   private static final long serialVersionUID = 0xcafebabe;

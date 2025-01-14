@@ -16,6 +16,8 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Iterables.getOnlyElement;
+
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -40,7 +42,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
       case 0:
         return ImmutableSet.of();
       case 1:
-        return ImmutableSet.of(Iterables.getOnlyElement(set));
+        return ImmutableSet.of(getOnlyElement(set));
       default:
         return new ImmutableEnumSet<>(set);
     }

@@ -16,9 +16,11 @@
 
 package dev.mccue.guava.collect;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import dev.mccue.jsr305.CheckForNull;
@@ -49,13 +51,13 @@ abstract class AbstractListMultimap<K extends @Nullable Object, V extends @Nulla
 
   @Override
   List<V> createUnmodifiableEmptyCollection() {
-    return Collections.emptyList();
+    return emptyList();
   }
 
   @Override
   <E extends @Nullable Object> Collection<E> unmodifiableCollectionSubclass(
       Collection<E> collection) {
-    return Collections.unmodifiableList((List<E>) collection);
+    return unmodifiableList((List<E>) collection);
   }
 
   @Override

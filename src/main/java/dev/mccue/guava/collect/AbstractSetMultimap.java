@@ -16,9 +16,11 @@
 
 package dev.mccue.guava.collect;
 
+import static java.util.Collections.emptySet;
+import static java.util.Collections.unmodifiableSet;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -49,13 +51,13 @@ abstract class AbstractSetMultimap<K extends @Nullable Object, V extends @Nullab
 
   @Override
   Set<V> createUnmodifiableEmptyCollection() {
-    return Collections.emptySet();
+    return emptySet();
   }
 
   @Override
   <E extends @Nullable Object> Collection<E> unmodifiableCollectionSubclass(
       Collection<E> collection) {
-    return Collections.unmodifiableSet((Set<E>) collection);
+    return unmodifiableSet((Set<E>) collection);
   }
 
   @Override

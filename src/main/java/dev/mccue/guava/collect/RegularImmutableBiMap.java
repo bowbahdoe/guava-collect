@@ -20,6 +20,7 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkPositionIndex;
 import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
 import static dev.mccue.guava.collect.ImmutableMapEntry.createEntryArray;
+import static dev.mccue.guava.collect.Maps.immutableEntry;
 import static dev.mccue.guava.collect.RegularImmutableMap.MAX_HASH_BUCKET_LENGTH;
 import static dev.mccue.guava.collect.RegularImmutableMap.checkNoConflictInKeyBucket;
 import static java.util.Objects.requireNonNull;
@@ -275,7 +276,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
           @Override
           public Entry<V, K> get(int index) {
             Entry<K, V> entry = entries[index];
-            return Maps.immutableEntry(entry.getValue(), entry.getKey());
+            return immutableEntry(entry.getValue(), entry.getKey());
           }
 
           @Override

@@ -15,6 +15,7 @@
  */
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Maps.immutableEntry;
 import static java.util.Objects.requireNonNull;
 
 import com.google.errorprone.annotations.concurrent.LazyInit;
@@ -84,7 +85,7 @@ final class JdkBackedImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     @Override
     public Entry<V, K> get(int index) {
       Entry<K, V> entry = entries.get(index);
-      return Maps.immutableEntry(entry.getValue(), entry.getKey());
+      return immutableEntry(entry.getValue(), entry.getKey());
     }
 
     @Override

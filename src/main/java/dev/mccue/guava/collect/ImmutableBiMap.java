@@ -18,6 +18,7 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static java.util.Arrays.sort;
 import static java.util.Objects.requireNonNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -465,7 +466,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
             if (entriesUsed) {
               entries = Arrays.copyOf(entries, size);
             }
-            Arrays.sort(
+            sort(
                 (Entry<K, V>[]) entries, // Entries up to size are not null
                 0,
                 size,

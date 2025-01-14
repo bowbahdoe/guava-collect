@@ -14,6 +14,7 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Maps.immutableEntry;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.collect.ImmutableMap.IteratorBasedImmutableMap;
@@ -134,7 +135,7 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
           for (index++; index < maxIndex; index++) {
             V value = getValue(index);
             if (value != null) {
-              return Maps.immutableEntry(getKey(index), value);
+              return immutableEntry(getKey(index), value);
             }
           }
           return endOfData();

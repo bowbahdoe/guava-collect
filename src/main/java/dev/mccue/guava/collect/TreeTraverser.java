@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Iterators.singletonIterator;
 
 import dev.mccue.guava.base.Function;
 import java.util.ArrayDeque;
@@ -73,6 +74,8 @@ import dev.mccue.jsr305.CheckForNull;
 @Deprecated
 @ElementTypesAreNonnullByDefault
 public abstract class TreeTraverser<T> {
+  /** Constructor for use by subclasses. */
+  public TreeTraverser() {}
 
   /**
    * Returns a tree traverser that uses the given function to navigate from a node to its children.
@@ -141,7 +144,7 @@ public abstract class TreeTraverser<T> {
 
     PreOrderIterator(T root) {
       this.stack = new ArrayDeque<>();
-      stack.addLast(Iterators.singletonIterator(checkNotNull(root)));
+      stack.addLast(singletonIterator(checkNotNull(root)));
     }
 
     @Override

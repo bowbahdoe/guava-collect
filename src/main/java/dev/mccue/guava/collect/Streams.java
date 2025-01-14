@@ -53,7 +53,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Static utility methods related to {@code Stream} instances.
  *
- * @since 21.0
+ * @since 21.0 (but only since 33.4.0 in the Android flavor)
  */
 @ElementTypesAreNonnullByDefault
 public final class Streams {
@@ -394,7 +394,7 @@ public final class Streams {
    * This method behaves equivalently to {@code #zip zipping} the stream elements into
    * temporary pair objects and then using {@code Stream#forEach} on that stream.
    *
-   * @since 22.0
+   * @since 22.0 (but only since 33.4.0 in the Android flavor)
    */
   public static <A extends @Nullable Object, B extends @Nullable Object> void forEachPair(
       Stream<A> streamA, Stream<B> streamB, BiConsumer<? super A, ? super B> consumer) {
@@ -748,7 +748,7 @@ public final class Streams {
    * <p>This interface is only intended for use by callers of {@code #mapWithIndex(Stream,
    * FunctionWithIndex)}.
    *
-   * @since 21.0
+   * @since 21.0 (but only since 33.4.0 in the Android flavor)
    */
   public interface FunctionWithIndex<T extends @Nullable Object, R extends @Nullable Object> {
     /** Applies this function to the given argument and its index within a stream. */
@@ -803,7 +803,7 @@ public final class Streams {
    * <p>This interface is only intended for use by callers of {@code #mapWithIndex(IntStream,
    * IntFunctionWithIndex)}.
    *
-   * @since 21.0
+   * @since 21.0 (but only since 33.4.0 in the Android flavor)
    */
   public interface IntFunctionWithIndex<R extends @Nullable Object> {
     /** Applies this function to the given argument and its index within a stream. */
@@ -817,7 +817,7 @@ public final class Streams {
    * <p>This interface is only intended for use by callers of {@code #mapWithIndex(LongStream,
    * LongFunctionWithIndex)}.
    *
-   * @since 21.0
+   * @since 21.0 (but only since 33.4.0 in the Android flavor)
    */
   public interface LongFunctionWithIndex<R extends @Nullable Object> {
     /** Applies this function to the given argument and its index within a stream. */
@@ -831,7 +831,7 @@ public final class Streams {
    * <p>This interface is only intended for use by callers of {@code #mapWithIndex(DoubleStream,
    * DoubleFunctionWithIndex)}.
    *
-   * @since 21.0
+   * @since 21.0 (but only since 33.4.0 in the Android flavor)
    */
   public interface DoubleFunctionWithIndex<R extends @Nullable Object> {
     /** Applies this function to the given argument and its index within a stream. */

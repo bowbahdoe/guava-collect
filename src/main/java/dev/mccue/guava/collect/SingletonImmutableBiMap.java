@@ -18,6 +18,7 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkEntryNotNull;
+import static dev.mccue.guava.collect.Maps.immutableEntry;
 
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.util.function.BiConsumer;
@@ -83,7 +84,7 @@ final class SingletonImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
 
   @Override
   ImmutableSet<Entry<K, V>> createEntrySet() {
-    return ImmutableSet.of(Maps.immutableEntry(singleKey, singleValue));
+    return ImmutableSet.of(immutableEntry(singleKey, singleValue));
   }
 
   @Override

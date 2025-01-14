@@ -19,6 +19,8 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkState;
+import static dev.mccue.guava.collect.Maps.immutableEntry;
+import static dev.mccue.guava.collect.Maps.safeGet;
 import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 import static java.util.Objects.requireNonNull;
 
@@ -1286,7 +1288,7 @@ abstract class AbstractMapBasedMultimap<K extends @Nullable Object, V extends @N
     return new Itr<Entry<K, V>>() {
       @Override
       Entry<K, V> output(@ParametricNullness K key, @ParametricNullness V value) {
-        return Maps.immutableEntry(key, value);
+        return immutableEntry(key, value);
       }
     };
   }
@@ -1299,7 +1301,7 @@ abstract class AbstractMapBasedMultimap<K extends @Nullable Object, V extends @N
           K key = keyToValueCollectionEntry.getKey();
           Collection<V> valueCollection = keyToValueCollectionEntry.getValue();
           return CollectSpliterators.map(
-              valueCollection.spliterator(), (V value) -> Maps.immutableEntry(key, value));
+              valueCollection.spliterator(), (V value) -> immutableEntry(key, value));
         },
         Spliterator.SIZED,
         size());
@@ -1353,7 +1355,7 @@ abstract class AbstractMapBasedMultimap<K extends @Nullable Object, V extends @N
     @Override
     @CheckForNull
     public Collection<V> get(@CheckForNull Object key) {
-      Collection<V> collection = Maps.safeGet(submap, key);
+      Collection<V> collection = safeGet(submap, key);
       if (collection == null) {
         return null;
       }
@@ -1413,7 +1415,7 @@ abstract class AbstractMapBasedMultimap<K extends @Nullable Object, V extends @N
 
     Entry<K, Collection<V>> wrapEntry(Entry<K, Collection<V>> entry) {
       K key = entry.getKey();
-      return Maps.immutableEntry(key, wrapCollection(key, entry.getValue()));
+      return immutableEntry(key, wrapCollection(key, entry.getValue()));
     }
 
     class AsMapEntries extends Maps.EntrySet<K, Collection<V>> {
@@ -1636,7 +1638,7 @@ abstract class AbstractMapBasedMultimap<K extends @Nullable Object, V extends @N
       Collection<V> output = createCollection();
       output.addAll(entry.getValue());
       entryIterator.remove();
-      return Maps.immutableEntry(entry.getKey(), unmodifiableCollectionSubclass(output));
+      return immutableEntry(entry.getKey(), unmodifiableCollectionSubclass(output));
     }
 
     @Override

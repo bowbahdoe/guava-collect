@@ -17,8 +17,6 @@
 package dev.mccue.guava.collect;
 
 import dev.mccue.guava.primitives.Booleans;
-import dev.mccue.guava.primitives.Ints;
-import dev.mccue.guava.primitives.Longs;
 import java.util.Comparator;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -114,12 +112,12 @@ public abstract class ComparisonChain {
 
         @Override
         public ComparisonChain compare(int left, int right) {
-          return classify(Ints.compare(left, right));
+          return classify(Integer.compare(left, right));
         }
 
         @Override
         public ComparisonChain compare(long left, long right) {
-          return classify(Longs.compare(left, right));
+          return classify(Long.compare(left, right));
         }
 
         @Override
@@ -134,12 +132,12 @@ public abstract class ComparisonChain {
 
         @Override
         public ComparisonChain compareTrueFirst(boolean left, boolean right) {
-          return classify(Booleans.compare(right, left)); // reversed
+          return classify(Boolean.compare(right, left)); // reversed
         }
 
         @Override
         public ComparisonChain compareFalseFirst(boolean left, boolean right) {
-          return classify(Booleans.compare(left, right));
+          return classify(Boolean.compare(left, right));
         }
 
         ComparisonChain classify(int result) {
@@ -236,13 +234,13 @@ public abstract class ComparisonChain {
       @ParametricNullness T left, @ParametricNullness T right, Comparator<T> comparator);
 
   /**
-   * Compares two {@code int} values as specified by {@code Ints#compare}, <i>if</i> the result of
-   * this comparison chain has not already been determined.
+   * Compares two {@code int} values as specified by {@code Integer#compare}, <i>if</i> the result
+   * of this comparison chain has not already been determined.
    */
   public abstract ComparisonChain compare(int left, int right);
 
   /**
-   * Compares two {@code long} values as specified by {@code Longs#compare}, <i>if</i> the result of
+   * Compares two {@code long} values as specified by {@code Long#compare}, <i>if</i> the result of
    * this comparison chain has not already been determined.
    */
   public abstract ComparisonChain compare(long left, long right);

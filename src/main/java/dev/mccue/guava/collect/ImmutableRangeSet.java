@@ -17,9 +17,12 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkElementIndex;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Iterables.getOnlyElement;
+import static dev.mccue.guava.collect.Iterators.emptyIterator;
 import static dev.mccue.guava.collect.SortedLists.KeyAbsentBehavior.NEXT_HIGHER;
 import static dev.mccue.guava.collect.SortedLists.KeyAbsentBehavior.NEXT_LOWER;
 import static dev.mccue.guava.collect.SortedLists.KeyPresentBehavior.ANY_PRESENT;
+import static java.util.Collections.sort;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.collect.SortedLists.KeyAbsentBehavior;
@@ -593,7 +596,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     public UnmodifiableIterator<C> iterator() {
       return new AbstractIterator<C>() {
         final Iterator<Range<C>> rangeItr = ranges.iterator();
-        Iterator<C> elemItr = Iterators.emptyIterator();
+        Iterator<C> elemItr = emptyIterator();
 
         @Override
         @CheckForNull
@@ -615,7 +618,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     public UnmodifiableIterator<C> descendingIterator() {
       return new AbstractIterator<C>() {
         final Iterator<Range<C>> rangeItr = ranges.reverse().iterator();
-        Iterator<C> elemItr = Iterators.emptyIterator();
+        Iterator<C> elemItr = emptyIterator();
 
         @Override
         @CheckForNull
@@ -812,7 +815,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
     public ImmutableRangeSet<C> build() {
       ImmutableList.Builder<Range<C>> mergedRangesBuilder =
           new ImmutableList.Builder<>(ranges.size());
-      Collections.sort(ranges, Range.<C>rangeLexOrdering());
+      sort(ranges, Range.<C>rangeLexOrdering());
       PeekingIterator<Range<C>> peekingItr = Iterators.peekingIterator(ranges.iterator());
       while (peekingItr.hasNext()) {
         Range<C> range = peekingItr.next();
@@ -834,8 +837,7 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
       ImmutableList<Range<C>> mergedRanges = mergedRangesBuilder.build();
       if (mergedRanges.isEmpty()) {
         return of();
-      } else if (mergedRanges.size() == 1
-          && Iterables.getOnlyElement(mergedRanges).equals(Range.all())) {
+      } else if (mergedRanges.size() == 1 && getOnlyElement(mergedRanges).equals(Range.all())) {
         return all();
       } else {
         return new ImmutableRangeSet<>(mergedRanges);

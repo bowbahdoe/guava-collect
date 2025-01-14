@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkElementIndex;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 import static java.util.Collections.emptyMap;
 
 import dev.mccue.guava.base.Objects;
@@ -181,7 +182,7 @@ public final class ArrayTable<R, C, V> extends AbstractTable<R, C, @Nullable V>
     V[][] copy = (@Nullable V[][]) new Object[rowList.size()][columnList.size()];
     array = copy;
     for (int i = 0; i < rowList.size(); i++) {
-      System.arraycopy(table.array[i], 0, copy[i], 0, table.array[i].length);
+      arraycopy(table.array[i], 0, copy[i], 0, table.array[i].length);
     }
   }
 
@@ -373,7 +374,7 @@ public final class ArrayTable<R, C, V> extends AbstractTable<R, C, @Nullable V>
     @Nullable
     V[][] copy = (@Nullable V[][]) Array.newInstance(valueClass, rowList.size(), columnList.size());
     for (int i = 0; i < rowList.size(); i++) {
-      System.arraycopy(array[i], 0, copy[i], 0, array[i].length);
+      arraycopy(array[i], 0, copy[i], 0, array[i].length);
     }
     return copy;
   }

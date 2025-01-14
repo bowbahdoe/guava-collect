@@ -16,7 +16,6 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 
-import dev.mccue.guava.primitives.Booleans;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 import dev.mccue.jsr305.CheckForNull;
@@ -81,7 +80,7 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
       return result;
     }
     // same value. below comes before above
-    return Booleans.compare(this instanceof AboveValue, that instanceof AboveValue);
+    return Boolean.compare(this instanceof AboveValue, that instanceof AboveValue);
   }
 
   C endpoint() {
@@ -338,9 +337,8 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
         case OPEN:
           C previous = domain.previous(endpoint);
           return (previous == null) ? Cut.<C>belowAll() : new AboveValue<C>(previous);
-        default:
-          throw new AssertionError();
       }
+      throw new AssertionError();
     }
 
     @Override
@@ -351,9 +349,8 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
           return (previous == null) ? Cut.<C>aboveAll() : new AboveValue<C>(previous);
         case OPEN:
           return this;
-        default:
-          throw new AssertionError();
       }
+      throw new AssertionError();
     }
 
     @Override
@@ -422,9 +419,8 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
         case CLOSED:
           C next = domain.next(endpoint);
           return (next == null) ? Cut.<C>belowAll() : belowValue(next);
-        default:
-          throw new AssertionError();
       }
+      throw new AssertionError();
     }
 
     @Override
@@ -435,9 +431,8 @@ abstract class Cut<C extends Comparable> implements Comparable<Cut<C>>, Serializ
           return (next == null) ? Cut.<C>aboveAll() : belowValue(next);
         case CLOSED:
           return this;
-        default:
-          throw new AssertionError();
       }
+      throw new AssertionError();
     }
 
     @Override

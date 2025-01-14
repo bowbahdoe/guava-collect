@@ -18,6 +18,11 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static java.util.Arrays.asList;
+import static java.util.Arrays.sort;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
 
 import dev.mccue.guava.base.Function;
 import java.util.ArrayList;
@@ -742,7 +747,6 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * @throws IllegalArgumentException if {@code k} is negative
    * @since 8.0
    */
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
   public <E extends T> List<E> leastOf(Iterable<E> iterable, int k) {
     if (iterable instanceof Collection) {
       Collection<E> collection = (Collection<E>) iterable;
@@ -753,11 +757,11 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
 
         @SuppressWarnings("unchecked") // c only contains E's and doesn't escape
         E[] array = (E[]) collection.toArray();
-        Arrays.sort(array, this);
+        sort(array, this);
         if (array.length > k) {
           array = Arrays.copyOf(array, k);
         }
-        return Collections.unmodifiableList(Arrays.asList(array));
+        return unmodifiableList(asList(array));
       }
     }
     return leastOf(iterable.iterator(), k);
@@ -784,16 +788,16 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
     checkNonnegative(k, "k");
 
     if (k == 0 || !iterator.hasNext()) {
-      return Collections.emptyList();
+      return emptyList();
     } else if (k >= Integer.MAX_VALUE / 2) {
       // k is really large; just do a straightforward sorted-copy-and-sublist
       ArrayList<E> list = Lists.newArrayList(iterator);
-      Collections.sort(list, this);
+      sort(list, this);
       if (list.size() > k) {
         list.subList(k, list.size()).clear();
       }
       list.trimToSize();
-      return Collections.unmodifiableList(list);
+      return unmodifiableList(list);
     } else {
       TopKSelector<E> selector = TopKSelector.least(k, this);
       selector.offerAll(iterator);
@@ -859,12 +863,11 @@ public abstract class Ordering<T extends @Nullable Object> implements Comparator
    * calling {@code Collections#sort(List)}.
    */
   // TODO(kevinb): rerun benchmarks including new options
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
   public <E extends T> List<E> sortedCopy(Iterable<E> elements) {
     @SuppressWarnings("unchecked") // does not escape, and contains only E's
     E[] array = (E[]) Iterables.toArray(elements);
-    Arrays.sort(array, this);
-    return Lists.newArrayList(Arrays.asList(array));
+    sort(array, this);
+    return Lists.newArrayList(asList(array));
   }
 
   /**

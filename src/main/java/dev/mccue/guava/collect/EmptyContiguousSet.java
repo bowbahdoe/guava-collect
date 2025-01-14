@@ -13,6 +13,8 @@
  */
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Iterators.emptyIterator;
+
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -92,13 +94,13 @@ final class EmptyContiguousSet<C extends Comparable> extends ContiguousSet<C> {
 
   @Override
   public UnmodifiableIterator<C> iterator() {
-    return Iterators.emptyIterator();
+    return emptyIterator();
   }
 
   // NavigableSet
   @Override
   public UnmodifiableIterator<C> descendingIterator() {
-    return Iterators.emptyIterator();
+    return emptyIterator();
   }
 
   @Override

@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkArgument;
+import static dev.mccue.guava.collect.Iterables.getOnlyElement;
 
 import dev.mccue.guava.collect.ImmutableMap.IteratorBasedImmutableMap;
 import java.io.InvalidObjectException;
@@ -41,7 +42,7 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
       case 0:
         return ImmutableMap.of();
       case 1:
-        Entry<K, V> entry = Iterables.getOnlyElement(map.entrySet());
+        Entry<K, V> entry = getOnlyElement(map.entrySet());
         return ImmutableMap.of(entry.getKey(), entry.getValue());
       default:
         return new ImmutableEnumMap<>(map);

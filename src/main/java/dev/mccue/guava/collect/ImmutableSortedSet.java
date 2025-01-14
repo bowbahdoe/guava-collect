@@ -19,6 +19,8 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.ObjectArrays.checkElementsNotNull;
+import static java.lang.System.arraycopy;
+import static java.util.Arrays.sort;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
@@ -102,8 +104,8 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
   }
 
   /** Returns an immutable sorted set containing a single element. */
-  public static <E extends Comparable<? super E>> ImmutableSortedSet<E> of(E element) {
-    return new RegularImmutableSortedSet<>(ImmutableList.of(element), Ordering.natural());
+  public static <E extends Comparable<? super E>> ImmutableSortedSet<E> of(E e1) {
+    return new RegularImmutableSortedSet<>(ImmutableList.of(e1), Ordering.natural());
   }
 
   /**
@@ -169,7 +171,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
     contents[3] = e4;
     contents[4] = e5;
     contents[5] = e6;
-    System.arraycopy(remaining, 0, contents, 6, remaining.length);
+    arraycopy(remaining, 0, contents, 6, remaining.length);
     return construct(Ordering.natural(), contents.length, (E[]) contents);
   }
 
@@ -368,7 +370,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
       return emptySet(comparator);
     }
     checkElementsNotNull(contents, n);
-    Arrays.sort(contents, 0, n, comparator);
+    sort(contents, 0, n, comparator);
     int uniques = 1;
     for (int i = 1; i < n; i++) {
       E cur = contents[i];
@@ -445,11 +447,16 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
      * used Object[], we might be able to optimize toArray() to use clone() sometimes. (See
      * cl/592273615 and cl/592273683.)
      */
-    @SuppressWarnings("unchecked")
     public Builder(Comparator<? super E> comparator) {
+      this(comparator, ImmutableCollection.Builder.DEFAULT_INITIAL_CAPACITY);
+    }
+
+    /** Creates a new builder with an expected size. */
+    @SuppressWarnings("unchecked")
+    Builder(Comparator<? super E> comparator, int expectedSize) {
       super(true); // don't construct guts of hash-based set builder
       this.comparator = checkNotNull(comparator);
-      this.elements = (E[]) new Object[ImmutableCollection.Builder.DEFAULT_INITIAL_CAPACITY];
+      this.elements = (E[]) new Object[expectedSize];
       this.n = 0;
     }
 
@@ -462,7 +469,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
       if (n == 0) {
         return;
       }
-      Arrays.sort(elements, 0, n, comparator);
+      sort(elements, 0, n, comparator);
       int unique = 1;
       for (int i = 1; i < n; i++) {
         int cmp = comparator.compare(elements[unique - 1], elements[i]);
@@ -493,10 +500,15 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
       copyIfNecessary();
       if (n == elements.length) {
         sortAndDedup();
-        /*
-         * Sorting operations can only be allowed to occur once every O(n) operations to keep
-         * amortized O(n log n) performance.  Therefore, ensure there are at least O(n) *unused*
-         * spaces in the builder array.
+        /**
+         * sortAndDedup may have made enough room for this element, but that's not necessarily good
+         * enough. Consider, for example, the case where we have a buffer of size (n+1), add n
+         * distinct elements, and add the last element over again many times over. We don't want a
+         * situation where we re-sort the entire buffer every time the last element is re-added.
+         *
+         * <p>The solution is to ensure there are O(n) spaces left over in the buffer after
+         * sortAndDedup -- that is, at least c*n for some constant c > 0. Ensuring the buffer size
+         * is at least expandedCapacity(n, n + 1) satisfies this property.
          */
         int newLength = ImmutableCollection.Builder.expandedCapacity(n, n + 1);
         if (newLength > elements.length) {
@@ -911,7 +923,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet.CachingAsList<E
    */
   @DoNotCall("Pass a parameter of type Comparable")
   @Deprecated
-  public static <E> ImmutableSortedSet<E> of(E element) {
+  public static <E> ImmutableSortedSet<E> of(E e1) {
     throw new UnsupportedOperationException();
   }
 

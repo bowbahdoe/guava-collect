@@ -17,6 +17,9 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static java.lang.Math.max;
+import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.MoreObjects;
@@ -27,11 +30,11 @@ import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -216,6 +219,19 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
   }
 
   /**
+   * Returns a new builder with a hint for how many distinct keys are expected to be added. The
+   * generated builder is equivalent to that returned by {@code #builder}, but may perform better if
+   * {@code expectedKeys} is a good estimate.
+   *
+   * @throws IllegalArgumentException if {@code expectedKeys} is negative
+   * @since 33.3.0
+   */
+  public static <K, V> Builder<K, V> builderWithExpectedKeys(int expectedKeys) {
+    checkNonnegative(expectedKeys, "expectedKeys");
+    return new Builder<>(expectedKeys);
+  }
+
+  /**
    * A builder for creating immutable {@code SetMultimap} instances, especially {@code public static
    * final} multimaps ("constant multimaps"). Example:
    *
@@ -243,9 +259,41 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
       super();
     }
 
+    Builder(int expectedKeys) {
+      super(expectedKeys);
+    }
+
     @Override
-    Collection<V> newMutableValueCollection() {
-      return Platform.preservesInsertionOrderOnAddsSet();
+    ImmutableCollection.Builder<V> newValueCollectionBuilderWithExpectedSize(int expectedSize) {
+      return (valueComparator == null)
+          ? ImmutableSet.builderWithExpectedSize(expectedSize)
+          : new ImmutableSortedSet.Builder<V>(valueComparator, expectedSize);
+    }
+
+    @Override
+    int expectedValueCollectionSize(int defaultExpectedValues, Iterable<?> values) {
+      // Only trust the size of `values` if it is a Set and therefore probably already deduplicated.
+      if (values instanceof Set<?>) {
+        Set<?> collection = (Set<?>) values;
+        return max(defaultExpectedValues, collection.size());
+      } else {
+        return defaultExpectedValues;
+      }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>Note that {@code expectedValuesPerKey} is taken to mean the expected number of
+     * <i>distinct</i> values per key.
+     *
+     * @since 33.3.0
+     */
+    @CanIgnoreReturnValue
+    @Override
+    public Builder<K, V> expectedValuesPerKey(int expectedValuesPerKey) {
+      super.expectedValuesPerKey(expectedValuesPerKey);
+      return this;
     }
 
     /** Adds a key-value mapping to the built multimap if it is not already present. */
@@ -290,7 +338,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     @CanIgnoreReturnValue
     @Override
     public Builder<K, V> putAll(K key, V... values) {
-      return putAll(key, Arrays.asList(values));
+      return putAll(key, asList(values));
     }
 
     @CanIgnoreReturnValue
@@ -343,11 +391,14 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     /** Returns a newly-created immutable set multimap. */
     @Override
     public ImmutableSetMultimap<K, V> build() {
-      Collection<Map.Entry<K, Collection<V>>> mapEntries = builderMap.entrySet();
+      if (builderMap == null) {
+        return ImmutableSetMultimap.of();
+      }
+      Collection<Map.Entry<K, ImmutableCollection.Builder<V>>> mapEntries = builderMap.entrySet();
       if (keyComparator != null) {
         mapEntries = Ordering.from(keyComparator).<K>onKeys().immutableSortedCopy(mapEntries);
       }
-      return fromMapEntries(mapEntries, valueComparator);
+      return fromMapBuilderEntries(mapEntries, valueComparator);
     }
   }
 
@@ -416,6 +467,32 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
       K key = entry.getKey();
       Collection<? extends V> values = entry.getValue();
       ImmutableSet<V> set = valueSet(valueComparator, values);
+      if (!set.isEmpty()) {
+        builder.put(key, set);
+        size += set.size();
+      }
+    }
+
+    return new ImmutableSetMultimap<>(builder.buildOrThrow(), size, valueComparator);
+  }
+
+  /** Creates an ImmutableSetMultimap from a map to builders. */
+  static <K, V> ImmutableSetMultimap<K, V> fromMapBuilderEntries(
+      Collection<? extends Map.Entry<K, ImmutableCollection.Builder<V>>> mapEntries,
+      @CheckForNull Comparator<? super V> valueComparator) {
+    if (mapEntries.isEmpty()) {
+      return of();
+    }
+    ImmutableMap.Builder<K, ImmutableSet<V>> builder =
+        new ImmutableMap.Builder<>(mapEntries.size());
+    int size = 0;
+
+    for (Entry<K, ImmutableCollection.Builder<V>> entry : mapEntries) {
+      K key = entry.getKey();
+      ImmutableSet.Builder<? extends V> values = (ImmutableSet.Builder<V>) entry.getValue();
+      // If orderValuesBy got called at the very end, we may need to do the ImmutableSet to
+      // ImmutableSortedSet copy for each of these.
+      ImmutableSet<V> set = valueSet(valueComparator, values.build());
       if (!set.isEmpty()) {
         builder.put(key, set);
         size += set.size();

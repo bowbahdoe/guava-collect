@@ -16,6 +16,8 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Iterators.singletonIterator;
+
 import dev.mccue.guava.base.Preconditions;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -51,7 +53,7 @@ final class SingletonImmutableSet<E> extends ImmutableSet<E> {
 
   @Override
   public UnmodifiableIterator<E> iterator() {
-    return Iterators.singletonIterator(element);
+    return singletonIterator(element);
   }
 
   @Override

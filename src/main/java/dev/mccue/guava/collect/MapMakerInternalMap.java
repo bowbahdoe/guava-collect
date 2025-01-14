@@ -16,6 +16,7 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
+import static java.lang.Math.min;
 
 import dev.mccue.guava.base.Equivalence;
 import dev.mccue.guava.collect.MapMaker.Dummy;
@@ -34,7 +35,6 @@ import java.lang.ref.WeakReference;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -157,12 +157,12 @@ class MapMakerInternalMap<
    * Creates a new, empty map with the specified strategy, initial capacity and concurrency level.
    */
   private MapMakerInternalMap(MapMaker builder, InternalEntryHelper<K, V, E, S> entryHelper) {
-    concurrencyLevel = Math.min(builder.getConcurrencyLevel(), MAX_SEGMENTS);
+    concurrencyLevel = min(builder.getConcurrencyLevel(), MAX_SEGMENTS);
 
     keyEquivalence = builder.getKeyEquivalence();
     this.entryHelper = entryHelper;
 
-    int initialCapacity = Math.min(builder.getInitialCapacity(), MAXIMUM_CAPACITY);
+    int initialCapacity = min(builder.getInitialCapacity(), MAXIMUM_CAPACITY);
 
     // Find power-of-two sizes best matching arguments. Constraints:
     // (segmentCount > concurrencyLevel)
@@ -2715,7 +2715,7 @@ class MapMakerInternalMap<
     }
   }
 
-  final class KeySet extends SafeToArraySet<K> {
+  final class KeySet extends AbstractSet<K> {
 
     @Override
     public Iterator<K> iterator() {
@@ -2774,22 +2774,9 @@ class MapMakerInternalMap<
     public void clear() {
       MapMakerInternalMap.this.clear();
     }
-
-    // super.toArray() may misbehave if size() is inaccurate, at least on old versions of Android.
-    // https://code.google.com/p/android/issues/detail?id=36519 / http://r.android.com/47508
-
-    @Override
-    public Object[] toArray() {
-      return toArrayList(this).toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-      return toArrayList(this).toArray(a);
-    }
   }
 
-  final class EntrySet extends SafeToArraySet<Entry<K, V>> {
+  final class EntrySet extends AbstractSet<Entry<K, V>> {
 
     @Override
     public Iterator<Entry<K, V>> iterator() {
@@ -2835,28 +2822,6 @@ class MapMakerInternalMap<
     public void clear() {
       MapMakerInternalMap.this.clear();
     }
-  }
-
-  private abstract static class SafeToArraySet<E> extends AbstractSet<E> {
-    // super.toArray() may misbehave if size() is inaccurate, at least on old versions of Android.
-    // https://code.google.com/p/android/issues/detail?id=36519 / http://r.android.com/47508
-
-    @Override
-    public Object[] toArray() {
-      return toArrayList(this).toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-      return toArrayList(this).toArray(a);
-    }
-  }
-
-  private static <E> ArrayList<E> toArrayList(Collection<E> c) {
-    // Avoid calling ArrayList(Collection), which may call back into toArray.
-    ArrayList<E> result = new ArrayList<>(c.size());
-    Iterators.addAll(result, c.iterator());
-    return result;
   }
 
   // Serialization Support

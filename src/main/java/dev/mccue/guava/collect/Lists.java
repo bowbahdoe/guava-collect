@@ -24,6 +24,8 @@ import static dev.mccue.guava.base.Preconditions.checkPositionIndexes;
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
+import static dev.mccue.guava.collect.Iterators.elementsEqual;
+import static java.lang.Math.min;
 
 import dev.mccue.guava.base.Function;
 import dev.mccue.guava.base.Objects;
@@ -74,9 +76,12 @@ public final class Lists {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code ArrayList} {@code ArrayList#ArrayList() constructor} directly, taking
-   * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * advantage of <a
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayList() {
     return new ArrayList<>();
   }
@@ -97,7 +102,7 @@ public final class Lists {
    */
   @SafeVarargs
   
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(E... elements) {
     checkNotNull(elements); // for GWT
     // Avoid integer overflow when a large array is passed in
@@ -117,9 +122,12 @@ public final class Lists {
    *
    * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method. Use
    * the {@code ArrayList} {@code ArrayList#ArrayList(Collection) constructor} directly, taking
-   * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * advantage of <a
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(
       Iterable<? extends E> elements) {
     checkNotNull(elements); // for GWT
@@ -137,6 +145,7 @@ public final class Lists {
    * ImmutableList#copyOf(Iterator)} instead.
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayList(
       Iterator<? extends E> elements) {
     ArrayList<E> list = newArrayList();
@@ -157,9 +166,10 @@ public final class Lists {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use {@code new }{@code ArrayList#ArrayList(int) ArrayList}{@code <>(int)} directly, taking
-   * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>. (Unlike here, there is no risk
-   * of overload ambiguity, since the {@code ArrayList} constructors very wisely did not accept
-   * varargs.)
+   * advantage of <a
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>. (Unlike here, there is no risk of overload ambiguity, since the {@code ArrayList}
+   * constructors very wisely did not accept varargs.)
    *
    * @param initialArraySize the exact size of the initial backing array for the returned array list
    *     ({@code ArrayList} documentation calls this value the "capacity")
@@ -168,6 +178,7 @@ public final class Lists {
    * @throws IllegalArgumentException if {@code initialArraySize} is negative
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithCapacity(
       int initialArraySize) {
     checkNonnegative(initialArraySize, "initialArraySize"); // for GWT.
@@ -188,6 +199,7 @@ public final class Lists {
    * @throws IllegalArgumentException if {@code estimatedSize} is negative
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> ArrayList<E> newArrayListWithExpectedSize(
       int estimatedSize) {
     return new ArrayList<>(computeArrayListCapacity(estimatedSize));
@@ -207,9 +219,12 @@ public final class Lists {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code LinkedList} {@code LinkedList#LinkedList() constructor} directly, taking
-   * advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * advantage of <a
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedList<E> newLinkedList() {
     return new LinkedList<>();
   }
@@ -228,9 +243,12 @@ public final class Lists {
    *
    * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method. Use
    * the {@code LinkedList} {@code LinkedList#LinkedList(Collection) constructor} directly,
-   * taking advantage of <a href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * taking advantage of <a
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    */
   
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedList<E> newLinkedList(
       Iterable<? extends E> elements) {
     LinkedList<E> list = newLinkedList();
@@ -693,7 +711,7 @@ public final class Lists {
     public List<T> get(int index) {
       checkElementIndex(index, size());
       int start = index * size;
-      int end = Math.min(start + size, list.size());
+      int end = min(start + size, list.size());
       return list.subList(start, end);
     }
 
@@ -1019,7 +1037,7 @@ public final class Lists {
       }
       return true;
     } else {
-      return Iterators.elementsEqual(thisList.iterator(), otherList.iterator());
+      return elementsEqual(thisList.iterator(), otherList.iterator());
     }
   }
 

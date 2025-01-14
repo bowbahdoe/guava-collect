@@ -16,9 +16,11 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Sets.unmodifiableNavigableSet;
+import static java.util.Collections.unmodifiableSortedSet;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.NavigableSet;
 import java.util.SortedSet;
@@ -56,9 +58,9 @@ abstract class AbstractSortedSetMultimap<K extends @Nullable Object, V extends @
   <E extends @Nullable Object> SortedSet<E> unmodifiableCollectionSubclass(
       Collection<E> collection) {
     if (collection instanceof NavigableSet) {
-      return Sets.unmodifiableNavigableSet((NavigableSet<E>) collection);
+      return unmodifiableNavigableSet((NavigableSet<E>) collection);
     } else {
-      return Collections.unmodifiableSortedSet((SortedSet<E>) collection);
+      return unmodifiableSortedSet((SortedSet<E>) collection);
     }
   }
 

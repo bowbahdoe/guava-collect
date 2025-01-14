@@ -20,6 +20,8 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
 import static dev.mccue.guava.collect.CompactHashing.UNSET;
 import static dev.mccue.guava.collect.Hashing.smearedHash;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Objects;
@@ -105,7 +107,6 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
    * @return a new {@code CompactHashSet} containing those elements (minus duplicates)
    */
   @SafeVarargs
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
   public static <E extends @Nullable Object> CompactHashSet<E> create(E... elements) {
     CompactHashSet<E> set = createWithExpectedSize(elements.length);
     Collections.addAll(set, elements);
@@ -360,8 +361,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     int entriesSize = requireEntries().length;
     if (newSize > entriesSize) {
       // 1.5x but round up to nearest odd (this is optimal for memory consumption on Android)
-      int newCapacity =
-          Math.min(CompactHashing.MAX_SIZE, (entriesSize + Math.max(1, entriesSize >>> 1)) | 1);
+      int newCapacity = min(CompactHashing.MAX_SIZE, (entriesSize + max(1, entriesSize >>> 1)) | 1);
       if (newCapacity != entriesSize) {
         resizeEntries(newCapacity);
       }

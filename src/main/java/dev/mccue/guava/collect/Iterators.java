@@ -22,6 +22,8 @@ import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.base.Predicates.instanceOf;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
 import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Function;
@@ -633,8 +635,7 @@ public final class Iterators {
           throw new NoSuchElementException();
         }
         @SuppressWarnings("unchecked") // we only put Ts in it
-        @Nullable
-        T[] array = (@Nullable T[]) new Object[size];
+        @Nullable T[] array = (@Nullable T[]) new Object[size];
         int count = 0;
         for (; count < size && iterator.hasNext(); count++) {
           array[count] = iterator.next();
@@ -643,7 +644,7 @@ public final class Iterators {
           array[i] = null; // for GWT
         }
 
-        List<@Nullable T> list = Collections.unmodifiableList(Arrays.asList(array));
+        List<@Nullable T> list = unmodifiableList(asList(array));
         // TODO(b/192579700): Use a ternary once it no longer confuses our nullness checker.
         if (pad || count == size) {
           return list;
@@ -1098,56 +1099,31 @@ public final class Iterators {
    */
   public static <T extends @Nullable Object> UnmodifiableIterator<T> singletonIterator(
       @ParametricNullness T value) {
-    if (value != null) {
-      return new SingletonIterator<>(value);
-    }
-    @SuppressWarnings("nullness") // For `value` to be null, T must be a nullable type.
-    UnmodifiableIterator<T> result = (UnmodifiableIterator<T>) new SingletonNullIterator<T>();
-    return result;
+    return new SingletonIterator<>(value);
   }
 
   private static final class SingletonIterator<T extends @Nullable Object>
       extends UnmodifiableIterator<T> {
-    private @Nullable T valueOrNull;
+    private final T value;
+    private boolean done;
 
-    SingletonIterator(@NonNull T value) {
-      this.valueOrNull = value;
+    SingletonIterator(T value) {
+      this.value = value;
     }
 
     @Override
     public boolean hasNext() {
-      return valueOrNull != null;
+      return !done;
     }
 
     @Override
-    public @NonNull T next() {
-      T result = valueOrNull;
-      valueOrNull = null;
-      // We put the common case first, even though it's unlikely to matter if the code is run much:
-      // https://shipilev.net/jvm/anatomy-quarks/28-frequency-based-code-layout/
-      if (result != null) {
-        return result;
+    @ParametricNullness
+    public T next() {
+      if (done) {
+        throw new NoSuchElementException();
       }
-      throw new NoSuchElementException();
-    }
-  }
-
-  private static final class SingletonNullIterator<T> extends UnmodifiableIterator<@Nullable T> {
-    private boolean returned;
-
-    @Override
-    public boolean hasNext() {
-      return !returned;
-    }
-
-    @Override
-    public @Nullable T next() {
-      if (!returned) {
-        // common case first, as in SingletonIterator
-        returned = true;
-        return null;
-      }
-      throw new NoSuchElementException();
+      done = true;
+      return value;
     }
   }
 

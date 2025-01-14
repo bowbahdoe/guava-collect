@@ -16,6 +16,8 @@
 
 package dev.mccue.guava.collect;
 
+import static java.lang.Math.max;
+
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.primitives.Ints;
 import java.util.Arrays;
@@ -67,7 +69,7 @@ final class CompactHashing {
    */
   static int tableSize(int expectedSize) {
     // We use entries next == 0 to indicate UNSET, so actual capacity is 1 less than requested.
-    return Math.max(MIN_HASH_TABLE_SIZE, Hashing.closedTableSize(expectedSize + 1, 1.0f));
+    return max(MIN_HASH_TABLE_SIZE, Hashing.closedTableSize(expectedSize + 1, 1.0));
   }
 
   /** Creates and returns a properly-sized array with the given number of buckets. */

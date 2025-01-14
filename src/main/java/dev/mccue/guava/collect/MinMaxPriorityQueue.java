@@ -21,6 +21,9 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkPositionIndex;
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.System.arraycopy;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.math.IntMath;
@@ -600,7 +603,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
         return -1;
       }
       checkState(index > 0);
-      int limit = Math.min(index, size - len) + len;
+      int limit = min(index, size - len) + len;
       int minIndex = index;
       for (int i = index + 1; i < limit; i++) {
         if (compareElements(i, minIndex) < 0) {
@@ -911,7 +914,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
   // Incompatible return type change. Use inherited (unoptimized) implementation
   public Object[] toArray() {
     Object[] copyTo = new Object[size];
-    System.arraycopy(queue, 0, copyTo, 0, size);
+    arraycopy(queue, 0, copyTo, 0, size);
     return copyTo;
   }
 
@@ -943,7 +946,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
     // Enlarge to contain initial contents
     if (initialContents instanceof Collection) {
       int initialSize = ((Collection<?>) initialContents).size();
-      result = Math.max(result, initialSize);
+      result = max(result, initialSize);
     }
 
     // Now cap it at maxSize + 1
@@ -954,7 +957,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
     if (size > queue.length) {
       int newCapacity = calculateNewCapacity();
       Object[] newQueue = new Object[newCapacity];
-      System.arraycopy(queue, 0, newQueue, 0, queue.length);
+      arraycopy(queue, 0, newQueue, 0, queue.length);
       queue = newQueue;
     }
   }
@@ -969,6 +972,6 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   /** There's no reason for the queueSize to ever be more than maxSize + 1 */
   private static int capAtMaximumSize(int queueSize, int maximumSize) {
-    return Math.min(queueSize - 1, maximumSize) + 1; // don't overflow
+    return min(queueSize - 1, maximumSize) + 1; // don't overflow
   }
 }

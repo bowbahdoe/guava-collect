@@ -17,6 +17,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Maps.transformValues;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -59,7 +60,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Mike Bostock
  * @author Jared Levy
  */
-
 @ElementTypesAreNonnullByDefault
 /*
  * I have decided not to bother adding @ParametricNullness annotations in this class. Adding them is
@@ -1180,7 +1180,6 @@ final class Synchronized {
 
     @Override
     @CheckForNull
-    @SuppressWarnings("nullness") // TODO(b/262880368): Remove once we see @NonNull in JDK APIs
     public V computeIfPresent(
         K key, BiFunction<? super K, ? super @NonNull V, ? extends @Nullable V> remappingFunction) {
       synchronized (mutex) {
@@ -1200,7 +1199,6 @@ final class Synchronized {
 
     @Override
     @CheckForNull
-    @SuppressWarnings("nullness") // TODO(b/262880368): Remove once we see @NonNull in JDK APIs
     public V merge(
         K key,
         @NonNull V value,
@@ -2205,7 +2203,7 @@ final class Synchronized {
     public Map<R, Map<C, V>> rowMap() {
       synchronized (mutex) {
         return map(
-            Maps.transformValues(
+            transformValues(
                 delegate().rowMap(),
                 new dev.mccue.guava.base.Function<Map<C, V>, Map<C, V>>() {
                   @Override
@@ -2221,7 +2219,7 @@ final class Synchronized {
     public Map<C, Map<R, V>> columnMap() {
       synchronized (mutex) {
         return map(
-            Maps.transformValues(
+            transformValues(
                 delegate().columnMap(),
                 new dev.mccue.guava.base.Function<Map<R, V>, Map<R, V>>() {
                   @Override

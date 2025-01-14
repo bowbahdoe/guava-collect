@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Function;
@@ -351,7 +352,7 @@ public final class Collections2 {
   /** Returns best-effort-sized StringBuilder based on the given collection size. */
   static StringBuilder newStringBuilderForCollection(int size) {
     checkNonnegative(size, "size");
-    return new StringBuilder((int) Math.min(size * 8L, Ints.MAX_POWER_OF_TWO));
+    return new StringBuilder((int) min(size * 8L, Ints.MAX_POWER_OF_TWO));
   }
 
   /**

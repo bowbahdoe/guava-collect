@@ -14,6 +14,9 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Maps.immutableEntry;
+import static dev.mccue.guava.collect.Maps.safeGet;
+
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.util.AbstractCollection;
@@ -68,15 +71,15 @@ abstract class AbstractTable<
 
   @Override
   public boolean contains(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
-    Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
+    Map<C, V> row = safeGet(rowMap(), rowKey);
     return row != null && Maps.safeContainsKey(row, columnKey);
   }
 
   @Override
   @CheckForNull
   public V get(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
-    Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
-    return (row == null) ? null : Maps.safeGet(row, columnKey);
+    Map<C, V> row = safeGet(rowMap(), rowKey);
+    return (row == null) ? null : safeGet(row, columnKey);
   }
 
   @Override
@@ -93,7 +96,7 @@ abstract class AbstractTable<
   @Override
   @CheckForNull
   public V remove(@CheckForNull Object rowKey, @CheckForNull Object columnKey) {
-    Map<C, V> row = Maps.safeGet(rowMap(), rowKey);
+    Map<C, V> row = safeGet(rowMap(), rowKey);
     return (row == null) ? null : Maps.safeRemove(row, columnKey);
   }
 
@@ -133,10 +136,10 @@ abstract class AbstractTable<
     public boolean contains(@CheckForNull Object o) {
       if (o instanceof Cell) {
         Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
-        Map<C, V> row = Maps.safeGet(rowMap(), cell.getRowKey());
+        Map<C, V> row = safeGet(rowMap(), cell.getRowKey());
         return row != null
             && Collections2.safeContains(
-                row.entrySet(), Maps.immutableEntry(cell.getColumnKey(), cell.getValue()));
+                row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
       }
       return false;
     }
@@ -145,10 +148,10 @@ abstract class AbstractTable<
     public boolean remove(@CheckForNull Object o) {
       if (o instanceof Cell) {
         Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
-        Map<C, V> row = Maps.safeGet(rowMap(), cell.getRowKey());
+        Map<C, V> row = safeGet(rowMap(), cell.getRowKey());
         return row != null
             && Collections2.safeRemove(
-                row.entrySet(), Maps.immutableEntry(cell.getColumnKey(), cell.getValue()));
+                row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
       }
       return false;
     }

@@ -19,6 +19,8 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static java.lang.Math.min;
+import static java.util.Arrays.asList;
 
 import dev.mccue.guava.base.Predicate;
 import dev.mccue.guava.base.Predicates;
@@ -98,7 +100,6 @@ public final class Sets {
    * @param otherElements the rest of the elements the set should contain
    * @return an immutable set containing those elements, minus duplicates
    */
-  // http://code.google.com/p/google-web-toolkit/issues/detail?id=3028
   
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(
       E anElement, E... otherElements) {
@@ -115,7 +116,6 @@ public final class Sets {
    * @param elements the elements, all of the same {@code enum} type, that the set should contain
    * @return an immutable set containing those elements, minus duplicates
    */
-  // http://code.google.com/p/google-web-toolkit/issues/detail?id=3028
   
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(Iterable<E> elements) {
     if (elements instanceof ImmutableEnumSet) {
@@ -174,8 +174,10 @@ public final class Sets {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code HashSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet() {
     return new HashSet<>();
   }
@@ -193,7 +195,7 @@ public final class Sets {
    * asList}{@code (...))}, or for creating an empty set then calling {@code Collections#addAll}.
    * This method is not actually very useful and will likely be deprecated in the future.
    */
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet(E... elements) {
     HashSet<E> set = newHashSetWithExpectedSize(elements.length);
     Collections.addAll(set, elements);
@@ -214,10 +216,12 @@ public final class Sets {
    *
    * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method.
    * Instead, use the {@code HashSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    *
    * <p>Overall, this method is not very useful and will likely be deprecated in the future.
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet(Iterable<? extends E> elements) {
     return (elements instanceof Collection)
         ? new HashSet<E>((Collection<? extends E>) elements)
@@ -236,6 +240,7 @@ public final class Sets {
    *
    * <p>Overall, this method is not very useful and will likely be deprecated in the future.
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet(Iterator<? extends E> elements) {
     HashSet<E> set = newHashSet();
     Iterators.addAll(set, elements);
@@ -254,6 +259,7 @@ public final class Sets {
    *     without resizing
    * @throws IllegalArgumentException if {@code expectedSize} is negative
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSetWithExpectedSize(
       int expectedSize) {
     return new HashSet<>(Maps.capacity(expectedSize));
@@ -301,10 +307,12 @@ public final class Sets {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code LinkedHashSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    *
    * @return a new, empty {@code LinkedHashSet}
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedHashSet<E> newLinkedHashSet() {
     return new LinkedHashSet<>();
   }
@@ -317,13 +325,15 @@ public final class Sets {
    *
    * <p><b>Note:</b> if {@code elements} is a {@code Collection}, you don't need this method.
    * Instead, use the {@code LinkedHashSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    *
    * <p>Overall, this method is not very useful and will likely be deprecated in the future.
    *
    * @param elements the elements that the set should contain, in order
    * @return a new {@code LinkedHashSet} containing those elements (minus duplicates)
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedHashSet<E> newLinkedHashSet(
       Iterable<? extends E> elements) {
     if (elements instanceof Collection) {
@@ -346,6 +356,7 @@ public final class Sets {
    * @throws IllegalArgumentException if {@code expectedSize} is negative
    * @since 11.0
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedHashSet<E> newLinkedHashSetWithExpectedSize(
       int expectedSize) {
     return new LinkedHashSet<>(Maps.capacity(expectedSize));
@@ -361,11 +372,15 @@ public final class Sets {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    *
    * @return a new, empty {@code TreeSet}
    */
-  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
+  @SuppressWarnings({
+    "rawtypes", // https://github.com/google/guava/issues/989
+    "NonApiType", // acts as a direct substitute for a constructor call
+  })
   public static <E extends Comparable> TreeSet<E> newTreeSet() {
     return new TreeSet<>();
   }
@@ -383,7 +398,8 @@ public final class Sets {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>.
    *
    * <p>This method is just a small convenience for creating an empty set and then calling {@code
    * Iterables#addAll}. This method is not very useful and will likely be deprecated in the future.
@@ -391,7 +407,10 @@ public final class Sets {
    * @param elements the elements that the set should contain
    * @return a new {@code TreeSet} containing those elements (minus duplicates)
    */
-  @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
+  @SuppressWarnings({
+    "rawtypes", // https://github.com/google/guava/issues/989
+    "NonApiType", // acts as a direct substitute for a constructor call
+  })
   public static <E extends Comparable> TreeSet<E> newTreeSet(Iterable<? extends E> elements) {
     TreeSet<E> set = newTreeSet();
     Iterables.addAll(set, elements);
@@ -406,14 +425,16 @@ public final class Sets {
    *
    * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated. Instead,
    * use the {@code TreeSet} constructor directly, taking advantage of <a
-   * href="http://goo.gl/iz2Wi">"diamond" syntax</a>. One caveat to this is that the {@code TreeSet}
-   * constructor uses a null {@code Comparator} to mean "natural ordering," whereas this factory
-   * rejects null. Clean your code accordingly.
+   * href="https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html#type-inference-instantiation">"diamond"
+   * syntax</a>. One caveat to this is that the {@code TreeSet} constructor uses a null {@code
+   * Comparator} to mean "natural ordering," whereas this factory rejects null. Clean your code
+   * accordingly.
    *
    * @param comparator the comparator to use to sort the set
    * @return a new, empty {@code TreeSet}
    * @throws NullPointerException if {@code comparator} is null
    */
+  @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> TreeSet<E> newTreeSet(
       Comparator<? super E> comparator) {
     return new TreeSet<>(checkNotNull(comparator));
@@ -570,9 +591,18 @@ public final class Sets {
      * nonstandard notion of equivalence, for example if it is a {@code TreeSet} using a comparator
      * that is inconsistent with {@code Object#equals(Object)}.
      */
-    @SuppressWarnings("nullness") // Unsafe, but we can't fix it now.
     public ImmutableSet<@NonNull E> immutableCopy() {
-      return ImmutableSet.copyOf((SetView<@NonNull E>) this);
+      // Not using ImmutableSet.copyOf() to avoid iterating thrice (isEmpty, size, iterator).
+      int upperBoundSize = upperBoundSize();
+      if (upperBoundSize == 0) {
+        return ImmutableSet.of();
+      }
+      ImmutableSet.Builder<@NonNull E> builder =
+          ImmutableSet.builderWithExpectedSize(upperBoundSize);
+      for (E element : this) {
+        builder.add(checkNotNull(element));
+      }
+      return builder.build();
     }
 
     /**
@@ -694,6 +724,18 @@ public final class Sets {
      */
     @Override
     public abstract UnmodifiableIterator<E> iterator();
+
+    /**
+     * Returns the upper bound on the size of this set view.
+     *
+     * <p>This method is used to presize the underlying collection when converting to an {@code
+     * ImmutableSet}.
+     */
+    abstract int upperBoundSize();
+
+    static int upperBoundSize(Set<?> set) {
+      return set instanceof SetView ? ((SetView) set).upperBoundSize() : set.size();
+    }
   }
 
   /**
@@ -774,13 +816,8 @@ public final class Sets {
       }
 
       @Override
-      @SuppressWarnings({"nullness", "unchecked"}) // see supertype
-      public ImmutableSet<@NonNull E> immutableCopy() {
-        ImmutableSet.Builder<@NonNull E> builder =
-            new ImmutableSet.Builder<@NonNull E>()
-                .addAll((Iterable<@NonNull E>) set1)
-                .addAll((Iterable<@NonNull E>) set2);
-        return (ImmutableSet<@NonNull E>) builder.build();
+      int upperBoundSize() {
+        return upperBoundSize(set1) + upperBoundSize(set2);
       }
     };
   }
@@ -872,6 +909,11 @@ public final class Sets {
       public boolean containsAll(Collection<?> collection) {
         return set1.containsAll(collection) && set2.containsAll(collection);
       }
+
+      @Override
+      int upperBoundSize() {
+        return min(upperBoundSize(set1), upperBoundSize(set2));
+      }
     };
   }
 
@@ -939,6 +981,11 @@ public final class Sets {
       @Override
       public boolean contains(@CheckForNull Object element) {
         return set1.contains(element) && !set2.contains(element);
+      }
+
+      @Override
+      int upperBoundSize() {
+        return upperBoundSize(set1);
       }
     };
   }
@@ -1009,6 +1056,11 @@ public final class Sets {
       @Override
       public boolean contains(@CheckForNull Object element) {
         return set1.contains(element) ^ set2.contains(element);
+      }
+
+      @Override
+      int upperBoundSize() {
+        return upperBoundSize(set1) + upperBoundSize(set2);
       }
     };
   }
@@ -1393,7 +1445,7 @@ public final class Sets {
    */
   @SafeVarargs
   public static <B> Set<List<B>> cartesianProduct(Set<? extends B>... sets) {
-    return cartesianProduct(Arrays.asList(sets));
+    return cartesianProduct(asList(sets));
   }
 
   private static final class CartesianSet<E> extends ForwardingCollection<List<E>>
@@ -1980,6 +2032,7 @@ public final class Sets {
    * @since 13.0
    */
   // NavigableSet
+  // Synchronized
   public static <E extends @Nullable Object> NavigableSet<E> synchronizedNavigableSet(
       NavigableSet<E> navigableSet) {
     return Synchronized.navigableSet(navigableSet);
@@ -2004,7 +2057,7 @@ public final class Sets {
      * is just more than the set's size.  We augment the test by
      * assuming that sets have fast contains() performance, and other
      * collections don't.  See
-     * http://code.google.com/p/guava-libraries/issues/detail?id=1013
+     * https://github.com/google/guava/issues/1013
      */
     if (collection instanceof Set && collection.size() > set.size()) {
       return Iterators.removeAll(set.iterator(), collection);

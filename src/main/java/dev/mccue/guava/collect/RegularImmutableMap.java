@@ -31,7 +31,10 @@ import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * Implementation of {@code ImmutableMap} with two or more entries.
+ * Implementation of {@code ImmutableMap} used for 0 entries and for 2+ entries. Additional
+ * implementations exist for particular cases, like {@code ImmutableTable} views and hash flooding.
+ * (This doc discusses {@code ImmutableMap} subclasses only for the JRE flavor; the Android flavor
+ * differs.)
  *
  * @author Jesse Wilson
  * @author Kevin Bourrillion

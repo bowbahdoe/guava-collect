@@ -735,6 +735,7 @@ public final class Tables {
    * @return a synchronized view of the specified table
    * @since 22.0
    */
+  // Synchronized
   public static <R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
       Table<R, C, V> synchronizedTable(Table<R, C, V> table) {
     return Synchronized.table(table, null);

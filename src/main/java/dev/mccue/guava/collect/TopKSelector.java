@@ -19,11 +19,14 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
+import static java.lang.Math.max;
+import static java.util.Arrays.asList;
+import static java.util.Arrays.sort;
+import static java.util.Collections.unmodifiableList;
 
 import dev.mccue.guava.math.IntMath;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -159,7 +162,6 @@ final class TopKSelector<
    * Quickselects the top k elements from the 2k elements in the buffer. O(k) expected time, O(k log
    * k) worst case.
    */
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
   private void trim() {
     int left = 0;
     int right = 2 * k - 1;
@@ -178,7 +180,7 @@ final class TopKSelector<
       if (pivotNewIndex > k) {
         right = pivotNewIndex - 1;
       } else if (pivotNewIndex < k) {
-        left = Math.max(pivotNewIndex, left + 1);
+        left = max(pivotNewIndex, left + 1);
         minThresholdPosition = pivotNewIndex;
       } else {
         break;
@@ -188,7 +190,7 @@ final class TopKSelector<
         @SuppressWarnings("nullness") // safe because we pass sort() a range that contains real Ts
         T[] castBuffer = (T[]) buffer;
         // We've already taken O(k log k), let's make sure we don't take longer than O(k log k).
-        Arrays.sort(castBuffer, left, right + 1, comparator);
+        sort(castBuffer, left, right + 1, comparator);
         break;
       }
     }
@@ -272,11 +274,10 @@ final class TopKSelector<
    * <p>The returned list is an unmodifiable copy and will not be affected by further changes to
    * this {@code TopKSelector}. This method returns in O(k log k) time.
    */
-  @SuppressWarnings("nullness") // TODO: b/316358623 - Remove after checker fix.
   public List<T> topK() {
     @SuppressWarnings("nullness") // safe because we pass sort() a range that contains real Ts
     T[] castBuffer = (T[]) buffer;
-    Arrays.sort(castBuffer, 0, bufferSize, comparator);
+    sort(castBuffer, 0, bufferSize, comparator);
     if (bufferSize > k) {
       Arrays.fill(buffer, k, buffer.length, null);
       bufferSize = k;
@@ -285,6 +286,6 @@ final class TopKSelector<
     // Up to bufferSize, all elements of buffer are real Ts (not null unless T includes null)
     T[] topK = Arrays.copyOf(castBuffer, bufferSize);
     // we have to support null elements, so no ImmutableList for us
-    return Collections.unmodifiableList(Arrays.asList(topK));
+    return unmodifiableList(asList(topK));
   }
 }

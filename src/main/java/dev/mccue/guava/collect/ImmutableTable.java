@@ -17,6 +17,8 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Iterables.getOnlyElement;
+import static dev.mccue.guava.collect.Tables.immutableCell;
 
 import dev.mccue.guava.base.MoreObjects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -150,7 +152,7 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
    * new entry with those values.
    */
   static <R, C, V> Cell<R, C, V> cellOf(R rowKey, C columnKey, V value) {
-    return Tables.immutableCell(
+    return immutableCell(
         checkNotNull(rowKey, "rowKey"),
         checkNotNull(columnKey, "columnKey"),
         checkNotNull(value, "value"));
@@ -283,7 +285,7 @@ public abstract class ImmutableTable<R, C, V> extends AbstractTable<R, C, V>
         case 0:
           return of();
         case 1:
-          return new SingletonImmutableTable<>(Iterables.getOnlyElement(cells));
+          return new SingletonImmutableTable<>(getOnlyElement(cells));
         default:
           return RegularImmutableTable.forCells(cells, rowComparator, columnComparator);
       }

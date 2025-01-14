@@ -20,6 +20,9 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Predicates.in;
 import static dev.mccue.guava.base.Predicates.not;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
+import static dev.mccue.guava.collect.Maps.immutableEntry;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
 
 import dev.mccue.guava.base.MoreObjects;
 import dev.mccue.guava.base.Predicate;
@@ -67,7 +70,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
   }
 
   private boolean satisfies(@ParametricNullness K key, @ParametricNullness V value) {
-    return predicate.apply(Maps.immutableEntry(key, value));
+    return predicate.apply(immutableEntry(key, value));
   }
 
   final class ValuePredicate implements Predicate<V> {
@@ -209,9 +212,9 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
       if (result.isEmpty()) {
         return null;
       } else if (unfiltered instanceof SetMultimap) {
-        return Collections.unmodifiableSet(Sets.newLinkedHashSet(result));
+        return unmodifiableSet(Sets.newLinkedHashSet(result));
       } else {
-        return Collections.unmodifiableList(result);
+        return unmodifiableList(result);
       }
     }
 
@@ -263,7 +266,7 @@ class FilteredEntryMultimap<K extends @Nullable Object, V extends @Nullable Obje
                 Collection<V> collection =
                     filterCollection(entry.getValue(), new ValuePredicate(key));
                 if (!collection.isEmpty()) {
-                  return Maps.immutableEntry(key, collection);
+                  return immutableEntry(key, collection);
                 }
               }
               return endOfData();

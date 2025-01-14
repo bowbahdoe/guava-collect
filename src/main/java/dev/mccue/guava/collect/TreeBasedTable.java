@@ -18,6 +18,8 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Iterables.transform;
+import static dev.mccue.guava.collect.Iterators.mergeSorted;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Supplier;
@@ -69,7 +71,7 @@ import dev.mccue.jsr305.CheckForNull;
 public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   private final Comparator<? super C> columnComparator;
 
-  private static class Factory<C, V> implements Supplier<TreeMap<C, V>>, Serializable {
+  private static class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
     final Comparator<? super C> comparator;
 
     Factory(Comparator<? super C> comparator) {
@@ -77,7 +79,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
     }
 
     @Override
-    public TreeMap<C, V> get() {
+    public Map<C, V> get() {
       return new TreeMap<>(comparator);
     }
 
@@ -315,9 +317,8 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
     Comparator<? super C> comparator = columnComparator();
 
     Iterator<C> merged =
-        Iterators.mergeSorted(
-            Iterables.transform(
-                backingMap.values(), (Map<C, V> input) -> input.keySet().iterator()),
+        mergeSorted(
+            transform(backingMap.values(), (Map<C, V> input) -> input.keySet().iterator()),
             comparator);
 
     return new AbstractIterator<C>() {

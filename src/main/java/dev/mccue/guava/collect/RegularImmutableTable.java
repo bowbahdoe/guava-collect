@@ -16,8 +16,8 @@ package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkArgument;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static java.util.Collections.sort;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -135,7 +135,7 @@ abstract class RegularImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
                 ? 0
                 : columnComparator.compare(cell1.getColumnKey(), cell2.getColumnKey());
           };
-      Collections.sort(cells, comparator);
+      sort(cells, comparator);
     }
     return forCellsInternal(cells, rowComparator, columnComparator);
   }

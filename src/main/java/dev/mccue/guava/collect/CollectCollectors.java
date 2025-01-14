@@ -19,6 +19,7 @@ package dev.mccue.guava.collect;
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toMap;
 
 import dev.mccue.guava.base.Preconditions;
 import java.util.Collection;
@@ -32,7 +33,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import dev.mccue.jsr305.CheckForNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -200,8 +200,7 @@ final class CollectCollectors {
     checkNotNull(valueFunction);
     checkNotNull(mergeFunction);
     return collectingAndThen(
-        Collectors.toMap(keyFunction, valueFunction, mergeFunction, LinkedHashMap::new),
-        ImmutableMap::copyOf);
+        toMap(keyFunction, valueFunction, mergeFunction, LinkedHashMap::new), ImmutableMap::copyOf);
   }
 
   static <T extends @Nullable Object, K, V>
@@ -235,8 +234,7 @@ final class CollectCollectors {
     checkNotNull(valueFunction);
     checkNotNull(mergeFunction);
     return collectingAndThen(
-        Collectors.toMap(
-            keyFunction, valueFunction, mergeFunction, () -> new TreeMap<K, V>(comparator)),
+        toMap(keyFunction, valueFunction, mergeFunction, () -> new TreeMap<K, V>(comparator)),
         ImmutableSortedMap::copyOfSorted);
   }
 

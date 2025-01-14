@@ -22,7 +22,6 @@ import static java.util.Collections.emptySet;
 import dev.mccue.guava.base.Predicate;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +130,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
 
     @Override
     protected Set<V> delegate() {
-      return Collections.emptySet();
+      return emptySet();
     }
   }
 
@@ -171,7 +170,7 @@ class FilteredKeyMultimap<K extends @Nullable Object, V extends @Nullable Object
 
     @Override
     protected List<V> delegate() {
-      return Collections.emptyList();
+      return emptyList();
     }
   }
 

@@ -22,6 +22,8 @@ import static dev.mccue.guava.collect.CompactHashing.UNSET;
 import static dev.mccue.guava.collect.Hashing.smearedHash;
 import static dev.mccue.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 import static dev.mccue.guava.collect.NullnessCasts.unsafeNull;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.base.Objects;
@@ -408,8 +410,7 @@ class CompactHashMap<K extends @Nullable Object, V extends @Nullable Object>
     int entriesSize = requireEntries().length;
     if (newSize > entriesSize) {
       // 1.5x but round up to nearest odd (this is optimal for memory consumption on Android)
-      int newCapacity =
-          Math.min(CompactHashing.MAX_SIZE, (entriesSize + Math.max(1, entriesSize >>> 1)) | 1);
+      int newCapacity = min(CompactHashing.MAX_SIZE, (entriesSize + max(1, entriesSize >>> 1)) | 1);
       if (newCapacity != entriesSize) {
         resizeEntries(newCapacity);
       }

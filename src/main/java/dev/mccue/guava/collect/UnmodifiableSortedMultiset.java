@@ -16,6 +16,8 @@
 
 package dev.mccue.guava.collect;
 
+import static dev.mccue.guava.collect.Sets.unmodifiableNavigableSet;
+
 import dev.mccue.guava.collect.Multisets.UnmodifiableMultiset;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.util.Comparator;
@@ -50,7 +52,7 @@ final class UnmodifiableSortedMultiset<E extends @Nullable Object> extends Unmod
 
   @Override
   NavigableSet<E> createElementSet() {
-    return Sets.unmodifiableNavigableSet(delegate().elementSet());
+    return unmodifiableNavigableSet(delegate().elementSet());
   }
 
   @Override

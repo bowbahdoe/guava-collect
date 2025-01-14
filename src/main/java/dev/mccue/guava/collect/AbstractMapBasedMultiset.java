@@ -21,6 +21,7 @@ import static dev.mccue.guava.base.Preconditions.checkNotNull;
 import static dev.mccue.guava.base.Preconditions.checkState;
 import static dev.mccue.guava.collect.CollectPreconditions.checkNonnegative;
 import static dev.mccue.guava.collect.CollectPreconditions.checkRemove;
+import static dev.mccue.guava.collect.Maps.safeGet;
 import static java.util.Objects.requireNonNull;
 
 import dev.mccue.guava.primitives.Ints;
@@ -247,7 +248,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
 
   @Override
   public int count(@CheckForNull Object element) {
-    Count frequency = Maps.safeGet(backingMap, element);
+    Count frequency = safeGet(backingMap, element);
     return (frequency == null) ? 0 : frequency.get();
   }
 

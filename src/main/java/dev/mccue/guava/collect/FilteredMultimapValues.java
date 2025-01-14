@@ -15,6 +15,7 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.base.Predicates.not;
 
 import dev.mccue.guava.base.Objects;
 import dev.mccue.guava.base.Predicate;
@@ -84,8 +85,7 @@ final class FilteredMultimapValues<K extends @Nullable Object, V extends @Nullab
         multimap.unfiltered().entries(),
         // explicit <Entry<K, V>> is required to build with JDK6
         Predicates.<Entry<K, V>>and(
-            multimap.entryPredicate(),
-            Maps.<V>valuePredicateOnEntries(Predicates.not(Predicates.in(c)))));
+            multimap.entryPredicate(), Maps.<V>valuePredicateOnEntries(not(Predicates.in(c)))));
   }
 
   @Override

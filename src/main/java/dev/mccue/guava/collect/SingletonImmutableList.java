@@ -17,9 +17,10 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Iterators.singletonIterator;
+import static java.util.Collections.singleton;
 
 import dev.mccue.guava.base.Preconditions;
-import java.util.Collections;
 import java.util.Spliterator;
 
 /**
@@ -46,12 +47,12 @@ final class SingletonImmutableList<E> extends ImmutableList<E> {
 
   @Override
   public UnmodifiableIterator<E> iterator() {
-    return Iterators.singletonIterator(element);
+    return singletonIterator(element);
   }
 
   @Override
   public Spliterator<E> spliterator() {
-    return Collections.singleton(element).spliterator();
+    return singleton(element).spliterator();
   }
 
   @Override

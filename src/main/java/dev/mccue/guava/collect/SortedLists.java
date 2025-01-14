@@ -15,8 +15,10 @@
 package dev.mccue.guava.collect;
 
 import static dev.mccue.guava.base.Preconditions.checkNotNull;
+import static dev.mccue.guava.collect.Lists.transform;
 
 import dev.mccue.guava.base.Function;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -239,7 +241,7 @@ final class SortedLists {
       KeyPresentBehavior presentBehavior,
       KeyAbsentBehavior absentBehavior) {
     return binarySearch(
-        Lists.transform(list, keyFunction), key, keyComparator, presentBehavior, absentBehavior);
+        transform(list, keyFunction), key, keyComparator, presentBehavior, absentBehavior);
   }
 
   /**
@@ -276,7 +278,7 @@ final class SortedLists {
     checkNotNull(presentBehavior);
     checkNotNull(absentBehavior);
     if (!(list instanceof RandomAccess)) {
-      list = Lists.newArrayList(list);
+      list = new ArrayList<>(list);
     }
     // TODO(lowasser): benchmark when it's best to do a linear search
 
